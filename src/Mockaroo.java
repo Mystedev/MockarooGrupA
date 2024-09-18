@@ -2,8 +2,10 @@
 public class Mockaroo {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 
 	}
-
+	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
+	// ·Funcion boolean sin formatos
+	// 
 }
