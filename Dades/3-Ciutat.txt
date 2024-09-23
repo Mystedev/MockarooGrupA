@@ -1,0 +1,250 @@
+1#Barcelona#Espanya
+2#Lleida#Espanya
+3#Madrid#Espanya
+4#València#Espanya
+5#Girona#Espanya
+6#Palma#Espanya
+7#Bilbao#Espanya
+8#Tarragona#Espanya
+9#Sant Sebastià#Espanya
+10#Saragossa#Espanya
+11#Màlaga#Espanya
+12#Vigo#Espanya
+13#Còrdova#Espanya
+14#Granada#Espanya
+15#Alacant#Espanya
+16#Múrcia#Espanya
+17#Oviedo#Espanya
+18#Logronyo#Espanya
+19#Salamanca#Espanya
+20#Toledo#Espanya
+21#Badajoz#Espanya
+22#Jaén#Espanya
+23#Segòvia#Espanya
+24#Ceuta#Espanya
+25#Melilla#Espanya
+26#París#França
+27#Marsella#França
+28#Lió#França
+29#Tolosa de Llenguadoc#França
+30#Bordeus#França
+31#Niça#França
+32#Estrasburg#França
+33#Lilla#França
+34#Montpeller#França
+35#Nantes#França
+36#Grenoble#França
+37#Clermont-Ferrand#França
+38#Rennes#França
+39#Dijon#França
+40#Le Havre#França
+41#Reims#França
+42#Tours#França
+43#Avinyó#França
+44#Besançon#França
+45#Poitiers#França
+46#Roma#Itàlia
+47#Milà#Itàlia
+48#Nàpols#Itàlia
+49#Venècia#Itàlia
+50#Florència#Itàlia
+51#Bolonya#Itàlia
+52#Torí#Itàlia
+53#Gènova#Itàlia
+54#Palerm#Itàlia
+55#Bari#Itàlia
+56#Càller#Itàlia
+57#Catània#Itàlia
+58#Verona#Itàlia
+59#Pisa#Itàlia
+60#Parma#Itàlia
+61#Rimini#Itàlia
+62#Bergamo#Itàlia
+63#Perusa#Itàlia
+64#Mòdena#Itàlia
+65#Messina#Itàlia
+66#Londres#Regne Unit
+67#Bristol#Regne Unit
+68#Manchester#Regne Unit
+69#Edimburg#Regne Unit
+70#Glasgow#Regne Unit
+71#Liverpool#Regne Unit
+72#Birmingham#Regne Unit
+73#Cardiff#Regne Unit
+74#Leeds#Regne Unit
+75#Newcastle#Regne Unit
+76#Nottingham#Regne Unit
+77#Belfast#Regne Unit
+78#Oxford#Regne Unit
+79#Cambridge#Regne Unit
+80#Sheffield#Regne Unit
+81#Brighton#Regne Unit
+82#Coventry#Regne Unit
+83#York#Regne Unit
+84#Leicester#Regne Unit
+85#Aberdeen#Regne Unit
+86#Berlín#Alemanya
+87#Munic#Alemanya
+88#Hamburg#Alemanya
+89#Frankfurt#Alemanya
+90#Colònia#Alemanya
+91#Stuttgart#Alemanya
+92#Düsseldorf#Alemanya
+93#Dresden#Alemanya
+94#Leipzig#Alemanya
+95#Bremen#Alemanya
+96#Hannover#Alemanya
+97#Nuremberg#Alemanya
+98#Friburg#Alemanya
+99#Karlsruhe#Alemanya
+100#Potsdam#Alemanya
+101#Lisboa#Portugal
+102#Porto#Portugal
+103#Coïmbra#Portugal
+104#Braga#Portugal
+105#Faro#Portugal
+106#Évora#Portugal
+107#Setúbal#Portugal
+108#Aveiro#Portugal
+109#Guarda#Portugal
+110#Vila Real#Portugal
+111#Viseu#Portugal
+112#Beja#Portugal
+113#Funchal#Portugal
+114#Ponta Delgada#Portugal
+115#Leiria#Portugal
+116#Brussel·les#Bèlgica
+117#Anvers#Bèlgica
+118#Gant#Bèlgica
+119#Lieja#Bèlgica
+120#Bruges#Bèlgica
+121#Namur#Bèlgica
+122#Mons#Bèlgica
+123#Louvain#Bèlgica
+124#Oostende#Bèlgica
+125#Tournai#Bèlgica
+126#Zuric#Suïssa
+127#Ginebra#Suïssa
+128#Basilea#Suïssa
+129#Berna#Suïssa
+130#Lausana#Suïssa
+131#Lucerna#Suïssa
+132#Winterthur#Suïssa
+133#Lugano#Suïssa
+134#Friburg#Suïssa
+135#Sankt Gallen#Suïssa
+136#Amsterdam#Països Baixos
+137#Rotterdam#Països Baixos
+138#La Haia#Països Baixos
+139#Utrecht#Països Baixos
+140#Eindhoven#Països Baixos
+141#Tilburg#Països Baixos
+142#Breda#Països Baixos
+143#Groningen#Països Baixos
+144#Haarlem#Països Baixos
+145#Arnhem#Països Baixos
+146#Copenhaguen#Dinamarca
+147#Aarhus#Dinamarca
+148#Odense#Dinamarca
+149#Aalborg#Dinamarca
+150#Esbjerg#Dinamarca
+151#Oslo#Noruega
+152#Bergen#Noruega
+153#Trondheim#Noruega
+154#Stavanger#Noruega
+155#Drammen#Noruega
+156#Estocolm#Suècia
+157#Göteborg#Suècia
+158#Malmö#Suècia
+159#Upsala#Suècia
+160#Västerås#Suècia
+161#Hèlsinki#Finlàndia
+162#Tampere#Finlàndia
+163#Turku#Finlàndia
+164#Oulu#Finlàndia
+165#Lahti#Finlàndia
+166#Viena#Àustria
+167#Salzburg#Àustria
+168#Innsbruck#Àustria
+169#Graz#Àustria
+170#Linz#Àustria
+171#Luxemburg#Luxemburg
+172#Dublín#Irlanda
+173#Cork#Irlanda
+174#Galway#Irlanda
+175#Limerick#Irlanda
+176#Waterford#Irlanda
+177#Reykjavík#Islàndia
+178#Akureyri#Islàndia
+179#Praga#Txèquia
+180#Brno#Txèquia
+181#Ostrava#Txèquia
+182#Pilsen#Txèquia
+183#Liberec#Txèquia
+184#Bratislava#Eslovàquia
+185#Košice#Eslovàquia
+186#Prešov#Eslovàquia
+187#Budapest#Hongria
+188#Debrecen#Hongria
+189#Szeged#Hongria
+190#Miskolc#Hongria
+191#Pécs#Hongria
+192#Varsòvia#Polònia
+193#Cracòvia#Polònia
+194#Gdańsk#Polònia
+195#Poznań#Polònia
+196#Breslau#Polònia
+197#Zagreb#Croàcia
+198#Split#Croàcia
+199#Rijeka#Croàcia
+200#Ljubljana#Eslovènia
+201#Maribor#Eslovènia
+202#Belgrad#Sèrbia
+203#Novi Sad#Sèrbia
+204#Sofia#Bulgària
+205#Plovdiv#Bulgària
+206#Bucarest#Romania
+207#Cluj-Napoca#Romania
+208#Timișoara#Romania
+209#Brașov#Romania
+210#Constanța#Romania
+211#Atenes#Grècia
+212#Salònica#Grècia
+213#Patres#Grècia
+214#Heràklion#Grècia
+215#Volos#Grècia
+216#Zagreb#Croàcia
+217#Dubrovnik#Croàcia
+218#Pula#Croàcia
+219#Moscou#Rússia
+220#Sant Petersburg#Rússia
+221#Novosibirsk#Rússia
+222#Ekaterinburg#Rússia
+223#Kazan#Rússia
+224#Kíev#Ucraïna
+225#Khàrkiv#Ucraïna
+226#Odesa#Ucraïna
+227#Dnipro#Ucraïna
+228#Lviv#Ucraïna
+229#Tallinn#Estònia
+230#Riga#Letònia
+231#Vílnius#Lituània
+232#Valletta#Malta
+233#Andorra la Vella#Andorra
+234#Podgorica#Montenegro
+235#Sarajevo#Bòsnia i Hercegovina
+236#Skopje#Macedònia del Nord
+237#Tirana#Albània
+238#Istanbul#Turquia
+239#Ankara#Turquia
+240#Esmirna#Turquia
+241#Nicòsia#Xipre
+242#Valletta#Malta
+243#Podgorica#Montenegro
+244#Sarajevo#Bòsnia i Hercegovina
+245#Skopje#Macedònia del Nord
+246#Tirana#Albània
+247#Reykjavík#Islàndia
+248#Minsk#Bielorússia
+249#Belgrad#Sèrbia
+250#Chisinau#Moldàvia
