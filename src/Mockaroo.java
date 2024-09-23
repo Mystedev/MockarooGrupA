@@ -19,6 +19,12 @@ public class Mockaroo {
 			e.printStackTrace();
 		}
 		
+		
+		
+	}
+	
+	public static void marcal() {
+		
 	}
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// ·Funcion boolean sin formatos
