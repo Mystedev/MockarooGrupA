@@ -7,7 +7,8 @@ public class Mockaroo {
 	public static void main(String[] args) {
 		
 		try {
-			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Pais.txt"};
+			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt",
+					"Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
 			FileReader fr = new FileReader(files_dades[0]);
 			BufferedReader br = new BufferedReader(fr);
 			String line;
