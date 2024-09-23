@@ -1,9 +1,24 @@
+import java.io.FileReader;
+import java.io.File;
+import java.io.BufferedReader;
 
 public class Mockaroo {
 
 	public static void main(String[] args) {
 		
-
+		try {
+			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Pais.txt"};
+			FileReader fr = new FileReader(files_dades[0]);
+			BufferedReader br = new BufferedReader(fr);
+			String line;
+			while(br.ready()) {
+				line = br.readLine();
+				System.out.println(line);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// ·Funcion boolean sin formatos
