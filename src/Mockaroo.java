@@ -18,7 +18,6 @@ public class Mockaroo {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// ·Funcion boolean sin formatos
