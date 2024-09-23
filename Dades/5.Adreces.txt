@@ -1,0 +1,250 @@
+1#Carrer del Prat
+2#Carrer de la Marina
+3#Carrer de Sant Joan
+4#Carrer del Pi
+5#Carrer de la Pau
+6#Carrer del Sol
+7#Carrer de l'Església
+8#Carrer del Port
+9#Carrer de la Riera
+10#Carrer de la Floresta
+11#Carrer de la Llibertat
+12#Carrer de la Tramuntana
+13#Carrer de la Mercè
+14#Carrer de la Font
+15#Carrer de les Moreres
+16#Carrer de l'Olivera
+17#Carrer de Sant Pau
+18#Carrer de les Vinyes
+19#Carrer del Castell
+20#Carrer de la Rambla
+21#Carrer de la Verge
+22#Carrer del Clot
+23#Carrer de la Figuera
+24#Carrer de la Mar
+25#Carrer del Camí Ral
+26#Carrer de les Flors
+27#Carrer de la Primavera
+28#Carrer de la Serra
+29#Carrer del Puig
+30#Carrer del Montseny
+31#Carrer del Montnegre
+32#Carrer del Raval
+33#Carrer de la Sort
+34#Carrer del Cingle
+35#Carrer de l'Alzina
+36#Carrer de les Planes
+37#Carrer de l'Estació
+38#Carrer de la Gavina
+39#Carrer del Roure
+40#Carrer de la Palma
+41#Carrer de la Creu
+42#Carrer del Nord
+43#Carrer del Sud
+44#Carrer del Mig
+45#Carrer del Vinyet
+46#Carrer de la Plana
+47#Carrer de la Garriga
+48#Carrer del Bosquet
+49#Carrer de l'Arc de Sant Martí
+50#Carrer del Pi Gros
+51#Carrer de la Palmera
+52#Carrer del Carrilet
+53#Carrer de la Costa
+54#Carrer del Vent
+55#Carrer del Marge
+56#Carrer de la Torre
+57#Carrer del Camp
+58#Carrer de la Nit
+59#Carrer del Barri Vell
+60#Carrer de l'Estrella
+61#Carrer de la Lluna
+62#Carrer del Mercadal
+63#Carrer de la Barceloneta
+64#Carrer del Terraplè
+65#Carrer de la Vall
+66#Carrer de l'Aigua
+67#Carrer del Ter
+68#Carrer de la Noguera
+69#Carrer de l'Urgell
+70#Carrer de la Selva
+71#Carrer de la Garrotxa
+72#Carrer del Ripollès
+73#Carrer del Moianès
+74#Carrer de la Segarra
+75#Carrer de la Conca
+76#Carrer del Gironès
+77#Carrer del Bages
+78#Carrer de l'Anoia
+79#Carrer del Maresme
+80#Carrer del Vallès
+81#Carrer de l'Empordà
+82#Carrer de la Ribera
+83#Carrer de l'Ordal
+84#Carrer del Montjuïc
+85#Carrer de la Pedrera
+86#Carrer de les Corts
+87#Carrer de Gràcia
+88#Carrer del Poble Sec
+89#Carrer de Sant Gervasi
+90#Carrer del Poblenou
+91#Carrer de Sants
+92#Carrer del Congost
+93#Carrer de l'Ebre
+94#Carrer del Llobregat
+95#Carrer de la Diagonal
+96#Carrer del Guinardó
+97#Carrer de la Foixarda
+98#Carrer del Carmel
+99#Carrer del Baixador
+100#Carrer de Vallvidrera
+101#Carrer de Sarrià
+102#Carrer de Lesseps
+103#Carrer de Provença
+104#Carrer del Paral·lel
+105#Carrer de la Bonanova
+106#Carrer de Can Baró
+107#Carrer del Poblat Ibèric
+108#Carrer de Montcada
+109#Carrer del Clavell
+110#Carrer del Timó
+111#Carrer de la Farigola
+112#Carrer del Llorer
+113#Carrer del Marquès de Sentmenat
+114#Carrer de Pau Claris
+115#Carrer del Pi Verd
+116#Carrer de les Eres
+117#Carrer de l'Argenteria
+118#Carrer del Fòrum
+119#Carrer de la Barceloneta Alta
+120#Carrer del Passeig Marítim
+121#Carrer del Vaixell
+122#Carrer de la Mar Gran
+123#Carrer de les Dunes
+124#Carrer de la Badia
+125#Carrer de la Torreta
+126#Carrer de Sant Vicenç
+127#Carrer de les Oliveres
+128#Carrer del Falguera
+129#Carrer del Canigó
+130#Carrer de les Voltes
+131#Carrer de les Clarisses
+132#Carrer de Sant Pere
+133#Carrer de la Mussara
+134#Carrer del Cavall Bernat
+135#Carrer de la Punta
+136#Carrer de les Quatre Columnes
+137#Carrer del Calvari
+138#Carrer de la Pedrissa
+139#Carrer de l'Hostal
+140#Carrer de la Fosca
+141#Carrer de les Lloses
+142#Carrer del Rosselló
+143#Carrer de la Mola
+144#Carrer de Sant Martí
+145#Carrer de les Arenes
+146#Carrer de Sant Jordi
+147#Carrer del Vilassar
+148#Carrer del Coll
+149#Carrer del Portell
+150#Carrer de la Llacuna
+151#Carrer del Rec
+152#Carrer de l'Escorxador
+153#Carrer de les Cases Noves
+154#Carrer del Vapor
+155#Carrer del Bellsolà
+156#Carrer del Garric
+157#Carrer de les Roses
+158#Carrer de la Balma
+159#Carrer del Molí
+160#Carrer del Lledoner
+161#Carrer de l'Oreneta
+162#Carrer de les Creus
+163#Carrer del Sitjar
+164#Carrer del Gorg
+165#Carrer de l'Empelt
+166#Carrer de les Monges
+167#Carrer del Til·ler
+168#Carrer de la Cisa
+169#Carrer de les Fonts
+170#Carrer del Brollador
+171#Carrer del Montgrí
+172#Carrer del Pedró
+173#Carrer de les Finestres
+174#Carrer del Vern
+175#Carrer de la Mitja Lluna
+176#Carrer del Freixe
+177#Carrer del Romaní
+178#Carrer del Fanal
+179#Carrer de l'Arbreda
+180#Carrer de la Rovira
+181#Carrer del Graner
+182#Carrer del Pla de Sant Martí
+183#Carrer de l'Aleixar
+184#Carrer de la Fulla
+185#Carrer del Parc Central
+186#Carrer del Fondo
+187#Carrer de la Masia
+188#Carrer del Tallat
+189#Carrer de la Llitera
+190#Carrer del Pantà
+191#Carrer de la Vinya Nova
+192#Carrer de l'Horta
+193#Carrer del Romesco
+194#Carrer del Xaloc
+195#Carrer del Masnou
+196#Carrer de les Mines
+197#Carrer de la Mata
+198#Carrer del Canigó Alt
+199#Carrer de la Vall Fosca
+200#Carrer del Montcau
+201#Carrer de la Roca Grossa
+202#Carrer de la Vall d'Hebron
+203#Carrer de l'Atlàntida
+204#Carrer del Marquet
+205#Carrer de la Savina
+206#Carrer del Salze
+207#Carrer del Xiprer
+208#Carrer de les Canyes
+209#Carrer del Passeig Verd
+210#Carrer del Mirador
+211#Carrer de les Olives
+212#Carrer de l'Ermita
+213#Carrer de la Foixarda
+214#Carrer de l'Esquirol
+215#Carrer de la Roca Bruna
+216#Carrer del Roc Blanc
+217#Carrer del Tram
+218#Carrer del Safrà
+219#Carrer de les Tàpies
+220#Carrer del Pi Blau
+221#Carrer de les Brucardes
+222#Carrer del Suro
+223#Carrer del Penyalar
+224#Carrer de les Hortes
+225#Carrer del Vidre
+226#Carrer de les Llambordes
+227#Carrer del Llac Petit
+228#Carrer del Casalot
+229#Carrer de la Parellada
+230#Carrer del Xalet
+231#Carrer de les Palmeres
+232#Carrer del Galliner
+233#Carrer de la Forja
+234#Carrer del Marquet de les Roques
+235#Carrer de les Carretes
+236#Carrer del Sol Ixent
+237#Carrer del Delta
+238#Carrer del Cisteller
+239#Carrer de les Maresmes
+240#Carrer de la Molsa
+241#Carrer del Pins
+242#Carrer del Xaloc Gran
+243#Carrer del Pic Negre
+244#Carrer de la Llàntia
+245#Carrer del Gregal
+246#Carrer del Veler
+247#Carrer del Fonoll
+248#Carrer de la Figuera Alta
+249#Carrer del Xoriguer
+250#Carrer de les Cabanyes
