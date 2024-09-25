@@ -10,12 +10,6 @@ public class Mockaroo {
 	public static void main(String[] args) {
 		
 		try {
-
-		//	String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt",
-		//			"Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
-		//	FileReader fr = new FileReader(files_dades[0]);
-		//	BufferedReader br = new BufferedReader(fr);
-		//	String line;
 			int llargada = 10;
 			boolean dadesBoolean [] = new boolean [llargada];
 			dadesBoolean(llargada, dadesBoolean);
@@ -33,13 +27,6 @@ public class Mockaroo {
 				System.out.println(line);
 
 			}
-
-		//	while(br.ready()) {
-		//		line = br.readLine();
-		//		System.out.println(line);
-		//	}
-
-			// System.out.println(RandomNumber(1,0,1000));
 
 		}catch(Exception e) {
 			e.printStackTrace();
