@@ -1,27 +1,47 @@
 import java.io.FileReader;
+import java.util.Random;
 import java.io.File;
 import java.io.BufferedReader;
 
 public class Mockaroo {
 
+	
 	public static void main(String[] args) {
 		
 		try {
-			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt",
-					"Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
-			FileReader fr = new FileReader(files_dades[0]);
-			BufferedReader br = new BufferedReader(fr);
-			String line;
-			while(br.ready()) {
-				line = br.readLine();
-				System.out.println(line);
+		//	String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt",
+		//			"Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
+		//	FileReader fr = new FileReader(files_dades[0]);
+		//	BufferedReader br = new BufferedReader(fr);
+		//	String line;
+			int llargada = 10;
+			boolean dadesBoolean [] = new boolean [llargada];
+			dadesBoolean(llargada, dadesBoolean);
+			for(int i = 0; i < llargada; i++) {
+				System.out.println(dadesBoolean[i]);
 			}
+		//	while(br.ready()) {
+		//		line = br.readLine();
+		//		System.out.println(line);
+		//	}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// ·Funcion boolean sin formatos
+	public static void dadesBoolean(int quantitatDades, boolean dadesBoolean[]) {
+		//inicialitzem el Random
+		Random random=new Random();
+		//Fem un bucle amb tantes voltes com dades a generar
+		for (int i = 0; i < quantitatDades; i++) {
+			//Guardem al array de booleans el valor aleatori generat amb el Random
+	        dadesBoolean[i] = random.nextBoolean();
+	    }
+		
+		
+	}
+	
 	// ·Funcion int para indicar los 'decimales=0','minims=0 i maxims=1000'
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
 	// ·Funcion IP4 ???
