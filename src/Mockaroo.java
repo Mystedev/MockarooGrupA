@@ -6,9 +6,16 @@ import java.util.Scanner;
 
 public class Mockaroo {
 
+	
 	public static void main(String[] args) {
 		
 		try {
+			int llargada = 10;
+			boolean dadesBoolean [] = new boolean [llargada];
+			dadesBoolean(llargada, dadesBoolean);
+			for(int i = 0; i < llargada; i++) {
+				System.out.println(dadesBoolean[i]);
+
 			Scanner reader = new Scanner(System.in);
 			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt",
 					"Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
@@ -21,12 +28,25 @@ public class Mockaroo {
 				System.out.println(line);
 			}*/
 			// System.out.println(RandomNumber(1,0,1000));
+
+			}
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// ·Funcion boolean sin formatos
+	public static void dadesBoolean(int quantitatDades, boolean dadesBoolean[]) {
+		//inicialitzem el Random
+		Random random=new Random();
+		//Fem un bucle amb tantes voltes com dades a generar
+		for (int i = 0; i < quantitatDades; i++) {
+			//Guardem al array de booleans el valor aleatori generat amb el Random
+	        dadesBoolean[i] = random.nextBoolean();
+	    }
+	}
+	
 	// ·Funcion int para indicar los 'decimales=0','minims=0 i maxims=1000'
 	public static double RandomNumber(double decimals,double minim,double maxim) {
 		// Importem el metode random per generar numeros aleatoris
