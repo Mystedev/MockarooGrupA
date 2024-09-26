@@ -15,10 +15,11 @@ public class Mockaroo {
 			FileReader fr = new FileReader(files_dades[0]);
 			BufferedReader br = new BufferedReader(fr);
 			String line;
-			while(br.ready()) {
+			
+			/*while(br.ready()) {
 				line = br.readLine();
 				System.out.println(line);
-			}
+			}*/
 			// System.out.println(RandomNumber(1,0,1000));
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -42,6 +43,7 @@ public class Mockaroo {
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
 	// ·Funcion IP4 ???
 	// ·Funcion String ha de indicar 'letras,numeros,mayusculas,minusculas,simbolos y longitud'
+	
 	// ·Funcion String ha de indicar el 'any minim=1900 i maxim=2023'
 	// ·Funcion para IBAN o DNI (Hay como buscar como se generan)
 	// ·Funcion int ha de indicar el 'valor d'inici=1'
