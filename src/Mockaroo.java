@@ -30,8 +30,8 @@ public class Mockaroo {
 			// System.out.println(RandomNumber(1,0,1000));
 
 			}
-
-		}catch(Exception e) {
+		}
+		catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -63,7 +63,49 @@ public class Mockaroo {
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
 	// ·Funcion IP4 ???
 	// ·Funcion String ha de indicar 'letras,numeros,mayusculas,minusculas,simbolos y longitud'
-	
+	// Mètode per generar la contrasenya segons els paràmetres
+    public static String GenerarPassword(boolean inclouLletres, boolean inclouNumeros, 
+                                         boolean inclouMajuscules, boolean inclouMinuscules, 
+                                         boolean inclouSymbols, int longitud) {
+        // Definim els conjunts de caràcters possibles
+        String lletres = "abcdefghijklmnopqrstuvwxyz";
+        String majuscules = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String numeros = "0123456789";
+        String simbols = "!@#$%^&*()_-+=<>?/{}~|";
+        // Cadena que contindrà tots els caràcters permesos segons les opcions
+        String conjuntCaracters = "";
+        // Afegeix els caràcters segons els paràmetres afegits
+        if (inclouLletres && inclouMinuscules) {conjuntCaracters += lletres;}
+        if (inclouLletres && inclouMajuscules) {conjuntCaracters += majuscules;}
+        if (inclouNumeros) {conjuntCaracters += numeros;}
+        if (inclouSymbols) {conjuntCaracters += simbols;}
+        // Si no s'ha seleccionat cap conjunt de caràcters, torna un missatge d'error
+        if (conjuntCaracters.isEmpty()) {
+            System.out.println("Cal seleccionar almenys una opció de caràcters.");
+        }
+        // Generació de la contrasenya
+        Random random = new Random();
+        String password = "";
+        for (int i = 0; i < longitud; i++) {
+            int index = random.nextInt(conjuntCaracters.length());
+            password += conjuntCaracters.charAt(index);  // Mezcla de caracters
+        }
+        return password;
+    }
+    public static void MostrarPassword() {
+    	// Paràmetres de exemple
+        boolean inclouLletres = true;
+        boolean inclouNumeros = true;
+        boolean inclouMajuscules = true;
+        boolean inclouMinuscules = true;
+        boolean inclouSymbols = true;
+        int longitud = 12;  // Longitud de la contrasenya
+        
+        String password = GenerarPassword(inclouLletres, inclouNumeros, inclouMajuscules, 
+                                          inclouMinuscules, inclouSymbols, longitud);
+        // Mostrar la contrasenya generada
+        System.out.println("Contrasenya generada exitosament: " + password);
+    }
 	// ·Funcion String ha de indicar el 'any minim=1900 i maxim=2023'
 	// ·Funcion para IBAN o DNI (Hay como buscar como se generan)
 	// ·Funcion int ha de indicar el 'valor d'inici=1'
