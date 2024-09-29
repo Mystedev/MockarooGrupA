@@ -1,35 +1,34 @@
 import java.io.FileReader;
 import java.util.Random;
-import java.io.File;
 import java.io.BufferedReader;
 import java.util.Scanner;
 
 public class Mockaroo {
-
-	
 	public static void main(String[] args) {
 		
 		try {
 			int llargada = 10;
 			boolean dadesBoolean [] = new boolean [llargada];
 			dadesBoolean(llargada, dadesBoolean);
-			for(int i = 0; i < llargada; i++) {
-				System.out.println(dadesBoolean[i]);
-
+			for(int i = 0; i < llargada; i++) {System.out.println(dadesBoolean[i]);}
+			
 			Scanner reader = new Scanner(System.in);
 			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt",
 					"Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
 			FileReader fr = new FileReader(files_dades[0]);
 			BufferedReader br = new BufferedReader(fr);
 			String line;
-			
+			// Lectura dels fitxers de dades
 			/*while(br.ready()) {
 				line = br.readLine();
 				System.out.println(line);
 			}*/
-			// System.out.println(RandomNumber(1,0,1000));
-
-			}
+			
+			
+			// System.out.println(RandomNumber(1,0,1000)); --Funcion para mostrar numeros decimales
+			// MostrarPassword(); --Funcion para mostrar contraseña compuesta por caracteres,simbolos y letras
+			// String numeroDNI = ObtenerDNI(); --Funcion para obtener DNI aleatorio 
+			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -79,10 +78,6 @@ public class Mockaroo {
         if (inclouLletres && inclouMajuscules) {conjuntCaracters += majuscules;}
         if (inclouNumeros) {conjuntCaracters += numeros;}
         if (inclouSymbols) {conjuntCaracters += simbols;}
-        // Si no s'ha seleccionat cap conjunt de caràcters, torna un missatge d'error
-        if (conjuntCaracters.isEmpty()) {
-            System.out.println("Cal seleccionar almenys una opció de caràcters.");
-        }
         // Generació de la contrasenya
         Random random = new Random();
         String password = "";
@@ -107,7 +102,25 @@ public class Mockaroo {
         System.out.println("Contrasenya generada exitosament: " + password);
     }
 	// ·Funcion String ha de indicar el 'any minim=1900 i maxim=2023'
-	// ·Funcion para IBAN o DNI (Hay como buscar como se generan)
+	// ·Funcion para IBAN o DNI (Hay como buscar como se generan)---------------------------------------
+    // Funcio per generar la ultima lletra del DNI
+    public static char GenerarLetraDNI(int dni) {
+    	// Lletres valides per seleccionar l'ultim caracter del DNI
+    	String characters = "TRWAGMYFPDXBNJZSQVHLCKE";
+    	// La resta de la divisio de la longitud total del 'string' dels caracters ens dona la posicio de la lletra, es a dir  '23'
+    	int rest = dni % characters.length();
+    	return characters.charAt(rest);
+    }
+    // Funcion per obtenir el umero de DNI aleatori
+    public static String ObtenerDNI() {
+    	Random random = new Random();
+    	// Necesitem que la quantitat de numeros del DNI sigui de 8
+    	int numeroDNI = random.nextInt(90000000) + 10000000;
+    	// Obtenim la serie de numeros aleatoris que contindran el DNI
+    	char lletra = GenerarLetraDNI(numeroDNI);
+    	// Obtenim exitosament un numero de DNI aleatori
+    	return numeroDNI + String.valueOf(lletra);
+    }
 	// ·Funcion int ha de indicar el 'valor d'inici=1'
 	//*****************************
 	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
