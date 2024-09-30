@@ -7,34 +7,51 @@ public class Mockaroo {
 	public static void main(String[] args) {
 		
 		try {
-			int llargada = 10;
-			boolean dadesBoolean [] = new boolean [llargada];
-			dadesBoolean(llargada, dadesBoolean);
-			for(int i = 0; i < llargada; i++) {System.out.println(dadesBoolean[i]);}
-			
-			Scanner reader = new Scanner(System.in);
-			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt",
-					"Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
-			FileReader fr = new FileReader(files_dades[0]);
-			BufferedReader br = new BufferedReader(fr);
-			String line;
-			// Lectura dels fitxers de dades
-			/*while(br.ready()) {
-				line = br.readLine();
-				System.out.println(line);
-			}*/
-			
-			
+			LlegirDades();
 			// System.out.println(RandomNumber(1,0,1000)); --Funcion para mostrar numeros decimales
 			// MostrarPassword(); --Funcion para mostrar contraseña compuesta por caracteres,simbolos y letras
 			// String numeroDNI = ObtenerDNI(); --Funcion para obtener DNI aleatorio 
-			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
+	// Funcio per llegir els arxius de dades
+	public static void LlegirDades() {
+		try {
+			Scanner reader = new Scanner(System.in);
+			// Array d'arxius de dades per accedir i llegir-los
+			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt",
+					"Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
+			// Arxiu d'entrada per determinar on guardar els arxius 
+			String fileEntrada = "Dades/Requisits.txt";
+			// Llegirem l'arxiu amb les especificacions que pot demanar l'usuari
+			BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
+			// Llegim la primera linea 
+			String line = br.readLine();
+			// La primera linea queda separada pel '#' obtenint a la primera posicio el tipus d'arxiu i a la segona posicio la ubicacio
+			String firstLine[] = line.split("#");
+			// Separem les dades obtingudes
+			String tipusArxiu = firstLine[0];
+			String quantitatRegistres = firstLine[1];
+			String ubicacioArxiu = firstLine[2];
+			// Farem servir la seguent sintaxi per guiar al usuari de manera que sapigui com,on i quants registres vol generar
+			// *Tipus d'arxiu que es vol generar ->> SQL o XML
+			// *Quantitat de registres que es vol generar ->> 0-250 (Tenint en compte que el total de dades per arxiu es de 250)
+			// *Ubicació on es vol guardar l'arxiu generat
+			System.out.println("La següent linea servirá per saber com voldras generar l'arxiu de sortida.");
+			System.out.println("Fes servir la següent sintaxi per generar l'arxiu de sortida ->> SQL#200#Escriptori");
+			System.out.print("Introdueix com vols generar l'arxiu:");
+			String arxiuGenerat = reader.nextLine();
+			String formatArxiu[] = arxiuGenerat.split("#");
+			while(formatArxiu.length!=3) {
+				System.out.print("Error|Introdueix un format vàlid:");
+				arxiuGenerat = reader.nextLine();
+			}
+			
+		}catch(Exception e) {e.printStackTrace();}
+	}
 	// ·Funcion boolean sin formatos
 	public static void dadesBoolean(int quantitatDades, boolean dadesBoolean[]) {
 		//inicialitzem el Random
@@ -45,7 +62,6 @@ public class Mockaroo {
 	        dadesBoolean[i] = random.nextBoolean();
 	    }
 	}
-	
 	// ·Funcion int para indicar los 'decimales=0','minims=0 i maxims=1000'
 	public static double RandomNumber(double decimals,double minim,double maxim) {
 		// Importem el metode random per generar numeros aleatoris
@@ -63,9 +79,8 @@ public class Mockaroo {
 	// ·Funcion IP4 ???
 	// ·Funcion String ha de indicar 'letras,numeros,mayusculas,minusculas,simbolos y longitud'
 	// Mètode per generar la contrasenya segons els paràmetres
-    public static String GenerarPassword(boolean inclouLletres, boolean inclouNumeros, 
-                                         boolean inclouMajuscules, boolean inclouMinuscules, 
-                                         boolean inclouSymbols, int longitud) {
+    public static String GenerarPassword(boolean inclouLletres, boolean inclouNumeros, boolean inclouMajuscules, boolean inclouMinuscules, 
+                                         boolean inclouSimbols, int longitud) {
         // Definim els conjunts de caràcters possibles
         String lletres = "abcdefghijklmnopqrstuvwxyz";
         String majuscules = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -77,7 +92,7 @@ public class Mockaroo {
         if (inclouLletres && inclouMinuscules) {conjuntCaracters += lletres;}
         if (inclouLletres && inclouMajuscules) {conjuntCaracters += majuscules;}
         if (inclouNumeros) {conjuntCaracters += numeros;}
-        if (inclouSymbols) {conjuntCaracters += simbols;}
+        if (inclouSimbols) {conjuntCaracters += simbols;}
         // Generació de la contrasenya
         Random random = new Random();
         String password = "";
