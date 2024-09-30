@@ -1,225 +1,223 @@
-1#Espanya
-2#França
-3#Itàlia
-4#Regne Unit
-5#Alemanya
-6#Portugal
-7#Bèlgica
-8#Suïssa
-9#Països Baixos
-10#Dinamarca
-11#Noruega
-12#Suècia
-13#Finlàndia
-14#Àustria
-15#Luxemburg
-16#Irlanda
-17#Islàndia
-18#Txèquia
-19#Eslovàquia
-20#Hongria
-21#Polònia
-22#Croàcia
-23#Eslovènia
-24#Sèrbia
-25#Bulgària
-26#Romania
-27#Grècia
-28#Rússia
-29#Ucraïna
-30#Estònia
-31#Letònia
-32#Lituània
-33#Malta
-34#Andorra
-35#Montenegro
-36#Bòsnia i Hercegovina
-37#Macedònia del Nord
-38#Albània
-39#Turquia
-40#Xipre
-41#Moldàvia
-42#Bielorússia
-43#Geòrgia
-44#Armènia
-45#Azerbaidjan
-46#Kazakhstan
-47#Uzbekistan
-48#Tadjikistan
-49#Kirguizistan
-50#Turkmenistan
-51#Israel
-52#Palestina
-53#Líban
-54#Jordània
-55#Síria
-56#Iraq
-57#Iran
-58#Aràbia Saudita
-59#Emirats Àrabs Units
-60#Qatar
-61#Oman
-62#Iemen
-63#Egipte
-64#Líbia
-65#Tunísia
-66#Algèria
-67#Marroc
-68#Mauritània
-69#Senegal
-70#Mali
-71#Niger
-72#Txad
-73#Sudan
-74#Sudan del Sud
-75#Etiòpia
-76#Eritrea
-77#Somàlia
-78#Djibouti
-79#Kenya
-80#Uganda
-81#Ruanda
-82#Burundi
-83#Tanzània
-84#Malawi
-85#Moçambic
-86#Zàmbia
-87#Angola
-88#Namíbia
-89#Botswana
-90#Zimbabwe
-91#Sud-àfrica
-92#Lesotho
-93#Eswatini
-94#Madagascar
-95#Maurici
-96#Seychelles
-97#Comores
-98#República Democràtica del Congo
-99#República del Congo
-100#Gabón
-101#Guinea Equatorial
-102#Sao Tomé i Príncep
-103#Camerun
-104#Nigèria
-105#Ghana
-106#Costa d'Ivori
-107#Burkina Faso
-108#Togo
-109#Benín
-110#Libèria
-111#Sierra Leone
-112#Guinea
-113#Guinea Bissau
-114#Cap Verd
-115#Gàmbia
-116#Jamaica
-117#Haití
-118#República Dominicana
-119#Cuba
-120#Mèxic
-121#Guatemala
-122#Belize
-123#El Salvador
-124#Hondures
-125#Nicaragua
-126#Costa Rica
-127#Panamà
-128#Colòmbia
-129#Veneçuela
-130#Equador
-131#Perú
-132#Bolívia
-133#Xile
-134#Argentina
-135#Uruguai
-136#Paraguai
-137#Brasil
-138#Surinam
-139#Guyana
-140#Trinitat i Tobago
-141#Barbados
-142#Granada
-143#Saint Lucia
-144#Saint Kitts i Nevis
-145#Saint Vincent i les Grenadines
-146#Antigua i Barbuda
-147#Bahames
-148#Dominica
-149#Puerto Rico
-150#Estats Units
-151#Canadà
-152#Groenlàndia
-153#Islàndia
-154#Cuba
-155#Jamaica
-156#Aruba
-157#Curacao
-158#Martinica
-159#Guadeloupe
-160#Saint Barthélemy
-161#Montserrat
-162#Bahamas
-163#Barbados
-164#Saint Kitts and Nevis
-165#Anguilla
-166#Antigua and Barbuda
-167#Saint Vincent and the Grenadines
-168#Saint Lucia
-169#Belize
-170#Honduras
-171#Guatemala
-172#El Salvador
-173#Nicaragua
-174#Costa Rica
-175#Panamà
-176#Veneçuela
-177#Colòmbia
-178#Equador
-179#Perú
-180#Bolívia
-181#Xile
-182#Argentina
-183#Uruguai
-184#Paraguai
-185#Brasil
-186#Surinam
-187#Guyana
-188#Trinitat i Tobago
-189#Barbados
-190#Bahames
-191#Saint Kitts i Nevis
-192#Saint Vincent i les Grenadines
-193#Saint Lucia
-194#Antigua i Barbuda
-195#Dominica
-196#Grenada
-197#Cuba
-198#Haití
-199#República Dominicana
-200#Mèxic
-201#Estats Units
-202#Canadà
-203#Groenlàndia
-204#Islàndia
-205#Japó
-206#Xina
-207#Corea del Sud
-208#Corea del Nord
-209#Índia
-210#Pakistan
-211#Bangla Desh
-212#Sri Lanka
-213#Nepal
-214#Butan
-215#Myanmar
-216#Tailàndia
-217#Cambodja
-218#Vietnam
-219#Laos
-220#Malàisia
-221#Singapur
-222#Indonèsia
-223#Filipines
-224#Brunei
-225#Timor Oriental
+1#Espanya#ES
+2#França#FR
+3#Itàlia#IT
+4#Regne Unit#GB
+5#Alemanya#DE
+6#Portugal#PT
+7#Bèlgica#BE
+8#Suïssa#CH
+9#Països Baixos#NL
+10#Dinamarca#DK
+11#Noruega#NO
+12#Suècia#SE
+13#Finlàndia#FI
+14#Àustria#AT
+15#Luxemburg#LU
+16#Irlanda#IE
+17#Islàndia#IS
+18#Txèquia#CZ
+19#Eslovàquia#SK
+20#Hongria#HU
+21#Polònia#PL
+22#Croàcia#HR
+23#Eslovènia#SI
+24#Sèrbia#RS
+25#Bulgària#BG
+26#Romania#RO
+27#Grècia#GR
+28#Rússia#RU
+29#Ucraïna#UA
+30#Estònia#EE
+31#Letònia#LV
+32#Lituània#LT
+33#Malta#MT
+34#Andorra#AD
+35#Montenegro#ME
+36#Bòsnia i Hercegovina#BA
+37#Macedònia del Nord#MK
+38#Albània#AL
+39#Turquia#TR
+40#Xipre#CY
+41#Moldàvia#MD
+42#Bielorússia#BY
+43#Geòrgia#GE
+44#Armènia#AM
+45#Azerbaidjan#AZ
+46#Kazakhstan#KZ
+47#Uzbekistan#UZ
+48#Tadjikistan#TJ
+49#Kirguizistan#KG
+50#Turkmenistan#TM
+51#Israel#IL
+52#Palestina#PS
+53#Líban#LB
+54#Jordània#JO
+55#Síria#SY
+56#Iraq#IQ
+57#Iran#IR
+58#Aràbia Saudita#SA
+59#Emirats Àrabs Units#AE
+60#Qatar#QA
+61#Oman#OM
+62#Iemen#YE
+63#Egipte#EG
+64#Líbia#LY
+65#Tunísia#TN
+66#Algèria#DZ
+67#Marroc#MA
+68#Mauritània#MR
+69#Senegal#SN
+70#Mali#ML
+71#Niger#NE
+72#Txad#TD
+73#Sudan#SD
+74#Sudan del Sud#SS
+75#Etiòpia#ET
+76#Eritrea#ER
+77#Somàlia#SO
+78#Djibouti#DJ
+79#Kenya#KE
+80#Uganda#UG
+81#Ruanda#RW
+82#Burundi#BI
+83#Tanzània#TZ
+84#Malawi#MW
+85#Moçambic#MZ
+86#Zàmbia#ZM
+87#Angola#AO
+88#Namíbia#NA
+89#Botswana#BW
+90#Zimbabwe#ZW
+91#Sud-àfrica#ZA
+92#Lesotho#LS
+93#Eswatini#SZ
+94#Madagascar#MG
+95#Maurici#MU
+96#Seychelles#SC
+97#Comores#KM
+98#República Democràtica del Congo#CD
+99#República del Congo#CG
+100#Gabón#GA
+101#Guinea Equatorial#GQ
+102#Sao Tomé i Príncep#ST
+103#Camerun#CM
+104#Nigèria#NG
+105#Ghana#GH
+106#Costa d'Ivori#CI
+107#Burkina Faso#BF
+108#Togo#TG
+109#Benín#BJ
+110#Libèria#LR
+111#Sierra Leone#SL
+112#Guinea#GN
+113#Guinea Bissau#GW
+114#Cap Verd#CV
+115#Gàmbia#GM
+116#Jamaica#JM
+117#Haití#HT
+118#República Dominicana#DO
+119#Cuba#CU
+120#Mèxic#MX
+121#Guatemala#GT
+122#Belize#BZ
+123#El Salvador#SV
+124#Hondures#HN
+125#Nicaragua#NI
+126#Costa Rica#CR
+127#Panamà#PA
+128#Colòmbia#CO
+129#Veneçuela#VE
+130#Equador#EC
+131#Perú#PE
+132#Bolívia#BO
+133#Xile#CL
+134#Argentina#AR
+135#Uruguai#UY
+136#Paraguai#PY
+137#Brasil#BR
+138#Surinam#SR
+139#Guyana#GY
+140#Trinitat i Tobago#TT
+141#Barbados#BB
+142#Granada#GD
+143#Saint Lucia#LC
+144#Saint Kitts i Nevis#KN
+145#Saint Vincent i les Grenadines#VC
+146#Antigua i Barbuda#AG
+147#Bahames#BS
+148#Dominica#DM
+149#Puerto Rico#PR
+150#Estats Units#US
+151#Canadà#CA
+152#Groenlàndia#GL
+153#Islàndia#IS
+154#Cuba#CU
+155#Jamaica#JM
+156#Aruba#AW
+157#Curacao#CW
+158#Martinica#MQ
+159#Guadeloupe#GP
+160#Saint Barthélemy#BL
+161#Montserrat#MS
+162#Bahamas#BS
+163#Barbados#BB
+164#Saint Kitts and Nevis#KN
+165#Saint Vincent and les Grenadines#VC
+166#Saint Lucia#LC
+167#Belize#BZ
+168#Honduras#HN
+169#Guatemala#GT
+170#El Salvador#SV
+171#Nicaragua#NI
+172#Costa Rica#CR
+173#Panamà#PA
+174#Veneçuela#VE
+175#Colòmbia#CO
+176#Equador#EC
+177#Perú#PE
+178#Bolívia#BO
+179#Xile#CL
+180#Argentina#AR
+181#Uruguai#UY
+182#Paraguai#PY
+183#Brasil#BR
+184#Surinam#SR
+185#Guyana#GY
+186#Trinitat i Tobago#TT
+187#Barbados#BB
+188#Bahames#BS
+189#Saint Kitts i Nevis#KN
+190#Saint Vincent i les Grenadines#VC
+191#Saint Lucia#LC
+192#Antigua i Barbuda#AG
+193#Dominica#DM
+194#Grenada#GD
+195#Cuba#CU
+196#Haití#HT
+197#República Dominicana#DO
+198#Mèxic#MX
+199#Estats Units#US
+200#Canadà#CA
+201#Groenlàndia#GL
+202#Islàndia#IS
+203#Japó#JP
+204#Xina#CN
+205#Corea del Sud#KR
+206#Corea del Nord#KP
+207#Índia#IN
+208#Pakistan#PK
+209#Bangla Desh#BD
+210#Sri Lanka#LK
+211#Nepal#NP
+212#Butan#BT
+213#Myanmar#MM
+214#Tailàndia#TH
+215#Cambodja#KH
+216#Vietnam#VN
+217#Laos#LA
+218#Malàisia#MY
+219#Singapur#SG
+220#Indonèsia#ID
+221#Filipines#PH
+222#Brunei#BN
+223#Timor Oriental#TL
