@@ -96,9 +96,13 @@ public class Mockaroo {
 		for (int i = 0; i < data.length; i++) {
 			int any=random.nextInt(anyMaxim-anyMinim)+anyMinim,mes=random.nextInt(12)+1,dia;
 			dia=diesMes(mes,any);
-			dia=random.nextInt(dia)+1;
-			data[i]= dia+"/"+mes+"/"+any;
-			System.out.println(data[i]);
+			if (dia==-1) {
+				System.out.println("ERROR");
+			}else {
+				dia=random.nextInt(dia)+1;
+				data[i]= dia+"/"+mes+"/"+any;
+				System.out.println(data[i]);
+			}
 		}
 		
 		return "a";
