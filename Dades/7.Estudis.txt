@@ -1,0 +1,250 @@
+1#Llicenciatura en Dret
+2#Enginyeria Informàtica
+3#Psicologia
+4#Arquitectura
+5#Infermeria
+6#Periodisme
+7#Biologia
+8#Enginyeria Civil
+9#Disseny Gràfic
+10#Història
+11#Filologia Catalana
+12#Ciències Polítiques
+13#Administració d'Empreses
+14#Enginyeria Industrial
+15#Economia
+16#Ciències Ambientals
+17#Farmàcia
+18#Educació Infantil
+19#Medicina
+20#Antropologia
+21#Filosofia
+22#Química
+23#Geologia
+24#Relacions Internacionals
+25#Enginyeria de Telecomunicacions
+26#Estudis Anglesos
+27#Enginyeria Mecànica
+28#Física
+29#Matemàtiques
+30#Publicitat i Relacions Públiques
+31#Enginyeria Electrònica
+32#Enginyeria Química
+33#Enginyeria Biomèdica
+34#Història de l'Art
+35#Enginyeria en Disseny Industrial
+36#Ciències del Mar
+37#Pedagogia
+38#Sociologia
+39#Enginyeria en Energies Renovables
+40#Bioquímica
+41#Turisme
+42#Estudis de Gènere
+43#Criminologia
+44#Comunicació Audiovisual
+45#Ciències de l'Esport
+46#Enginyeria Naval
+47#Dret Internacional
+48#Ciberseguretat
+49#Màrqueting
+50#Enginyeria Agrònoma
+51#Logopèdia
+52#Educació Social
+53#Enginyeria en Robòtica
+54#Ciències Forenses
+55#Enginyeria Aeroespacial
+56#Estudis Francesos
+57#Estudis Clàssics
+58#Enginyeria de Materials
+59#Ciències de la Salut
+60#Geografia
+61#Llengües Modernes
+62#Filologia Hispànica
+63#Gestió Cultural
+64#Enginyeria en Automoció
+65#Cinematografia
+66#Nutrició Humana i Dietètica
+67#Investigació Biomèdica
+68#Teologia
+69#Disseny de Producte
+70#Antropologia Social
+71#Enginyeria en Sistemes de la Informació
+72#Bioenginyeria
+73#Enginyeria en Organització Industrial
+74#Matemàtica Computacional
+75#Ciències Jurídiques
+76#Enginyeria Marítima
+77#Traducció i Interpretació
+78#Ciències de la Terra
+79#Neurologia
+80#Ciències de la Comunicació
+81#Estudis Literaris
+82#Dret Penal
+83#Enginyeria de So i Imatge
+84#Estadística
+85#Estudis sobre Desenvolupament
+86#Enginyeria en Xarxes
+87#Ciències Físiques
+88#Enginyeria del Medi Ambient
+89#Estudis Orientals
+90#Educació Especial
+91#Nanotecnologia
+92#Gestió Esportiva
+93#Ciències de l'Administració
+94#Enginyeria Ambiental
+95#Estudis Internacionals
+96#Psicoanàlisi
+97#Economia Aplicada
+98#Història Contemporània
+99#Gestió Sanitària
+100#Enginyeria Elèctrica
+101#Geografia Humana
+102#Estudis Àrabs i Islàmics
+103#Gestió Financera
+104#Cultura Visual
+105#Ciberpsicologia
+106#Tecnologia dels Aliments
+107#Psicopedagogia
+108#Gestió de Recursos Humans
+109#Ciències Cognitives
+110#Gestió de Projectes
+111#Estudis Medievals
+112#Enginyeria de Camins
+113#Astrofísica
+114#Estudis sobre Pau i Conflictes
+115#Estudis del Llatí
+116#Tecnologies Digitals
+117#Dret Administratiu
+118#Ciències Actuarials
+119#Terapia Ocupacional
+120#Geografia Física
+121#Bioinformàtica
+122#Gestió Ambiental
+123#Enginyeria Informàtica en Xarxes
+124#Biotecnologia
+125#Estudis sobre Migracions
+126#Tecnologia Musical
+127#Estudis sobre Salut Pública
+128#Investigació Social
+129#Disseny d'Interiors
+130#Finances i Comptabilitat
+131#Estudis sobre l'Àfrica
+132#Enginyeria en Sistemes d'Energia
+133#Enginyeria de la Construcció
+134#Ciències del Treball
+135#Pedagogia Terapèutica
+136#Mediació Familiar
+137#Estudis sobre l'Amèrica Llatina
+138#Psicologia Educativa
+139#Enginyeria Tèxtil
+140#Filosofia de la Ciència
+141#Estudis sobre Gènere i Sexualitat
+142#Història Medieval
+143#Tecnologies de la Informació
+144#Investigació Operativa
+145#Llengües i Literatures Clàssiques
+146#Tecnologia de la Construcció
+147#Ciències del Comportament
+148#Enginyeria Tècnica en Obres Públiques
+149#Biofísica
+150#Enginyeria d'Obres Hidràuliques
+151#Tecnologia Espacial
+152#Neurociència Cognitiva
+153#Educació Física
+154#Estudis sobre Desenvolupament Internacional
+155#Filosofia Política
+156#Història de les Religions
+157#Educació Primària
+158#Enginyeria en Mecatrònica
+159#Intel·ligència Artificial
+160#Seguretat Alimentària
+161#Biologia Molecular
+162#Estudis sobre el Patrimoni Cultural
+163#Filosofia Moral
+164#Disseny d'Experiència d'Usuari
+165#Educació Artística
+166#Ciències Socials
+167#Comunicació Política
+168#Economia Internacional
+169#Enginyeria Fotònica
+170#Enginyeria de l'Energia
+171#Història Moderna
+172#Educació i TIC
+173#Llengua de Signes
+174#Estudis Musicals
+175#Genètica Humana
+176#Disseny d'Escenografia
+177#Enginyeria de Processos Industrials
+178#Estudis Socioculturals
+179#Gestió Patrimonial
+180#Arqueologia
+181#Neurociència
+182#Terapia Assistida per Animals
+183#Estudis Clàssics i Moderns
+184#Lingüística Aplicada
+185#Dret Mercantil
+186#Biologia Evolutiva
+187#Filosofia Analítica
+188#Estudis sobre l'Àsia
+189#Enginyeria en Electrònica de Potència
+190#Antropologia Cultural
+191#Bioètica
+192#Història Econòmica
+193#Economia i Negocis
+194#Dret Laboral
+195#Estudis sobre la Memòria Històrica
+196#Disseny d'Aplicacions Digitals
+197#Química Analítica
+198#Enginyeria del Transport
+199#Ciències de la Computació
+200#Enginyeria Hidrològica
+201#Estudis Teatrals
+202#Psicologia Social
+203#Dret de Família
+204#Estudis sobre Discapacitat
+205#Ciències dels Materials
+206#Intel·ligència de Negoci
+207#Història d'Espanya
+208#Biofarmàcia
+209#Educació Inclusiva
+210#Estudis Cinematogràfics
+211#Gestió de la Innovació
+212#Ciències del Llenguatge
+213#Economia Sostenible
+214#Disseny Web
+215#Educació Bilingüe
+216#Gestió d'Empreses Culturals
+217#Estudis sobre el Comerç Internacional
+218#Neurociències i Comportament
+219#Història Antiga
+220#Biotecnologia Marina
+221#Enginyeria en Automatització
+222#Terapia Familiar
+223#Història i Geografia
+224#Ciències Polítiques i de l'Administració
+225#Estudis sobre la Infància
+226#Filosofia del Dret
+227#Tecnologia Educativa
+228#Educació per a la Salut
+229#Disseny de Sistemes Interactius
+230#Fisiologia
+231#Gestió del Risc
+232#Biofísica Molecular
+233#Dret i Economia
+234#Història del Cinema
+235#Estudis sobre Migració
+236#Educació per a la Sostenibilitat
+237#Disseny d'Animació
+238#Estudis Literaris i Culturals
+239#Lingüística Teòrica
+240#Estudis sobre Comunicació Intercultural
+241#Ciències Biomèdiques
+242#Gestió d'Organitzacions
+243#Història de la Ciència
+244#Tecnologia Ambiental
+245#Estudis Psicològics
+246#Estudis sobre l'educació alternativa
+247#Dret Internacional Públic
+248#Gestió de la Innovació Tecnològica
+249#Estudis sobre la Història del Disseny
+250#Educació en Valors
