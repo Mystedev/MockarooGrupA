@@ -8,70 +8,15 @@ public class Mockaroo {
 	public static void main(String[] args) {
 		Random random = new Random();
 		try {
-			
-			
-			
+			LlegirDades();
+			// System.out.println(RandomNumber(1,0,1000)); --Funcion para mostrar numeros decimales
+			// MostrarPassword(); --Funcion para mostrar contraseña compuesta por caracteres,simbolos y letras
+			// String numeroDNI = ObtenerDNI(); --Funcion para obtener DNI aleatorio 
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static String email(int largada,String emails[],String files_dades[],int aleatori) {
-			Random random = new Random();
-			Scanner teclat=new Scanner (System.in);
-		try {
-			
-			FileReader fr = new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\1-Noms.txt");
-			FileReader fr2 = new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\1-Noms.txt");
-			FileReader fr1 = new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\10-NomDeLaCompanyia.txt");
-			FileReader fr3 = new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\10-NomDeLaCompanyia.txt");
-			BufferedReader br = new BufferedReader(fr);
-			BufferedReader br2 = new BufferedReader(fr2);
-			BufferedReader br1 = new BufferedReader(fr1);
-			BufferedReader br3 = new BufferedReader(fr3);
-			String nomCompanyia[]=new String[2];
-			String nom[]=new String[2];
-			emails=new String [largada];
-			int j=0;
-			for (int i=0 ; j <largada&&i<250; i++) {
-				nom[1]= br.readLine();
-				nom=nom[1].split("#");
-				if (i>=aleatori&&j<largada) {
-					emails[j] =nom[1]+"@";
-					j++;
-				}
-			}
-			for (int i=0 ; i <=aleatori&&j<largada ; i++) {
-				nom[1]= br2.readLine();
-				nom=nom[1].split("#");
-				emails[j] = nom[1]+"@";
-				j++;
-			}
-			j=0;
-			for (int i=0 ; j <largada; i++) {
-				nomCompanyia[1]=br1.readLine();
-				nomCompanyia=nomCompanyia[1].split("#");
-				if (i>=aleatori&&j<largada) {
-					emails[j] = emails[j]+nomCompanyia[1]+".com";
-					System.out.println(emails[j]);
-					j++;
-				}
-			}
-			
-			for (int i=0 ; i <=aleatori&&j<largada ; i++) {
-				nomCompanyia[1]=br3.readLine();
-				nomCompanyia=nomCompanyia[1].split("#");
-				emails[j] = emails[j]+nomCompanyia[1]+".com";
-				System.out.println(emails[j]);
-				j++;
-			}
-			//+nomCompanyia[1]+".com"
-			return "a";
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+
 	public static String dates(int largada,int anyMinim,int anyMaxim,int aleatori) {
 		Random random = new Random();
 		String data[]=new String [largada];
@@ -116,31 +61,15 @@ public class Mockaroo {
 			  return -1;
 		  } 
 		}
-	public static void autonumeric(int llargada,int num[],int valorPerDefecte) {
-		num=new int[llargada];
-		for (int i = 0; i <llargada; i++) {
-			num[i]=valorPerDefecte;
-			valorPerDefecte++;
-			System.out.println(num[i]);
-		}
-		try {
-			LlegirDades();
-			// System.out.println(RandomNumber(1,0,1000)); --Funcion para mostrar numeros decimales
-			// MostrarPassword(); --Funcion para mostrar contraseña compuesta por caracteres,simbolos y letras
-			// String numeroDNI = ObtenerDNI(); --Funcion para obtener DNI aleatorio 
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// Funcio per llegir els arxius de dades
 	public static void LlegirDades() {
 		try {
 			Scanner reader = new Scanner(System.in);
 			// Array d'arxius de dades per accedir i llegir-los
-			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt",
-					"Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
+			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5-Proffesions.txt",
+					"Dades/6-Pais.txt","Dades/7-Estudis.txt","Dades/8-Colors.txt","Dades/10-NomDeLaCompanyia"};
 			// Arxiu d'entrada per determinar on guardar els arxius 
 			String fileEntrada = "Dades/Requisits.txt";
 			// Llegirem l'arxiu amb les especificacions que pot demanar l'usuari
@@ -193,8 +122,58 @@ public class Mockaroo {
 		return numeroAleatorio;
 	}
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
+		public static String email(int largada,String emails[],String files_dades[],int aleatori) {
+			Random random = new Random();
+			Scanner teclat=new Scanner (System.in);
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\1-Noms.txt"));
+			BufferedReader br2 = new BufferedReader(new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\1-Noms.txt"));
+			BufferedReader br1 = new BufferedReader(new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\10-NomDeLaCompanyia.txt"));
+			BufferedReader br3 = new BufferedReader(new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\10-NomDeLaCompanyia.txt"));
+			String nomCompanyia[]=new String[2];
+			String nom[]=new String[2];
+			emails=new String [largada];
+			int j=0;
+			for (int i=0 ; j <largada&&i<250; i++) {
+				nom[1]= br.readLine();
+				nom=nom[1].split("#");
+				if (i>=aleatori&&j<largada) {
+					emails[j] =nom[1]+"@";
+					j++;
+				}
+			}
+			for (int i=0 ; i <=aleatori&&j<largada ; i++) {
+				nom[1]= br2.readLine();
+				nom=nom[1].split("#");
+				emails[j] = nom[1]+"@";
+				j++;
+			}
+			j=0;
+			for (int i=0 ; j <largada; i++) {
+				nomCompanyia[1]=br1.readLine();
+				nomCompanyia=nomCompanyia[1].split("#");
+				if (i>=aleatori&&j<largada) {
+					emails[j] = emails[j]+nomCompanyia[1]+".com";
+					System.out.println(emails[j]);
+					j++;
+				}
+			}
+			
+			for (int i=0 ; i <=aleatori&&j<largada ; i++) {
+				nomCompanyia[1]=br3.readLine();
+				nomCompanyia=nomCompanyia[1].split("#");
+				emails[j] = emails[j]+nomCompanyia[1]+".com";
+				System.out.println(emails[j]);
+				j++;
+			}
+			//+nomCompanyia[1]+".com"
+			return "a";
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	// ·Funcion IP4 ???
-	// ·Funcion String ha de indicar 'letras,numeros,mayusculas,minusculas,simbolos y longitud'
 	// Mètode per generar la contrasenya segons els paràmetres
     public static String GenerarPassword(boolean inclouLletres, boolean inclouNumeros, boolean inclouMajuscules, boolean inclouMinuscules, 
                                          boolean inclouSimbols, int longitud) {
@@ -206,10 +185,10 @@ public class Mockaroo {
         // Cadena que contindrà tots els caràcters permesos segons les opcions
         String conjuntCaracters = "";
         // Afegeix els caràcters segons els paràmetres afegits
-        if (inclouLletres && inclouMinuscules) {conjuntCaracters += lletres;}
-        if (inclouLletres && inclouMajuscules) {conjuntCaracters += majuscules;}
-        if (inclouNumeros) {conjuntCaracters += numeros;}
-        if (inclouSimbols) {conjuntCaracters += simbols;}
+        if (inclouLletres && inclouMinuscules) conjuntCaracters += lletres;
+        if (inclouLletres && inclouMajuscules) conjuntCaracters += majuscules;
+        if (inclouNumeros) conjuntCaracters += numeros;
+        if (inclouSimbols) conjuntCaracters += simbols;
         // Generació de la contrasenya
         Random random = new Random();
         String password = "";
@@ -254,6 +233,14 @@ public class Mockaroo {
     	return numeroDNI + String.valueOf(lletra);
     }
 	// ·Funcion int ha de indicar el 'valor d'inici=1'
+    public static void autonumeric(int llargada,int num[],int valorPerDefecte) {
+		num=new int[llargada];
+		for (int i = 0; i <llargada; i++) {
+			num[i]=valorPerDefecte;
+			valorPerDefecte++;
+			System.out.println(num[i]);
+		}
+	}
 	//*****************************
 	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
 }
