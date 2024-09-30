@@ -20,8 +20,9 @@ public class Mockaroo {
 				//line = br.readLine();
 			//	System.out.println(line);
 			//}
-			int numAleatori=random.nextInt(250);
+			int numAleatori=random.nextInt(250),anyMaxim=2023,anyMinim=1900,valorPerDefecteAutonumeric=1;
 			line=email(2,emails,files_dades,numAleatori);
+			line=dates(2,anyMinim,anyMaxim,numAleatori);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -82,6 +83,53 @@ public class Mockaroo {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public static String dates(int largada,int anyMinim,int anyMaxim,int aleatori) {
+		Random random = new Random();
+		String data[]=new String [largada];
+		int test;
+		if(anyMaxim<anyMinim) {
+			test=anyMaxim;
+			anyMaxim=anyMinim;
+			anyMinim=test;
+		}
+		for (int i = 0; i < data.length; i++) {
+			int any=random.nextInt(anyMaxim-anyMinim)+anyMinim,mes=random.nextInt(12)+1,dia;
+			dia=diesMes(mes,any);
+			dia=random.nextInt(dia)+1;
+			data[i]= dia+"/"+mes+"/"+any;
+			System.out.println(data[i]);
+		}
+		
+		return "a";
+	}
+	public static int diesMes( int mes ,int any) {
+		  if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
+		    // Meses de 31 días
+		    return 31;
+		  } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+		    // Meses de 30 días
+		    return 30;
+		  } else if (mes == 2) {
+		    // Febrero (28 en años comunes, 29 en años bisiestos)
+		    // Implementar lógica para determinar si es año bisiesto
+		    if ((any % 4 == 0 && any % 100 != 0) || (any % 100 == 0 && any % 400 == 0))
+		    {
+		      return 29;
+		    } else {
+		      return 28;
+		    }
+		  }else {
+			  return -1;
+		  } 
+		}
+	public static void autonumeric(int llargada,int num[],int valorPerDefecte) {
+		num=new int[llargada];
+		for (int i = 0; i <llargada; i++) {
+			num[i]=valorPerDefecte;
+			valorPerDefecte++;
+			System.out.println(num[i]);
+		}
 	}
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// ·Funcion boolean sin formatos
