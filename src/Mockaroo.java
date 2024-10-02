@@ -7,69 +7,11 @@ import java.util.Scanner;
 public class Mockaroo {
 	public static void main(String[] args) {
 		Random random = new Random();
+		Scanner reader = new Scanner(System.in);
 		try {
-			LlegirDades();
-			// System.out.println(RandomNumber(1,0,1000)); --Funcion para mostrar numeros decimales
-			// MostrarPassword(); --Funcion para mostrar contraseña compuesta por caracteres,simbolos y letras
-			// String numeroDNI = ObtenerDNI(); --Funcion para obtener DNI aleatorio 
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static String dates(int largada,int anyMinim,int anyMaxim,int aleatori) {
-		Random random = new Random();
-		String data[]=new String [largada];
-		int test;
-		if(anyMaxim<anyMinim) {
-			test=anyMaxim;
-			anyMaxim=anyMinim;
-			anyMinim=test;
-		}
-		for (int i = 0; i < data.length; i++) {
-			int any=random.nextInt(anyMaxim-anyMinim)+anyMinim,mes=random.nextInt(12)+1,dia;
-			dia=diesMes(mes,any);
-			if (dia==-1) {
-				System.out.println("ERROR");
-			}else {
-				dia=random.nextInt(dia)+1;
-				data[i]= dia+"/"+mes+"/"+any;
-				System.out.println(data[i]);
-			}
-		}
-		
-
-		return "a";
-	}
-	public static int diesMes( int mes ,int any) {
-		  if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
-		    // Meses de 31 días
-		    return 31;
-		  } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
-		    // Meses de 30 días
-		    return 30;
-		  } else if (mes == 2) {
-		    // Febrero (28 en años comunes, 29 en años bisiestos)
-		    // Implementar lógica para determinar si es año bisiesto
-		    if ((any % 4 == 0 && any % 100 != 0) || (any % 100 == 0 && any % 400 == 0))
-		    {
-		      return 29;
-		    } else {
-		      return 28;
-		    }
-		  }else {
-			  return -1;
-		  } 
-		}
-	
-	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
-	// Funcio per llegir els arxius de dades
-	public static void LlegirDades() {
-		try {
-			Scanner reader = new Scanner(System.in);
 			// Array d'arxius de dades per accedir i llegir-los
 			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5-Proffesions.txt",
-					"Dades/6-Pais.txt","Dades/7-Estudis.txt","Dades/8-Colors.txt","Dades/10-NomDeLaCompanyia"};
+					"Dades/6-Pais.txt","Dades/7-Estudis.txt","Dades/8-Colors.txt","Dades/10-NomDeLaCompanyia.txt"};
 			// Arxiu d'entrada per determinar on guardar els arxius 
 			String fileEntrada = "Dades/Requisits.txt";
 			// Llegirem l'arxiu amb les especificacions que pot demanar l'usuari
@@ -95,9 +37,57 @@ public class Mockaroo {
 				System.out.print("Error|Introdueix un format vàlid:");
 				arxiuGenerat = reader.nextLine();
 			}
-			
-		}catch(Exception e) {e.printStackTrace();}
+			// System.out.println(RandomNumber(1,0,1000)); --Funcion para mostrar numeros decimales
+			// MostrarPassword(); --Funcion para mostrar contraseña compuesta por caracteres,simbolos y letras
+			// String numeroDNI = ObtenerDNI(); --Funcion para obtener DNI aleatorio 
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
+	public static String dates(int largada,int anyMinim,int anyMaxim,int aleatori) {
+		Random random = new Random();
+		String data[]=new String [largada];
+		int test;
+		if(anyMaxim<anyMinim) {
+			test=anyMaxim;
+			anyMaxim=anyMinim;
+			anyMinim=test;
+		}
+		for (int i = 0; i < data.length; i++) {
+			int any=random.nextInt(anyMaxim-anyMinim)+anyMinim,mes=random.nextInt(12)+1,dia;
+			dia=diesMes(mes,any);
+			if (dia==-1) {
+				System.out.println("ERROR");
+			}else {
+				dia=random.nextInt(dia)+1;
+				data[i]= dia+"/"+mes+"/"+any;
+				System.out.println(data[i]);
+			}
+		}
+		return "a";
+	}
+	public static int diesMes( int mes ,int any) {
+		  if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
+		    // Meses de 31 días
+		    return 31;
+		  } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+		    // Meses de 30 días
+		    return 30;
+		  } else if (mes == 2) {
+		    // Febrero (28 en años comunes, 29 en años bisiestos)
+		    // Implementar lógica para determinar si es año bisiesto
+		    if ((any % 4 == 0 && any % 100 != 0) || (any % 100 == 0 && any % 400 == 0))
+		    {
+		      return 29;
+		    } else {
+		      return 28;
+		    }
+		  }else {
+			  return -1;
+		  } 
+		}
+	
+	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// ·Funcion boolean sin formatos
 	public static void dadesBoolean(int quantitatDades, boolean dadesBoolean[]) {
 		//inicialitzem el Random
@@ -114,7 +104,7 @@ public class Mockaroo {
 		Random random = new Random();
 		// Generem el numero aleatori entre un (minim i un maxim)
         double numeroAleatorio = minim + (maxim - minim) * random.nextDouble(); 
-        // Redondearem el numeor especificat a partir de la quantitat de decimals demanats
+        // Redondearem el numero especificat a partir de la quantitat de decimals demanats
         double escala = Math.pow(10, decimals);
         numeroAleatorio = Math.round(numeroAleatorio * escala) / escala;
 		// Al declarar el resultat de la funcio , haurem de especificar en ordre , la quantitat de decimals que volem, el rang minim i el rang maxim
@@ -122,14 +112,14 @@ public class Mockaroo {
 		return numeroAleatorio;
 	}
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
-		public static String email(int largada,String emails[],String files_dades[],int aleatori) {
+		public static String email(int largada,String emails[],int aleatori) {
 			Random random = new Random();
 			Scanner teclat=new Scanner (System.in);
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\1-Noms.txt"));
-			BufferedReader br2 = new BufferedReader(new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\1-Noms.txt"));
-			BufferedReader br1 = new BufferedReader(new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\10-NomDeLaCompanyia.txt"));
-			BufferedReader br3 = new BufferedReader(new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\10-NomDeLaCompanyia.txt"));
+			BufferedReader br = new BufferedReader(new FileReader("Dades/1-Noms.txt"));
+			BufferedReader br2 = new BufferedReader(new FileReader("Dades/1-Noms.txt"));
+			BufferedReader br1 = new BufferedReader(new FileReader("Dades/10-NomDeLaCompanyia.txt"));
+			BufferedReader br3 = new BufferedReader(new FileReader("Dades/10-NomDeLaCompanyia.txt"));
 			String nomCompanyia[]=new String[2];
 			String nom[]=new String[2];
 			emails=new String [largada];
@@ -149,7 +139,7 @@ public class Mockaroo {
 				j++;
 			}
 			j=0;
-			for (int i=0 ; j <largada; i++) {
+			for (int i=0 ; j <largada&&i<250; i++) {
 				nomCompanyia[1]=br1.readLine();
 				nomCompanyia=nomCompanyia[1].split("#");
 				if (i>=aleatori&&j<largada) {
@@ -199,13 +189,15 @@ public class Mockaroo {
         return password;
     }
     public static void MostrarPassword() {
+    	Scanner reader = new Scanner(System.in);
     	// Paràmetres de exemple
         boolean inclouLletres = true;
         boolean inclouNumeros = true;
         boolean inclouMajuscules = true;
         boolean inclouMinuscules = true;
         boolean inclouSymbols = true;
-        int longitud = 12;  // Longitud de la contrasenya
+        System.out.println("Introdueix la longitud de la contrasenya :");
+        int longitud = reader.nextInt();  // Longitud de la contrasenya
         
         String password = GenerarPassword(inclouLletres, inclouNumeros, inclouMajuscules, 
                                           inclouMinuscules, inclouSymbols, longitud);
