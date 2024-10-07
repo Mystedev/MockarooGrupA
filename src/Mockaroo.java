@@ -13,11 +13,6 @@ public class Mockaroo {
 			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt",
 					"Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
 			
-			
-			LlegirDades();
-			// System.out.println(RandomNumber(1,0,1000)); --Funcion para mostrar numeros decimales
-			// MostrarPassword(); --Funcion para mostrar contraseña compuesta por caracteres,simbolos y letras
-			// String numeroDNI = ObtenerDNI(); --Funcion para obtener DNI aleatorio 
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
