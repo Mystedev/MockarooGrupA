@@ -1,4 +1,6 @@
 import java.io.FileReader;
+import java.io.IOException;
+import java.math.BigInteger;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.BufferedReader;
@@ -174,6 +176,15 @@ public class Mockaroo {
 		return null;
 	}
 	// ·Funcion IP4 ???
+		//Per cridar-la dadesIp4(quantitatDades, Array on guardar les ip)
+		public static void dadesIp4(int quantitatDades, String[] dadesIp4) {
+		    Random random = new Random();
+		    // Fem un bucle amb tantes voltes com dades a generar
+		    for (int i = 0; i < quantitatDades; i++) {
+		        // Generem i guardem els valors
+		        dadesIp4[i] = random.nextInt(256) + "." + random.nextInt(256) + "." + random.nextInt(256) + "." + random.nextInt(256);
+		    }
+		}
 	// Mètode per generar la contrasenya segons els paràmetres
     public static String GenerarPassword(boolean inclouLletres, boolean inclouNumeros, boolean inclouMajuscules, boolean inclouMinuscules, 
                                          boolean inclouSimbols, int longitud) {
@@ -213,7 +224,125 @@ public class Mockaroo {
         System.out.println("Contrasenya generada exitosament: " + password);
     }
 	// ·Funcion String ha de indicar el 'any minim=1900 i maxim=2023'
-	// ·Funcion para IBAN o DNI (Hay como buscar como se generan)---------------------------------------
+	// ·Funcion para IBAN 
+    //Per cridarla: iban( numeroAleatori, quantitatDades, Array on guardar els ibans)
+    private static void iban (int numeroAleatori, int quantitatDades, String [] iban) {
+		try{
+			//Primer contem les linies del arxiu per generar el array on guardar les dades
+			//No es fa amb un tamany definit per si es modifica el tamany de l'arxiu
+			BufferedReader br = new BufferedReader(new FileReader("Dades/6-Pais.txt"));			
+			int tamanyArxiu = 0;
+            while (br.readLine() != null) tamanyArxiu++;
+            br.close();
+			String liniesFitxer [] = new String [tamanyArxiu];			
+			BufferedReader br2 = new BufferedReader(new FileReader("Dades/6-Pais.txt"));
+			String linia;
+            int i = 0;
+            // Llegir cada línia i guardar-la a l'array
+            while ((linia = br2.readLine()) != null) {
+                liniesFitxer[i] = linia;
+                i++;
+            }
+            br2.close();
+
+            /*
+             * Un cop tenim totes les dades del arxiu en un array, hem de 
+             * calcular si des del numero aleatori fins al final del array
+             * tenim suficients dades per mostrar la quantitat que demana
+             * l'usuari
+             */
+
+        	int llegirLinea = numeroAleatori;
+        	int contador = 0;
+            if((quantitatDades+numeroAleatori)<liniesFitxer.length) {
+            	//en aquest cas no cal fer res especial, ja que disposem de
+            	//prous dades
+
+            	contador = 0;
+            	for(int j = 0; j < quantitatDades; j++) {
+            		//cridem la funció que genera ibans tants cops com dades
+            		//em de generar
+            		iban[contador] = generarIban(liniesFitxer[llegirLinea]);
+                	llegirLinea++;
+                	contador++;
+            	}
+            	
+            	
+            	
+            } else {
+            	//en aquest cas no disposem de prous dades, aixi que haurem
+            	//de tornar a llegir des del inici
+            	
+            	contador = 0;
+            	//calculem quantes dades tenim disponibles i quantes ens en falten
+            	int dadesDisponibles = liniesFitxer.length - numeroAleatori;
+            	int dadesRestants = quantitatDades - dadesDisponibles;
+            	
+            	for(int k = 0; k < dadesDisponibles; k++) {
+            		//Amb aquest primer for generem els ibans possibles fins que
+            		//arribem al final de les dades disponibles
+            		iban[contador] = generarIban(liniesFitxer[llegirLinea]);
+                	llegirLinea++;
+                	contador++;
+            	}
+            	llegirLinea = 0;
+            	for(int l = 0; l < dadesRestants; l++) {
+            		//amb aquest for generem ibans des de la linea 0 del
+            		//array fins haver generat totes les dades restants
+            		iban[contador] = generarIban(liniesFitxer[llegirLinea]);
+                	llegirLinea++;
+                	contador++;
+            	}
+            	
+            }
+			
+		} catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	//Funció que genera un iban i el retorna en format String
+	private static String generarIban(String linea) {
+		BigInteger digitControl;
+		String[] lineaSeparada = linea.split("#");
+		String codiPaisNumeros = "";
+		String numeroCompte = "";
+		String codiPais = lineaSeparada[2];
+		String numeroIbanTemp = "";
+		String iban;
+		char lletra1Pais = Character.toLowerCase(codiPais.charAt(0));
+		char lletra2Pais = Character.toLowerCase(codiPais.charAt(1));
+		int numero1CodiPais = lletra1Pais - 'a' + 10;
+		int numero2CodiPais = lletra2Pais - 'a' + 10;
+		codiPaisNumeros = "" + numero1CodiPais + numero2CodiPais;
+		
+		/*
+		 * Un cop tenim totes les variables, generem un num de compte
+		 * aleatori
+		 */
+		Random random = new Random();
+		
+		for (int i = 0; i < 20; i++) numeroCompte = numeroCompte + random.nextInt(10);
+		/*
+		 * Amb num de compte i codi pais, calculem els digits de control. 
+		 * Per poder fer el calcul dels digits de control, necessitem el 
+		 * numero de compte + el codi de pais en digits + 0 + 0.
+		 */
+		numeroIbanTemp = numeroCompte + codiPaisNumeros + 0 + 0;
+		/*
+		 * Per calcular els dígits de control de l'IBAN, primer agafem el valor de 
+		 * numeroIbanTemp i en fem un nombre BigInteger (ja que es un numero de 26 digits
+		 * no entra en un long). Després calulem el mòdul 97 a aquest nombre. 
+		 * Després, restem 98 a aquest resultat. El resultat d'aquesta resta serà el valor 
+		 * dels dígits de control de l'IBAN.
+		 */
+		digitControl = BigInteger.valueOf(98).subtract(new BigInteger(numeroIbanTemp).mod(BigInteger.valueOf(97)));
+		//Guardem el iban final generat a partir del codi pais + els digits de control i el numero de compte
+		iban = codiPais + digitControl + numeroCompte;
+		return iban;
+	}
+    
+    
     // Funcio per generar la ultima lletra del DNI
     public static char GenerarLetraDNI(int dni) {
     	// Lletres valides per seleccionar l'ultim caracter del DNI
