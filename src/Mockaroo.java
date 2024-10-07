@@ -37,6 +37,8 @@ public class Mockaroo {
 				System.out.print("Error|Introdueix un format vàlid:");
 				arxiuGenerat = reader.nextLine();
 			}
+			System.out.println("Bien.");
+			
 			// System.out.println(RandomNumber(1,0,1000)); --Funcion para mostrar numeros decimales
 			// MostrarPassword(); --Funcion para mostrar contraseña compuesta por caracteres,simbolos y letras
 			// String numeroDNI = ObtenerDNI(); --Funcion para obtener DNI aleatorio 
