@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.util.Scanner;
 
 public class Mockaroo {
+	
 	public static void main(String[] args) {
 		Random random = new Random();
 		try {
@@ -119,8 +120,23 @@ public class Mockaroo {
 		return numeroAleatorio;
 	}
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
-		
-	
+	public static void url(int llargada,String url[]) {
+		try {
+			//GENERO LA URL DESDE EL NOM DE COMPANYIA 
+			FileReader fr3 = new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\10-NomDeLaCompanyia.txt");
+			BufferedReader br3 = new BufferedReader(fr3);
+			String text[]=new String[2];
+			url=new String[llargada];
+			for (int i = 0; i < llargada; i++) {
+				text[1]=br3.readLine();
+				text=text[1].split("#");
+				url[i]="www."+text[1]+".com";
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 		
 	// ·Funcion IP4 ???
 		//Per cridar-la dadesIp4(quantitatDades, Array on guardar les ip)
