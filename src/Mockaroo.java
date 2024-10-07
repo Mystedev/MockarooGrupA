@@ -4,12 +4,11 @@ import java.math.BigInteger;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.BufferedReader;
-import java.util.Scanner;
 
 public class Mockaroo {
+	public static Scanner reader = new Scanner(System.in);
+	public static Random random = new Random();
 	public static void main(String[] args) {
-		Random random = new Random();
-		Scanner reader = new Scanner(System.in);
 		try {
 			// Array d'arxius de dades per accedir i llegir-los
 			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5-Proffesions.txt",
@@ -20,35 +19,94 @@ public class Mockaroo {
 			BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
 			// Llegim la primera linea 
 			String line = br.readLine();
-			// La primera linea queda separada pel '#' obtenint a la primera posicio el tipus d'arxiu i a la segona posicio la ubicacio
-			String firstLine[] = line.split("#");
-			// Separem les dades obtingudes
-			String tipusArxiu = firstLine[0];
-			String quantitatRegistres = firstLine[1];
-			String ubicacioArxiu = firstLine[2];
 			// Farem servir la seguent sintaxi per guiar al usuari de manera que sapigui com,on i quants registres vol generar
 			// *Tipus d'arxiu que es vol generar ->> SQL o XML
 			// *Quantitat de registres que es vol generar ->> 0-250 (Tenint en compte que el total de dades per arxiu es de 250)
 			// *Ubicació on es vol guardar l'arxiu generat
-			System.out.println("La següent linea servirá per saber com voldras generar l'arxiu de sortida.");
-			System.out.println("Fes servir la següent sintaxi per generar l'arxiu de sortida ->> SQL#200#Escriptori");
+			System.out.println("Fes servir la següent sintaxi per generar l'arxiu de sortida ->> "+line);
 			System.out.print("Introdueix com vols generar l'arxiu:");
 			String arxiuGenerat = reader.nextLine();
 			String formatArxiu[] = arxiuGenerat.split("#");
-			while(formatArxiu.length!=3) {
-				System.out.print("Error|Introdueix un format vàlid:");
-				arxiuGenerat = reader.nextLine();
-			}
-			System.out.println("Bien.");
-			
-			// System.out.println(RandomNumber(1,0,1000)); --Funcion para mostrar numeros decimales
+			// Variable amb el resultat de la linea descrita per l'usuari
+			String correctLine = ValidarFormatEntrada(arxiuGenerat,formatArxiu);
+			String secondLine = br.readLine();
+			System.out.println("La següent linea mostra la quantitat total d'arxius que es pot llegir");
+			System.out.println(secondLine);
+			LlegirArxiusAleatoris();
 			// MostrarPassword(); --Funcion para mostrar contraseña compuesta por caracteres,simbolos y letras
+			// System.out.println(RandomNumber(1,0,1000)); --Funcion para mostrar numeros decimales
 			// String numeroDNI = ObtenerDNI(); --Funcion para obtener DNI aleatorio 
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+	// Funcio per que l'usuari pugui demanar que arxius vol llegir aleatoriament
+	public static void LlegirArxiusAleatoris() {
+		int i = 0;
+		int num;
+		System.out.print("Que arxius vols llegir?:");
+		System.out.println("-> 1 2 3 4 5 6 7 8 10 <-");
+		int number = reader.nextInt();
+		while(i < number) {
+			System.out.print("Afegeix l'arxiu:");
+			num = reader.nextInt();
+			i++;
+		}
+		System.out.println("Eso es todo.");
+	}
 	// Funcio creada per validar el format del fitxer d'entrada
+	public static String ValidarFormatEntrada(String arxiuGenerat,String formatArxiu[]) {
+		// Comprovar la longitud de l'array i el format correctament
+		boolean isCorrect = false; // Inicialment, no és correcte
+		// Bucle que demana correccions fins que tot el format sigui correcte
+		while (!isCorrect) {
+		// Comprovar si l'array té 3 elements
+			if (formatArxiu.length != 3) {
+				System.out.println("Error -> El format de l'arxiu ha de tenir 3 elements: 'Tipus de Arxiu'#'Quantitat de registres'#'Ubicació'");
+		        System.out.print("Introdueix el format correcte (separat per espais): ");
+		        arxiuGenerat = reader.nextLine();
+		        formatArxiu = arxiuGenerat.split("#");
+		    }
+		    // Comprovar que el tipus d'arxiu és "SQL" o "XML"
+		    else if (!(formatArxiu[0].equalsIgnoreCase("XML") || formatArxiu[0].equalsIgnoreCase("SQL"))) {
+		        System.out.println("Error -> El tipus d'arxiu ha de ser 'SQL' o 'XML'");
+		        System.out.print("Introdueix el format correcte: ");
+		        arxiuGenerat = reader.nextLine();
+		        formatArxiu = arxiuGenerat.split("#");
+		    }
+		    // Comprovar que el segon element és un nombre vàlid
+		    else if (!esNumeroValid(formatArxiu[1])) {
+		        System.out.println("Error -> La quantitat de registres ha de ser un número positiu entre 1 i 250.");
+		        System.out.print("Introdueix el format correcte: ");
+		        arxiuGenerat = reader.nextLine();
+		        formatArxiu = arxiuGenerat.split("#");
+		    }
+		    // Comprovar que la ubicació és "DOCUMENTOS"
+		    else if (!formatArxiu[2].equalsIgnoreCase("DOCUMENTOS")) {
+		        System.out.println("Error -> La ubicació ha de ser 'DOCUMENTOS'.");
+		        System.out.print("Introdueix el format correcte: ");
+		        arxiuGenerat = reader.nextLine();
+		        formatArxiu = arxiuGenerat.split("#");
+		    } else {
+		        // Si tot és correcte, sortir del bucle
+		        isCorrect = true;
+		     }
+		}
+		// Retornar la línia correcta quan tot sigui correcte
+		return arxiuGenerat;
+	}
+	// Funció auxiliar per comprovar si el segon element és un nombre vàlid entre 1 i 250
+	public static boolean esNumeroValid(String valor) {
+	    // Comprovar si és un número sencer
+	    for (int i = 0; i < valor.length(); i++) {
+	        if (!Character.isDigit(valor.charAt(i))) {
+	            return false; // No és un número vàlid
+	        }
+	    }
+	    // Convertir el número i comprovar que estigui dins del rang
+	    int numero = Integer.parseInt(valor);
+	    return numero >= 1 && numero <= 250;
+	}
 	// Funcio per genear dates
 	public static String dates(int largada,int anyMinim,int anyMaxim,int aleatori) {
 		Random random = new Random();
