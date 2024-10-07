@@ -46,6 +46,8 @@ public class Mockaroo {
 			e.printStackTrace();
 		}
 	}
+	// Funcio creada per validar el format del fitxer d'entrada
+	// Funcio per genear dates
 	public static String dates(int largada,int anyMinim,int anyMaxim,int aleatori) {
 		Random random = new Random();
 		String data[]=new String [largada];
