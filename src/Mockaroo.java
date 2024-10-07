@@ -24,7 +24,7 @@ public class Mockaroo {
 			//	System.out.println(line);
 			//}
 			int numAleatori=random.nextInt(250),anyMaxim=2023,anyMinim=1900,valorPerDefecteAutonumeric=1;
-			line=email(2,emails,files_dades,numAleatori);
+			line=email(200,emails,files_dades,numAleatori);
 			line=dates(2,anyMinim,anyMaxim,numAleatori);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -32,121 +32,138 @@ public class Mockaroo {
 	}
 	
 	public static String email(int largada,String emails[],String files_dades[],int aleatori) {
-			Random random = new Random();
-			Scanner teclat=new Scanner (System.in);
-		try {
-			
-			FileReader fr = new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\1-Noms.txt");
-			FileReader fr2 = new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\1-Noms.txt");
-			FileReader fr1 = new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\10-NomDeLaCompanyia.txt");
-			FileReader fr3 = new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\10-NomDeLaCompanyia.txt");
-			BufferedReader br = new BufferedReader(fr);
-			BufferedReader br2 = new BufferedReader(fr2);
-			BufferedReader br1 = new BufferedReader(fr1);
-			BufferedReader br3 = new BufferedReader(fr3);
-			String nomCompanyia[]=new String[2];
-			String nom[]=new String[2];
-			emails=new String [largada];
-			int j=0;
-			for (int i=0 ; j <largada&&i<250; i++) {
-				nom[1]= br.readLine();
-				nom=nom[1].split("#");
-				if (i>=aleatori&&j<largada) {
-					emails[j] =nom[1]+"@";
-					j++;
+		Random random = new Random();
+		Scanner teclat=new Scanner (System.in);
+	try {
+		//Declaro els lectors
+		BufferedReader br = new BufferedReader(new FileReader(files_dades[0]));
+		BufferedReader br1 = new BufferedReader(new FileReader(files_dades[8]));
+		//L'asicno la llargada a les arrays que s'utilitzaran
+		String nomCompanyia[]=new String[2];
+		String nom[]=new String[2];
+		emails=new String [largada];
+		//Declaro variables per a utilitzarles com a index, i per a calcular si s'he de torna a llegui el archiu  
+		int j=0,posicioArray,numAleatori2=aleatori,largadaArxiu=250,largadaGenera=largada;
+		//Aqui li resto un al aleatori per que encaixi amb la posicio de la array
+		numAleatori2=aleatori-1;
+		//Ara faig els calculs per a comprova si ha cabare llegin linies nules si
+		largadaGenera=numAleatori2+largadaGenera;
+		posicioArray=largadaGenera-largadaArxiu;
+		//si el numero es mes geran que cero acabaria lleguin linies nules per a no llegirnes he fet el calcul corresponent
+		if (posicioArray>0) {
+			//calculo quina posicio li correspont a la primera linia
+			posicioArray=largada-posicioArray;
+			//bucle per a llegui i asicnar aleatoriament
+			for (int i=0 ; i <250 ; i++) {
+				//La condicio es per asicnar a les primeres lineias comenzan per el final 
+				if(posicioArray<largada) {
+					//legeixo linia
+					nom[1]= br.readLine();
+					nom=nom[1].split("#");
+					emails[posicioArray] = nom[1]+"@";
+					nomCompanyia[1]=br1.readLine();
+					nomCompanyia=nomCompanyia[1].split("#");
+					//guardo el email
+					emails[posicioArray] = emails[posicioArray]+nomCompanyia[1]+".com";
+					posicioArray++;
+				}else {
+					//llegeixo linies
+					nom[1]= br.readLine();
+					nom=nom[1].split("#");
+					nomCompanyia[1]=br1.readLine();
+					nomCompanyia=nomCompanyia[1].split("#");
+					//Hem salto les linies fins trova la linia amb el numero aleatori
+					if (i>=numAleatori2&&j<largada) {
+						emails[j] =nom[1]+"@";
+						emails[j] = emails[j]+nomCompanyia[1]+".com";
+						j++;
+					}
 				}
 			}
-			for (int i=0 ; i <=aleatori&&j<largada ; i++) {
-				nom[1]= br2.readLine();
+			
+		}else {
+			//Legeixo i guardo
+			for (int i=0 ; j<largada ; i++) {
+				nom[1]= br.readLine();
 				nom=nom[1].split("#");
-				emails[j] = nom[1]+"@";
-				j++;
-			}
-			j=0;
-			for (int i=0 ; j <largada; i++) {
 				nomCompanyia[1]=br1.readLine();
 				nomCompanyia=nomCompanyia[1].split("#");
 				if (i>=aleatori&&j<largada) {
+					emails[j] =nom[1]+"@";
 					emails[j] = emails[j]+nomCompanyia[1]+".com";
-					System.out.println(emails[j]);
 					j++;
 				}
 			}
-			
-			for (int i=0 ; i <=aleatori&&j<largada ; i++) {
-				nomCompanyia[1]=br3.readLine();
-				nomCompanyia=nomCompanyia[1].split("#");
-				emails[j] = emails[j]+nomCompanyia[1]+".com";
-				System.out.println(emails[j]);
-				j++;
-			}
-			//+nomCompanyia[1]+".com"
-			return "a";
-		}catch (Exception e) {
-			e.printStackTrace();
 		}
-		return null;
+		//for (int i = 0; i < emails.length; i++) {
+			//System.out.println(emails[i]);
+		//}
+		//int numAleatori=random.nextInt(250)+1,anyMaxim=2023,anyMinim=1900,valorPerDefecteAutonumeric=1;
+		//String emails []=new String [1];
+		//line=email(2,emails,files_dades,numAleatori);
+	}catch (Exception e) {
+		e.printStackTrace();
 	}
+	return null;
+}
 	public static String dates(int largada,int anyMinim,int anyMaxim,int aleatori) {
 		Random random = new Random();
+		//dono llargada a les array i la variable
 		String data[]=new String [largada];
 		int test;
+		//Utilitzo l'array per a ordenar ficar el maxim com a maxim
 		if(anyMaxim<anyMinim) {
 			test=anyMaxim;
 			anyMaxim=anyMinim;
 			anyMinim=test;
 		}
+		//bucle per a generar els anys
 		for (int i = 0; i < data.length; i++) {
 			int any=random.nextInt(anyMaxim-anyMinim)+anyMinim,mes=random.nextInt(12)+1,dia;
+			//Crido a la funcio pera sabe cuans dies te el mes 
 			dia=diesMes(mes,any);
 			if (dia==-1) {
 				System.out.println("ERROR");
 			}else {
+				//Genero el dia i el guardo a la array
 				dia=random.nextInt(dia)+1;
 				data[i]= dia+"/"+mes+"/"+any;
 				System.out.println(data[i]);
 			}
 		}
-		
-
+		//Lineis del main per a fer proves amb la crida de la funcio
+		//int numAleatori=random.nextInt(250)+1,anyMaxim=2023,anyMinim=1900,valorPerDefecteAutonumeric=1;
+		//line=dates(2,anyMinim,anyMaxim,numAleatori);
 		return "a";
 	}
 	public static int diesMes( int mes ,int any) {
-		  if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
-		    // Meses de 31 días
-		    return 31;
-		  } else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
-		    // Meses de 30 días
-		    return 30;
-		  } else if (mes == 2) {
-		    // Febrero (28 en años comunes, 29 en años bisiestos)
-		    // Implementar lógica para determinar si es año bisiesto
-		    if ((any % 4 == 0 && any % 100 != 0) || (any % 100 == 0 && any % 400 == 0))
-		    {
-		      return 29;
-		    } else {
-		      return 28;
-		    }
-		  }else {
-			  return -1;
-		  } 
-		}
+		if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
+			// Meses de 31 días
+			return 31;
+		} else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+			// Meses de 30 días
+			return 30;
+		} else if (mes == 2) {
+			// Febre (28 en anys comuns, 29 en anys de traspas)
+			// Implementar lógica para determinar si es año bisiesto
+			if ((any % 4 == 0 && any % 100 != 0) || (any % 100 == 0 && any % 400 == 0)){
+				return 29;
+			} else {
+				return 28;
+			}
+		}else {
+			return -1;
+		} 
+	}
 	public static void autonumeric(int llargada,int num[],int valorPerDefecte) {
 		num=new int[llargada];
+		//Faig un bucle per a genera el auto numeric comensan amb el numero que el usuari indiqui
 		for (int i = 0; i <llargada; i++) {
 			num[i]=valorPerDefecte;
 			valorPerDefecte++;
 			System.out.println(num[i]);
 		}
-		try {
-			LlegirDades();
-			// System.out.println(RandomNumber(1,0,1000)); --Funcion para mostrar numeros decimales
-			// MostrarPassword(); --Funcion para mostrar contraseña compuesta por caracteres,simbolos y letras
-			// String numeroDNI = ObtenerDNI(); --Funcion para obtener DNI aleatorio 
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+		
 	}
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// Funcio per llegir els arxius de dades
@@ -221,10 +238,10 @@ public class Mockaroo {
         // Cadena que contindrà tots els caràcters permesos segons les opcions
         String conjuntCaracters = "";
         // Afegeix els caràcters segons els paràmetres afegits
-        if (inclouLletres && inclouMinuscules) {conjuntCaracters += lletres;}
-        if (inclouLletres && inclouMajuscules) {conjuntCaracters += majuscules;}
-        if (inclouNumeros) {conjuntCaracters += numeros;}
-        if (inclouSimbols) {conjuntCaracters += simbols;}
+        if (inclouLletres && inclouMinuscules) conjuntCaracters += lletres;
+        if (inclouLletres && inclouMajuscules) conjuntCaracters += majuscules;
+        if (inclouNumeros) conjuntCaracters += numeros;
+        if (inclouSimbols) conjuntCaracters += simbols;
         // Generació de la contrasenya
         Random random = new Random();
         String password = "";
