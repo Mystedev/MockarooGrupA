@@ -32,7 +32,17 @@ public class Mockaroo {
 			String secondLine = br.readLine();
 			System.out.println("La següent linea mostra la quantitat total d'arxius que es pot llegir");
 			System.out.println(secondLine);
-			LlegirArxiusAleatoris();
+			System.out.println("Introduce los números correspondientes a las posiciones del array separados por espacios:");
+	        String input = reader.nextLine();
+			// Convertir el input del usuario en un array de enteros
+	        String[] indicesStr = input.split(" ");
+	        int[] indices = new int[indicesStr.length];
+
+	        for (int i = 0; i < indicesStr.length; i++) {
+	            indices[i] = Integer.parseInt(indicesStr[i]);
+	        }
+			// LlegirArxiusAleatoris(files_dades);
+			leerArchivos(files_dades, indices);
 			// MostrarPassword(); --Funcion para mostrar contraseña compuesta por caracteres,simbolos y letras
 			// System.out.println(RandomNumber(1,0,1000)); --Funcion para mostrar numeros decimales
 			// String numeroDNI = ObtenerDNI(); --Funcion para obtener DNI aleatorio 
@@ -40,20 +50,17 @@ public class Mockaroo {
 			e.printStackTrace();
 		}
 	}
-	// Funcio per que l'usuari pugui demanar que arxius vol llegir aleatoriament
-	public static void LlegirArxiusAleatoris() {
-		int i = 0;
-		int num;
-		System.out.print("Que arxius vols llegir?:");
-		System.out.println("-> 1 2 3 4 5 6 7 8 10 <-");
-		int number = reader.nextInt();
-		while(i < number) {
-			System.out.print("Afegeix l'arxiu:");
-			num = reader.nextInt();
-			i++;
-		}
-		System.out.println("Eso es todo.");
-	}
+	// Función que lee el array según los índices proporcionados
+    public static void leerArchivos(String[] archivos, int[] indices) {
+    	for (int i = 0; i < indices.length; i++) {
+            int index = indices[i];
+            if (index >= 1 && index <= archivos.length) {
+                System.out.println("Archivo en posición " + index + ": " + archivos[index - 1]);
+            } else {
+                System.out.println("Índice " + index + " fuera de rango.");
+            }
+        }
+    }
 	// Funcio creada per validar el format del fitxer d'entrada
 	public static String ValidarFormatEntrada(String arxiuGenerat,String formatArxiu[]) {
 		// Comprovar la longitud de l'array i el format correctament
@@ -61,9 +68,9 @@ public class Mockaroo {
 		// Bucle que demana correccions fins que tot el format sigui correcte
 		while (!isCorrect) {
 		// Comprovar si l'array té 3 elements
-			if (formatArxiu.length != 3) {
+			if (formatArxiu.length != 3 ) {
 				System.out.println("Error -> El format de l'arxiu ha de tenir 3 elements: 'Tipus de Arxiu'#'Quantitat de registres'#'Ubicació'");
-		        System.out.print("Introdueix el format correcte (separat per espais): ");
+		        System.out.print("Introdueix el format correcte (separat per '#'): ");
 		        arxiuGenerat = reader.nextLine();
 		        formatArxiu = arxiuGenerat.split("#");
 		    }
