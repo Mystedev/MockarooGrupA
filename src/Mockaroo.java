@@ -8,11 +8,14 @@ import java.io.BufferedReader;
 public class Mockaroo {
 	public static Scanner reader = new Scanner(System.in);
 	public static Random random = new Random();
+	public static int contador = 0;
+	public static String dniGenerat[]=new String[1000];
 	public static void main(String[] args) {
 		try {
+			
 			// Array d'arxius de dades per accedir i llegir-los
 			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5-Proffesions.txt",
-					"Dades/6-Pais.txt","Dades/7-Estudis.txt","Dades/8-Colors.txt","Dades/10-NomDeLaCompanyia.txt"};
+					"Dades/6-Pais.txt","Dades/7-Estudis.txt","Dades/8-Colors.txt","null","Dades/10-NomDeLaCompanyia.txt"};
 			// Arxiu d'entrada per determinar on guardar els arxius 
 			String fileEntrada = "Dades/Requisits.txt";
 			// Llegirem l'arxiu amb les especificacions que pot demanar l'usuari
@@ -37,7 +40,6 @@ public class Mockaroo {
 			// Convertir el input del usuario en un array de enteros
 	        String[] indicesStr = input.split(" ");
 	        int[] indices = new int[indicesStr.length];
-
 	        for (int i = 0; i < indicesStr.length; i++) {
 	            indices[i] = Integer.parseInt(indicesStr[i]);
 	        }
@@ -45,15 +47,16 @@ public class Mockaroo {
 			leerArchivos(files_dades, indices);
 			// MostrarPassword(); --Funcion para mostrar contraseña compuesta por caracteres,simbolos y letras
 			// System.out.println(RandomNumber(1,0,1000)); --Funcion para mostrar numeros decimales
-			// String numeroDNI = ObtenerDNI(); --Funcion para obtener DNI aleatorio 
+			// System.out.println("ObtenerDNI()");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	// Función que lee el array según los índices proporcionados
     public static void leerArchivos(String[] archivos, int[] indices) {
-    	for (int i = 0; i < indices.length; i++) {
+        for (int i = 0; i < indices.length; i++) {
             int index = indices[i];
+            // Cambiar el rango a 1 a archivos.length ya que el archivo 10 es parte del array
             if (index >= 1 && index <= archivos.length) {
                 System.out.println("Archivo en posición " + index + ": " + archivos[index - 1]);
             } else {
@@ -407,20 +410,44 @@ public class Mockaroo {
     // Funcio per generar la ultima lletra del DNI
     public static char GenerarLetraDNI(int dni) {
     	// Lletres valides per seleccionar l'ultim caracter del DNI
-    	String characters = "TRWAGMYFPDXBNJZSQVHLCKE";
+    	String CHARACTERS = "TRWAGMYFPDXBNJZSQVHLCKE";
     	// La resta de la divisio de la longitud total del 'string' dels caracters ens dona la posicio de la lletra, es a dir  '23'
-    	int rest = dni % characters.length();
-    	return characters.charAt(rest);
+    	int rest = dni % CHARACTERS.length();
+    	return CHARACTERS.charAt(rest);
+    }
+    // Funcio per saber si ja existeix el DNI
+    public static boolean existeixDni(String dni) {
+    	for(int i=0;i< contador;i++) {
+    		if(dniGenerat[i].equals(dni)) {
+    			return true;// El dni ja existeix
+    		}
+    	}
+    	return false;// El dni no existeix
     }
     // Funcion per obtenir el umero de DNI aleatori
     public static String ObtenerDNI() {
-    	Random random = new Random();
-    	// Necesitem que la quantitat de numeros del DNI sigui de 8
-    	int numeroDNI = random.nextInt(90000000) + 10000000;
-    	// Obtenim la serie de numeros aleatoris que contindran el DNI
-    	char lletra = GenerarLetraDNI(numeroDNI);
-    	// Obtenim exitosament un numero de DNI aleatori
-    	return numeroDNI + String.valueOf(lletra);
+    	random = new Random();
+    	String dniResult = "";
+    	
+    	while(existeixDni(dniResult)) {
+    		// Generem un numero maxim de 8 digits
+    		int numeroDni = random.nextInt(90000000)+10000000;
+    		// Obtenim la lletra corresponent al numero
+    		char lletra = GenerarLetraDNI(numeroDni);
+    		// Combinem numero i lletra
+    		dniResult = numeroDni + String.valueOf(lletra);
+    	}
+    	if (existeixDni(dniResult)) {
+            System.out.println("DNI repetido: " + dniResult);
+        }
+    	if(contador < 1000) {
+    		dniGenerat[contador] = dniResult;
+    		contador++;
+    	}else {
+    		System.out.println("S'ha alcanzat el numero maxim de possibles DNIs");
+    	}
+    	
+    	return dniResult;
     }
 	// ·Funcion int ha de indicar el 'valor d'inici=1'
     public static void autonumeric(int llargada,int num[],int valorPerDefecte) {
