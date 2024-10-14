@@ -1,3 +1,505 @@
+<<<<<<< HEAD
+1#blau cel
+2#blanc atiquat
+3#aigua
+4#aiguamarina
+5#atzur
+6#beix
+7#bescuit
+8#negre
+9#ametlla blanquejada
+10#blau
+11#blau violaci
+12#marró
+13#fusta polida
+14#blau cadet
+15#chartreuse
+16#xocolata
+17#corall
+18#blau de blat de moro
+19#blat de moro setinat
+20#carmesí
+21#cià
+22#blau fosc
+23#cià fosc
+24#or fosco
+25#gris fosc
+26#verd fosc
+27#caqui fosc
+28#magenta fosc
+29#verd oliva fosc
+30#taronja fosc
+31#orquídia fosca
+32#vermell fosc
+33#salmó fosc
+34#verd marí fosc
+35#blau pissarra fosc
+36#gris pissarra fosc
+37#turquesa fosca
+38#violat fosc
+39#rosa intens
+40#blau cel profund
+41#gris apagat
+42#blau dodger
+43#maó
+44#blanc floral
+45#verd bosc
+46#fúcsia
+47#gainsboro
+48#blanc fantasma
+49#or
+50#vareta daurada
+51#gris
+52#verd
+53#verd groguenc
+54#meló
+55#rosa viu
+56#vermell indi
+57#indi
+58#ivori
+59#caqui
+60#lavanda
+61#rubor de lavanda
+62#verd gespa
+63#llimona chiffon
+64#blau clar
+65#corall clar
+66#cià clar
+67#groc vareta daurada clar
+68#gris clar
+69#verd clar
+70#rosa clar
+71#salmó clar
+72#verd marí clar
+73#blau cel clar
+74#gris pissarra clar
+75#blau acer clar
+76#groc clar
+77#llima
+78#verd llima
+79#lli
+80#magenta
+81#marró fosc
+82#aiguamarina mitjana
+83#blau mitjà
+84#orquídia mitjana
+85#porpra mitjà
+86#verd marí mitjà
+87#blau pissarra mitjà
+88#verd primavera mitjà
+89#turquesa mitjana
+90#vermell violeta mitjà
+91#blau mitjanit
+92#crema de menta
+93#rosa boirós
+94#mocassí
+95#blanc navajo
+96#marí
+97#encaix antic
+98#oliva
+99#verd oliva
+100#taronja
+101#taronja vermellós
+102#orquídia
+103#vareta daurada pàl·lida
+104#verd pàl·lid
+105#turquesa pàl·lida
+106#vermell violeta pàl·lid
+107#nata de papaia
+108#borrissol de préssec
+109#perú
+110#rosa
+111#pruna
+112#blau pols
+113#porpra
+114#porpra rebecca
+115#vermell
+116#marró rosaci
+117#blau reial
+118#marró sella
+119#salmó
+120#marró sorrenc
+121#verd marí
+122#closca de mar
+123#siena
+124#plata
+125#blau cel
+126#blau pissarra
+127#gris pissarra
+128#neu
+129#verd primavera
+130#blau acer
+131#bronze
+132#verd blavós
+133#card
+134#tomàquet
+135#turquesa
+136#violeta
+137#blat
+138#blanc
+139#fum blanc
+140#groc
+141#verd groguenc
+142#caqui fosc
+143#blau clar
+144#rosa clar
+145#beix clar
+146#lavanda clar
+147#taronja clar
+148#verd fosc mitjà
+149#verd oliva clar
+150#groc pàl·lid
+151#blau clar profund
+152#blau mitjà clar
+153#xocolata fosc
+154#blau marí clar
+155#blau fum clar
+156#ametlla pàl·lida
+157#beix profund
+158#marfil
+159#gris clar apagat
+160#groc brillant
+161#blau pervinca
+162#blau cel pàl·lid
+163#blanc atzurat
+164#beix setinat
+165#vermell càlid
+166#lila clar
+167#caoba
+168#blau neó
+169#rosat pols
+170#blau cobalt
+171#blau suau
+172#morat fosforescent
+173#blau aigua fosc
+174#blanc lletós
+175#beix pols
+176#rosa brillant
+177#marró terra
+178#gris estany
+179#verd oceà
+180#blau infinit
+181#groguenc pàl·lid
+182#blau oceà clar
+183#cian brillant
+184#vermell sang
+185#taronja fosc brillant
+186#blau profund
+187#gris mitjà
+188#groc intens
+189#blau orquídia
+190#rosa pastel
+191#plata setinada
+192#blanc brillant
+193#gris perla
+194#blanc cendra
+195#blau elèctric
+196#verd blavós intens
+197#vermell viu
+198#blau vellut
+199#verd fosc intens
+200#blau marí profund
+201#blau profund intens
+202#marró caramel
+203#violeta pàl·lid
+204#blanc daurat
+205#verd fresc
+206#beix suau
+207#gris platí
+208#taronja clar brillant
+209#blau cel brillant
+210#groc festuc
+211#rosa salmó
+212#blau marí setinat
+213#taronja intens
+214#lavanda pàl·lida
+215#verd neó
+216#blau lapislàtzuli
+217#verd llimona clar
+218#blau tempesta
+219#taronja pàl·lid
+220#blau safir clar
+221#vermell robí
+222#marró profund
+223#blau oceà intens
+224#blau cel clar profund
+225#gris ciment
+226#blau bosc
+227#blau real brillant
+228#blau fum intens
+229#gris alumini
+230#taronja suau
+231#blau lila
+232#taronja cendra
+233#verd lima intens
+234#blau neó intens
+235#vermell robí clar
+236#blau acaci
+237#blau cel marí
+238#blau oli
+239#blau safir intens
+240#groguenc suau
+241#marró rosaci intens
+242#rosa pastel clar
+243#lavanda càlida
+244#beix fosc
+245#vermell bordeus
+246#blau elèctric clar
+247#beix lletós
+248#verd fosc intens clar
+249#blau cel setinat
+=======
+1#blau cel
+2#blanc atiquat
+3#aigua
+4#aiguamarina
+5#atzur
+6#beix
+7#bescuit
+8#negre
+9#ametlla blanquejada
+10#blau
+11#blau violaci
+12#marró
+13#fusta polida
+14#blau cadet
+15#chartreuse
+16#xocolata
+17#corall
+18#blau de blat de moro
+19#blat de moro setinat
+20#carmesí
+21#cià
+22#blau fosc
+23#cià fosc
+24#or fosco
+25#gris fosc
+26#verd fosc
+27#caqui fosc
+28#magenta fosc
+29#verd oliva fosc
+30#taronja fosc
+31#orquídia fosca
+32#vermell fosc
+33#salmó fosc
+34#verd marí fosc
+35#blau pissarra fosc
+36#gris pissarra fosc
+37#turquesa fosca
+38#violat fosc
+39#rosa intens
+40#blau cel profund
+41#gris apagat
+42#blau dodger
+43#maó
+44#blanc floral
+45#verd bosc
+46#fúcsia
+47#gainsboro
+48#blanc fantasma
+49#or
+50#vareta daurada
+51#gris
+52#verd
+53#verd groguenc
+54#meló
+55#rosa viu
+56#vermell indi
+57#indi
+58#ivori
+59#caqui
+60#lavanda
+61#rubor de lavanda
+62#verd gespa
+63#llimona chiffon
+64#blau clar
+65#corall clar
+66#cià clar
+67#groc vareta daurada clar
+68#gris clar
+69#verd clar
+70#rosa clar
+71#salmó clar
+72#verd marí clar
+73#blau cel clar
+74#gris pissarra clar
+75#blau acer clar
+76#groc clar
+77#llima
+78#verd llima
+79#lli
+80#magenta
+81#marró fosc
+82#aiguamarina mitjana
+83#blau mitjà
+84#orquídia mitjana
+85#porpra mitjà
+86#verd marí mitjà
+87#blau pissarra mitjà
+88#verd primavera mitjà
+89#turquesa mitjana
+90#vermell violeta mitjà
+91#blau mitjanit
+92#crema de menta
+93#rosa boirós
+94#mocassí
+95#blanc navajo
+96#marí
+97#encaix antic
+98#oliva
+99#verd oliva
+100#taronja
+101#taronja vermellós
+102#orquídia
+103#vareta daurada pàl·lida
+104#verd pàl·lid
+105#turquesa pàl·lida
+106#vermell violeta pàl·lid
+107#nata de papaia
+108#borrissol de préssec
+109#perú
+110#rosa
+111#pruna
+112#blau pols
+113#porpra
+114#porpra rebecca
+115#vermell
+116#marró rosaci
+117#blau reial
+118#marró sella
+119#salmó
+120#marró sorrenc
+121#verd marí
+122#closca de mar
+123#siena
+124#plata
+125#blau cel
+126#blau pissarra
+127#gris pissarra
+128#neu
+129#verd primavera
+130#blau acer
+131#bronze
+132#verd blavós
+133#card
+134#tomàquet
+135#turquesa
+136#violeta
+137#blat
+138#blanc
+139#fum blanc
+140#groc
+141#verd groguenc
+142#caqui fosc
+143#blau clar
+144#rosa clar
+145#beix clar
+146#lavanda clar
+147#taronja clar
+148#verd fosc mitjà
+149#verd oliva clar
+150#groc pàl·lid
+151#blau clar profund
+152#blau mitjà clar
+153#xocolata fosc
+154#blau marí clar
+155#blau fum clar
+156#ametlla pàl·lida
+157#beix profund
+158#marfil
+159#gris clar apagat
+160#groc brillant
+161#blau pervinca
+162#blau cel pàl·lid
+163#blanc atzurat
+164#beix setinat
+165#vermell càlid
+166#lila clar
+167#caoba
+168#blau neó
+169#rosat pols
+170#blau cobalt
+171#blau suau
+172#morat fosforescent
+173#blau aigua fosc
+174#blanc lletós
+175#beix pols
+176#rosa brillant
+177#marró terra
+178#gris estany
+179#verd oceà
+180#blau infinit
+181#groguenc pàl·lid
+182#blau oceà clar
+183#cian brillant
+184#vermell sang
+185#taronja fosc brillant
+186#blau profund
+187#gris mitjà
+188#groc intens
+189#blau orquídia
+190#rosa pastel
+191#plata setinada
+192#blanc brillant
+193#gris perla
+194#blanc cendra
+195#blau elèctric
+196#verd blavós intens
+197#vermell viu
+198#blau vellut
+199#verd fosc intens
+200#blau marí profund
+201#blau profund intens
+202#marró caramel
+203#violeta pàl·lid
+204#blanc daurat
+205#verd fresc
+206#beix suau
+207#gris platí
+208#taronja clar brillant
+209#blau cel brillant
+210#groc festuc
+211#rosa salmó
+212#blau marí setinat
+213#taronja intens
+214#lavanda pàl·lida
+215#verd neó
+216#blau lapislàtzuli
+217#verd llimona clar
+218#blau tempesta
+219#taronja pàl·lid
+220#blau safir clar
+221#vermell robí
+222#marró profund
+223#blau oceà intens
+224#blau cel clar profund
+225#gris ciment
+226#blau bosc
+227#blau real brillant
+228#blau fum intens
+229#gris alumini
+230#taronja suau
+231#blau lila
+232#taronja cendra
+233#verd lima intens
+234#blau neó intens
+235#vermell robí clar
+236#blau acaci
+237#blau cel marí
+238#blau oli
+239#blau safir intens
+240#groguenc suau
+241#marró rosaci intens
+242#rosa pastel clar
+243#lavanda càlida
+244#beix fosc
+245#vermell bordeus
+246#blau elèctric clar
+247#beix lletós
+248#verd fosc intens clar
+249#blau cel setinat
+>>>>>>> branch 'main' of git@github.com:Mystedev/Mockaroo.git
+250#blanc glaçat
 1#blau cel
 2#blanc atiquat
 3#aigua
