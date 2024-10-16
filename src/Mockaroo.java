@@ -10,6 +10,7 @@ public class Mockaroo {
 	public static Random random = new Random();
 	public static int contador = 0;
 	public static String dniGenerat[]=new String[1000];
+	public static String rutaUbicacio = "";
 	public static void main(String[] args) {
 		try {
             // Array d'arxius de dades per accedir i llegir-los
@@ -41,6 +42,7 @@ public class Mockaroo {
             String formatArxiu[] = firstLine.split("#");
             String formatValid = ValidarFormatEntrada(firstLine, formatArxiu);
             System.out.println(formatValid);
+            rutaUbicacio = formatArxiu[2];
             br.close();
             reader.close();
         } catch (Exception e) {
