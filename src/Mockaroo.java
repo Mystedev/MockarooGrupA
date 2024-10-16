@@ -12,47 +12,44 @@ public class Mockaroo {
 	public static Random random = new Random();
 	public static int contador = 0;
 	public static String dniGenerat[]=new String[1000];
+	public static String rutaUbicacio = "";
 	public static void main(String[] args) {
 		try {
-			
-			// Array d'arxius de dades per accedir i llegir-los
-			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5-Proffesions.txt",
-					"Dades/6-Pais.txt","Dades/7-Estudis.txt","Dades/8-Colors.txt","null","Dades/10-NomDeLaCompanyia.txt"};
-			// Arxiu d'entrada per determinar on guardar els arxius 
-			String fileEntrada = "Dades/Requisits.txt";
-			// Llegirem l'arxiu amb les especificacions que pot demanar l'usuari
-			BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
-			// Llegim la primera linea 
-			String line = br.readLine();
-			// Farem servir la seguent sintaxi per guiar al usuari de manera que sapigui com,on i quants registres vol generar
-			// *Tipus d'arxiu que es vol generar ->> SQL o XML
-			// *Quantitat de registres que es vol generar ->> 0-250 (Tenint en compte que el total de dades per arxiu es de 250)
-			// *Ubicació on es vol guardar l'arxiu generat
-			System.out.println("Fes servir la següent sintaxi per generar l'arxiu de sortida ->> "+line);
-			System.out.print("Introdueix com vols generar l'arxiu:");
-			String arxiuGenerat = reader.nextLine();
-			String formatArxiu[] = arxiuGenerat.split("#");
-			// Variable amb el resultat de la linea descrita per l'usuari
-			String correctLine = ValidarFormatEntrada(arxiuGenerat,formatArxiu);
-			String secondLine = br.readLine();
-			System.out.println("La següent linea mostra la quantitat total d'arxius que es pot llegir");
-			System.out.println(secondLine);
-			System.out.println("Introduce los números correspondientes a las posiciones del array separados por espacios:");
-	        String input = reader.nextLine();
-			// Convertir el input del usuario en un array de enteros
-	        String[] indicesStr = input.split(" ");
-	        int[] indices = new int[indicesStr.length];
-	        for (int i = 0; i < indicesStr.length; i++) {
-	            indices[i] = Integer.parseInt(indicesStr[i]);
-	        }
-			// LlegirArxiusAleatoris(files_dades);
-			leerArchivos(files_dades, indices);
-			// MostrarPassword(); --Funcion para mostrar contraseña compuesta por caracteres,simbolos y letras
-			// System.out.println(RandomNumber(1,0,1000)); --Funcion para mostrar numeros decimales
-			// System.out.println("ObtenerDNI()");
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+            // Array d'arxius de dades per accedir i llegir-los
+            String files_dades[] = {
+                "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
+                "Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt",
+                "Dades/7-Estudis.txt", "Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt"
+            };
+            // Arxiu  d'entrada per determinar on guardar l'arxiu generat
+            String fileEntrada = "Dades/Requisits.txt";
+            // Llegim l'arxiu amb les especificacions que demana l'usuari
+            BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
+            // Llegir la primera linia amb el format que ens interesa
+            String firstLine = br.readLine();
+            // Llegir la resta de linies
+            String line;
+            while ((line = br.readLine()) != null) {    
+            // Suposant que cada línia conté números separats per espais
+                String[] indicesStr = line.split(" ");
+                // Convertir el input de cada línia en un array d'enters
+                int[] indices = new int[indicesStr.length];
+                for (int i = 0; i < indicesStr.length; i++) {
+                    indices[i] = Integer.parseInt(indicesStr[i]);
+                }
+                // Llegir els arxius especificats al arxiu d'entrada per obtenir els arxius que llegirem 
+                leerArchivos(files_dades, indices);
+            }
+            // Obtenim el format correcte de la primera linea i el validem
+            String formatArxiu[] = firstLine.split("#");
+            String formatValid = ValidarFormatEntrada(firstLine, formatArxiu);
+            System.out.println(formatValid);
+            rutaUbicacio = formatArxiu[2];
+            br.close();
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	}
 	// Función que lee el array según los índices proporcionados
     public static void leerArchivos(String[] archivos, int[] indices) {
@@ -75,32 +72,25 @@ public class Mockaroo {
 		// Comprovar si l'array té 3 elements
 			if (formatArxiu.length != 3 ) {
 				System.out.println("Error -> El format de l'arxiu ha de tenir 3 elements: 'Tipus de Arxiu'#'Quantitat de registres'#'Ubicació'");
-		        System.out.print("Introdueix el format correcte (separat per '#'): ");
-		        arxiuGenerat = reader.nextLine();
-		        formatArxiu = arxiuGenerat.split("#");
+				return null;
 		    }
 		    // Comprovar que el tipus d'arxiu és "SQL" o "XML"
 		    else if (!(formatArxiu[0].equalsIgnoreCase("XML") || formatArxiu[0].equalsIgnoreCase("SQL"))) {
 		        System.out.println("Error -> El tipus d'arxiu ha de ser 'SQL' o 'XML'");
-		        System.out.print("Introdueix el format correcte: ");
-		        arxiuGenerat = reader.nextLine();
-		        formatArxiu = arxiuGenerat.split("#");
+		        return null;
 		    }
 		    // Comprovar que el segon element és un nombre vàlid
 		    else if (!esNumeroValid(formatArxiu[1])) {
 		        System.out.println("Error -> La quantitat de registres ha de ser un número positiu entre 1 i 250.");
-		        System.out.print("Introdueix el format correcte: ");
-		        arxiuGenerat = reader.nextLine();
-		        formatArxiu = arxiuGenerat.split("#");
+		        return null;
 		    }
 		    // Comprovar que la ubicació és "DOCUMENTOS"
 		    else if (!formatArxiu[2].equalsIgnoreCase("DOCUMENTOS")) {
 		        System.out.println("Error -> La ubicació ha de ser 'DOCUMENTOS'.");
-		        System.out.print("Introdueix el format correcte: ");
-		        arxiuGenerat = reader.nextLine();
-		        formatArxiu = arxiuGenerat.split("#");
+		        return null;
 		    } else {
 		        // Si tot és correcte, sortir del bucle
+		    	System.out.println("Formato Válido.");
 		        isCorrect = true;
 		     }
 		}
@@ -448,7 +438,6 @@ public class Mockaroo {
     	}else {
     		System.out.println("S'ha alcanzat el numero maxim de possibles DNIs");
     	}
-    	
     	return dniResult;
     }
 	// ·Funcion int ha de indicar el 'valor d'inici=1'
@@ -462,6 +451,7 @@ public class Mockaroo {
 	}
 	//*****************************
 	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
+
     
     //Funcions creació XML, XSD i XSL
     
@@ -646,3 +636,4 @@ public class Mockaroo {
   		}
   	}
 }
+
