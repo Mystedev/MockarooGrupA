@@ -1,9 +1,11 @@
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.File;
 
 public class Mockaroo {
 	public static Scanner reader = new Scanner(System.in);
@@ -460,4 +462,187 @@ public class Mockaroo {
 	}
 	//*****************************
 	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
+    
+    //Funcions creació XML, XSD i XSL
+    
+  //Funcio per crear l'arxiu xsl
+    //crearXsl(dadesCrear);
+  	public static void crearXsl (String [] dadesCrear) {
+  		File desti=new File(rutaUbicacio+"\\Dades.xsl");
+  		try {
+  			PrintWriter impressora= new PrintWriter(desti);
+  			impressora.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
+  					+ "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">\r\n"
+  					+ "  <xsl:template match=\"/\">\r\n"
+  					+ "    <html>\r\n"
+  					+ "      <head>\r\n"
+  					+ "        <title>Dades demanades</title>\r\n"
+  					+ "        <style>\r\n"
+  					+ "          table {\r\n"
+  					+ "            border-collapse: collapse;\r\n"
+  					+ "            width: 100%;\r\n"
+  					+ "          }\r\n"
+  					+ "          th, td {\r\n"
+  					+ "            border: 1px solid black;\r\n"
+  					+ "            padding: 8px;\r\n"
+  					+ "            text-align: left;\r\n"
+  					+ "          }\r\n"
+  					+ "          th {\r\n"
+  					+ "            background-color: #f2f2f2;\r\n"
+  					+ "          }\r\n"
+  					+ "          tr:nth-child(even) {\r\n"
+  					+ "            background-color: #f9f9f9;\r\n"
+  					+ "          }\r\n"
+  					+ "        </style>\r\n"
+  					+ "      </head>\r\n"
+  					+ "      <body>\r\n"
+  					+ "        <h2>Taula de Dades</h2>\r\n"
+  					+ "        <table>\r\n"
+  					+ "          <thead>\r\n"
+  					+ "            <tr>");
+  			for (int i = 0; i < dadesCrear.length; i++) {
+  				if(dadesCrear[i]!= null) {
+  					impressora.println("              <th>"+dadesCrear[i]+"</th>");
+  				}			
+  			}
+  			impressora.println("            </tr>\r\n"
+  					+ "          </thead>\r\n"
+  					+ "          <tbody>\r\n"
+  					+ "            <xsl:for-each select=\"//linea\">\r\n"
+  					+ "              <tr>");
+  			
+  			for (int i = 0; i < dadesCrear.length; i++) {
+  				if(dadesCrear[i]!= null) {
+  					impressora.println("              <td><xsl:value-of select=\".//"+dadesCrear[i]+"\"></xsl:value-of></td>");
+  				}
+  			}
+  			impressora.println("              </tr>\r\n"
+  					+ "            </xsl:for-each>\r\n"
+  					+ "          </tbody>\r\n"
+  					+ "        </table>\r\n"
+  					+ "      </body>\r\n"
+  					+ "    </html>\r\n"
+  					+ "  </xsl:template>\r\n"
+  					+ "</xsl:stylesheet>");
+  			
+  			impressora.flush();
+  			impressora.close();
+  		
+  		} catch (Exception e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  		}
+  	}
+  	
+  	//Funcio per crear el xml
+  	//crearXml(dadesCrear2, dadesCrear, quantitatDades);
+  	public static void crearXml (
+			String [][] dadesCrear2,
+			String [] dadesCrear,
+			int quantitatDades) {
+		
+		File desti=new File(rutaUbicacio+"\\Dades.xml");
+		try {
+			PrintWriter impressora= new PrintWriter(desti);
+			impressora.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
+					+ "<?xml-stylesheet type=\"text/xsl\" href=\"Dades.xsl\"?>\r\n"
+					+ "<Dades xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"Dades.xsd\">");
+			for (int i = 0; i < quantitatDades; i++) {
+				impressora.println("    <linea>");
+				for (int j = 0; j < dadesCrear2.length; j++) {
+					if(dadesCrear[j]!= null) {
+						impressora.println("        <"+dadesCrear[j]+">"+dadesCrear2[j][i]+"</"+dadesCrear[j]+">");
+					}
+				}
+				impressora.println("    </linea>");
+			}
+			impressora.println("</Dades>");
+			
+			impressora.flush();
+			impressora.close();
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+  	
+  //Funcio per crear el XSD
+  	
+  //Funció per crear l'arxiu xsd
+  	//crearXsd(dadesCrear);
+  	public static void crearXsd (String dadesCrear[]) {
+  		File desti=new File(rutaUbicacio+"\\Dades.xsd");
+  		try {
+  			PrintWriter impressora= new PrintWriter(desti);
+  			//Primer de tot imprimim les primeres linies del document, que seràn sempre les mateixes
+  			impressora.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
+  					+ "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">");
+  			for (int i = 0; i < dadesCrear.length; i++) {
+  				/*
+  				 * A dadesGenerar tenim guardat els noms de les dades que volem generar, per tant si el
+  				 * valor es null, es que aquelles dades no ens interessen. S'han de guardar amb el mateix ordre
+  				 * de valors, per exemple nom sempre a la posició 0, cognoms a la 1 etc.. es el mateix ordre
+  				 * que en el enunciat.
+  				 */
+  				if(dadesCrear[i]!= null) {
+  					/*
+  					 * Els elements boolean, numero i dates son diferets de la resta pel fet de que el tipus 
+  					 * no es string, doncs primer amb aquest if controlem aquestes tres dades.
+  					 */
+  					if (i== 10) {
+  						impressora.println("    <xs:element name=\"boolean\" type=\"xs:boolean\"></xs:element>");
+  					}else if(i==11) {
+  						impressora.println("    <xs:element name=\"numero\" type=\"xs:integer\"></xs:element>");
+  					}else if(i==15) {
+  						impressora.println("    <xs:element name=\"dates\" type=\"xs:date\"></xs:element>");
+  					}else {
+  						impressora.println("    <xs:element name=\"" +dadesCrear[i]+ "\" type=\"xs:string\"></xs:element>");
+  					}
+  				}			
+  			}
+  			/*
+  			 * Aquest bloc tambés es identic en tots els casos, per tant l'imprimim sense
+  			 * controlar variables ni res semblant
+  			 */
+  			impressora.println(" <xs:element name=\"linea\">\r\n"
+  					+ "        <xs:complexType>\r\n"
+  					+ "            <xs:sequence>");
+  			
+  			/*
+  			 * Amb aquest for imprimim totes les linies dels elements fent referencia als elements
+  			 * declarats anteriorment
+  			 */
+  			for (int i = 0; i < dadesCrear.length; i++) {
+  				if(dadesCrear[i]!= null) {
+  					impressora.println("                <xs:element ref=\"" +dadesCrear[i]+"\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>");
+  				}
+  			}
+  			/*
+  			 * Aqui imprimim les ultimes linies del document, que un altre cop, 
+  			 * son sempre les mateixes, per tant no es necessàri ni un bucle ni variables
+  			 */
+  			impressora.println("            </xs:sequence>\r\n"
+  					+ "        </xs:complexType>\r\n"
+  					+ "    </xs:element>\r\n"
+  					+ "\r\n"
+  					+ "\r\n"
+  					+ "    <xs:element name=\"Dades\">\r\n"
+  					+ "        <xs:complexType>\r\n"
+  					+ "            <xs:sequence>\r\n"
+  					+ "                <xs:element ref=\"linea\" maxOccurs=\"unbounded\"></xs:element>\r\n"
+  					+ "            </xs:sequence>\r\n"
+  					+ "        </xs:complexType>\r\n"
+  					+ "    </xs:element>\r\n"
+  					+ "</xs:schema>");
+  			
+  			impressora.flush();
+  			impressora.close();
+  		
+  		} catch (Exception e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  		}
+  	}
 }
