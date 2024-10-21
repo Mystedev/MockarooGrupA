@@ -9,14 +9,7 @@ import java.util.Scanner;
 public class Mockaroo {
 	
 	public static void main(String[] args) {
-		Random random = new Random();
-		try {
-			String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt",
-					"Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		
 	}	
 	public static String email(int largada,String emails[],String files_dades[],int aleatori) {
 		Random random = new Random();
