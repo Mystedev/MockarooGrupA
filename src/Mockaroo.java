@@ -1,10 +1,12 @@
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.util.Scanner;
 
@@ -592,4 +594,100 @@ public class Mockaroo {
   			e.printStackTrace();
   		}
   	}
+  	
+	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
+	// ·Funcion boolean sin formatos
+	// ·Funcion int para indicar los 'decimales=0','minims=0 i maxims=1000'
+	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
+	// ·Funcion IP4 ???
+	// ·Funcion String ha de indicar 'letras,numeros,mayusculas,minusculas,simbolos y longitud'
+	// ·Funcion String ha de indicar el 'any minim=1900 i maxim=2023'
+	// ·Funcion para IBAN o DNI (Hay como buscar como se generan)
+	// ·Funcion int ha de indicar el 'valor d'inici=1'
+	//*****************************
+	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
+	public static void creaciDeSql(String ruta,int linies,String [][] dadesCrear2 ) throws IOException {
+		
+		System.out.println(ruta);
+		String test="\\Arxiu.sql";
+		File arxiuSql = new File(ruta+test);
+		
+		int i=0;
+		
+		while (arxiuSql.exists()) {
+			i++;
+			test="";
+			test="\\Arxiu("+i+").sql";
+			arxiuSql =new File(ruta+test);
+		}
+		ruta=ruta+test;
+		arxiuSql.createNewFile();
+		creacioDeTaula(linies,dadesCrear2,ruta);
+	}
+	//Creacio de SQL
+	public static void creacioDeTaula(int linies,String [][]dadesCrear2 ,String ruta) throws IOException{
+		BufferedWriter writer = new BufferedWriter(new FileWriter(ruta));
+		writer.write("CREATE DATABASE IF NOT EXISTS TaulaPerMostrarDades;\n");
+		writer.write("USE TaulaPerMostrarDades;\n\n");
+		writer.write("CREATE TABLE DadesGenarades(");
+		int j=0;
+        String test="";
+        for (int i = 0; i < dadesCrear2.length; i++) {
+			if (dadesCrear2[i][0]!=null) {
+				if (j==0&&(i==18||i==11)) {
+					writer.write(dadesCrear2[i][0]+" INT");
+					test="("+dadesCrear2[i][0];
+					j++;
+					
+				}else if(j==0&&i==10){
+					writer.write(dadesCrear2[i][0]+" BOOLEAN");
+					test="("+dadesCrear2[i][0];
+					j++;
+				}else if (j==0&&(i!=18||i!=11)) {
+					writer.write(dadesCrear2[i][0]+" VACHAR(100)");
+					test="("+dadesCrear2[i][0];
+					j++;
+				}else if (i==18||i==11) {
+					writer.write(" ,"+dadesCrear2[i][0]+" INT");
+					test=test+","+dadesCrear2[i][0];
+				}else if (i== 10) {
+					writer.write(","+dadesCrear2[i][0]+" BOOLEAN");
+					test=test+","+dadesCrear2[i][0];
+				}else {
+					writer.write(","+dadesCrear2[i][0]+" VACHAR(100)");
+					test=test+","+dadesCrear2[i][0];
+				}
+			}
+		}
+       
+        writer.write(");\n\n");
+        j=0;
+        int i=0;
+        for (int k = 0; k < linies; k++) {
+        	if (dadesCrear2[i][k]!=null) {
+        		writer.write("INSERT INTO DadesGenarades "+test+") VALUES (");
+	        	for ( i = 0;i  < dadesCrear2.length;i++) {
+	        		if (dadesCrear2[i][k]!=null) {
+	        			if (j==0&&(k==11||k==18)) {
+	            			writer.write(dadesCrear2[i][k]);
+	            			j++;
+	    				}else if (j==0) {
+	    					writer.write(" '"+dadesCrear2[i][k]+"'");
+	            			j++;
+	    				}else if (i==10||i==11) {
+	    					writer.write(", "+dadesCrear2[i][k]);
+	    				}else {
+	    					writer.write(", '"+dadesCrear2[i][k]+"'");
+	    				}
+					}
+				}
+	        	writer.write(");\n");
+	    		i=0;
+        	}
+        }
+        
+        writer.flush();
+        writer.close();
+	}
+
 }
