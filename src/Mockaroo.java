@@ -174,7 +174,6 @@ public class Mockaroo {
 			  return -1;
 		  } 
 		}
-	
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// ·Funcion boolean sin formatos
 	public static void dadesBoolean(int quantitatDades, boolean dadesBoolean[]) {
