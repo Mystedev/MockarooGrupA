@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.File;
 import java.util.Scanner;
 
 public class Mockaroo {
@@ -115,21 +116,48 @@ public class Mockaroo {
 		return numeroAleatorio;
 	}
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
-	public static void url(int llargada,String url[]) {
+	public static void url(int llargada,String urls[],String[] files_dades,int aleatori) {
 		try {
 			//GENERO LA URL DESDE EL NOM DE COMPANYIA 
-			FileReader fr3 = new FileReader("C:\\Users\\Jaume\\Documents\\Projecte_1\\Mockaroo\\Dades\\10-NomDeLaCompanyia.txt");
-			BufferedReader br3 = new BufferedReader(fr3);
+			BufferedReader br = new BufferedReader(new FileReader(files_dades[8]));
 			String text[]=new String[2];
-			url=new String[llargada];
-			for (int i = 0; i < llargada; i++) {
-				text[1]=br3.readLine();
-				text=text[1].split("#");
-				url[i]="www."+text[1]+".com";
+			//L'asicno la llargada a les arrays que s'utilitzaran
+			int j=0,posicioArray,numAleatori2=aleatori,largadaArxiu=250,largadaGenera=llargada;
+			numAleatori2=aleatori-1;
+			largadaGenera=numAleatori2+largadaGenera;
+			posicioArray=largadaGenera-largadaArxiu;
+			if (posicioArray>0) {
+				//calculo quina posicio li correspont a la primera linia
+				posicioArray=llargada-posicioArray;
+				for (int i = 0; i < largadaArxiu; i++) {
+					text[1]=br.readLine();
+					if (posicioArray<llargada) {
+						text=text[1].split("#");
+						urls[posicioArray]="www."+text[1]+".com";
+						posicioArray++;
+					}else {
+						if (i>=numAleatori2&&j<llargada) {
+						text=text[1].split("#");
+						urls[j]="www."+text[1]+".com";
+						System.out.println(urls[j]);
+						j++;
+						}
+					}
+				}
+			}else {
+				for (int i = 0; j < llargada; i++) {
+					text[1]=br.readLine();
+					if (i>=aleatori&&j<llargada) {
+						text=text[1].split("#");
+						urls[j]="www."+text[1]+".com";
+						System.out.println(urls[j]);
+						j++;
+					}
+				}
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 		
