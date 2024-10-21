@@ -689,5 +689,108 @@ public class Mockaroo {
         writer.flush();
         writer.close();
 	}
+	public static String[][] provesllegirDades(String dadesALlegir[],int quantitatDades) throws IOException{
+		Random random = new Random();
+		
+		int aleatori=random.nextInt(250)+1;
+		String dadesCrear[] = new String[19];
+		String[] nom = new String[quantitatDades];
+		String[] cognoms = new String[quantitatDades];
+		String[] ciutats = new String[quantitatDades];
+		String[] adreces = new String[quantitatDades];
+		String[] professions = new String[quantitatDades];
+		String[] pais = new String[quantitatDades];
+		String[] estudis = new String[quantitatDades];
+		String[] colors = new String[quantitatDades];
+		String[] url = new String[quantitatDades];
+		String[] companyia = new String[quantitatDades];
+		String[] booleans = new String[quantitatDades];
+		String[] numero = new String[quantitatDades];
+		String[] email = new String[quantitatDades];
+		String[] ip4 = new String[quantitatDades];
+		String[] password = new String[quantitatDades];
+		String[] dates = new String[quantitatDades];
+		String[] iban = new String[quantitatDades];
+		String[] dni = new String[quantitatDades];
+		String[] autonumeric = new String[quantitatDades];
+		String [][] dadesCrear2 = {nom, cognoms, ciutats, adreces, professions, pais, estudis, colors, url, companyia, booleans, numero, email, ip4, password, dates, iban, dni, autonumeric};
+				
+		dadesCrear2=lectorArxius(quantitatDades,dadesALlegir,aleatori,dadesCrear2);
+		
+		
+		for (int i = 0; i < dadesCrear2.length; i++) {
+			for (int j = 0; j < quantitatDades; j++) {
+				if (dadesCrear2[i][j]!=null) {
+					System.out.println(i+"--"+j+"--"+dadesCrear2[i][j]);
+				}
+			}
+		}
 
+		creaciDeSql("C:\\Intel",quantitatDades,dadesCrear2);
+	
+		return dadesCrear2;
+	}
+	public static String[][] lectorArxius(int linies,String[] arxiusALlegir,int aleatori,String [][] dadesCrear2) throws IOException{
+		String perLlegit[][]=new String[arxiusALlegir.length][linies];
+		String files_dades[]= {"Dades\\1-Noms.txt","Dades\\2-Cognoms.txt","Dades\\3-Ciutat.txt","Dades\\4-Adreces.txt","Dades/5.Proffesions.txt","Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
+		for (int i = 0; i < arxiusALlegir.length; i++) {
+			BufferedReader br = new BufferedReader(new FileReader(arxiusALlegir[i]));
+			llegir(br, perLlegit[i],aleatori,linies,0);
+		}
+		int fets=0;
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < perLlegit.length; j++) {
+				if (arxiusALlegir[j].equals(files_dades[i])) {
+					dadesCrear2[i]=perLlegit[j];
+					j=perLlegit.length;
+					fets++;
+				}else if(fets==perLlegit.length) {
+					i=10;
+					j=perLlegit.length;
+				}
+				
+			}
+		}
+		
+		return dadesCrear2;
+		/*
+		
+		*/
+	}
+	public static void llegir(BufferedReader br,String[]llegit,int aleatori,int linies,int especial) throws IOException{
+		String text[]=new String[2];
+		//L'asicno la llargada a les arrays que s'utilitzaran
+		int j=0,posicioArray,numAleatori2=aleatori,largadaArxiu=250,largadaGenera=linies;
+		numAleatori2=aleatori-1;
+		largadaGenera=numAleatori2+largadaGenera;
+		posicioArray=largadaGenera-largadaArxiu;
+		if (posicioArray>0) {
+			//calculo quina posicio li correspont a la primera linia
+			posicioArray=linies-posicioArray;
+			for (int i = 0; i < largadaArxiu; i++) {
+				text[1]=br.readLine();
+				if (posicioArray<linies) {
+					text=text[1].split("#");
+					llegit[posicioArray]=text[1];
+					posicioArray++;
+				}else {
+					if (i>=numAleatori2&&j<linies) {
+					text=text[1].split("#");
+					llegit[j]=text[1];
+					j++;
+					}
+				}
+			}
+		}else {
+			for (int i = 0; j < linies; i++) {
+				text[1]=br.readLine();
+				if (i>=aleatori&&j<linies) {
+					text=text[1].split("#");
+					llegit[j]=text[1];
+					j++;
+				}
+			}
+		}
+		
+	}
 }
