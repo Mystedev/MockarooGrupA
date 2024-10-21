@@ -13,6 +13,8 @@ public class Mockaroo {
 	public static int contador = 0;
 	public static String dniGenerat[]=new String[1000];
 	public static String rutaUbicacio = "";
+	public static int quantitatLlargada;
+	
 	public static void main(String[] args) {
 		try {
 		    // Array amb arxius de dades
@@ -26,22 +28,18 @@ public class Mockaroo {
 		    BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
 		    String firstLine = br.readLine();
 		    String line;
-		    
 		    while ((line = br.readLine()) != null) {
 		        // Cada linea conte numeros separats per espais
 		        String[] indicesStr = line.split(" ");
 		        int[] indices = new int[indicesStr.length];
-		        
 		        // Convertir cada index a un enter i validar-lo
 		        for (int i = 0; i < indicesStr.length; i++) {
 		            try {
 		                indices[i] = Integer.parseInt(indicesStr[i]);
-		            } catch (NumberFormatException e) {
+		            } catch (Exception e) {
 		                System.out.println("Error: Índice no válido en la entrada: " + indicesStr[i]);
-		                continue;
 		            }
 		        }
-		        
 		        // Llegir els arxius 
 		        String[] archivosSeleccionados = processarIndexs(files_dades, indices);
 		        
@@ -64,22 +62,28 @@ public class Mockaroo {
 		    e.printStackTrace();
 		}
 	}
-		// Función que lee el array según los índices proporcionados
-		public static String[] processarIndexs(String[] archivos, int[] indices) {
-		    String[] archivosSeleccionados = new String[indices.length];
-
-		    for (int i = 0; i < indices.length; i++) {
-		        int index = indices[i];
-		        // Verificar si el index esta dins del rang permes
-		        if (index >= 1 && index <= archivos.length) {
-		            archivosSeleccionados[i] = archivos[index - 1]; // Desar arxiu a l'array
-		        } else {
-		            archivosSeleccionados[i] = "Índice " + index + " fuera de rango.";
-		        }
-		    }
-		    
-		    return archivosSeleccionados; // Retornar l'arxiu de dades seleccionat
-		}
+	// Funció que llegeix l'array segons els indexs proporcionats
+	public static String[] processarIndexs(String[] archivos, int[] indices) {
+	    String[] resultados = new String[indices.length];
+	    
+	    for (int i = 0; i < indices.length; i++) {
+	        int index = indices[i];
+	        
+	        // Verificar si el index està dins del rang per als arxius
+	        if (index >= 1 && index <= archivos.length) {
+	            resultados[i] = archivos[index - 1]; // Desar arxiu a l'array
+	        } 
+	        // Verificar si el index està dins del rang per a les funcions
+	        /*else if (index >= 11 && index <= 19) {
+	            resultados[i] = executarFuncio(index); // Executar funció segons l'index
+	        } */
+	        else {
+	            resultados[i] = "Índice " + index + " fuera de rango.";
+	        }
+	    }
+	    return resultados; // Retornar els resultats
+	}
+	
     // Funcio per llegir les funcions a dins de l'arxiu requisits
 	// Funcio creada per validar el format del fitxer d'entrada
 	public static String ValidarFormatEntrada(String arxiuGenerat,String formatArxiu[]) {
