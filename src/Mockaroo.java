@@ -15,54 +15,72 @@ public class Mockaroo {
 	public static String rutaUbicacio = "";
 	public static void main(String[] args) {
 		try {
-            // Array d'arxius de dades per accedir i llegir-los
-            String files_dades[] = {
-                "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
-                "Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt",
-                "Dades/7-Estudis.txt", "Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt"
-            };
-            // Arxiu  d'entrada per determinar on guardar l'arxiu generat
-            String fileEntrada = "Dades/Requisits.txt";
-            // Llegim l'arxiu amb les especificacions que demana l'usuari
-            BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
-            // Llegir la primera linia amb el format que ens interesa
-            String firstLine = br.readLine();
-            // Llegir la resta de linies
-            String line;
-            while ((line = br.readLine()) != null) {    
-            // Suposant que cada línia conté números separats per espais
-                String[] indicesStr = line.split(" ");
-                // Convertir el input de cada línia en un array d'enters
-                int[] indices = new int[indicesStr.length];
-                for (int i = 0; i < indicesStr.length; i++) {
-                    indices[i] = Integer.parseInt(indicesStr[i]);
-                }
-                // Llegir els arxius especificats al arxiu d'entrada per obtenir els arxius que llegirem 
-                leerArchivos(files_dades, indices);
-            }
-            // Obtenim el format correcte de la primera linea i el validem
-            String formatArxiu[] = firstLine.split("#");
-            String formatValid = ValidarFormatEntrada(firstLine, formatArxiu);
-            System.out.println(formatValid);
-            rutaUbicacio = formatArxiu[2];
-            br.close();
-            reader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+		    // Array amb arxius de dades
+		    String files_dades[] = {
+		        "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
+		        "Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt",
+		        "Dades/7-Estudis.txt", "Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt"
+		    };
+		    // Arxiu d'entrada
+		    String fileEntrada = "Dades/Requisits.txt";
+		    BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
+		    String firstLine = br.readLine();
+		    String line;
+		    
+		    while ((line = br.readLine()) != null) {
+		        // Cada linea conte numeros separats per espais
+		        String[] indicesStr = line.split(" ");
+		        int[] indices = new int[indicesStr.length];
+		        
+		        // Convertir cada index a un enter i validar-lo
+		        for (int i = 0; i < indicesStr.length; i++) {
+		            try {
+		                indices[i] = Integer.parseInt(indicesStr[i]);
+		            } catch (NumberFormatException e) {
+		                System.out.println("Error: Índice no válido en la entrada: " + indicesStr[i]);
+		                continue;
+		            }
+		        }
+		        
+		        // Llegir els arxius 
+		        String[] archivosSeleccionados = processarIndexs(files_dades, indices);
+		        
+		        // Imprimir els arxius seleccionats
+		        for (int i = 0; i < archivosSeleccionados.length; i++) {
+		            if (archivosSeleccionados[i] != null) {
+		                System.out.println(archivosSeleccionados[i]);
+		            }
+		        }
+		    }
+		    // Processament de la primera linea 
+		    String formatArxiu[] = firstLine.split("#");
+		    // Primera linea validada
+		    String formatValid = ValidarFormatEntrada(firstLine, formatArxiu);
+		    System.out.println(formatValid);
+		    rutaUbicacio = formatArxiu[2];
+		    br.close();
+		    reader.close();
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
 	}
-	// Función que lee el array según los índices proporcionados
-    public static void leerArchivos(String[] archivos, int[] indices) {
-        for (int i = 0; i < indices.length; i++) {
-            int index = indices[i];
-            // Cambiar el rango a 1 a archivos.length ya que el archivo 10 es parte del array
-            if (index >= 1 && index <= archivos.length) {
-                System.out.println("Archivo en posición " + index + ": " + archivos[index - 1]);
-            } else {
-                System.out.println("Índice " + index + " fuera de rango.");
-            }
-        }
-    }
+		// Función que lee el array según los índices proporcionados
+		public static String[] processarIndexs(String[] archivos, int[] indices) {
+		    String[] archivosSeleccionados = new String[indices.length];
+
+		    for (int i = 0; i < indices.length; i++) {
+		        int index = indices[i];
+		        // Verificar si el index esta dins del rang permes
+		        if (index >= 1 && index <= archivos.length) {
+		            archivosSeleccionados[i] = archivos[index - 1]; // Desar arxiu a l'array
+		        } else {
+		            archivosSeleccionados[i] = "Índice " + index + " fuera de rango.";
+		        }
+		    }
+		    
+		    return archivosSeleccionados; // Retornar l'arxiu de dades seleccionat
+		}
+    // Funcio per llegir les funcions a dins de l'arxiu requisits
 	// Funcio creada per validar el format del fitxer d'entrada
 	public static String ValidarFormatEntrada(String arxiuGenerat,String formatArxiu[]) {
 		// Comprovar la longitud de l'array i el format correctament
@@ -599,7 +617,6 @@ public class Mockaroo {
   			impressora.println(" <xs:element name=\"linea\">\r\n"
   					+ "        <xs:complexType>\r\n"
   					+ "            <xs:sequence>");
-  			
   			/*
   			 * Amb aquest for imprimim totes les linies dels elements fent referencia als elements
   			 * declarats anteriorment
@@ -629,11 +646,9 @@ public class Mockaroo {
   			
   			impressora.flush();
   			impressora.close();
-  		
   		} catch (Exception e) {
   			// TODO Auto-generated catch block
   			e.printStackTrace();
   		}
   	}
 }
-
