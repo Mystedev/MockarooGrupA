@@ -18,7 +18,6 @@ public class Mockaroo {
 	public static String dadesCrear[][] = new String[19][200];
 	// Parametres utilitzats a les funcions
 	public static double decimals=2,minim=0,maxim=1000;
-	
 	public static void main(String[] args) {
 		try {
 		    // Array amb arxius de dades
@@ -674,7 +673,6 @@ public class Mockaroo {
   					+ "        </xs:complexType>\r\n"
   					+ "    </xs:element>\r\n"
   					+ "</xs:schema>");
-  			
   			impressora.flush();
   			impressora.close();
   		} catch (Exception e) {
