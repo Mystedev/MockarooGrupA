@@ -175,7 +175,10 @@ public class Mockaroo {
 		    // Fem un bucle amb tantes voltes com dades a generar
 		    for (int i = 0; i < quantitatDades; i++) {
 		        // Generem i guardem els valors
-		        dadesIp4[i] = random.nextInt(256) + "." + random.nextInt(256) + "." + random.nextInt(256) + "." + random.nextInt(256);
+		        dadesIp4[i] = random.nextInt(256) 
+		        		+ "." + random.nextInt(256) 
+		        		+ "." + random.nextInt(256) 
+		        		+ "." + random.nextInt(256);
 		    }
 		}
 	// Mètode per generar la contrasenya segons els paràmetres
