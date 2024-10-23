@@ -8,12 +8,16 @@ import java.io.BufferedReader;
 import java.io.File;
 
 public class Mockaroo {
+	// Variables i metodes globals del programa
 	public static Scanner reader = new Scanner(System.in);
 	public static Random random = new Random();
 	public static int contador = 0;
 	public static String dniGenerat[]=new String[1000];
 	public static String rutaUbicacio = "";
 	public static int quantitatLlargada;
+	public static String dadesCrear[][] = new String[19][200];
+	// Parametres utilitzats a les funcions
+	public static double decimals=2,minim=0,maxim=1000;
 	
 	public static void main(String[] args) {
 		try {
@@ -53,19 +57,49 @@ public class Mockaroo {
 		    // Processament de la primera linea 
 		    String formatArxiu[] = firstLine.split("#");
 		    // Primera linea validada
-		    String formatValid = ValidarFormatEntrada(firstLine, formatArxiu);
-		    System.out.println(formatValid);
-		    rutaUbicacio = formatArxiu[2];
+		    
+		    if(ValidarFormatEntrada(firstLine, formatArxiu)) {
+				rutaUbicacio = formatArxiu[2];
+				System.out.println(rutaUbicacio);
+		    }else {
+		    	System.out.println("n/");
+		    }
 		    br.close();
 		    reader.close();
-		} catch (Exception e) {
+		    }catch (Exception e) {
 		    e.printStackTrace();
 		}
+	}
+	// Funcio per processar els indexs i executar les funcions necessaries
+	public static String executarFuncio(int index) {
+		if(index == 11) {
+			// Funcio dadesBoolean
+		}else if(index == 12) {
+			// Funcio RandomNumber
+			double randomNumber = RandomNumber(decimals,minim,maxim);
+		}else if(index == 13) {
+			// Funcio email
+		}else if(index == 14) {
+			// Funcio dadesIp4
+		}else if(index == 15) {
+			// Funcio GenerarPassword
+			/*String pass = GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,inclouMinuscules, 
+										inclouSimbols,longitud);*/
+		}else if(index == 16) {
+			// Funcio dates
+		}else if(index == 17){
+			// Funcio iban
+		}else if(index == 18) {
+			// Funcio ObtenerDNI
+			//ObtenerDNI();
+		}else if(index == 19) {
+			// Funcio autonumeric
+		}
+		return "";
 	}
 	// Funció que llegeix l'array segons els indexs proporcionats
 	public static String[] processarIndexs(String[] archivos, int[] indices) {
 	    String[] resultados = new String[indices.length];
-	    
 	    for (int i = 0; i < indices.length; i++) {
 	        int index = indices[i];
 	        
@@ -74,9 +108,9 @@ public class Mockaroo {
 	            resultados[i] = archivos[index - 1]; // Desar arxiu a l'array
 	        } 
 	        // Verificar si el index està dins del rang per a les funcions
-	        /*else if (index >= 11 && index <= 19) {
+	        else if (index >= 11 && index <= 19) {
 	            resultados[i] = executarFuncio(index); // Executar funció segons l'index
-	        } */
+	        } 
 	        else {
 	            resultados[i] = "Índice " + index + " fuera de rango.";
 	        }
@@ -86,7 +120,7 @@ public class Mockaroo {
 	
     // Funcio per llegir les funcions a dins de l'arxiu requisits
 	// Funcio creada per validar el format del fitxer d'entrada
-	public static String ValidarFormatEntrada(String arxiuGenerat,String formatArxiu[]) {
+	public static boolean ValidarFormatEntrada(String arxiuGenerat,String formatArxiu[]) {
 		// Comprovar la longitud de l'array i el format correctament
 		boolean isCorrect = false; // Inicialment, no és correcte
 		// Bucle que demana correccions fins que tot el format sigui correcte
@@ -94,22 +128,22 @@ public class Mockaroo {
 		// Comprovar si l'array té 3 elements
 			if (formatArxiu.length != 3 ) {
 				System.out.println("Error -> El format de l'arxiu ha de tenir 3 elements: 'Tipus de Arxiu'#'Quantitat de registres'#'Ubicació'");
-				return null;
+				return false;
 		    }
 		    // Comprovar que el tipus d'arxiu és "SQL" o "XML"
 		    else if (!(formatArxiu[0].equalsIgnoreCase("XML") || formatArxiu[0].equalsIgnoreCase("SQL"))) {
 		        System.out.println("Error -> El tipus d'arxiu ha de ser 'SQL' o 'XML'");
-		        return null;
+		        return false;
 		    }
 		    // Comprovar que el segon element és un nombre vàlid
 		    else if (!esNumeroValid(formatArxiu[1])) {
 		        System.out.println("Error -> La quantitat de registres ha de ser un número positiu entre 1 i 250.");
-		        return null;
+		        return false;
 		    }
 		    // Comprovar que la ubicació és "DOCUMENTOS"
 		    else if (!formatArxiu[2].equalsIgnoreCase("DOCUMENTOS")) {
 		        System.out.println("Error -> La ubicació ha de ser 'DOCUMENTOS'.");
-		        return null;
+		        return false;
 		    } else {
 		        // Si tot és correcte, sortir del bucle
 		    	System.out.println("Formato Válido.");
@@ -117,7 +151,7 @@ public class Mockaroo {
 		     }
 		}
 		// Retornar la línia correcta quan tot sigui correcte
-		return arxiuGenerat;
+		return true;
 	}
 	// Funció auxiliar per comprovar si el segon element és un nombre vàlid entre 1 i 250
 	public static boolean esNumeroValid(String valor) {
@@ -321,14 +355,12 @@ public class Mockaroo {
                 i++;
             }
             br2.close();
-
             /*
              * Un cop tenim totes les dades del arxiu en un array, hem de 
              * calcular si des del numero aleatori fins al final del array
              * tenim suficients dades per mostrar la quantitat que demana
              * l'usuari
              */
-
         	int llegirLinea = numeroAleatori;
         	int contador = 0;
             if((quantitatDades+numeroAleatori)<liniesFitxer.length) {
@@ -367,9 +399,7 @@ public class Mockaroo {
                 	llegirLinea++;
                 	contador++;
             	}
-            	
             }
-			
 		} catch (IOException e) {
 	        e.printStackTrace();
 	    }
