@@ -343,9 +343,6 @@ public class Mockaroo {
                 	llegirLinea++;
                 	contador++;
             	}
-            	
-            	
-            	
             } else {
             	//en aquest cas no disposem de prous dades, aixi que haurem
             	//de tornar a llegir des del inici
@@ -418,8 +415,6 @@ public class Mockaroo {
 		iban = codiPais + digitControl + numeroCompte;
 		return iban;
 	}
-    
-    
     // Funcio per generar la ultima lletra del DNI
     public static char GenerarLetraDNI(int dni) {
     	// Lletres valides per seleccionar l'ultim caracter del DNI
