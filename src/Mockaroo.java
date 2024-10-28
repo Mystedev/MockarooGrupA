@@ -8,10 +8,16 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.util.Scanner;
+
 
 public class Mockaroo {
+
 	public static String rutaUbicacio = "";
+	public static Scanner reader = new Scanner(System.in);
+	public static Random random = new Random();
+	public static int contador = 0;
+	public static String dniGenerat[]=new String[1000];
+	
 	public static void main(String[] args) {
 		String files_dades[]= {"Dades\\1-Noms.txt","Dades\\2-Cognoms.txt","Dades\\3-Ciutat.txt","Dades\\4-Adreces.txt"};
 		try {
@@ -829,3 +835,7 @@ public class Mockaroo {
 	    }
 	}
 }
+
+    
+  
+
