@@ -60,8 +60,8 @@ public class Mockaroo {
 		    // Primera linea validada
 		    
 		    if(ValidarFormatEntrada(firstLine, formatArxiu)) {
-				rutaUbicacio = formatArxiu[2];
-				System.out.println(rutaUbicacio);
+				System.out.println("Archivo valido.");
+				
 		    }else {
 		    	System.out.println("n/");
 		    }
@@ -146,33 +146,6 @@ public class Mockaroo {
 	//int numAleatori=random.nextInt(250)+1,anyMaxim=2023,anyMinim=1900,valorPerDefecteAutonumeric=1;
 	//String emails []=new String [1];
 	//line=email(2,emails,files_dades,numAleatori);
-	// Funcio per processar els indexs i executar les funcions necessaries
-	public static String executarFuncio(int index) {
-		if(index == 11) {
-			// Funcio dadesBoolean
-		}else if(index == 12) {
-			// Funcio RandomNumber
-			double randomNumber = RandomNumber(decimals,minim,maxim);
-		}else if(index == 13) {
-			// Funcio email
-		}else if(index == 14) {
-			// Funcio dadesIp4
-		}else if(index == 15) {
-			// Funcio GenerarPassword
-			/*String pass = GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,inclouMinuscules, 
-										inclouSimbols,longitud);*/
-		}else if(index == 16) {
-			// Funcio dates
-		}else if(index == 17){
-			// Funcio iban
-		}else if(index == 18) {
-			// Funcio ObtenerDNI
-			//ObtenerDNI();
-		}else if(index == 19) {
-			// Funcio autonumeric
-		}
-		return "";
-	}
 	// Funció que llegeix l'array segons els indexs proporcionats
 	public static String[] processarIndexs(String[] archivos, int[] indices) {
 	    String[] resultados = new String[indices.length];
@@ -185,7 +158,7 @@ public class Mockaroo {
 	        } 
 	        // Verificar si el index està dins del rang per a les funcions
 	        else if (index >= 11 && index <= 19) {
-	            resultados[i] = executarFuncio(index); // Executar funció segons l'index
+	            //resultados[i] = executarFuncio(index); // Executar funció segons l'index
 	        } 
 	        else {
 	            resultados[i] = "Índice " + index + " fuera de rango.";
@@ -372,7 +345,8 @@ public class Mockaroo {
 		    }
 		}
 	// Mètode per generar la contrasenya segons els paràmetres
-    public static String GenerarPassword(boolean inclouLletres, boolean inclouNumeros, boolean inclouMajuscules, boolean inclouMinuscules, 
+    public static String GenerarPassword(boolean inclouLletres, boolean inclouNumeros, 
+    								boolean inclouMajuscules, boolean inclouMinuscules, 
                                          boolean inclouSimbols, int longitud) {
         // Definim els conjunts de caràcters possibles
         String lletres = "abcdefghijklmnopqrstuvwxyz";
