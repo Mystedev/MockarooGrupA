@@ -100,7 +100,7 @@ public class Mockaroo {
 	
 	
 	// ·Funcion boolean sin formatos
-	public static void dadesBoolean(int quantitatDades, boolean dadesBoolean[]) {
+	public static void booleans(int quantitatDades, boolean dadesBoolean[]) {
 		//inicialitzem el Random
 		Random random=new Random();
 		//Fem un bucle amb tantes voltes com dades a generar
@@ -170,7 +170,7 @@ public class Mockaroo {
 		
 	// ·Funcion IP4 ???
 		//Per cridar-la dadesIp4(quantitatDades, Array on guardar les ip)
-		public static void dadesIp4(int quantitatDades, String[] dadesIp4) {
+		public static void ip4(int quantitatDades, String[] dadesIp4) {
 		    Random random = new Random();
 		    // Fem un bucle amb tantes voltes com dades a generar
 		    for (int i = 0; i < quantitatDades; i++) {
