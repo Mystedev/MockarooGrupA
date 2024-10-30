@@ -60,7 +60,7 @@ public class Mockaroo {
 		    // Primera linea validada
 		    
 		    if(ValidarFormatEntrada(firstLine, formatArxiu)) {
-				System.out.println("Archivo valido.");
+				System.out.println("Archivo valido.{"+firstLine+"}");
 				
 		    }else {
 		    	System.out.println("n/");
