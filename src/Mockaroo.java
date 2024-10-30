@@ -22,55 +22,68 @@ public class Mockaroo {
 	public static double decimals=2,minim=0,maxim=1000;
 	public static void main(String[] args) {
 		try {
-		    // Array amb arxius de dades
+		    // Array con archivos de datos
 		    String files_dades[] = {
 		        "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
 		        "Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt",
 		        "Dades/7-Estudis.txt", "Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt"
 		    };
-		    // Arxiu d'entrada
+
+		    // Archivo de entrada
 		    String fileEntrada = "Dades/Requisits.txt";
 		    BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
 		    String firstLine = br.readLine();
 		    String line;
+
 		    while ((line = br.readLine()) != null) {
-		        // Cada linea conte numeros separats per espais
+		        // Cada línea contiene números separados por espacios
 		        String[] indicesStr = line.split(" ");
 		        int[] indices = new int[indicesStr.length];
-		        // Convertir cada index a un enter i validar-lo
+		        
+		        // Convertir cada índice a un entero y validar su rango
 		        for (int i = 0; i < indicesStr.length; i++) {
 		            try {
-		                indices[i] = Integer.parseInt(indicesStr[i]);
+		                int index = Integer.parseInt(indicesStr[i]);
+		                if (index >= 1 && index <= files_dades.length) { // Validación de rango
+		                    indices[i] = index;
+		                } else {
+		                    System.out.println("Error: Índice fuera de rango en la entrada: " + index);
+		                    indices[i] = -1; // Valor inválido o ignorar este índice
+		                }
 		            } catch (Exception e) {
 		                System.out.println("Error: Índice no válido en la entrada: " + indicesStr[i]);
 		            }
 		        }
-		        // Llegir els arxius 
+		        
+		        // Procesar los índices válidos
 		        String[] archivosSeleccionados = processarIndexs(files_dades, indices);
 		        
-		        // Imprimir els arxius seleccionats
+		        // Imprimir los archivos seleccionados
 		        for (int i = 0; i < archivosSeleccionados.length; i++) {
 		            if (archivosSeleccionados[i] != null) {
 		                System.out.println(archivosSeleccionados[i]);
 		            }
 		        }
 		    }
-		    // Processament de la primera linea 
+
+		    // Procesamiento de la primera línea
 		    String formatArxiu[] = firstLine.split("#");
-		    // Primera linea validada
-		    
-		    if(ValidarFormatEntrada(firstLine, formatArxiu)) {
-				System.out.println("Archivo valido.{"+firstLine+"}");
-				
-		    }else {
-		    	System.out.println("n/");
+		    String arxiuSortida = formatArxiu[0]; // XML/SQL
+		    int registres = Integer.parseInt(formatArxiu[1]); // Quantitat de registres
+		    String ruta = formatArxiu[2]; // Ruta on es guarda l'arxiu
+		    // Validar el formato de la primera línea
+		    if (ValidarFormatEntrada(firstLine, formatArxiu)) {
+		        System.out.println("Archivo válido.");
+		        System.out.println(arxiuSortida);
+		    } else {
+		        System.out.println("Formato no válido.");
 		    }
-		    br.close();
-		    reader.close();
-		    }catch (Exception e) {
+
+		    br.close(); // Cerrar BufferedReader
+		} catch (Exception e) {
 		    e.printStackTrace();
-		    }
-	}	
+		}
+	}
 	//for (int i = 0; i < emails.length; i++) {
 	//System.out.println(emails[i]);
 	//}
@@ -83,19 +96,19 @@ public class Mockaroo {
 	    for (int i = 0; i < indices.length; i++) {
 	        int index = indices[i];
 	        
-	        // Verificar si el index està dins del rang per als arxius
-	        if (index >= 1 && index <= archivos.length) {
-	            resultados[i] = archivos[index - 1]; // Desar arxiu a l'array
+	        // Verificar si el índice está dentro del rango de archivos
+	        if (index > 0 && index <= archivos.length) {
+	            resultados[i] = archivos[index - 1]; // Guardar archivo en el array
 	        } 
-	        // Verificar si el index està dins del rang per a les funcions
+	        // Verificar si el índice está dentro del rango de funciones (valores de ejemplo: 11-19)
 	        else if (index >= 11 && index <= 19) {
-	            //resultados[i] = executarFuncio(index); // Executar funció segons l'index
+	            resultados[i] = "Función ejecutada para índice " + index;
 	        } 
 	        else {
 	            resultados[i] = "Índice " + index + " fuera de rango.";
 	        }
 	    }
-	    return resultados; // Retornar els resultats
+	    return resultados; // Retornar los resultados
 	}
 	
     // Funcio per llegir les funcions a dins de l'arxiu requisits
