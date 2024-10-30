@@ -71,75 +71,6 @@ public class Mockaroo {
 		    e.printStackTrace();
 		    }
 	}	
-	public static void email(int largada,String emails[],String files_dades[],int aleatori) {
-		Random random = new Random();
-		Scanner teclat=new Scanner (System.in);
-			try {
-			//Declaro els lectors
-			BufferedReader br = new BufferedReader(new FileReader(files_dades[0]));
-			BufferedReader br1 = new BufferedReader(new FileReader(files_dades[8]));
-			//L'asicno la llargada a les arrays que s'utilitzaran
-			String nomCompanyia[]=new String[2];
-			String nom[]=new String[2];
-			emails=new String [largada];
-			//Declaro variables per a utilitzarles com a index, i per a calcular si s'he de torna a llegui el archiu  
-			int j=0,posicioArray,numAleatori2=aleatori,largadaArxiu=250,largadaGenera=largada;
-			//Aqui li resto un al aleatori per que encaixi amb la posicio de la array
-			numAleatori2=aleatori-1;
-			//Ara faig els calculs per a comprova si ha cabare llegin linies nules si
-			largadaGenera=numAleatori2+largadaGenera;
-			posicioArray=largadaGenera-largadaArxiu;
-			//si el numero es mes geran que cero acabaria lleguin linies nules per a no llegirnes he fet el calcul corresponent
-			if (posicioArray>0) {
-				//calculo quina posicio li correspont a la primera linia
-				posicioArray=largada-posicioArray;
-				//bucle per a llegui i asicnar aleatoriament
-				for (int i=0 ; i <250 ; i++) {
-					//La condicio es per asicnar a les primeres lineias comenzan per el final 
-					if(posicioArray<largada) {
-						//legeixo linia
-						nom[1]= br.readLine();
-						nom=nom[1].split("#");
-						emails[posicioArray] = nom[1]+"@";
-						nomCompanyia[1]=br1.readLine();
-						nomCompanyia=nomCompanyia[1].split("#");
-						//guardo el email
-						emails[posicioArray] = emails[posicioArray]+nomCompanyia[1]+".com";
-						posicioArray++;
-					}else {
-						//llegeixo linies
-						nom[1]= br.readLine();
-						nom=nom[1].split("#");
-						nomCompanyia[1]=br1.readLine();
-						nomCompanyia=nomCompanyia[1].split("#");
-						//Hem salto les linies fins trova la linia amb el numero aleatori
-						if (i>=numAleatori2&&j<largada) {
-							emails[j] =nom[1]+"@";
-							emails[j] = emails[j]+nomCompanyia[1]+".com";
-							j++;
-						}
-					}
-				}
-			}else {
-					//Legeixo i guardo
-					for (int i=0 ; j<largada ; i++) {
-						nom[1]= br.readLine();
-						nom=nom[1].split("#");
-						nomCompanyia[1]=br1.readLine();
-						nomCompanyia=nomCompanyia[1].split("#");
-						if (i>=aleatori&&j<largada) {
-							emails[j] =nom[1]+"@";
-							emails[j] = emails[j]+nomCompanyia[1]+".com";
-							j++;
-						}
-					}
-					
-			}
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
-	}
 	//for (int i = 0; i < emails.length; i++) {
 	//System.out.println(emails[i]);
 	//}
@@ -280,56 +211,6 @@ public class Mockaroo {
 		// Al declarar el resultat de la funcio , haurem de especificar en ordre , la quantitat de decimals que volem, el rang minim i el rang maxim
         // Decimals -> 0 per defecte * Minim -> 0 per defecte * Maxim -> 1000 per defecte
 		return numeroAleatorio;
-	}
-	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
-		public static String email(int largada,String emails[],int aleatori) {
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("Dades/1-Noms.txt"));
-			BufferedReader br2 = new BufferedReader(new FileReader("Dades/1-Noms.txt"));
-			BufferedReader br1 = new BufferedReader(new FileReader("Dades/10-NomDeLaCompanyia.txt"));
-			BufferedReader br3 = new BufferedReader(new FileReader("Dades/10-NomDeLaCompanyia.txt"));
-			String nomCompanyia[]=new String[2];
-			String nom[]=new String[2];
-			emails=new String [largada];
-			int j=0;
-			for (int i=0 ; j <largada&&i<250; i++) {
-				nom[1]= br.readLine();
-				nom=nom[1].split("#");
-				if (i>=aleatori&&j<largada) {
-					emails[j] =nom[1]+"@";
-					j++;
-				}
-			}
-			for (int i=0 ; i <=aleatori&&j<largada ; i++) {
-				nom[1]= br2.readLine();
-				nom=nom[1].split("#");
-				emails[j] = nom[1]+"@";
-				j++;
-			}
-			j=0;
-			for (int i=0 ; j <largada&&i<250; i++) {
-				nomCompanyia[1]=br1.readLine();
-				nomCompanyia=nomCompanyia[1].split("#");
-				if (i>=aleatori&&j<largada) {
-					emails[j] = emails[j]+nomCompanyia[1]+".com";
-					System.out.println(emails[j]);
-					j++;
-				}
-			}
-			
-			for (int i=0 ; i <=aleatori&&j<largada ; i++) {
-				nomCompanyia[1]=br3.readLine();
-				nomCompanyia=nomCompanyia[1].split("#");
-				emails[j] = emails[j]+nomCompanyia[1]+".com";
-				System.out.println(emails[j]);
-				j++;
-			}
-			//+nomCompanyia[1]+".com"
-			return "a";
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 	// ·Funcion IP4 ???
 		//Per cridar-la dadesIp4(quantitatDades, Array on guardar les ip)
