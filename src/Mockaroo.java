@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.Random;
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.util.Scanner;
 
 public class Mockaroo {
 	public Random random= new Random();
@@ -16,12 +14,50 @@ public class Mockaroo {
 	public static int llargada=0;
 	public static void main(String[] args) {
 		try {
-			
+		    // Array amb arxius de dades
+		    String files_dades[] = {
+		        "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
+		        "Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt",
+		        "Dades/7-Estudis.txt", "Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt"
+		    };
+		    // Arxiu d'entrada
+		    String fileEntrada = "Dades/Requisits.txt";
+		    BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
+		    String firstLine = br.readLine();
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		        // Cada linea conte numeros separats per espais
+		        String[] indicesStr = line.split(" ");
+		        int[] indices = new int[indicesStr.length];
+		        // Convertir cada index a un enter i validar-lo
+		        for (int i = 0; i < indicesStr.length; i++) {
+		            try {
+		                indices[i] = Integer.parseInt(indicesStr[i]);
+		            } catch (Exception e) {
+		                System.out.println("Error: Índice no válido en la entrada: " + indicesStr[i]);
+		            }
+		        }
+		        // Llegir els arxius 
+		        String[] archivosSeleccionados = processarIndexs(files_dades, indices);
+		        
+		        // Imprimir els arxius seleccionats
+		        for (int i = 0; i < archivosSeleccionados.length; i++) {
+		            if (archivosSeleccionados[i] != null) {
+		                System.out.println(archivosSeleccionados[i]);
+		            }
+		        }
+		    }
+		    // Processament de la primera linea 
+		    String formatArxiu[] = firstLine.split("#");
+		    // Primera linea validada
+		    String formatValid = ValidarFormatEntrada(firstLine, formatArxiu);
+		    System.out.println(formatValid);
+		    rutaUbicacio = formatArxiu[2];
+		    br.close();
+		   
 		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
+		    e.printStackTrace();
+		}		
 	}	
 	
 	 public static void email(int largada,String emails[],String files_dades[],int aleatori,String domini) {
@@ -32,12 +68,10 @@ public class Mockaroo {
 	         BufferedReader br = new BufferedReader(new FileReader(files_dades[0]));
 
 	         BufferedReader br1 = new BufferedReader(new FileReader(files_dades[8]));
-	         
+	   
 	         //L'asicno la llargada a les arrays que s'utilitzaran
 	         String auxiliarNom[]=new String[largada];
-	            
 	         llegir(br,auxiliarNom,aleatori,largada,0);
-
 	         if (domini.length()>0){
 	        	 for(int i=0;i<emails.length;i++){
 	        		 emails[i]=auxiliarNom[i]+"@"+domini;
@@ -55,6 +89,78 @@ public class Mockaroo {
 	        }
 
 	    }
+	
+	
+	// Funció que llegeix l'array segons els indexs proporcionats
+	public static String[] processarIndexs(String[] archivos, int[] indices) {
+	    String[] resultados = new String[indices.length];
+	    
+	    for (int i = 0; i < indices.length; i++) {
+	        int index = indices[i];
+	        
+	        // Verificar si el index està dins del rang per als arxius
+	        if (index >= 1 && index <= archivos.length) {
+	            resultados[i] = archivos[index - 1]; // Desar arxiu a l'array
+	        } 
+	        // Verificar si el index està dins del rang per a les funcions
+	        /*else if (index >= 11 && index <= 19) {
+	            resultados[i] = executarFuncio(index); // Executar funció segons l'index
+	        } */
+	        else {
+	            resultados[i] = "Índice " + index + " fuera de rango.";
+	        }
+	    }
+	    return resultados; // Retornar els resultats
+	}
+	
+    // Funcio per llegir les funcions a dins de l'arxiu requisits
+	// Funcio creada per validar el format del fitxer d'entrada
+	public static String ValidarFormatEntrada(String arxiuGenerat,String formatArxiu[]) {
+		// Comprovar la longitud de l'array i el format correctament
+		boolean isCorrect = false; // Inicialment, no és correcte
+		// Bucle que demana correccions fins que tot el format sigui correcte
+		while (!isCorrect) {
+		// Comprovar si l'array té 3 elements
+			if (formatArxiu.length != 3 ) {
+				System.out.println("Error -> El format de l'arxiu ha de tenir 3 elements: 'Tipus de Arxiu'#'Quantitat de registres'#'Ubicació'");
+				return null;
+		    }
+		    // Comprovar que el tipus d'arxiu és "SQL" o "XML"
+		    else if (!(formatArxiu[0].equalsIgnoreCase("XML") || formatArxiu[0].equalsIgnoreCase("SQL"))) {
+		        System.out.println("Error -> El tipus d'arxiu ha de ser 'SQL' o 'XML'");
+		        return null;
+		    }
+		    // Comprovar que el segon element és un nombre vàlid
+		    else if (!esNumeroValid(formatArxiu[1])) {
+		        System.out.println("Error -> La quantitat de registres ha de ser un número positiu entre 1 i 250.");
+		        return null;
+		    }
+		    // Comprovar que la ubicació és "DOCUMENTOS"
+		    else if (!formatArxiu[2].equalsIgnoreCase("DOCUMENTOS")) {
+		        System.out.println("Error -> La ubicació ha de ser 'DOCUMENTOS'.");
+		        return null;
+		    } else {
+		        // Si tot és correcte, sortir del bucle
+		    	System.out.println("Formato Válido.");
+		        isCorrect = true;
+		     }
+		}
+		// Retornar la línia correcta quan tot sigui correcte
+		return arxiuGenerat;
+	}
+	// Funció auxiliar per comprovar si el segon element és un nombre vàlid entre 1 i 250
+	public static boolean esNumeroValid(String valor) {
+	    // Comprovar si és un número sencer
+	    for (int i = 0; i < valor.length(); i++) {
+	        if (!Character.isDigit(valor.charAt(i))) {
+	            return false; // No és un número vàlid
+	        }
+	    }
+	    // Convertir el número i comprovar que estigui dins del rang
+	    int numero = Integer.parseInt(valor);
+	    return numero >= 1 && numero <= 250;
+	}
+
 	
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// Funcio per llegir els arxius de dades
@@ -145,6 +251,7 @@ public class Mockaroo {
         System.out.println("Contrasenya generada exitosament: " + password);
     }
 	// ·Funcion String ha de indicar el 'any minim=1900 i maxim=2023'
+
     public static void dates(int largada,int anyMinim,int anyMaxim,int aleatori,String data[]) {
 		Random random = new Random();
 		//dono llargada a les array i la variable
