@@ -15,10 +15,13 @@ public class Mockaroo {
 	// Variables i metodes globals del programa
 	public static Scanner reader = new Scanner(System.in);
 	public static Random random = new Random();
+	public static int numeroAleatori = random.nextInt(200)+1;
 	public static int contador = 0;
 	public static String dniGenerat[]=new String[1000];
 	public static String rutaUbicacio;
-	public static int quantitatLlargada;
+	public static int quantitatTipusDades;
+	public static int quantitatDades;
+	public static int contadorMatriu = 0;
 	public static String dadesCrear[][] = new String[19][200];
 	// Parametres utilitzats a les funcions
 	public static double decimals=2,minim=0,maxim=1000;
@@ -143,19 +146,19 @@ public class Mockaroo {
 	/*private static String executarFuncions(int index) {
 	    switch (index) {
 	        case 11:
-	            dadesBoolean(quantitatDades,dadesBoolean[]);
+	            Booleans();
 	        case 12:
 	            RandomNumber(decimals,minim,maxim);
 	        case 13:
 	            email(largada,emails[],files_dades[],aleatori,domini);
 	        case 14:
-	            dadesIp4(quantitatDades,dadesIp4);
+	            ip4();
 	        case 15:
 	            GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,inclouMinuscules,inclouSimbols, longitud);
 	        case 16:
 	            dates(largada,anyMinim,anyMaxim,aleatori,data[]);
 	        case 17:
-	            iban(numeroAleatori,quantitatDades,iban);
+	            iban();
 	        case 18:
 	            ObtenerDNI();
 	        case 19:
@@ -214,14 +217,15 @@ public class Mockaroo {
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// Funcio per llegir els arxius de dades
 	// ·Funcion boolean sin formatos
-	public static void booleans(int quantitatDades, boolean dadesBoolean[]) {
+	public static void booleans() {
 		//inicialitzem el Random
 		Random random=new Random();
 		//Fem un bucle amb tantes voltes com dades a generar
 		for (int i = 0; i < quantitatDades; i++) {
 			//Guardem al array de booleans el valor aleatori generat amb el Random
-	        dadesBoolean[i] = random.nextBoolean();
+	        dadesCrear[contadorMatriu][i] = random.nextBoolean()+"";
 	    }
+		contadorMatriu++;
 	}
 	// ·Funcion int para indicar los 'decimales=0','minims=0 i maxims=1000'
 	public static void RandomNumber(double decimals,double minim,double maxim) {
@@ -250,13 +254,14 @@ public class Mockaroo {
 
 	// ·Funcion IP4 ???
 		//Per cridar-la dadesIp4(quantitatDades, Array on guardar les ip)
-		public static void ip4(int quantitatDades, String[] dadesIp4) {
+		public static void ip4() {
 		    Random random = new Random();
 		    // Fem un bucle amb tantes voltes com dades a generar
 		    for (int i = 0; i < quantitatDades; i++) {
 		        // Generem i guardem els valors
-		        dadesIp4[i] = random.nextInt(256) + "." + random.nextInt(256) + "." + random.nextInt(256) + "." + random.nextInt(256);
+		        dadesCrear[contadorMatriu][i] = random.nextInt(256) + "." + random.nextInt(256) + "." + random.nextInt(256) + "." + random.nextInt(256);
 		    }
+		    contadorMatriu++;
 		}
 	// Mètode per generar la contrasenya segons els paràmetres
     public static String GenerarPassword(boolean inclouLletres, boolean inclouNumeros, 
@@ -349,7 +354,7 @@ public class Mockaroo {
 	    
 	// ·Funcion para IBAN 
     //Per cridarla: iban( numeroAleatori, quantitatDades, Array on guardar els ibans)
-    private static void iban (int numeroAleatori, int quantitatDades, String [] iban) {
+    private static void iban () {
 		try{
 			//Primer contem les linies del arxiu per generar el array on guardar les dades
 			//No es fa amb un tamany definit per si es modifica el tamany de l'arxiu
@@ -383,7 +388,7 @@ public class Mockaroo {
             	for(int j = 0; j < quantitatDades; j++) {
             		//cridem la funció que genera ibans tants cops com dades
             		//em de generar
-            		iban[contador] = generarIban(liniesFitxer[llegirLinea]);
+            		dadesCrear[contadorMatriu][contador] = generarIban(liniesFitxer[llegirLinea]);
                 	llegirLinea++;
                 	contador++;
             	}
@@ -402,7 +407,7 @@ public class Mockaroo {
             	for(int k = 0; k < dadesDisponibles; k++) {
             		//Amb aquest primer for generem els ibans possibles fins que
             		//arribem al final de les dades disponibles
-            		iban[contador] = generarIban(liniesFitxer[llegirLinea]);
+            		dadesCrear[contadorMatriu][contador] = generarIban(liniesFitxer[llegirLinea]);
                 	llegirLinea++;
                 	contador++;
             	}
@@ -410,7 +415,7 @@ public class Mockaroo {
             	for(int l = 0; l < dadesRestants; l++) {
             		//amb aquest for generem ibans des de la linea 0 del
             		//array fins haver generat totes les dades restants
-            		iban[contador] = generarIban(liniesFitxer[llegirLinea]);
+            		dadesCrear[contadorMatriu][contador] = generarIban(liniesFitxer[llegirLinea]);
                 	llegirLinea++;
                 	contador++;
             	}
