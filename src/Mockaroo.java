@@ -142,11 +142,11 @@ public class Mockaroo {
 	        }
 	    }
 	    return resultados; // Retornar los resultados
-	}
-	/*private static String executarFuncions(int index) {
+	}/*
+	private static String executarFuncions(int index) {
 	    switch (index) {
 	        case 11:
-	            Booleans();
+	            booleans();
 	        case 12:
 	            RandomNumber(decimals,minim,maxim);
 	        case 13:
