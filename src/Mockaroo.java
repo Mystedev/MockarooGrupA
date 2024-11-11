@@ -17,7 +17,7 @@ public class Mockaroo {
 	public static String dniGenerat[]=new String[1000];
 	public static String rutaUbicacio;
 	public static int quantitatLlargada;
-	public static String dadesCrear[][] = new String[19][200];
+	public static String dadesCrear[][];
 	// Parametres utilitzats a les funcions
 	public static double decimals=2,minim=0,maxim=1000;
 	public static int llargada=0;
@@ -36,12 +36,12 @@ public class Mockaroo {
 		    BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
 		    String firstLine = br.readLine();
 		    String line;
-
+		    int columnes=0,error;
 		    while ((line = br.readLine()) != null) {
 		        // Cada línea contiene números separados por espacios
 		        String[] indicesStr = line.split(" ");
 		        int[] indices = new int[indicesStr.length];
-		        
+		        columnes++;
 		        // Convertir cada índice a un entero y validar su rango
 		        for (int i = 0; i < indicesStr.length; i++) {
 		            try {
@@ -53,7 +53,9 @@ public class Mockaroo {
 		                    indices[i] = -1; // Valor inválido o ignorar este índice
 		                }
 		            } catch (Exception e) {
-		                System.out.println("Error: Índice no válido en la entrada: " + indicesStr[i]);
+		            	error=columnes+1;
+		            	System.out.println("Error: Índice no válido en la entrada: " + indicesStr[i]+" en la liniea "+error);
+		                
 		            }
 		        }
 		        
@@ -79,7 +81,7 @@ public class Mockaroo {
 		    } else {
 		        System.out.println("Formato no válido.");
 		    }
-
+		    dadesCrear=new String[columnes][];
 		    br.close(); // Cerrar BufferedReader
 
 		    
