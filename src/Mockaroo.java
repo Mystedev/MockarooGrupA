@@ -12,9 +12,6 @@ import java.io.File;
 
 public class Mockaroo {
 
-
-
-
 	// Variables i metodes globals del programa
 	public static Scanner reader = new Scanner(System.in);
 	public static Random random = new Random();
@@ -44,7 +41,7 @@ public class Mockaroo {
 
 		    while ((line = br.readLine()) != null) {
 		        // Cada línea contiene números separados por espacios
-		        String[] indicesStr = line.split(" ");
+		        String[] indicesStr = line.split("#");
 		        int[] indices = new int[indicesStr.length];
 		        
 		        // Convertir cada índice a un entero y validar su rango
