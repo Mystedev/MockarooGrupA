@@ -32,13 +32,12 @@ public class Mockaroo {
 		        "Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt",
 		        "Dades/7-Estudis.txt", "Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt"
 		    };
-
 		    // Archivo de entrada
 		    String fileEntrada = "Dades/Requisits.txt";
 		    BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
 		    String firstLine = br.readLine();
 		    String line;
-
+		    // Se lee cada linea que contiene una ruta de un archivo
 		    while ((line = br.readLine()) != null) {
 		        // Cada línea contiene números separados por espacios
 		        String[] indicesStr = line.split("#");
@@ -58,7 +57,6 @@ public class Mockaroo {
 		                System.out.println("Error: Índice no válido en la entrada: " + indicesStr[i]);
 		            }
 		        }
-		        
 		        // Procesar los índices válidos
 		        String[] archivosSeleccionados = processarIndexs(files_dades, indices);
 		        
@@ -69,7 +67,6 @@ public class Mockaroo {
 		            }
 		        }
 		    }
-
 		    // Procesamiento de la primera línea
 		    String formatArxiu[] = firstLine.split("#");
 		    String arxiuSortida = formatArxiu[0]; // XML/SQL
@@ -81,12 +78,7 @@ public class Mockaroo {
 		    } else {
 		        System.out.println("Formato no válido.");
 		    }
-
 		    br.close(); // Cerrar BufferedReader
-
-		    
-		    br.close();
-		   
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
@@ -136,11 +128,11 @@ public class Mockaroo {
 	        
 	        // Verificar si el índice está dentro del rango de archivos
 	        if (index > 0 && index <= archivos.length) {
-	            resultados[i] = archivos[index - 1]; // Guardar archivo en el array
+	            resultados[i] = archivos[index  - 1]; // Guardar archivo en el array
 	        } 
 	        // Verificar si el índice está dentro del rango de funciones (valores de ejemplo: 11-19)
 	        else if (index >= 11 && index <= 19) {
-	            resultados[i] = "Función ejecutada para índice " + index;
+	            //resultados[i] = executarFuncions(index);
 	        } 
 	        else {
 	            resultados[i] = "Índice " + index + " fuera de rango.";
@@ -148,7 +140,30 @@ public class Mockaroo {
 	    }
 	    return resultados; // Retornar los resultados
 	}
-	
+	/*private static String executarFuncions(int index) {
+	    switch (index) {
+	        case 11:
+	            dadesBoolean(quantitatDades,dadesBoolean[]);
+	        case 12:
+	            RandomNumber(decimals,minim,maxim);
+	        case 13:
+	            email(largada,emails[],files_dades[],aleatori,domini);
+	        case 14:
+	            dadesIp4(quantitatDades,dadesIp4);
+	        case 15:
+	            GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,inclouMinuscules,inclouSimbols, longitud);
+	        case 16:
+	            dates(largada,anyMinim,anyMaxim,aleatori,data[]);
+	        case 17:
+	            iban(numeroAleatori,quantitatDades,iban);
+	        case 18:
+	            ObtenerDNI();
+	        case 19:
+	            autonumeric(llargada,num[],valorPerDefecte);
+	        default:
+	            return "Función no definida para índice " + index;
+	    }
+	}*/
     // Funcio per llegir les funcions a dins de l'arxiu requisits
 	// Funcio creada per validar el format del fitxer d'entrada
 	public static boolean ValidarFormatEntrada(String arxiuGenerat,String formatArxiu[]) {
@@ -196,12 +211,8 @@ public class Mockaroo {
 	    int numero = Integer.parseInt(valor);
 	    return numero >= 1 && numero <= 250;
 	}
-
-	
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// Funcio per llegir els arxius de dades
-	
-	
 	// ·Funcion boolean sin formatos
 	public static void booleans(int quantitatDades, boolean dadesBoolean[]) {
 		//inicialitzem el Random
@@ -213,7 +224,7 @@ public class Mockaroo {
 	    }
 	}
 	// ·Funcion int para indicar los 'decimales=0','minims=0 i maxims=1000'
-	public static double RandomNumber(double decimals,double minim,double maxim) {
+	public static void RandomNumber(double decimals,double minim,double maxim) {
 		// Importem el metode random per generar numeros aleatoris
 		Random random = new Random();
 		// Generem el numero aleatori entre un (minim i un maxim)
@@ -223,7 +234,7 @@ public class Mockaroo {
         numeroAleatorio = Math.round(numeroAleatorio * escala) / escala;
 		// Al declarar el resultat de la funcio , haurem de especificar en ordre , la quantitat de decimals que volem, el rang minim i el rang maxim
         // Decimals -> 0 per defecte * Minim -> 0 per defecte * Maxim -> 1000 per defecte
-		return numeroAleatorio;
+        double num = numeroAleatorio;
 	}
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
 	public static void url(int llargada,String urls[],String[] files_dades,int aleatori) throws IOException{
@@ -280,7 +291,6 @@ public class Mockaroo {
         boolean inclouMinuscules = true;
         boolean inclouSymbols = true;
         int longitud = 12;  // Longitud de la contrasenya
-        
         String password = GenerarPassword(inclouLletres, inclouNumeros, inclouMajuscules, 
                                           inclouMinuscules, inclouSymbols, longitud);
         // Mostrar la contrasenya generada
@@ -315,7 +325,6 @@ public class Mockaroo {
 		//Lineis del main per a fer proves amb la crida de la funcio
 		//int numAleatori=random.nextInt(250)+1,anyMaxim=2023,anyMinim=1900,valorPerDefecteAutonumeric=1;
 		//line=dates(2,anyMinim,anyMaxim,numAleatori);
-		
 	}
 
 	public static int diesMes( int mes ,int any) {
@@ -462,14 +471,14 @@ public class Mockaroo {
     	return characters.charAt(rest);
     }
     // Funcion per obtenir el umero de DNI aleatori
-    public static String ObtenerDNI() {
+    public static void ObtenerDNI() {
     	Random random = new Random();
     	// Necesitem que la quantitat de numeros del DNI sigui de 8
     	int numeroDNI = random.nextInt(90000000) + 10000000;
     	// Obtenim la serie de numeros aleatoris que contindran el DNI
     	char lletra = GenerarLetraDNI(numeroDNI);
     	// Obtenim exitosament un numero de DNI aleatori
-    	return numeroDNI + String.valueOf(lletra);
+    	String dni = numeroDNI + String.valueOf(lletra);
     }
 	// ·Funcion int ha de indicar el 'valor d'inici=1'
     //Funcio per generar autonumeric
