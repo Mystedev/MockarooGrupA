@@ -130,7 +130,6 @@ public class Mockaroo {
 	        } 
 	        // Verificar si el índice está dentro del rango de funciones (valores de ejemplo: 11-19)
 	        else if (index >= 11 && index <= 19) {
-	            //resultados[i] = executarFuncions(index);
 	        } 
 	        else {
 	            resultados[i] = "Índice " + index + " fuera de rango.";
@@ -138,30 +137,6 @@ public class Mockaroo {
 	    }
 	    return resultados; // Retornar los resultados
 	}
-	/*private static String executarFuncions(int index) {
-	    switch (index) {
-	        case 11:
-	            dadesBoolean(quantitatDades,dadesBoolean[]);
-	        case 12:
-	            RandomNumber(decimals,minim,maxim);
-	        case 13:
-	            email(largada,emails[],files_dades[],aleatori,domini);
-	        case 14:
-	            dadesIp4(quantitatDades,dadesIp4);
-	        case 15:
-	            GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,inclouMinuscules,inclouSimbols, longitud);
-	        case 16:
-	            dates(largada,anyMinim,anyMaxim,aleatori,data[]);
-	        case 17:
-	            iban(numeroAleatori,quantitatDades,iban);
-	        case 18:
-	            ObtenerDNI();
-	        case 19:
-	            autonumeric(llargada,num[],valorPerDefecte);
-	        default:
-	            return "Función no definida para índice " + index;
-	    }
-	}*/
     // Funcio per llegir les funcions a dins de l'arxiu requisits
 	// Funcio creada per validar el format del fitxer d'entrada
 	public static boolean ValidarFormatEntrada(String arxiuGenerat,String formatArxiu[]) {
@@ -761,29 +736,7 @@ public class Mockaroo {
         writer.flush();
         writer.close();
 	}
-	public static String[][] provesllegirDades(String dadesALlegir[],int quantitatDades) throws IOException{
-		Random random = new Random();
-		
-		int aleatori=random.nextInt(250)+1;
-		
-		String [][] dadesCrear=new String[19][quantitatDades];
-				
-		dadesCrear=lectorArxius(quantitatDades,dadesALlegir,aleatori,dadesCrear);
-		
-		
-		for (int i = 0; i < dadesCrear.length; i++) {
-			for (int j = 0; j < quantitatDades; j++) {
-				if (dadesCrear[i][j]!=null) {
-					System.out.println(i+"--"+j+"--"+dadesCrear[i][j]);
-				}
-			}
-		}
-
-		creacioDeSql("C:\\Intel",quantitatDades,dadesCrear);
-	
-		return dadesCrear;
-	}
-	public static String[][] lectorArxius(int linies,String[] arxiusALlegir,int aleatori,String [][] dadesCrear) throws IOException{
+	public static String[][] lectorArxius(int linies,String[] arxiusALlegir,int aleatori) throws IOException{
 		String perLlegit[][]=new String[arxiusALlegir.length][linies];
 		String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt","Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
 		for (int i = 0; i < arxiusALlegir.length; i++) {
