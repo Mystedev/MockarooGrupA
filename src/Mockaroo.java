@@ -8,14 +8,13 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 
-
 public class Mockaroo {
 
 	// Variables i metodes globals del programa
 	public static String rutaUbicacio;
 	public static int quantitatTipusDades;
 	public static int quantitatDades;
-	public static String tipusDada;
+	public static String[] tipusDada;
 	public static String dadesCrear[][] = new String[19][200];
 	public static String files_dades[] = { "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
 							"Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt",
@@ -38,36 +37,30 @@ public class Mockaroo {
 		    BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
 		    String firstLine = br.readLine();
 		    String line;
+		    int cont = 0;
 		    // Se lee cada linea que contiene una ruta de un archivo
 		    while ((line = br.readLine()) != null) {
 		        // Cada línea contiene números separados por #
 		        String[] indicesStr = line.split("#");
 		        int[] indices = new int[indicesStr.length];
-		        
 		        // Convertir cada índice a un entero y validar su rango
-		        for (int i = 0; i < indicesStr.length; i++) {
-		            try {
-		                int index = Integer.parseInt(indicesStr[i]);
-		                if (index >= 1 && index <= files_dades.length) { // Validación de rango
-		                    indices[i] = index;
-		                } else {
-		                    System.out.println("Error: Índice fuera de rango en la entrada: " + index);
-		                    indices[i] = -1; // Valor inválido o ignorar este índice
-		                }
-		            } catch (Exception e) {
-		                System.out.println("Error: Índice no válido en la entrada: " + indicesStr[i]);
-		            }
+		        int index = Integer.parseInt(indicesStr[0]);
+		        if (index >= 1 && index <= 19) { // Validación de rango
+		        	indices[0] = index;
+		        } else {
+		        	System.out.println("Error: Índice fuera de rango en la entrada: " + index);
+		            indices[0] = -1; // Valor inválido o ignorar este índice
 		        }
 		        // Procesar los índices válidos
-		        String[] archivosSeleccionados = processarIndexs(files_dades, indices);
+		        String[] archivosSeleccionados = processarIndexs(files_dades, indices,cont,numeroAleatori);
 		        
 		        // Imprimir los archivos seleccionados
 		        for (int i = 0; i < archivosSeleccionados.length; i++) {
-		            if (archivosSeleccionados[i] != null) {
-		                System.out.println(archivosSeleccionados[i]);
-		            }
+		        	System.out.println(archivosSeleccionados[i]);
 		        }
+		        cont++;
 		    }
+		    System.out.println(cont);
 		    // Procesamiento de la primera línea
 		    String formatArxiu[] = firstLine.split("#");
 		    String arxiuSortida = formatArxiu[0]; // XML/SQL
@@ -167,8 +160,29 @@ public class Mockaroo {
 	    }
 	}*/
 
-	
-	
+	 public static String[] processarIndexs(String[] archivos, int[] indices,int cont,int aleatori) throws IOException {
+		    String[] resultados = new String[indices.length];
+		    for (int i = 0; i < indices.length; i++) {
+		        int index = indices[i];
+		        
+		        // Verificar si el índice está dentro del rango de archivos (1-10)
+		        if (index > 0 && index <= archivos.length) {
+		            resultados[i] = archivos[index - 1]; // Guardar archivo en el array
+		            if(resultados[i]=="9") {
+		            	url(quantitatDades,dadesCrear[cont],aleatori);
+		            }
+		        } 
+		        // Verificar si el índice está dentro del rango de funciones especiales (11-19)
+		        else if (index >= 11 && index <= 19) {
+		            resultados[i] = "Función " + index; 
+		        } 
+		        // Índice fuera de rango para ambos casos
+		        else {
+		            resultados[i] = "Índice " + index + " fuera de rango.";
+		        }
+		    }
+		    return resultados; // Retornar los resultados
+		}
 
     // Funcio per llegir les funcions a dins de l'arxiu requisits
 	// Funcio creada per validar el format del fitxer d'entrada
@@ -244,7 +258,7 @@ public class Mockaroo {
         double num = numeroAleatorio;
 	}
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
-	public static void url(int llargada,String urls[],String[] files_dades,int aleatori) throws IOException{
+	public static void url(int llargada,String urls[],int aleatori) throws IOException{
         //GENERO LA URL DESDE EL NOM DE COMPANYIA 
         BufferedReader br = new BufferedReader(new FileReader(files_dades[8]));
 
