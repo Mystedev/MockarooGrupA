@@ -33,8 +33,7 @@ public class Mockaroo {
 		    String files_dades[] = {
 		        "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
 		        "Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt",
-		        "Dades/7-Estudis.txt", "Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt"
-		    };
+		        "Dades/7-Estudis.txt", "Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt"};
 		    String line;
 		    int columnes=0;
 		    // Archivo de entrada
@@ -98,6 +97,7 @@ public class Mockaroo {
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
+	
 	}
 	//for (int i = 0; i < emails.length; i++) {
 	//System.out.println(emails[i]);
@@ -721,26 +721,26 @@ public class Mockaroo {
 			if (dadesCrear2[i][0]!=null) {
 				//Condicio per a escriure ints en la primera bolta
 				if (j==0&&(i==18||i==11)) {
-					writer.write(nom+" INT");
-					test="("+nom;
+					writer.write(nomTipusDada[i]+" INT");
+					test="("+nomTipusDada[i];
 					j++;
 				}else if(j==0&&i==10){//Condicio per a escriure booleans en la primera bolta
-					writer.write(nom+" BOOLEAN");
+					writer.write(nomTipusDada[i]+" BOOLEAN");
 					test="("+nom;
 					j++;
 				}else if (j==0&&(i!=18||i!=11)) {//Condicio per a escriure Strings en la primera bolta
 					writer.write(nom+" VACHAR(100)");
-					test="("+nom;
+					test="("+nomTipusDada[i];
 					j++;
 				}else if (i==18||i==11) {//Condicio per a escriure ints
-					writer.write(" ,"+nom+" INT");
-					test=test+","+nom;
+					writer.write(" ,"+nomTipusDada[i]+" INT");
+					test=test+","+nomTipusDada[i];
 				}else if (i== 10) {//Condicio per a escriure booleans
-					writer.write(","+nom+" BOOLEAN");
-					test=test+","+nom;
+					writer.write(","+nomTipusDada[i]+" BOOLEAN");
+					test=test+","+nomTipusDada[i];
 				}else {//Condicio per a escriure Strings
-					writer.write(","+nom+" VACHAR(100)");
-					test=test+","+nom;
+					writer.write(","+nomTipusDada[i]+" VACHAR(100)");
+					test=test+","+nomTipusDada[i];
 				}
 			}
 		}
