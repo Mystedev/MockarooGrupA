@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.Random;
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,36 +12,35 @@ import java.io.File;
 public class Mockaroo {
 
 	// Variables i metodes globals del programa
-	public static Scanner reader = new Scanner(System.in);
-	public static Random random = new Random();
-	public static int numeroAleatori = random.nextInt(200)+1;
-	public static int contador = 0;
-	public static String dniGenerat[]=new String[1000];
 	public static String rutaUbicacio;
 	public static int quantitatTipusDades;
 	public static int quantitatDades;
-	public static int contadorMatriu = 0;
+	public static String tipusDada;
 	public static String dadesCrear[][] = new String[19][200];
+	public static String files_dades[] = { "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
+							"Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt",
+							"Dades/7-Estudis.txt", "Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt"
+	    };
 	// Parametres utilitzats a les funcions
-	public static double decimals=2,minim=0,maxim=1000;
 	public static int llargada=0;
 	public static void main(String[] args) {
 		try {
-		    // Array con archivos de datos
-		    // Array amb arxius de dades
-		    String files_dades[] = {
-		        "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
-		        "Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt",
-		        "Dades/7-Estudis.txt", "Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt"
-		    };
-		    // Archivo de entrada
+		    // Variables del programa
+			Random random = new Random();
+		    int contador = 0,anyMinim=1900,anyMaxim=2023,valorInicial=1;
+		    int contadorMatriu = 0;
+		    int numeroAleatori = random.nextInt(200)+1;
+		    double decimals=2,minim=0,maxim=1000;
+		    boolean inclouLletres, inclouNumeros, inclouMajuscules,  inclouMinuscules,  inclouSimbols;
+		    String domini = "";
+		    // Arxiu de entrada i lectura d'aquest
 		    String fileEntrada = "Dades/Requisits.txt";
 		    BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
 		    String firstLine = br.readLine();
 		    String line;
 		    // Se lee cada linea que contiene una ruta de un archivo
 		    while ((line = br.readLine()) != null) {
-		        // Cada línea contiene números separados por espacios
+		        // Cada línea contiene números separados por #
 		        String[] indicesStr = line.split("#");
 		        int[] indices = new int[indicesStr.length];
 		        
@@ -135,13 +133,14 @@ public class Mockaroo {
 	        } 
 	        // Verificar si el índice está dentro del rango de funciones (valores de ejemplo: 11-19)
 	        else if (index >= 11 && index <= 19) {
-	            //resultados[i] = executarFuncions(index);
+	        	
 	        } 
 	        else {
 	            resultados[i] = "Índice " + index + " fuera de rango.";
 	        }
 	    }
 	    return resultados; // Retornar los resultados
+
 	}/*
 	private static String executarFuncions(int index) {
 	    switch (index) {
@@ -167,6 +166,10 @@ public class Mockaroo {
 	            return "Función no definida para índice " + index;
 	    }
 	}*/
+
+	
+	
+
     // Funcio per llegir les funcions a dins de l'arxiu requisits
 	// Funcio creada per validar el format del fitxer d'entrada
 	public static boolean ValidarFormatEntrada(String arxiuGenerat,String formatArxiu[]) {
@@ -217,7 +220,7 @@ public class Mockaroo {
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// Funcio per llegir els arxius de dades
 	// ·Funcion boolean sin formatos
-	public static void booleans() {
+	public static void booleans(int contadorMatriu) {
 		//inicialitzem el Random
 		Random random=new Random();
 		//Fem un bucle amb tantes voltes com dades a generar
@@ -254,7 +257,7 @@ public class Mockaroo {
 
 	// ·Funcion IP4 ???
 		//Per cridar-la dadesIp4(quantitatDades, Array on guardar les ip)
-		public static void ip4() {
+		public static void ip4(int contadorMatriu) {
 		    Random random = new Random();
 		    // Fem un bucle amb tantes voltes com dades a generar
 		    for (int i = 0; i < quantitatDades; i++) {
@@ -354,7 +357,7 @@ public class Mockaroo {
 	    
 	// ·Funcion para IBAN 
     //Per cridarla: iban( numeroAleatori, quantitatDades, Array on guardar els ibans)
-    private static void iban () {
+    private static void iban (int numeroAleatori,int contadorMatriu) {
 		try{
 			//Primer contem les linies del arxiu per generar el array on guardar les dades
 			//No es fa amb un tamany definit per si es modifica el tamany de l'arxiu
@@ -768,29 +771,7 @@ public class Mockaroo {
         writer.flush();
         writer.close();
 	}
-	public static String[][] provesllegirDades(String dadesALlegir[],int quantitatDades) throws IOException{
-		Random random = new Random();
-		
-		int aleatori=random.nextInt(250)+1;
-		
-		String [][] dadesCrear=new String[19][quantitatDades];
-				
-		dadesCrear=lectorArxius(quantitatDades,dadesALlegir,aleatori,dadesCrear);
-		
-		
-		for (int i = 0; i < dadesCrear.length; i++) {
-			for (int j = 0; j < quantitatDades; j++) {
-				if (dadesCrear[i][j]!=null) {
-					System.out.println(i+"--"+j+"--"+dadesCrear[i][j]);
-				}
-			}
-		}
-
-		creacioDeSql("C:\\Intel",quantitatDades,dadesCrear);
-	
-		return dadesCrear;
-	}
-	public static String[][] lectorArxius(int linies,String[] arxiusALlegir,int aleatori,String [][] dadesCrear) throws IOException{
+	public static String[][] lectorArxius(int linies,String[] arxiusALlegir,int aleatori) throws IOException{
 		String perLlegit[][]=new String[arxiusALlegir.length][linies];
 		String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt","Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
 		for (int i = 0; i < arxiusALlegir.length; i++) {
@@ -898,4 +879,3 @@ public class Mockaroo {
 	    }
 	}
 }
-
