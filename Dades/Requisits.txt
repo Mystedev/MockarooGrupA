@@ -1,6 +1,8 @@
 xml#200#Documentos
-10#nombre
-7
+10#nombre#apellido
+7#numteleofon
 3
 2
 1
+9
+17

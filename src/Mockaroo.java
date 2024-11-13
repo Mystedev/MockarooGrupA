@@ -47,6 +47,8 @@ public class Mockaroo {
 		        // Convertir cada índice a un entero y validar su rango
 		        for (int i = 0; i < indicesStr.length; i++) {
 		            try {
+		            	System.out.println(indicesStr[i]);
+		            	
 		                int index = Integer.parseInt(indicesStr[i]);
 		                if (index >= 1 && index <= files_dades.length) { // Validación de rango
 		                    indices[i] = index;
@@ -64,7 +66,7 @@ public class Mockaroo {
 		        // Imprimir los archivos seleccionados
 		        for (int i = 0; i < archivosSeleccionados.length; i++) {
 		            if (archivosSeleccionados[i] != null) {
-		                System.out.println(archivosSeleccionados[i]);
+		                //System.out.println(archivosSeleccionados[i]);
 		            }
 		        }
 		    }
