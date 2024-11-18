@@ -15,30 +15,45 @@ public class Mockaroo {
 	public static String rutaUbicacio;
 	public static int quantitatTipusDades;
 	public static int quantitatDades;
-	public static String[] tipusDada;
+	public static String[][] tipusDada;
 	public static String dadesCrear[][];
 	public static String files_dades[] = { "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
 			"Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt", "Dades/7-Estudis.txt",
 			"Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt" };
 	// Parametres utilitzats a les funcions
-	public static int llargada = 0;
 
 	public static void main(String[] args) {
 		try {
+			String lineContador;
+			String fileEntrada = "Dades/Requisits.txt";
+			int columnes=0;
+			BufferedReader br1=new BufferedReader(new FileReader(fileEntrada));
+			while((lineContador = br1.readLine()) != null) {
+				columnes++;
+			}
+			tipusDada=new String[columnes][columnes];
 			// Variables del programa
 			Random random = new Random();
-			int numeroAleatori = random.nextInt(250) + 1;
-			String fileEntrada = "Dades/Requisits.txt";
+			int numeroAleatori = random.nextInt(200) + 1;
 			BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
-			String[] formatArxiu;
+			// Variables generales del main
+			double decimal=2;
+			int minim=0,maxim=1000;
+			int contadorMatriu=0;
+			boolean inclouLletres=false,inclouNumeros=false,inclouMajuscules=false,inclouMinuscules=false,inclouSimbols=false; 
+			int longitud = 0;
+			int anyMinim=1900,anyMaxim = 2023;
+			int valorPerDefecte = 1;
 			// Leer y procesar la primera línea
 			String firstLine = br.readLine();
+			String[] formatArxiu;
+			int registres;
 			if (firstLine != null) {
 				formatArxiu = firstLine.split("#");
 				if (ValidarFormatEntrada(firstLine, formatArxiu)) {
 					System.out.println("Archivo válido. {" + firstLine + "}");
 					String arxiuSortida = formatArxiu[0]; // XML/SQL
-					int registres = Integer.parseInt(formatArxiu[1]); // Cantidad de registros
+					registres = Integer.parseInt(formatArxiu[1]); // Cantidad de registros
 					String ruta = formatArxiu[2]; // Ruta donde se guarda el archivo
 				} else {
 					System.out.println("Formato no válido.");
@@ -50,7 +65,8 @@ public class Mockaroo {
 				br.close();
 				return;
 			}
-
+			dadesCrear=new String[columnes][registres];
+			quantitatDades=registres;
 			// Leer líneas restantes y procesar índices
 			String line;
 			while ((line = br.readLine()) != null) {
@@ -79,16 +95,29 @@ public class Mockaroo {
 							System.out.println("Archivo de datos: " + archivo);
 						}
 					} else if (indices[i] >= 11 && indices[i] <= 19) {
-						// Procesar funciones especiales
-						System.out.println("Función especial: " + indices[i]);
+						if(indices[i]==11)booleans(contadorMatriu);
+						if(indices[i]==12)RandomNumber(decimal,minim,maxim);
+						if(indices[i]==13)email(quantitatDades,dadesCrear[contadorMatriu],files_dades,numeroAleatori,"");
+						if(indices[i]==14)ip4(contadorMatriu);
+						if(indices[i]==15)GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
+								inclouMinuscules,inclouSimbols,longitud);
+						if(indices[i]==16)dates(quantitatDades,anyMinim,anyMaxim,numeroAleatori,dadesCrear[contadorMatriu]);
+						if(indices[i]==17)iban(numeroAleatori,contadorMatriu);
+						if(indices[i]==18)ObtenerDNI();
+						if(indices[i]==19)autonumeric(numeroAleatori, dadesCrear[contadorMatriu], valorPerDefecte);
 					} else if (indices[i] == 0) {
 						System.out.println("Índice 0 omitido.");
 					} else {
 						System.out.println("Índice " + indices[i] + " fuera de rango.");
 					}
+					contadorMatriu++;
 				}
 			}
-			
+			if (formatArxiu[0].equalsIgnoreCase("SQL"))
+				creacioDeSql(formatArxiu[2], quantitatDades);
+			else {
+				//crearXml(dadesCrear,, quantitatDades);
+			}
 			br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,24 +130,24 @@ public class Mockaroo {
 	// numAleatori=random.nextInt(250)+1,anyMaxim=2023,anyMinim=1900,valorPerDefecteAutonumeric=1;
 	// String emails []=new String [1];
 	// line=email(2,emails,files_dades,numAleatori);
+
 	//Funcio per a crear emails
 	public static void email(int largada, String emails[], String files_dades[], int aleatori, String domini) {
 		try {
-			//Declaro lectors per a llegir els noms
 			BufferedReader br = new BufferedReader(new FileReader(files_dades[0]));
-			BufferedReader br1 = new BufferedReader(new FileReader(files_dades[8]));
+
+			BufferedReader br1 = new BufferedReader(new FileReader(files_dades[9]));
 
 			// L'asicno la llargada a les arrays que s'utilitzaran
 			String auxiliarNom[] = new String[largada];
 			llegir(br, auxiliarNom, aleatori, largada, 0);
-			//Si existeix algun domini o nom
 			if (domini.length() > 0) {
 				for (int i = 0; i < emails.length; i++) {
 					emails[i] = auxiliarNom[i] + "@" + domini;
 				}
 			} else {
 				String auxiliarDomini[] = new String[largada];
-				llegir(br, auxiliarDomini, aleatori, largada, 0);
+				llegir(br1, auxiliarDomini, aleatori, largada, 0);
 				for (int i = 0; i < emails.length; i++) {
 					emails[i] = auxiliarNom[i] + "@" + auxiliarDomini[i] + ".com";
 				}
@@ -142,26 +171,26 @@ public class Mockaroo {
 					"Error -> El format de l'arxiu ha de tenir 3 elements: 'Tipus de Arxiu'#'Quantitat de registres'#'Ubicació'");
 			return false;
 		}
-		// Comprovar que el tipus d'arxiu és "SQL" o "XML"
-		if (!(formatArxiu[0].equalsIgnoreCase("XML") || formatArxiu[0].equalsIgnoreCase("SQL"))) {
-			System.out.println("Error -> El tipus d'arxiu ha de ser 'SQL' o 'XML'");
-			return false;
+			// Comprovar que el tipus d'arxiu és "SQL" o "XML"
+			if (!(formatArxiu[0].equalsIgnoreCase("XML") || formatArxiu[0].equalsIgnoreCase("SQL"))) {
+				System.out.println("Error -> El tipus d'arxiu ha de ser 'SQL' o 'XML'");
+				return false;
+			}
+			// Comprovar que el segon element és un nombre vàlid
+			if (!esNumeroValid(formatArxiu[1])) {
+				System.out.println("Error -> La quantitat de registres ha de ser un número positiu entre 1 i 200.");
+				return false;
+			}
+			//Comprovo que el arxiu existeixi i sigui un directori
+			File f = new File(formatArxiu[2]);
+			if ((!f.exists()) || (!f.isDirectory())) {
+				System.out.println("Error -> La ubicació no existe o es un arxibo.");
+				return false;
+			}
+			// Si tot és correcte, sortir del bucle
+			System.out.println("Formato Válido.");
+			return true;
 		}
-		// Comprovar que el segon element és un nombre vàlid
-		if (!esNumeroValid(formatArxiu[1])) {
-			System.out.println("Error -> La quantitat de registres ha de ser un número positiu entre 1 i 200.");
-			return false;
-		}
-		File f = new File(formatArxiu[2]);
-		if ((!f.exists()) || (!f.isDirectory())) {
-			System.out.println("Error -> La ubicació no existe o es un arxibo.");
-			return false;
-		}
-		// Si tot és correcte, sortir del bucle
-		System.out.println("Formato Válido.");
-		return true;
-
-	}
 
 	// Funció auxiliar per comprovar si el segon element és un nombre vàlid entre 1
 	// i 250
@@ -212,8 +241,9 @@ public class Mockaroo {
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
 	public static void url(int llargada, String urls[], int aleatori) throws IOException {
 		// GENERO LA URL DESDE EL NOM DE COMPANYIA utilitzan llegir
-		BufferedReader br = new BufferedReader(new FileReader(files_dades[8]));
+		BufferedReader br = new BufferedReader(new FileReader(files_dades[9]));
 		llegir(br, urls, aleatori, llargada, 0);
+
 		for (int i = 0; i < llargada; i++) {
 			urls[i] = "www." + urls[i] + ".com";
 		}
@@ -463,14 +493,14 @@ public class Mockaroo {
 
 	// ·Funcion int ha de indicar el 'valor d'inici=1'
 	// Funcio per generar autonumeric
-	public static void autonumeric(int llargada, int num[], int valorPerDefecte) {
-		num = new int[llargada];
+
+	public static void autonumeric(int llargada, String num[], int valorPerDefecte) {
+		
 		// Faig un bucle per a genera el auto numeric comensan amb el numero que el
 		// usuari indiqui
 		for (int i = 0; i < llargada; i++) {
-			num[i] = valorPerDefecte;
+			num[i] = String.valueOf(valorPerDefecte);
 			valorPerDefecte++;
-			System.out.println(num[i]);
 		}
 	}
 	// *****************************
