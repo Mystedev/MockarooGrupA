@@ -23,59 +23,75 @@ public class Mockaroo {
 	// Parametres utilitzats a les funcions
 	public static int llargada=0;
 	public static void main(String[] args) {
-		try {
-		    // Variables del programa
-			Random random = new Random();
-		    int contador = 0,anyMinim=1900,anyMaxim=2023,valorInicial=1;
-		    int contadorMatriu = 0;
-		    int numeroAleatori = random.nextInt(200)+1;
-		    double decimals=2,minim=0,maxim=1000;
-		    boolean inclouLletres, inclouNumeros, inclouMajuscules,  inclouMinuscules,  inclouSimbols;
-		    String domini = "";
-		    // Arxiu de entrada i lectura d'aquest
-		    String fileEntrada = "Dades/Requisits.txt";
-		    BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
-		    String firstLine = br.readLine();
-		    String line;
-		    int cont = 0;
-		    // Se lee cada linea que contiene una ruta de un archivo
-		    while ((line = br.readLine()) != null) {
-		        // Cada línea contiene números separados por espacios
-		        String[] indicesStr = line.split("#");
-		        int[] indices = new int[indicesStr.length];
-		        // Convertir cada índice a un entero y validar su rango
-		        int index = Integer.parseInt(indicesStr[0]);
-		        if (index >= 1 && index <= 19) { // Validación de rango
-		        	indices[0] = index;
-		        } else {
-		        	System.out.println("Error: Índice fuera de rango en la entrada: " + index);
-		            indices[0] = -1; // Valor inválido o ignorar este índice
-		        }
-		        // Procesar los índices válidos
-		        String[] archivosSeleccionados = processarIndexs(files_dades, indices,cont,numeroAleatori);
-		        
-		        // Imprimir los archivos seleccionados
-		        for (int i = 0; i < archivosSeleccionados.length; i++) {
-		        	System.out.println(archivosSeleccionados[i]);
-		        }
-		        cont++;
-		    }
-		    System.out.println(cont);
-		    // Procesamiento de la primera línea
-		    String formatArxiu[] = firstLine.split("#");
-		    String arxiuSortida = formatArxiu[0]; // XML/SQL
-		    int registres = Integer.parseInt(formatArxiu[1]); // Quantitat de registres
-		    String ruta = formatArxiu[2]; // Ruta on es guarda l'arxiu
-		    // Validar el formato de la primera línea
-		    if (ValidarFormatEntrada(firstLine, formatArxiu)) {
-		        System.out.println("Archivo válido.");
-		    } else {
-		        System.out.println("Formato no válido.");
-		    }
-		    br.close(); // Cerrar BufferedReader
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
+	    try {
+	        // Variables del programa
+	        Random random = new Random();
+	        int numeroAleatori = random.nextInt(200) + 1;
+	        String fileEntrada = "Dades/Requisits.txt";
+	        BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
+	        
+	        // Leer y procesar la primera línea
+	        String firstLine = br.readLine();
+	        if (firstLine != null) {
+	            String[] formatArxiu = firstLine.split("#");
+	            if (ValidarFormatEntrada(firstLine, formatArxiu)) {
+	                System.out.println("Archivo válido. {"+firstLine+"}");
+	                String arxiuSortida = formatArxiu[0]; // XML/SQL
+	                int registres = Integer.parseInt(formatArxiu[1]); // Cantidad de registros
+	                String ruta = formatArxiu[2]; // Ruta donde se guarda el archivo
+	            } else {
+	                System.out.println("Formato no válido.");
+	                br.close();
+	                return;
+	            }
+	        } else {
+	            System.out.println("El archivo está vacío.");
+	            br.close();
+	            return;
+	        }
+	        
+	        // Leer líneas restantes y procesar índices
+	        String line;
+	        while ((line = br.readLine()) != null) {
+	            String[] indicesStr = line.split("#");
+	            int[] indices = new int[indicesStr.length];
+	            
+	            // Convertir y validar índices
+	            for (int i = 0; i < indicesStr.length; i++) {
+	                int index = Integer.parseInt(indicesStr[i]);
+	                if (index >= 1 && index <= 19) {
+	                    indices[i] = index;
+	                } else {
+	                    indices[i] = -1;
+	                }
+	            }
+	            
+	            // Procesar índices válidos
+	            for (int i = 0;i<indices.length;i++) {
+	                if (indices[i] >= 1 && indices[i] <= 10) {
+	                    // Procesar archivos de datos
+	                    String archivo = files_dades[indices[i] - 1];
+	                    if ("9".equals(archivo)) {
+	                        url(quantitatDades, dadesCrear[indices[i] - 1], numeroAleatori);
+	                    }
+	                    if (archivo != null && ! "null".equals(archivo)) {
+	                        System.out.println("Archivo de datos: " + archivo);
+	                    }
+	                } else if (indices[i] >= 11 && indices[i] <= 19) {
+	                    // Procesar funciones especiales
+	                    System.out.println("Función especial: " + indices[i]);
+	                } else if (indices[i] == 0) {
+	                    System.out.println("Índice 0 omitido.");
+	                } else {
+	                    System.out.println("Índice " + indices[i] + " fuera de rango.");
+	                }
+	            }
+	        }
+	        
+	        br.close(); // Cerrar BufferedReader
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 	//for (int i = 0; i < emails.length; i++) {
 	//System.out.println(emails[i]);
@@ -86,8 +102,6 @@ public class Mockaroo {
 		
 	 public static void email(int largada,String emails[],String files_dades[],int aleatori,String domini) {
 	     try {
-
-	    	 //Declaro els lectors
 
 	         BufferedReader br = new BufferedReader(new FileReader(files_dades[0]));
 
@@ -111,33 +125,8 @@ public class Mockaroo {
 	        }catch (Exception e) {
 	            e.printStackTrace();
 	        }
-
 	    }
 	
-	// Funció que llegeix l'array segons els indexs proporcionats
-	 public static String[] processarIndexs(String[] archivos, int[] indices,int cont,int aleatori) throws IOException {
-		    String[] resultados = new String[indices.length];
-		    for (int i = 0; i < indices.length; i++) {
-		        int index = indices[i];
-		        
-		        // Verificar si el índice está dentro del rango de archivos (1-10)
-		        if (index > 0 && index <= archivos.length) {
-		            resultados[i] = archivos[index - 1]; // Guardar archivo en el array
-		            if(resultados[i]=="9") {
-		            	url(quantitatDades,dadesCrear[cont],aleatori);
-		            }
-		        } 
-		        // Verificar si el índice está dentro del rango de funciones especiales (11-19)
-		        else if (index >= 11 && index <= 19) {
-		            resultados[i] = "Función " + index; 
-		        } 
-		        // Índice fuera de rango para ambos casos
-		        else {
-		            resultados[i] = "Índice " + index + " fuera de rango.";
-		        }
-		    }
-		    return resultados; // Retornar los resultados
-		}
     // Funcio per llegir les funcions a dins de l'arxiu requisits
 	// Funcio creada per validar el format del fitxer d'entrada
 	public static boolean ValidarFormatEntrada(String arxiuGenerat,String formatArxiu[]) {
