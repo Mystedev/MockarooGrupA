@@ -5,11 +5,9 @@ import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.Random;
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-
 
 public class Mockaroo {
 
@@ -26,81 +24,78 @@ public class Mockaroo {
 	// Parametres utilitzats a les funcions
 	public static int llargada=0;
 	public static void main(String[] args) {
-		try {
-		    // Variables del programa
-			Random random = new Random();
-		    int contador = 0,anyMinim=1900,anyMaxim=2023,valorInicial=1;
-		    int contadorMatriu = 0;
-		    int numeroAleatori = random.nextInt(250)+1;
-		    double decimals=2,minim=0,maxim=1000;
-		    boolean inclouLletres, inclouNumeros, inclouMajuscules,  inclouMinuscules,  inclouSimbols;
-		    String domini = "";
-		    // Arxiu de entrada i lectura d'aquest
-		    String fileEntrada = "Dades/Requisits.txt";
-		    BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
-		    String firstLine = br.readLine();
-		    String line;
-		    // Se lee cada linea que contiene una ruta de un archivo
-		    while ((line = br.readLine()) != null) {
-		        // Cada línea contiene números separados por espacios
-		        String[] indicesStr = line.split("#");
-		        int[] indices = new int[indicesStr.length];
-		        
-		        // Convertir cada índice a un entero y validar su rango
-		        if (indicesStr.length>=2) {
-		        	try {
-		                int index = Integer.parseInt(indicesStr[0]);
-		                if (index >= 1 && index <= files_dades.length) { // Validación de rango
-		                    indices[0] = index;
-		                } else {
-		                    System.out.println("Error: Índice fuera de rango en la entrada: " + index);
-		                    indices[0] = -1; // Valor inválido o ignorar este índice
-		                }
-		            } catch (NumberFormatException e) {
-		                System.out.println("Error: Índice no válido en la entrada: " + indicesStr[0]);
-		            }
-				}else {
-					System.out.println("Error: No hi ha tipo o nom: " + indicesStr[0]);
-				}
-		            
-		        
-		        // Procesar los índices válidos
-		        String[] archivosSeleccionados = processarIndexs(files_dades, indices);
-		        
-		        // Imprimir los archivos seleccionados
-		        for (int i = 0; i < archivosSeleccionados.length; i++) {
-		            if (archivosSeleccionados[i] != null) {
-		                System.out.println(archivosSeleccionados[i]);
-		            }
-		        }
-		    }
-		    
-		    // Procesamiento de la primera línea
-		    String formatArxiu[] = firstLine.split("#");
-		    if (!validadFormatPrimeraLinia(formatArxiu)) {
-		    	System.out.println("-----------------------------");
-				return;
-			}else { 
-			    String arxiuSortida = formatArxiu[0]; // XML/SQL
-			    int registres = Integer.parseInt(formatArxiu[1]); // Quantitat de registres
-			    String ruta = formatArxiu[2]; // Ruta on es guarda l'arxiu
-			    // Validar el formato de la primera línea
-			    if (ValidarFormatEntrada(firstLine, formatArxiu)) {
-			        System.out.println("Archivo válido.");
-			    } else {
-			       return;
-			    }
-			}
-		    if(formatArxiu[0].equals("SQL")) creacioDeSql(formatArxiu[2], quantitatDades);
+	    try {
+	        // Variables del programa
+	        Random random = new Random();
+	        int numeroAleatori = random.nextInt(250) + 1;
+	        String fileEntrada = "Dades/Requisits.txt";
+	        BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
+	        String[] formatArxiu;
+	        // Leer y procesar la primera línea
+	        String firstLine = br.readLine();
+	        if (firstLine != null) {
+	            formatArxiu = firstLine.split("#");
+	            if (ValidarFormatEntrada(firstLine, formatArxiu)) {
+	                System.out.println("Archivo válido. {"+firstLine+"}");
+	                String arxiuSortida = formatArxiu[0]; // XML/SQL
+	                int registres = Integer.parseInt(formatArxiu[1]); // Cantidad de registros
+	                String ruta = formatArxiu[2]; // Ruta donde se guarda el archivo
+	            } else {
+	                System.out.println("Formato no válido.");
+	                br.close();
+	                return;
+	            }
+	        } else {
+	            System.out.println("El archivo está vacío.");
+	            br.close();
+	            return;
+	        }
+	        
+	        // Leer líneas restantes y procesar índices
+	        String line;
+	        while ((line = br.readLine()) != null) {
+	            String[] indicesStr = line.split("#");
+	            int[] indices = new int[indicesStr.length];
+	            
+	            // Convertir y validar índices
+	            for (int i = 0; i < indicesStr.length; i++) {
+	                int index = Integer.parseInt(indicesStr[i]);
+	                if (index >= 1 && index <= 19) {
+	                    indices[i] = index;
+	                } else {
+	                    indices[i] = -1;
+	                }
+	            }
+	            
+	            // Procesar índices válidos
+	            for (int i = 0;i<indices.length;i++) {
+	                if (indices[i] >= 1 && indices[i] <= 10) {
+	                    // Procesar archivos de datos
+	                    String archivo = files_dades[indices[i] - 1];
+	                    if ("9".equals(archivo)) {
+	                        url(quantitatDades, dadesCrear[indices[i] - 1], numeroAleatori);
+	                    }
+	                    if (archivo != null && ! "null".equals(archivo)) {
+	                        System.out.println("Archivo de datos: " + archivo);
+	                    }
+	                } else if (indices[i] >= 11 && indices[i] <= 19) {
+	                    // Procesar funciones especiales
+	                    System.out.println("Función especial: " + indices[i]);
+	                } else if (indices[i] == 0) {
+	                    System.out.println("Índice 0 omitido.");
+	                } else {
+	                    System.out.println("Índice " + indices[i] + " fuera de rango.");
+	                }
+	            }
+	        }
+	        if(formatArxiu[0].equalsIgnoreCase("SQL")) creacioDeSql(formatArxiu[2], quantitatDades);
 		    else {
-		    	//crearXml(dadesCrear, formatArxiu, numeroAleatori);
-		    	//crearXsd(formatArxiu);
-		    	//crearXsl();
+		    	System.out.println("--------------------------------");
 		    }
-		    br.close(); // Cerrar BufferedReader
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
+	        br.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 	//for (int i = 0; i < emails.length; i++) {
 	//System.out.println(emails[i]);
@@ -111,9 +106,6 @@ public class Mockaroo {
 		
 	 public static void email(int largada,String emails[],String files_dades[],int aleatori,String domini) {
 	     try {
-
-	    	 //Declaro els lectors
-
 	         BufferedReader br = new BufferedReader(new FileReader(files_dades[0]));
 
 	         BufferedReader br1 = new BufferedReader(new FileReader(files_dades[8]));
@@ -136,29 +128,7 @@ public class Mockaroo {
 	        }catch (Exception e) {
 	            e.printStackTrace();
 	        }
-
 	    }
-	
-	// Funció que llegeix l'array segons els indexs proporcionats
-	public static String[] processarIndexs(String[] archivos, int[] indices) {
-	    String[] resultados = new String[indices.length];
-	    for (int i = 0; i < indices.length; i++) {
-	        int index = indices[i];
-	        
-	        // Verificar si el índice está dentro del rango de archivos
-	        if (index > 0 && index <= archivos.length) {
-	            resultados[i] = archivos[index  - 1]; // Guardar archivo en el array
-	        } 
-	        // Verificar si el índice está dentro del rango de funciones (valores de ejemplo: 11-19)
-	        else if (index >= 11 && index <= 19) {
-	        	
-	        } 
-	        else {
-	            resultados[i] = "Índice " + index + " fuera de rango.";
-	        }
-	    }
-	    return resultados; // Retornar los resultados
-	}
 	
     // Funcio per llegir les funcions a dins de l'arxiu requisits
 	// Funcio creada per validar el format del fitxer d'entrada
@@ -166,34 +136,31 @@ public class Mockaroo {
 		// Comprovar la longitud de l'array i el format correctament
 		boolean isCorrect = false; // Inicialment, no és correcte
 		// Bucle que demana correccions fins que tot el format sigui correcte
-		while (!isCorrect) {
+		
 		// Comprovar si l'array té 3 elements
 			if (formatArxiu.length != 3 ) {
 				System.out.println("Error -> El format de l'arxiu ha de tenir 3 elements: 'Tipus de Arxiu'#'Quantitat de registres'#'Ubicació'");
 				return false;
 		    }
 		    // Comprovar que el tipus d'arxiu és "SQL" o "XML"
-		    else if (!(formatArxiu[0].equalsIgnoreCase("XML") || formatArxiu[0].equalsIgnoreCase("SQL"))) {
+		     if (!(formatArxiu[0].equalsIgnoreCase("XML") || formatArxiu[0].equalsIgnoreCase("SQL"))) {
 		        System.out.println("Error -> El tipus d'arxiu ha de ser 'SQL' o 'XML'");
 		        return false;
 		    }
 		    // Comprovar que el segon element és un nombre vàlid
-		    else if (!esNumeroValid(formatArxiu[1])) {
-		        System.out.println("Error -> La quantitat de registres ha de ser un número positiu entre 1 i 250.");
+		     if (!esNumeroValid(formatArxiu[1])) {
+		        System.out.println("Error -> La quantitat de registres ha de ser un número positiu entre 1 i 200.");
 		        return false;
 		    }
-		    // Comprovar que la ubicació és "DOCUMENTOS"
-		    else if (!formatArxiu[2].equalsIgnoreCase("DOCUMENTOS")) {
-		        System.out.println("Error -> La ubicació ha de ser 'DOCUMENTOS'.");
-		        return false;
-		    } else {
+		     File f= new File(formatArxiu[2]);
+		     if ((!f.exists())||(!f.isDirectory())) {
+		    	 System.out.println("Error -> La ubicació no existe o es un arxibo.");
+		    	 return false;
+			}		    
 		        // Si tot és correcte, sortir del bucle
 		    	System.out.println("Formato Válido.");
-		        isCorrect = true;
-		     }
-		}
-		// Retornar la línia correcta quan tot sigui correcte
-		return true;
+		        return true;
+		   
 	}
 	// Funció auxiliar per comprovar si el segon element és un nombre vàlid entre 1 i 250
 	public static boolean esNumeroValid(String valor) {
@@ -234,7 +201,7 @@ public class Mockaroo {
         double num = numeroAleatorio;
 	}
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
-	public static void url(int llargada,String urls[],String[] files_dades,int aleatori) throws IOException{
+	public static void url(int llargada,String urls[],int aleatori) throws IOException{
         //GENERO LA URL DESDE EL NOM DE COMPANYIA 
         BufferedReader br = new BufferedReader(new FileReader(files_dades[8]));
 
@@ -867,17 +834,5 @@ public class Mockaroo {
 	        return ""; // Si no coincide con ningún id
 	    }
 	}
-	public static boolean validadFormatPrimeraLinia(String[] format) {
-
-		if(format.length!=3)return false;
-		format[0]=format[0].toUpperCase();
-		if(!format[0].equals("XML")&&!format[0].equals("SQL"))return false;
-		try {
-			Integer.parseInt(format[1]);
-		} catch (NumberFormatException e) {
-			return false;
-		}
-		if(format[2].length()<=0)return false;
-		return true;
-	}
+	
 }
