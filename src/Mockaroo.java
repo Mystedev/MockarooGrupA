@@ -3,7 +3,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
-import java.util.Iterator;
 import java.util.Random;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -47,12 +46,13 @@ public class Mockaroo {
 			// Leer y procesar la primera línea
 			String firstLine = br.readLine();
 			String[] formatArxiu;
-			int registres;
+			int registres=columnes;
 			if (firstLine != null) {
 				formatArxiu = firstLine.split("#");
 				if (ValidarFormatEntrada(firstLine, formatArxiu)) {
 					System.out.println("Archivo válido. {" + firstLine + "}");
 					String arxiuSortida = formatArxiu[0]; // XML/SQL
+					quantitatDades = registres;
 					registres = Integer.parseInt(formatArxiu[1]); // Cantidad de registros
 					String ruta = formatArxiu[2]; // Ruta donde se guarda el archivo
 				} else {
@@ -69,19 +69,21 @@ public class Mockaroo {
 			quantitatDades=registres;
 			// Leer líneas restantes y procesar índices
 			String line;
-			while ((line = br.readLine()) != null) {
-				String[] indicesStr = line.split("#");
-				int[] indices = new int[indicesStr.length];
-
-				// Convertir y validar índices
-				for (int i = 0; i < indicesStr.length; i++) {
-					int index = Integer.parseInt(indicesStr[i]);
-					if (index >= 1 && index <= 19) {
-						indices[i] = index;
-					} else {
-						indices[i] = -1;
+			while ((line=br.readLine())!=null) {
+				if(line.equals("")) {
+					return;
+				}else {
+					String[] indicesStr = line.split("#");
+					int[] indices = new int[indicesStr.length];
+					// Convertir y validar índices
+					for (int i = 0; i < indicesStr.length; i++) {
+						int index = Integer.parseInt(indicesStr[i]);
+						if (index >= 1 && index <= 19) {
+							indices[i] = index;
+						} else {
+							indices[i] = -1;
+						}
 					}
-				}
 
 				// Procesar índices válidos
 				for (int i = 0; i < indices.length; i++) {
@@ -111,6 +113,7 @@ public class Mockaroo {
 						System.out.println("Índice " + indices[i] + " fuera de rango.");
 					}
 					contadorMatriu++;
+					}
 				}
 			}
 			if (formatArxiu[0].equalsIgnoreCase("SQL"))
@@ -119,10 +122,8 @@ public class Mockaroo {
 				//crearXml(dadesCrear,, quantitatDades);
 			}
 			br.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+			} catch(Exception e) {e.printStackTrace();}	
 		}
-	}
 	// for (int i = 0; i < emails.length; i++) {
 	// System.out.println(emails[i]);
 	// }
@@ -131,7 +132,7 @@ public class Mockaroo {
 	// String emails []=new String [1];
 	// line=email(2,emails,files_dades,numAleatori);
 
-	//Funcio per a crear emails
+	// Funcio per a crear emails
 	public static void email(int largada, String emails[], String files_dades[], int aleatori, String domini) {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(files_dades[0]));
@@ -141,7 +142,7 @@ public class Mockaroo {
 			// L'asicno la llargada a les arrays que s'utilitzaran
 			String auxiliarNom[] = new String[largada];
 			llegir(br, auxiliarNom, aleatori, largada, 0);
-			if (domini.length() > 0) {
+			if (domini != null && domini.length() > 0) {
 				for (int i = 0; i < emails.length; i++) {
 					emails[i] = auxiliarNom[i] + "@" + domini;
 				}
@@ -171,26 +172,26 @@ public class Mockaroo {
 					"Error -> El format de l'arxiu ha de tenir 3 elements: 'Tipus de Arxiu'#'Quantitat de registres'#'Ubicació'");
 			return false;
 		}
-			// Comprovar que el tipus d'arxiu és "SQL" o "XML"
-			if (!(formatArxiu[0].equalsIgnoreCase("XML") || formatArxiu[0].equalsIgnoreCase("SQL"))) {
-				System.out.println("Error -> El tipus d'arxiu ha de ser 'SQL' o 'XML'");
-				return false;
-			}
-			// Comprovar que el segon element és un nombre vàlid
-			if (!esNumeroValid(formatArxiu[1])) {
-				System.out.println("Error -> La quantitat de registres ha de ser un número positiu entre 1 i 200.");
-				return false;
-			}
-			//Comprovo que el arxiu existeixi i sigui un directori
-			File f = new File(formatArxiu[2]);
-			if ((!f.exists()) || (!f.isDirectory())) {
-				System.out.println("Error -> La ubicació no existe o es un arxibo.");
-				return false;
-			}
-			// Si tot és correcte, sortir del bucle
-			System.out.println("Formato Válido.");
-			return true;
+		// Comprovar que el tipus d'arxiu és "SQL" o "XML"
+		if (!(formatArxiu[0].equalsIgnoreCase("XML") || formatArxiu[0].equalsIgnoreCase("SQL"))) {
+			System.out.println("Error -> El tipus d'arxiu ha de ser 'SQL' o 'XML'");
+			return false;
 		}
+		// Comprovar que el segon element és un nombre vàlid
+		if (!esNumeroValid(formatArxiu[1])) {
+			System.out.println("Error -> La quantitat de registres ha de ser un número positiu entre 1 i 200.");
+			return false;
+		}
+		// Comprovo que el arxiu existeixi i sigui un directori
+		File f = new File(formatArxiu[2]);
+		if ((!f.exists()) || (!f.isDirectory())) {
+			System.out.println("Error -> La ubicació no existe o es un arxibo.");
+			return false;
+		}
+		// Si tot és correcte, sortir del bucle
+		System.out.println("Formato Válido.");
+		return true;
+	}
 
 	// Funció auxiliar per comprovar si el segon element és un nombre vàlid entre 1
 	// i 250
@@ -335,7 +336,8 @@ public class Mockaroo {
 		// numAleatori=random.nextInt(250)+1,anyMaxim=2023,anyMinim=1900,valorPerDefecteAutonumeric=1;
 		// line=dates(2,anyMinim,anyMaxim,numAleatori);
 	}
-	//funcio per a saber cuants dies te el mes que es genere aleatoriament
+
+	// funcio per a saber cuants dies te el mes que es genere aleatoriament
 	public static int diesMes(int mes, int any) {
 		if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
 			// Meses de 31 días
@@ -495,7 +497,7 @@ public class Mockaroo {
 	// Funcio per generar autonumeric
 
 	public static void autonumeric(int llargada, String num[], int valorPerDefecte) {
-		
+
 		// Faig un bucle per a genera el auto numeric comensan amb el numero que el
 		// usuari indiqui
 		for (int i = 0; i < llargada; i++) {
@@ -751,7 +753,8 @@ public class Mockaroo {
 		writer.flush();
 		writer.close();
 	}
-	//Funcio per a triar quins arxius s'han de gennerar
+
+	// Funcio per a triar quins arxius s'han de gennerar
 	public static String[][] lectorArxius(int linies, String[] arxiusALlegir, int aleatori) throws IOException {
 		String perLlegit[][] = new String[arxiusALlegir.length][linies];
 		String files_dades[] = { "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt", "Dades/4-Adreces.txt",
