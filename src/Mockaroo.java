@@ -13,6 +13,7 @@ public class Mockaroo {
 	// Variables i metodes globals del programa
 	public static String rutaUbicacio;
 	public static int quantitatTipusDades;
+	public static int[] idDades;
 	public static int quantitatDades;
 	public static String[] tipusDada;
 	public static String dadesCrear[][] = new String[19][200];
