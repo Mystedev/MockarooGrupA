@@ -86,9 +86,8 @@ public class Mockaroo {
 	                    System.out.println("Índice " + indices[i] + " fuera de rango.");
 	                }
 	            }
-	        }
-	        
-	        br.close(); // Cerrar BufferedReader
+	        } 
+	        br.close();
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
@@ -102,7 +101,6 @@ public class Mockaroo {
 		
 	 public static void email(int largada,String emails[],String files_dades[],int aleatori,String domini) {
 	     try {
-
 	         BufferedReader br = new BufferedReader(new FileReader(files_dades[0]));
 
 	         BufferedReader br1 = new BufferedReader(new FileReader(files_dades[8]));
