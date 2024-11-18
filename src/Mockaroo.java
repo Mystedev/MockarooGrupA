@@ -8,14 +8,13 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 
-
 public class Mockaroo {
 
 	// Variables i metodes globals del programa
 	public static String rutaUbicacio;
 	public static int quantitatTipusDades;
 	public static int quantitatDades;
-	public static String tipusDada;
+	public static String[] tipusDada;
 	public static String dadesCrear[][] = new String[19][200];
 	public static String files_dades[] = { "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
 							"Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt",
@@ -83,6 +82,75 @@ public class Mockaroo {
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
+	    try {
+	        // Variables del programa
+	        Random random = new Random();
+	        int numeroAleatori = random.nextInt(200) + 1;
+	        String fileEntrada = "Dades/Requisits.txt";
+	        BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
+	        
+	        // Leer y procesar la primera línea
+	        String firstLine = br.readLine();
+	        if (firstLine != null) {
+	            String[] formatArxiu = firstLine.split("#");
+	            if (ValidarFormatEntrada(firstLine, formatArxiu)) {
+	                System.out.println("Archivo válido. {"+firstLine+"}");
+	                String arxiuSortida = formatArxiu[0]; // XML/SQL
+	                int registres = Integer.parseInt(formatArxiu[1]); // Cantidad de registros
+	                String ruta = formatArxiu[2]; // Ruta donde se guarda el archivo
+	            } else {
+	                System.out.println("Formato no válido.");
+	                br.close();
+	                return;
+	            }
+	        } else {
+	            System.out.println("El archivo está vacío.");
+	            br.close();
+	            return;
+	        }
+	        
+	        // Leer líneas restantes y procesar índices
+	        String line;
+	        while ((line = br.readLine()) != null) {
+	            String[] indicesStr = line.split("#");
+	            int[] indices = new int[indicesStr.length];
+	            
+	            // Convertir y validar índices
+	            for (int i = 0; i < indicesStr.length; i++) {
+	                int index = Integer.parseInt(indicesStr[i]);
+	                if (index >= 1 && index <= 19) {
+	                    indices[i] = index;
+	                } else {
+	                    indices[i] = -1;
+	                }
+	            }
+	            
+	            // Procesar índices válidos
+	            for (int i = 0;i<indices.length;i++) {
+	                if (indices[i] >= 1 && indices[i] <= 10) {
+	                    // Procesar archivos de datos
+	                    String archivo = files_dades[indices[i] - 1];
+	                    if ("9".equals(archivo)) {
+	                        url(quantitatDades, dadesCrear[indices[i] - 1], numeroAleatori);
+	                    }
+	                    if (archivo != null && ! "null".equals(archivo)) {
+	                        System.out.println("Archivo de datos: " + archivo);
+	                    }
+	                } else if (indices[i] >= 11 && indices[i] <= 19) {
+	                    // Procesar funciones especiales
+	                    System.out.println("Función especial: " + indices[i]);
+	                } else if (indices[i] == 0) {
+	                    System.out.println("Índice 0 omitido.");
+	                } else {
+	                    System.out.println("Índice " + indices[i] + " fuera de rango.");
+	                }
+	            }
+	        } 
+	        br.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
 	}
 	//for (int i = 0; i < emails.length; i++) {
 	//System.out.println(emails[i]);
@@ -93,9 +161,6 @@ public class Mockaroo {
 		
 	 public static void email(int largada,String emails[],String files_dades[],int aleatori,String domini) {
 	     try {
-
-	    	 //Declaro els lectors
-
 	         BufferedReader br = new BufferedReader(new FileReader(files_dades[0]));
 
 	         BufferedReader br1 = new BufferedReader(new FileReader(files_dades[8]));
@@ -118,7 +183,6 @@ public class Mockaroo {
 	        }catch (Exception e) {
 	            e.printStackTrace();
 	        }
-
 	    }
 	
 	// Funció que llegeix l'array segons els indexs proporcionats
@@ -169,6 +233,7 @@ public class Mockaroo {
 
 	
 	
+
 
     // Funcio per llegir les funcions a dins de l'arxiu requisits
 	// Funcio creada per validar el format del fitxer d'entrada
@@ -244,7 +309,7 @@ public class Mockaroo {
         double num = numeroAleatorio;
 	}
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
-	public static void url(int llargada,String urls[],String[] files_dades,int aleatori) throws IOException{
+	public static void url(int llargada,String urls[],int aleatori) throws IOException{
         //GENERO LA URL DESDE EL NOM DE COMPANYIA 
         BufferedReader br = new BufferedReader(new FileReader(files_dades[8]));
 
