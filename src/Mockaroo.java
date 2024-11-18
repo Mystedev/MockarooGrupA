@@ -3,74 +3,67 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 
+
 public class Mockaroo {
+
 	// Variables i metodes globals del programa
-	public static Scanner reader = new Scanner(System.in);
-	public static Random random = new Random();
-	public static int contador = 0;
-	public static String dniGenerat[]=new String[1000];
 	public static String rutaUbicacio;
+	public static int quantitatTipusDades;
 	public static int quantitatDades;
-	public static String dominio;
-	public static int anyMinim=1900;
-	public static int anyMaxim=2023;
-	public static int valorInicial=1;
-	public static String dadesCrear[][];
+	public static String[] tipusDada;
+	public static String dadesCrear[][] ;
+	public static String files_dades[] = { "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
+							"Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt",
+							"Dades/7-Estudis.txt", "Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt"
+	    };
 	// Parametres utilitzats a les funcions
-	public static double decimals=2,minim=0,maxim=1000;
 	public static int llargada=0;
-	public static String[] nomTipusDada;
 	public static void main(String[] args) {
 		try {
-		    // Array con archivos de datos
-		    // Array amb arxius de dades
-		    String files_dades[] = {
-		        "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
-		        "Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt",
-		        "Dades/7-Estudis.txt", "Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt"};
-		    String line;
-		    int columnes=0;
-		    // Archivo de entrada
+		    // Variables del programa
+			Random random = new Random();
+		    int contador = 0,anyMinim=1900,anyMaxim=2023,valorInicial=1;
+		    int contadorMatriu = 0;
+		    int numeroAleatori = random.nextInt(250)+1;
+		    double decimals=2,minim=0,maxim=1000;
+		    boolean inclouLletres, inclouNumeros, inclouMajuscules,  inclouMinuscules,  inclouSimbols;
+		    String domini = "";
+		    // Arxiu de entrada i lectura d'aquest
 		    String fileEntrada = "Dades/Requisits.txt";
-		    BufferedReader contadorLinies = new BufferedReader(new FileReader(fileEntrada));
-		    while((line = contadorLinies.readLine()) != null) {
-		    	columnes++;
-		    }
 		    BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
 		    String firstLine = br.readLine();
-		    nomTipusDada=new String[columnes];	
-		    int columnes1=0;
-		    int error;
+		    String line;
 		    // Se lee cada linea que contiene una ruta de un archivo
 		    while ((line = br.readLine()) != null) {
 		        // Cada línea contiene números separados por espacios
-		        String[] indicesStr = line.split(" ");
-		       
+		        String[] indicesStr = line.split("#");
 		        int[] indices = new int[indicesStr.length];
-		        columnes1++;
+		        
 		        // Convertir cada índice a un entero y validar su rango
-		        for (int i = 0; i < indicesStr.length; i++) {
-		            try {
-		                int index = Integer.parseInt(indicesStr[i]);
+		        if (indicesStr.length>=2) {
+		        	try {
+		                int index = Integer.parseInt(indicesStr[0]);
 		                if (index >= 1 && index <= files_dades.length) { // Validación de rango
-		                    indices[i] = index;
+		                    indices[0] = index;
 		                } else {
 		                    System.out.println("Error: Índice fuera de rango en la entrada: " + index);
-		                    indices[i] = -1; // Valor inválido o ignorar este índice
+		                    indices[0] = -1; // Valor inválido o ignorar este índice
 		                }
 		            } catch (NumberFormatException e) {
-		            	nomTipusDada[columnes1]=indicesStr[1];
-		            }catch(Exception e) {
-		            	error=columnes1+1;
-		            	System.out.println("Error: Índice no válido en la entrada: " + indicesStr[i]+" en la liniea "+error);
+		                System.out.println("Error: Índice no válido en la entrada: " + indicesStr[0]);
 		            }
-		        }
+				}else {
+					System.out.println("Error: No hi ha tipo o nom: " + indicesStr[0]);
+				}
+		            
+		        
 		        // Procesar los índices válidos
 		        String[] archivosSeleccionados = processarIndexs(files_dades, indices);
 		        
@@ -81,23 +74,33 @@ public class Mockaroo {
 		            }
 		        }
 		    }
+		    
 		    // Procesamiento de la primera línea
 		    String formatArxiu[] = firstLine.split("#");
-		    String arxiuSortida = formatArxiu[0]; // XML/SQL
-		    quantitatDades = Integer.parseInt(formatArxiu[1]); // Quantitat de registres
-		    String ruta = formatArxiu[2]; // Ruta on es guarda l'arxiu
-		    // Validar el formato de la primera línea
-		    if (ValidarFormatEntrada(firstLine, formatArxiu)) {
-		        System.out.println("Archivo válido.");
-		    } else {
-		        System.out.println("Formato no válido.");
+		    if (!validadFormatPrimeraLinia(formatArxiu)) {
+		    	System.out.println("-----------------------------");
+				return;
+			}else { 
+			    String arxiuSortida = formatArxiu[0]; // XML/SQL
+			    int registres = Integer.parseInt(formatArxiu[1]); // Quantitat de registres
+			    String ruta = formatArxiu[2]; // Ruta on es guarda l'arxiu
+			    // Validar el formato de la primera línea
+			    if (ValidarFormatEntrada(firstLine, formatArxiu)) {
+			        System.out.println("Archivo válido.");
+			    } else {
+			       return;
+			    }
+			}
+		    if(formatArxiu[0].equals("SQL")) creacioDeSql(formatArxiu[2], quantitatDades);
+		    else {
+		    	//crearXml(dadesCrear, formatArxiu, numeroAleatori);
+		    	//crearXsd(formatArxiu);
+		    	//crearXsl();
 		    }
-		    dadesCrear=new String[columnes][quantitatDades];
 		    br.close(); // Cerrar BufferedReader
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
-	
 	}
 	//for (int i = 0; i < emails.length; i++) {
 	//System.out.println(emails[i]);
@@ -106,7 +109,7 @@ public class Mockaroo {
 	//String emails []=new String [1];
 	//line=email(2,emails,files_dades,numAleatori);
 		
-	 public static void email(String emails[],String files_dades[],int aleatori,String domini) {
+	 public static void email(int largada,String emails[],String files_dades[],int aleatori,String domini) {
 	     try {
 
 	    	 //Declaro els lectors
@@ -116,15 +119,15 @@ public class Mockaroo {
 	         BufferedReader br1 = new BufferedReader(new FileReader(files_dades[8]));
 	   
 	         //L'asicno la llargada a les arrays que s'utilitzaran
-	         String auxiliarNom[]=new String[quantitatDades];
-	         llegir(br,auxiliarNom,aleatori,quantitatDades,false);
+	         String auxiliarNom[]=new String[largada];
+	         llegir(br,auxiliarNom,aleatori,largada,0);
 	         if (domini.length()>0){
 	        	 for(int i=0;i<emails.length;i++){
 	        		 emails[i]=auxiliarNom[i]+"@"+domini;
 	             }
 	         } else{
-	        	 String auxiliarDomini[]=new String[quantitatDades];
-	        	 llegir(br,auxiliarDomini,aleatori,quantitatDades,false);
+	        	 String auxiliarDomini[]=new String[largada];
+	        	 llegir(br,auxiliarDomini,aleatori,largada,0);
 	        	 for(int i=0;i<emails.length;i++){
 	        		 emails[i]=auxiliarNom[i]+"@"+auxiliarDomini[i]+".com";
 	             }
@@ -148,7 +151,7 @@ public class Mockaroo {
 	        } 
 	        // Verificar si el índice está dentro del rango de funciones (valores de ejemplo: 11-19)
 	        else if (index >= 11 && index <= 19) {
-	            //resultados[i] = executarFuncions(index);
+	        	
 	        } 
 	        else {
 	            resultados[i] = "Índice " + index + " fuera de rango.";
@@ -156,30 +159,7 @@ public class Mockaroo {
 	    }
 	    return resultados; // Retornar los resultados
 	}
-	/*private static String executarFuncions(int index) {
-	    switch (index) {
-	        case 11:
-	            dadesBoolean(quantitatDades,dadesBoolean[]);
-	        case 12:
-	            RandomNumber(decimals,minim,maxim);
-	        case 13:
-	            email(largada,emails[],files_dades[],aleatori,domini);
-	        case 14:
-	            dadesIp4(quantitatDades,dadesIp4);
-	        case 15:
-	            GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,inclouMinuscules,inclouSimbols, longitud);
-	        case 16:
-	            dates(largada,anyMinim,anyMaxim,aleatori,data[]);
-	        case 17:
-	            iban(numeroAleatori,quantitatDades,iban);
-	        case 18:
-	            ObtenerDNI();
-	        case 19:
-	            autonumeric(llargada,num[],valorPerDefecte);
-	        default:
-	            return "Función no definida para índice " + index;
-	    }
-	}*/
+	
     // Funcio per llegir les funcions a dins de l'arxiu requisits
 	// Funcio creada per validar el format del fitxer d'entrada
 	public static boolean ValidarFormatEntrada(String arxiuGenerat,String formatArxiu[]) {
@@ -230,14 +210,15 @@ public class Mockaroo {
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones ->
 	// Funcio per llegir els arxius de dades
 	// ·Funcion boolean sin formatos
-	public static void dadesBoolean(int quantitatDades, boolean dadesBoolean[]) {
+	public static void booleans(int contadorMatriu) {
 		//inicialitzem el Random
 		Random random=new Random();
 		//Fem un bucle amb tantes voltes com dades a generar
 		for (int i = 0; i < quantitatDades; i++) {
 			//Guardem al array de booleans el valor aleatori generat amb el Random
-	        dadesBoolean[i] = random.nextBoolean();
+	        dadesCrear[contadorMatriu][i] = random.nextBoolean()+"";
 	    }
+		contadorMatriu++;
 	}
 	// ·Funcion int para indicar los 'decimales=0','minims=0 i maxims=1000'
 	public static void RandomNumber(double decimals,double minim,double maxim) {
@@ -257,7 +238,7 @@ public class Mockaroo {
         //GENERO LA URL DESDE EL NOM DE COMPANYIA 
         BufferedReader br = new BufferedReader(new FileReader(files_dades[8]));
 
-        llegir(br,urls,aleatori,llargada,false);
+        llegir(br,urls,aleatori,llargada,0);
 
         for(int i=0; i < llargada;i++){
             urls[i] = "www."+urls[i]+".com";
@@ -266,13 +247,14 @@ public class Mockaroo {
 
 	// ·Funcion IP4 ???
 		//Per cridar-la dadesIp4(quantitatDades, Array on guardar les ip)
-		public static void dadesIp4(int quantitatDades, String[] dadesIp4) {
+		public static void ip4(int contadorMatriu) {
 		    Random random = new Random();
 		    // Fem un bucle amb tantes voltes com dades a generar
 		    for (int i = 0; i < quantitatDades; i++) {
 		        // Generem i guardem els valors
-		        dadesIp4[i] = random.nextInt(256) + "." + random.nextInt(256) + "." + random.nextInt(256) + "." + random.nextInt(256);
+		        dadesCrear[contadorMatriu][i] = random.nextInt(256) + "." + random.nextInt(256) + "." + random.nextInt(256) + "." + random.nextInt(256);
 		    }
+		    contadorMatriu++;
 		}
 	// Mètode per generar la contrasenya segons els paràmetres
     public static String GenerarPassword(boolean inclouLletres, boolean inclouNumeros, 
@@ -314,7 +296,7 @@ public class Mockaroo {
     }
 	// ·Funcion String ha de indicar el 'any minim=1900 i maxim=2023'
 
-    public static void dates(int anyMinim,int anyMaxim,String data[]) {
+    public static void dates(int largada,int anyMinim,int anyMaxim,int aleatori,String data[]) {
 		Random random = new Random();
 		//dono llargada a les array i la variable
 		int test;
@@ -325,7 +307,7 @@ public class Mockaroo {
 			anyMinim=test;
 		}
 		//bucle per a generar els anys
-		for (int i = 0; i < quantitatDades; i++) {
+		for (int i = 0; i < data.length; i++) {
 			int any=random.nextInt(anyMaxim-anyMinim)+anyMinim,mes=random.nextInt(12)+1,dia;
 			//Crido a la funcio pera sabe cuans dies te el mes 
 			dia=diesMes(mes,any);
@@ -365,7 +347,7 @@ public class Mockaroo {
 	    
 	// ·Funcion para IBAN 
     //Per cridarla: iban( numeroAleatori, quantitatDades, Array on guardar els ibans)
-    private static void iban (int numeroAleatori, int quantitatDades, String [] iban) {
+    private static void iban (int numeroAleatori,int contadorMatriu) {
 		try{
 			//Primer contem les linies del arxiu per generar el array on guardar les dades
 			//No es fa amb un tamany definit per si es modifica el tamany de l'arxiu
@@ -399,7 +381,7 @@ public class Mockaroo {
             	for(int j = 0; j < quantitatDades; j++) {
             		//cridem la funció que genera ibans tants cops com dades
             		//em de generar
-            		iban[contador] = generarIban(liniesFitxer[llegirLinea]);
+            		dadesCrear[contadorMatriu][contador] = generarIban(liniesFitxer[llegirLinea]);
                 	llegirLinea++;
                 	contador++;
             	}
@@ -418,7 +400,7 @@ public class Mockaroo {
             	for(int k = 0; k < dadesDisponibles; k++) {
             		//Amb aquest primer for generem els ibans possibles fins que
             		//arribem al final de les dades disponibles
-            		iban[contador] = generarIban(liniesFitxer[llegirLinea]);
+            		dadesCrear[contadorMatriu][contador] = generarIban(liniesFitxer[llegirLinea]);
                 	llegirLinea++;
                 	contador++;
             	}
@@ -426,7 +408,7 @@ public class Mockaroo {
             	for(int l = 0; l < dadesRestants; l++) {
             		//amb aquest for generem ibans des de la linea 0 del
             		//array fins haver generat totes les dades restants
-            		iban[contador] = generarIban(liniesFitxer[llegirLinea]);
+            		dadesCrear[contadorMatriu][contador] = generarIban(liniesFitxer[llegirLinea]);
                 	llegirLinea++;
                 	contador++;
             	}
@@ -498,9 +480,10 @@ public class Mockaroo {
     }
 	// ·Funcion int ha de indicar el 'valor d'inici=1'
     //Funcio per generar autonumeric
-  	public static void autonumeric(int num[],int valorPerDefecte) {
+  	public static void autonumeric(int llargada,int num[],int valorPerDefecte) {
+  		num=new int[llargada];
   		//Faig un bucle per a genera el auto numeric comensan amb el numero que el usuari indiqui
-  		for (int i = 0; i <quantitatDades; i++) {
+  		for (int i = 0; i <llargada; i++) {
   			num[i]=valorPerDefecte;
   			valorPerDefecte++;
   			System.out.println(num[i]);
@@ -684,7 +667,7 @@ public class Mockaroo {
   		}
   	}
 	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
-	public static void creacioDeSql(String ruta,int linies,String [][] dadesCrear2 ) throws IOException {
+	public static void creacioDeSql(String ruta,int linies ) throws IOException {
 		
 		//Le doy nombre al SQL 
 		String test="\\Arxiu.sql";
@@ -703,10 +686,10 @@ public class Mockaroo {
 		//Creo el fitxer i crido la funcio per a crear la taula 
 		arxiuSql.createNewFile();
 		String noms[]=new String[10];
-		creacioDeTaula(linies,dadesCrear2,ruta,noms);
+		creacioDeTaula(linies,ruta);
 	}
 	//Funcio per a Creacio de SQL
-	public static void creacioDeTaula(int linies,String [][]dadesCrear2 ,String ruta,String[]nom) throws IOException{
+	public static void creacioDeTaula(int linies,String ruta) throws IOException{
 		//Declaro el escritor i escric lo nesesari per a crear i utilitza la base de dades
 		BufferedWriter writer = new BufferedWriter(new FileWriter(ruta));
 		writer.write("CREATE DATABASE IF NOT EXISTS TaulaPerMostrarDades;\n");
@@ -716,31 +699,31 @@ public class Mockaroo {
 		int j=0;
         String test="";
         //El bucle serveix per a escriure el tipo de valors que hi hauran a la taula amb el seu nom
-        for (int i = 0; i < dadesCrear2.length; i++) {
+        for (int i = 0; i < dadesCrear.length; i++) {
         	//Comprobo si hi ha algo a escriure
-			if (dadesCrear2[i][0]!=null) {
+			if (dadesCrear[i][0]!=null) {
 				//Condicio per a escriure ints en la primera bolta
 				if (j==0&&(i==18||i==11)) {
-					writer.write(nomTipusDada[i]+" INT");
-					test="("+nomTipusDada[i];
+					writer.write(tipusDada[i]+" INT");
+					test="("+tipusDada[i];
 					j++;
 				}else if(j==0&&i==10){//Condicio per a escriure booleans en la primera bolta
-					writer.write(nomTipusDada[i]+" BOOLEAN");
-					test="("+nom;
+					writer.write(tipusDada[i]+" BOOLEAN");
+					test="("+tipusDada[i];
 					j++;
 				}else if (j==0&&(i!=18||i!=11)) {//Condicio per a escriure Strings en la primera bolta
-					writer.write(nom+" VACHAR(100)");
-					test="("+nomTipusDada[i];
+					writer.write(tipusDada[i]+" VACHAR(100)");
+					test="("+tipusDada[i];
 					j++;
 				}else if (i==18||i==11) {//Condicio per a escriure ints
-					writer.write(" ,"+nomTipusDada[i]+" INT");
-					test=test+","+nomTipusDada[i];
+					writer.write(" ,"+tipusDada[i]+" INT");
+					test=test+","+tipusDada[i];
 				}else if (i== 10) {//Condicio per a escriure booleans
-					writer.write(","+nomTipusDada[i]+" BOOLEAN");
-					test=test+","+nomTipusDada[i];
+					writer.write(","+tipusDada[i]+" BOOLEAN");
+					test=test+","+tipusDada[i];
 				}else {//Condicio per a escriure Strings
-					writer.write(","+nomTipusDada[i]+" VACHAR(100)");
-					test=test+","+nomTipusDada[i];
+					writer.write(","+tipusDada[i]+" VACHAR(100)");
+					test=test+","+tipusDada[i];
 				}
 			}
 		}
@@ -751,22 +734,22 @@ public class Mockaroo {
         //Bucle per a crear tots els inserts necessaris
         for (int k = 0; k < linies; k++) {
         	//Comprobo si hi ha algo a escriure
-        	if (dadesCrear2[i][k]!=null) {
+        	if (dadesCrear[i][k]!=null) {
         		//Escric cada insert
         		writer.write("INSERT INTO DadesGenarades "+test+") VALUES (");
         		//
-        		for ( i = 0;i  < dadesCrear2.length;i++) {
-	        		if (dadesCrear2[i][k]!=null) {
+        		for ( i = 0;i  < dadesCrear.length;i++) {
+	        		if (dadesCrear[i][k]!=null) {
 	        			if (j==0&&(k==11||k==18)) {
-	            			writer.write(dadesCrear2[i][k]);
+	            			writer.write(dadesCrear[i][k]);
 	            			j++;
 	    				}else if (j==0) {
-	    					writer.write(" '"+dadesCrear2[i][k]+"'");
+	    					writer.write(" '"+dadesCrear[i][k]+"'");
 	            			j++;
 	    				}else if (i==10||i==11) {
-	    					writer.write(", "+dadesCrear2[i][k]);
+	    					writer.write(", "+dadesCrear[i][k]);
 	    				}else {
-	    					writer.write(", '"+dadesCrear2[i][k]+"'");
+	    					writer.write(", '"+dadesCrear[i][k]+"'");
 	    				}
 					}
 				}
@@ -778,95 +761,64 @@ public class Mockaroo {
         writer.flush();
         writer.close();
 	}
-	public static String[][] provesllegirDades(String dadesALlegir,int quantitatDades,int columnes,boolean especial) throws IOException{
-		Random random = new Random();
-		
-		int aleatori=random.nextInt(250)+1;
-		
-		String [][] dadesCrear=new String[19][quantitatDades];
-				
-		lectorArxius(dadesALlegir,aleatori,columnes,dadesCrear[1],especial);
-		
-		for (int i = 0; i < dadesCrear.length; i++) {
-			for (int j = 0; j < quantitatDades; j++) {
-				if (dadesCrear[i][j]!=null) {
-					System.out.println(i+"--"+j+"--"+dadesCrear[i][j]);
+	public static String[][] lectorArxius(int linies,String[] arxiusALlegir,int aleatori) throws IOException{
+		String perLlegit[][]=new String[arxiusALlegir.length][linies];
+		String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt","Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
+		for (int i = 0; i < arxiusALlegir.length; i++) {
+			BufferedReader br = new BufferedReader(new FileReader(arxiusALlegir[i]));
+			llegir(br, perLlegit[i],aleatori,linies,0);
+		}
+		int fets=0;
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < perLlegit.length; j++) {
+				if (arxiusALlegir[j].equals(files_dades[i])) {
+					dadesCrear[i]=perLlegit[j];
+					j=perLlegit.length;
+					fets++;
+				}else if(fets==perLlegit.length) {
+					i=10;
+					j=perLlegit.length;
 				}
 			}
 		}
-
-		creacioDeSql("C:\\Intel",quantitatDades,dadesCrear);
-
+		
 		return dadesCrear;
+		/*
+		
+		*/
 	}
-	public static void lectorArxius(String arxiusALlegir,int aleatori,int columnes,String arxiusLector[],boolean especials) throws IOException{
-		//String files_dades[]= {"Dades/1-Noms.txt","Dades/2-Cognoms.txt","Dades/3-Ciutat.txt","Dades/4-Adreces.txt","Dades/5.Proffesions.txt","Dades/6.Pais.txt","Dades/7.Estudis.txt","Dades/8.Colors.txt","Dades/10.NomDeLaCompanyia"};
-	
-		BufferedReader br = new BufferedReader(new FileReader(arxiusALlegir));
-		llegir(br, arxiusLector,aleatori,quantitatDades,especials);
-
-	}
-	public static void llegir(BufferedReader br,String[]llegit,int aleatori,int linies,boolean especial) throws IOException{
+	public static void llegir(BufferedReader br,String[]llegit,int aleatori,int linies,int especial) throws IOException{
 		String text[]=new String[2];
 		//L'asicno la llargada a les arrays que s'utilitzaran
 		int j=0,posicioArray,numAleatori2=aleatori,largadaArxiu=250,largadaGenera=linies;
-		numAleatori2=aleatori-1;
 		largadaGenera=numAleatori2+largadaGenera;
 		posicioArray=largadaGenera-largadaArxiu;
 		if (posicioArray>0) {//Condicio per si mirar que tot cap a la array respecte el num aleatori
 			//calculo quina posicio li correspont a la primera linia
 			posicioArray=linies-posicioArray;
 			//Bucle per a lleguir i guardar a la posicio corresponent
-			if (especial) {
-				for (int i = 0; i < largadaArxiu; i++) {
-					text[1]=br.readLine();
-					if (posicioArray<linies) {//Guardo a les ultimes posicions del array les primeres linies 
+			for (int i = 0; i < largadaArxiu; i++) {
+				text[1]=br.readLine();
+				if (posicioArray<linies) {//Guardo a les ultimes posicions del array les primeres linies 
+					text=text[1].split("#");
+					llegit[posicioArray]=text[1];
+					posicioArray++;
+				}else {
+					if (i>=numAleatori2&&j<linies) {//Guardo la resta de linies amb el ordre correcte a la posicio del num aleatori
 						text=text[1].split("#");
-						llegit[posicioArray]=text[2];
-						posicioArray++;
-					}else {
-						if (i>=numAleatori2&&j<linies) {//Guardo la resta de linies amb el ordre correcte a la posicio del num aleatori
-							text=text[1].split("#");	
-							llegit[j]=text[2];
-							j++;
-						}
-					}
-				}
-			}else {
-				for (int i = 0; i < largadaArxiu; i++) {
-					text[1]=br.readLine();
-					if (posicioArray<linies) {//Guardo a les ultimes posicions del array les primeres linies 
-						text=text[1].split("#");
-						llegit[posicioArray]=text[1];
-						posicioArray++;
-					}else {
-						if (i>=numAleatori2&&j<linies) {//Guardo la resta de linies amb el ordre correcte a la posicio del num aleatori
-							text=text[1].split("#");	
-							llegit[j]=text[1];
-							j++;
-						}
+						llegit[j]=text[1];
+						j++;
 					}
 				}
 			}
 		}else {//Si que hi cap respecte el aleatori 
 			//bucle per a llegir de una sense fer els calculs
-			if(especial) {
-				for (int i = 0; j < linies; i++) {
-					text[1]=br.readLine();
-					if (i>=aleatori&&j<linies) {
-						text=text[1].split("#");
-						llegit[j]=text[2];
-						j++;
-					}
-				}
-			}else {
-				for (int i = 0; j < linies; i++) {
-					text[1]=br.readLine();
-					if (i>=aleatori&&j<linies) {
-						text=text[1].split("#");
-						llegit[j]=text[1];
-						j++;
-					}
+			for (int i = 0; j < linies; i++) {
+				text[1]=br.readLine();
+				if (i>=aleatori&&j<linies) {
+					text=text[1].split("#");
+					llegit[j]=text[1];
+					j++;
 				}
 			}
 		}
@@ -899,7 +851,7 @@ public class Mockaroo {
 	        return "Number";
 	    } else if (id == 12) {
 	        return "Emails";
-	    } else if (id == 13) {
+	    } else if (id == 13) { 
 	        return "IP4";
 	    } else if (id == 14) {
 	        return "Password";
@@ -914,5 +866,18 @@ public class Mockaroo {
 	    } else {
 	        return ""; // Si no coincide con ningún id
 	    }
+	}
+	public static boolean validadFormatPrimeraLinia(String[] format) {
+
+		if(format.length!=3)return false;
+		format[0]=format[0].toUpperCase();
+		if(!format[0].equals("XML")&&!format[0].equals("SQL"))return false;
+		try {
+			Integer.parseInt(format[1]);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		if(format[2].length()<=0)return false;
+		return true;
 	}
 }

@@ -221,3 +221,30 @@
 221#Filipines#PH
 222#Brunei#BN
 223#Timor Oriental#TL
+224#Espanya#ES
+225#França#FR
+226#Itàlia#IT
+227#Regne Unit#GB
+228#Alemanya#DE
+229#Portugal#PT
+230#Bèlgica#BE
+231#Suïssa#CH
+232#Països Baixos#NL
+233#Dinamarca#DK
+234#Noruega#NO
+235#Suècia#SE
+236#Finlàndia#FI
+237#Àustria#AT
+238#Luxemburg#LU
+239#Irlanda#IE
+240#Islàndia#IS
+241#Txèquia#CZ
+242#Eslovàquia#SK
+243#Hongria#HU
+244#Polònia#PL
+245#Croàcia#HR
+246#Eslovènia#SI
+247#Sèrbia#RS
+248#Bulgària#BG
+249#Romania#RO
+250#Grècia#GR
