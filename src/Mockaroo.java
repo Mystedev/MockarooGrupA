@@ -45,6 +45,7 @@ public class Mockaroo {
 					System.out.println("Archivo válido. {" + firstLine + "}");
 					String arxiuSortida = formatArxiu[0]; // XML/SQL
 					int registres = Integer.parseInt(formatArxiu[1]); // Cantidad de registros
+					quantitatDades = registres;
 					String ruta = formatArxiu[2]; // Ruta donde se guarda el archivo
 				} else {
 					System.out.println("Formato no válido.");
@@ -59,49 +60,53 @@ public class Mockaroo {
 
 			// Leer líneas restantes y procesar índices
 			String line;
-			while ((line = br.readLine()) != null) {
-				String[] indicesStr = line.split("#");
-				int[] indices = new int[indicesStr.length];
+			while ((line=br.readLine())!=null) {
+				if(line.equals("")) {
+					return;
+				}else {
+					String[] indicesStr = line.split("#");
+					int[] indices = new int[indicesStr.length];
+					// Convertir y validar índices
+					for (int i = 0; i < indicesStr.length; i++) {
+						int index = Integer.parseInt(indicesStr[i]);
+						if (index >= 1 && index <= 19) {
+							indices[i] = index;
+						} else {
+							indices[i] = -1;
+						}
+					}
 
-				// Convertir y validar índices
-				for (int i = 0; i < indicesStr.length; i++) {
-					int index = Integer.parseInt(indicesStr[i]);
-					if (index >= 1 && index <= 19) {
-						indices[i] = index;
-					} else {
-						indices[i] = -1;
+					// Procesar índices válidos
+					for (int i = 0; i < indices.length; i++) {
+						if (indices[i] >= 1 && indices[i] <= 10) {
+							// Procesar archivos de datos
+							String archivo = files_dades[indices[i] - 1];
+							if ("9".equals(archivo)) {
+								url(quantitatDades, dadesCrear[indices[i] - 1], numeroAleatori);
+							}
+							if (archivo != null && !"null".equals(archivo)) {
+								System.out.println("Archivo de datos: " + archivo);
+							}
+						} else if (indices[i] >= 11 && indices[i] <= 19) {
+							if(indices[i]==11)booleans(contadorMatriu);
+							if(indices[i]==12)RandomNumber(decimal,minim,maxim);
+							if(indices[i]==13)email(quantitatDades,dadesCrear[contadorMatriu],files_dades,numeroAleatori,"");
+							if(indices[i]==14)ip4(contadorMatriu);
+							if(indices[i]==15)GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
+									inclouMinuscules,inclouSimbols,longitud);
+							if(indices[i]==16)dates(llargada,anyMinim,anyMaxim,numeroAleatori,dadesCrear[contadorMatriu]);
+							if(indices[i]==17)iban(numeroAleatori,contadorMatriu);
+							if(indices[i]==18)ObtenerDNI();
+							if(indices[i]==19)autonumeric(numeroAleatori, dadesCrear[contadorMatriu], valorPerDefecte);
+						} else if (indices[i] == 0) {
+							System.out.println("Índice 0 omitido.");
+						} else {
+							System.out.println("Índice " + indices[i] + " fuera de rango.");
+						}
+						contadorMatriu++;
 					}
 				}
-
-				// Procesar índices válidos
-				for (int i = 0; i < indices.length; i++) {
-					if (indices[i] >= 1 && indices[i] <= 10) {
-						// Procesar archivos de datos
-						String archivo = files_dades[indices[i] - 1];
-						if ("9".equals(archivo)) {
-							url(quantitatDades, dadesCrear[indices[i] - 1], numeroAleatori);
-						}
-						if (archivo != null && !"null".equals(archivo)) {
-							System.out.println("Archivo de datos: " + archivo);
-						}
-					} else if (indices[i] >= 11 && indices[i] <= 19) {
-						if(indices[i]==11)booleans(contadorMatriu);
-						if(indices[i]==12)RandomNumber(decimal,minim,maxim);
-						if(indices[i]==13)email(llargada,dadesCrear[contadorMatriu],files_dades,numeroAleatori,"");
-						if(indices[i]==14)ip4(contadorMatriu);
-						if(indices[i]==15)GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
-								inclouMinuscules,inclouSimbols,longitud);
-						if(indices[i]==16)dates(llargada,anyMinim,anyMaxim,numeroAleatori,dadesCrear[contadorMatriu]);
-						if(indices[i]==17)iban(numeroAleatori,contadorMatriu);
-						if(indices[i]==18)ObtenerDNI();
-						if(indices[i]==19)autonumeric(numeroAleatori, dadesCrear[contadorMatriu], valorPerDefecte);
-					} else if (indices[i] == 0) {
-						System.out.println("Índice 0 omitido.");
-					} else {
-						System.out.println("Índice " + indices[i] + " fuera de rango.");
-					}
-					contadorMatriu++;
-				}
+				
 			}
 			br.close();
 		} catch (Exception e) {
@@ -120,12 +125,12 @@ public class Mockaroo {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(files_dades[0]));
 
-			BufferedReader br1 = new BufferedReader(new FileReader(files_dades[8]));
+			BufferedReader br1 = new BufferedReader(new FileReader(files_dades[9]));
 
 			// L'asicno la llargada a les arrays que s'utilitzaran
 			String auxiliarNom[] = new String[largada];
 			llegir(br, auxiliarNom, aleatori, largada, 0);
-			if (domini.length() > 0) {
+			if (domini != null && domini.length() > 0) {
 				for (int i = 0; i < emails.length; i++) {
 					emails[i] = auxiliarNom[i] + "@" + domini;
 				}
@@ -774,7 +779,7 @@ public class Mockaroo {
 		String text[] = new String[2];
 		// L'asicno la llargada a les arrays que s'utilitzaran
 		int j = 0, posicioArray, numAleatori2 = aleatori, largadaArxiu = 250, largadaGenera = linies;
-		numAleatori2 = aleatori - 1;
+		
 		largadaGenera = numAleatori2 + largadaGenera;
 		posicioArray = largadaGenera - largadaArxiu;
 		if (posicioArray > 0) {// Condicio per si mirar que tot cap a la array respecte el num aleatori
