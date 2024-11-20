@@ -74,6 +74,7 @@ public class Mockaroo {
 					return;
 				}else {
 					String[] indicesStr = line.split("#");
+					
 					int[] indices = new int[indicesStr.length];
 					// Convertir y validar índices
 					for (int i = 0; i < indicesStr.length; i++) {
@@ -185,7 +186,7 @@ public class Mockaroo {
 		// Comprovo que el arxiu existeixi i sigui un directori
 		File f = new File(formatArxiu[2]);
 		if ((!f.exists()) || (!f.isDirectory())) {
-			System.out.println("Error -> La ubicació no existe o es un arxibo.");
+			System.out.println("Error -> La ubicació no existe o es un arxiu.");
 			return false;
 		}
 		// Si tot és correcte, sortir del bucle
