@@ -7,9 +7,10 @@ import java.util.Random;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-
+/**
+ * 
+ */
 public class Mockaroo {
-
 	// Variables i metodes globals del programa
 	public static String rutaUbicacio;
 	public static int quantitatTipusDades;
@@ -20,7 +21,6 @@ public class Mockaroo {
 			"Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt", "Dades/7-Estudis.txt",
 			"Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt" };
 	// Parametres utilitzats a les funcions
-
 	public static void main(String[] args) {
 		try {
 			String lineContador;
