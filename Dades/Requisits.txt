@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 sql#200#C:\Intel
 1#a
 2
@@ -6,3 +7,10 @@ sql#200#C:\Intel
 9
 10
 13
+=======
+xml#200#C:\Intel
+1#a
+10#nombre#apellido
+7#numteleofon
+3
+>>>>>>> refs/remotes/origin/main
