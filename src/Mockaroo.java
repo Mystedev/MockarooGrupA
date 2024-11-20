@@ -28,6 +28,217 @@ public class Mockaroo {
 			int columnes=0;
 			BufferedReader br1=new BufferedReader(new FileReader(fileEntrada));
 			while((lineContador = br1.readLine()) != null) {
+				
+					
+					String[] lineas = lineContador.split("#");
+					
+					char[] indice = lineas[0].toCharArray();
+					if(indice.length>2) {
+						System.out.println("Tamaño de indice no valido");
+					}
+					if(indice.length==2) {
+						if(!Character.isDigit(indice[0]) || !Character.isDigit(indice[1])) {
+							System.out.println("Indice no valido, tienen que ser digitos");
+						}else {
+							
+							int indiceCompleto = Integer.parseInt(lineas[0]);
+						
+							if(indiceCompleto>19 || indiceCompleto<1) {
+								System.out.println(lineContador);
+								System.out.println("indice no valido, debe estar entre 1 y 19");
+							}
+							switch(indiceCompleto){
+								case 10:
+									if(lineas.length!=2) {
+										System.out.println(lineContador);
+										System.out.println("Entrada incorrecta, debe contener id#nombre");
+									}
+									break;
+								case 11:
+									if(lineas.length!=2) {
+										System.out.println(lineContador);
+										System.out.println("Entrada incorrecta, debe contener id#nombre");
+									}
+									break;
+								case 12:
+									if(lineas.length<2 || lineas.length>5) {
+										System.out.println(lineContador);
+										System.out.println("Entrada incorrecta, debe contener id#nombre como minimo \nComo pocional puede ser \nid#nombre#decimales \nid#nombre#decimales#minimo \nid#nombre#decimales#minimo#maximo");
+									}
+									if(lineas.length==3) {
+										char[] decimals = lineas[2].toCharArray();
+										for(int i = 0; i<decimals.length; i++) {
+											if(!Character.isDigit(decimals[i])) {
+												System.out.println(lineContador);
+												System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+											}
+										}
+									}
+									if(lineas.length==4) {
+										char[] decimals = lineas[3].toCharArray();
+										for(int i = 0; i<decimals.length; i++) {
+											if(!Character.isDigit(decimals[i])) {
+												System.out.println(lineContador);
+												System.out.println("Parametro no valido, la opcion minimo tiene que ser digitos");
+											}
+										}
+										char[] decimals2 = lineas[2].toCharArray();
+										for(int i = 0; i<decimals2.length; i++) {
+											if(!Character.isDigit(decimals2[i])) {
+												System.out.println(lineContador);
+												System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+											}
+										}
+									}
+									if(lineas.length==5) {
+										char[] decimals2 = lineas[2].toCharArray();
+										for(int i = 0; i<decimals2.length; i++) {
+											if(!Character.isDigit(decimals2[i])) {
+												System.out.println(lineContador);
+												System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+											}
+										}
+										char[] decimals3 = lineas[3].toCharArray();
+										for(int i = 0; i<decimals3.length; i++) {
+											if(!Character.isDigit(decimals3[i])) {
+												System.out.println(lineContador);
+												System.out.println("Parametro no valido, la opcion minimo tiene que ser digitos");
+											}
+										}
+										char[] decimals = lineas[4].toCharArray();
+										for(int i = 0; i<decimals.length; i++) {
+											if(!Character.isDigit(decimals[i])) {
+												System.out.println(lineContador);
+												System.out.println("Parametro no valido, la opcion maximo tiene que ser digitos");
+											}
+										}
+									}
+									break;
+								case 13:
+									if(lineas.length<2 || lineas.length>4) {
+										System.out.println(lineContador);
+										System.out.println("Entrada incorrecta, debe contener id#nombre como minimo \nLos parametros opcionales son \nid#nombre#dominio \nid#nombre#extensionDominio \nid#nombre#dominio#extensionDominio");
+									}
+									break;
+								case 14:
+									if(lineas.length!=2) {
+										System.out.println(lineContador);
+										System.out.println("Entrada incorrecta, debe contener id#nombre");
+									}
+									break;
+								case 15:
+									if(lineas.length!=8) {
+										System.out.println(lineContador);
+										System.out.println("Entrada incorrecta, debe contener id#nombre#letras#numeros#mayusculas#minusculas#simbolos#longitud");					
+										continue;
+									}else {
+										for(int i = 2; i<lineas.length-1;i++) {
+											char[] opcions = lineas[i].toCharArray();
+											
+											if(lineas[i].length()!=1) {
+												System.out.println(lineContador);
+												System.out.println("Entrada incorrecta, las opciones deben ser un digito ( zero o uno )");
+											}
+											if(!Character.isDigit(opcions[0])) {
+												System.out.println(lineContador);
+												System.out.println("Entrada incorrecta, las opciones deben ser un digito ( zero o uno )");
+											}else if(Integer.parseInt(String.valueOf(opcions[0]))!=0 && Integer.parseInt(String.valueOf(opcions[0]))!=1) {
+												System.out.println(lineContador);
+												System.out.println("Entrada incorrecta, las opciones deben ser un digito ( zero o uno )");
+											}
+											
+										}
+										
+									} 
+									
+									if(Integer.parseInt(lineas[7])<8 || Integer.parseInt(lineas[7])>32) {
+										System.out.println(lineContador);
+										System.out.println("Entrada incorrecta, la longitud de la contraseña debe ser entre 8 y 32");
+										
+									}
+									break;
+								case 16:
+									boolean error = false;
+									if(lineas.length<2 || lineas.length>4) {
+										System.out.println(lineContador);
+										System.out.println("Entrada incorrecta, debe contener id#nombre como minimo \nLos parametros opcionales son \nid#nombre#añoMinimo \nid#nombre#añoMinimo#añoMaximo");
+									}else if(lineas.length==3) {
+										char[] anyMinim = lineas[2].toCharArray();
+										for(int i = 0; i < anyMinim.length; i++) {
+											if(!Character.isDigit(anyMinim[i])) {
+												System.out.println(lineContador);
+												System.out.println("Parametro no valido, el año minimo deben ser digitos");
+												i=1000;
+												error = true;
+											}
+											
+										}
+		
+									} else if(lineas.length==4) {
+										char[] anyMinim = lineas[2].toCharArray();
+										for(int i = 0; i < anyMinim.length; i++) {
+											if(!Character.isDigit(anyMinim[i])) {
+												System.out.println(lineContador);
+												System.out.println("Parametro no valido, el año minimo deben ser digitos");
+												i=1000;
+												error = true;
+											}
+											
+										}
+										char[] anyMinim2 = lineas[3].toCharArray();
+										for(int i = 0; i < anyMinim2.length; i++) {
+											if(!Character.isDigit(anyMinim2[i])) {
+												System.out.println(lineContador);
+												System.out.println("Parametro no valido, el año maximo deben ser digitos");
+												i=1000;
+												error = true;
+											}		
+										}
+									}
+									break;
+								case 17:
+									if(lineas.length!=2) {
+										System.out.println(lineContador);
+										System.out.println("Entrada incorrecta, debe contener id#nombre");
+									}
+									break;
+								case 18:
+									if(lineas.length!=2) {
+										System.out.println(lineContador);
+										System.out.println("Entrada incorrecta, debe contener id#nombre");
+									}
+									break;
+								case 19:
+									if(lineas.length<2 || lineas.length>3) {
+										System.out.println(lineContador);
+										System.out.println("Entrada incorrecta, debe contener id#nombre \n los parametros opcionales son \n id#nombre#valorInicio");
+									}else if(lineas.length==3) {
+										char[] valorInicio = lineas[2].toCharArray();
+										for(int i = 0; i < valorInicio.length; i++) {
+											if(!Character.isDigit(valorInicio[i])) {
+												System.out.println(lineContador);
+												System.out.println("Parametro no valido, el valor de inicio debe ser digitos");
+												i=1000;
+												
+											}		
+										}
+									}
+									break;
+							}
+						}
+						
+					}
+					if(indice.length==1) {
+						if(!Character.isDigit(indice[0])) {
+							System.out.println("Indice no valido, tienen que ser digitos");
+						}
+						if(lineas.length !=2){
+							System.out.println(lineContador);
+							System.out.println("Entrada incorrecta, debe contener id#nombre");
+						}
+					}
+					
+				
 				columnes++;
 			}
 			tipusDada=new String[columnes][columnes];
@@ -123,7 +334,14 @@ public class Mockaroo {
 			}
 			br.close();
 			} catch(Exception e) {e.printStackTrace();}	
-		}
+	
+
+	}
+	
+	public static void validacioDades() {
+			
+	}
+
 	// for (int i = 0; i < emails.length; i++) {
 	// System.out.println(emails[i]);
 	// }
@@ -158,8 +376,58 @@ public class Mockaroo {
 			e.printStackTrace();
 		}
 	}
+	    
+	
+	// Funció que llegeix l'array segons els indexs proporcionats
+	public static String[] processarIndexs(String[] archivos, int[] indices) {
+	    String[] resultados = new String[indices.length];
+	    for (int i = 0; i < indices.length; i++) {
+	        int index = indices[i];
+	        
+	        // Verificar si el índice está dentro del rango de archivos
+	        if (index > 0 && index <= archivos.length) {
+	            resultados[i] = archivos[index  - 1]; // Guardar archivo en el array
+	        } 
+	        // Verificar si el índice está dentro del rango de funciones (valores de ejemplo: 11-19)
+	        else if (index >= 11 && index <= 19) {
+	        	
+	        } 
+	        else {
+	            resultados[i] = "Índice " + index + " fuera de rango.";
+	        }
+	    }
+	    return resultados; // Retornar los resultados
 
-	// Funcio per llegir les funcions a dins de l'arxiu requisits
+	}/*
+	private static String executarFuncions(int index) {
+	    switch (index) {
+	        case 11:
+	            booleans();
+	        case 12:
+	            RandomNumber(decimals,minim,maxim);
+	        case 13:
+	            email(largada,emails[],files_dades[],aleatori,domini);
+	        case 14:
+	            ip4();
+	        case 15:
+	            GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,inclouMinuscules,inclouSimbols, longitud);
+	        case 16:
+	            dates(largada,anyMinim,anyMaxim,aleatori,data[]);
+	        case 17:
+	            iban();
+	        case 18:
+	            ObtenerDNI();
+	        case 19:
+	            autonumeric(llargada,num[],valorPerDefecte);
+	        default:
+	            return "Función no definida para índice " + index;
+	    }
+	}*/
+
+	
+	
+
+
 	// Funcio creada per validar el format del fitxer d'entrada
 	public static boolean ValidarFormatEntrada(String arxiuGenerat, String formatArxiu[]) {
 		// Comprovar la longitud de l'array i el format correctament
@@ -494,6 +762,24 @@ public class Mockaroo {
 	}
 
 	// ·Funcion int ha de indicar el 'valor d'inici=1'
+    //Funcio per generar autonumeric
+  	public static void autonumeric(int llargada,int num[],int valorPerDefecte) {
+  		num=new int[llargada];
+  		//Faig un bucle per a genera el auto numeric comensan amb el numero que el usuari indiqui
+  		for (int i = 0; i <llargada; i++) {
+  			num[i]=valorPerDefecte;
+  			valorPerDefecte++;
+  			System.out.println(num[i]);
+  		}
+  	}
+	//*****************************
+	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
+    
+  //Funcio per crear l'arxiu xsl
+    //crearXsl(dadesCrear);
+  	
+  	
+
 	// Funcio per generar autonumeric
 
 	public static void autonumeric(int llargada, String num[], int valorPerDefecte) {
@@ -555,7 +841,7 @@ public class Mockaroo {
 
 	// Funcio per crear el xml
 	// crearXml(dadesCrear2, dadesCrear, quantitatDades);
-	public static void crearXml(String[][] dadesCrear2, String[] dadesCrear, int quantitatDades) {
+	public static void crearXml(String[][] dadesCrear2, String[][] dadesCrear, int quantitatDades) {
 
 		File desti = new File(rutaUbicacio + "\\Dades.xml");
 		try {
@@ -565,10 +851,13 @@ public class Mockaroo {
 					+ "<Dades xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"Dades.xsd\">");
 			for (int i = 0; i < quantitatDades; i++) {
 				impressora.println("    <linea>");
-				for (int j = 0; j < dadesCrear2.length; j++) {
-					if (dadesCrear[j] != null) {
+				for (int j = 0; j < dadesCrear.length; j++) {
+					if(tipusDada[j]!= null) {
+						impressora.println("        <"+tipusDada[j]+">"+dadesCrear[j][i]+"</"+tipusDada[j]+">");
+				for (int k = 0; k < dadesCrear2.length; k++) {
+					if (dadesCrear[k] != null) {
 						impressora.println(
-								"        <" + dadesCrear[j] + ">" + dadesCrear2[j][i] + "</" + dadesCrear[j] + ">");
+								"        <" + dadesCrear[k] + ">" + dadesCrear2[k][i] + "</" + dadesCrear[k] + ">");
 					}
 				}
 				impressora.println("    </linea>");
@@ -577,10 +866,28 @@ public class Mockaroo {
 
 			impressora.flush();
 			impressora.close();
-
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+			
+  	}
+  //Funcio per crear el XSD
+  	
+  //Funció per crear l'arxiu xsd
+  	//crearXsd(dadesCrear);
+  	
+  	
+	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
+	public static void creacioDeSql(String ruta,int linies,String [][] dadesCrear2 ) throws IOException {
+		
+		//Le doy nombre al SQL 
+		String test="\\Arxiu.sql";
+		//Creo el file per a escriure en ell
+		File arxiuSql = new File(ruta+test);
+		//Miro si el file existeix i el canvio si es nesesari
+		int i=0;
 
 	}
 	// Funcio per crear el XSD
