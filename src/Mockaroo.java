@@ -691,12 +691,12 @@ public class Mockaroo {
 		String test = "";
 		// El bucle serveix per a escriure el tipo de valors que hi hauran a la taula
 		// amb el seu nom
-		for (int i = 0; i < dadesCrear.length; i++) {
+		for (int i = 0; i < tipusDada.length; i++) {
 			// Comprobo si hi ha algo a escriure
-			if (dadesCrear[i][0] != null) {
+			if (tipusDada[i][0] != null) {
 				// Condicio per a escriure ints en la primera bolta
 				if (j == 0 && (i == 18 || i == 11)) {
-					writer.write(tipusDada[i] + " INT");
+					writer.write(tipusDada[i][i] + " INT");
 					test = "(" + tipusDada[i];
 					j++;
 				} else if (j == 0 && i == 10) {// Condicio per a escriure booleans en la primera bolta
