@@ -154,6 +154,229 @@ public class Mockaroo {
 	    }
 
 	}
+	
+	public static void validacioDades() {
+		try {
+					
+			String fileEntrada = "C:/Intel/Requisits.txt";
+			BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
+			String firstLine = br.readLine();
+			String line;
+			
+			while((line = br.readLine()) != null){
+				//System.out.println(line);
+				String[] lineas = line.split("#");
+				char[] indice = lineas[0].toCharArray();
+				if(indice.length>2) {
+					System.out.println("Tamaño de indice no valido");
+				}
+				if(indice.length==2) {
+					if(!Character.isDigit(indice[0]) || !Character.isDigit(indice[1])) {
+						System.out.println("Indice no valido, tienen que ser digitos");
+					}else {
+						
+						int indiceCompleto = Integer.parseInt(lineas[0]);
+					
+						if(indiceCompleto>19 || indiceCompleto<1) {
+							System.out.println(line);
+							System.out.println("indice no valido, debe estar entre 1 y 19");
+						}
+						switch(indiceCompleto){
+							case 10:
+								if(lineas.length!=2) {
+									System.out.println(line);
+									System.out.println("Entrada incorrecta, debe contener id#nombre");
+								}
+								break;
+							case 11:
+								if(lineas.length!=2) {
+									System.out.println(line);
+									System.out.println("Entrada incorrecta, debe contener id#nombre");
+								}
+								break;
+							case 12:
+								if(lineas.length<2 || lineas.length>5) {
+									System.out.println(line);
+									System.out.println("Entrada incorrecta, debe contener id#nombre como minimo \nComo pocional puede ser \nid#nombre#decimales \nid#nombre#decimales#minimo \nid#nombre#decimales#minimo#maximo");
+								}
+								if(lineas.length==3) {
+									char[] decimals = lineas[2].toCharArray();
+									for(int i = 0; i<decimals.length; i++) {
+										if(!Character.isDigit(decimals[i])) {
+											System.out.println(line);
+											System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+										}
+									}
+								}
+								if(lineas.length==4) {
+									char[] decimals = lineas[3].toCharArray();
+									for(int i = 0; i<decimals.length; i++) {
+										if(!Character.isDigit(decimals[i])) {
+											System.out.println(line);
+											System.out.println("Parametro no valido, la opcion minimo tiene que ser digitos");
+										}
+									}
+									char[] decimals2 = lineas[2].toCharArray();
+									for(int i = 0; i<decimals2.length; i++) {
+										if(!Character.isDigit(decimals2[i])) {
+											System.out.println(line);
+											System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+										}
+									}
+								}
+								if(lineas.length==5) {
+									char[] decimals2 = lineas[2].toCharArray();
+									for(int i = 0; i<decimals2.length; i++) {
+										if(!Character.isDigit(decimals2[i])) {
+											System.out.println(line);
+											System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+										}
+									}
+									char[] decimals3 = lineas[3].toCharArray();
+									for(int i = 0; i<decimals3.length; i++) {
+										if(!Character.isDigit(decimals3[i])) {
+											System.out.println(line);
+											System.out.println("Parametro no valido, la opcion minimo tiene que ser digitos");
+										}
+									}
+									char[] decimals = lineas[4].toCharArray();
+									for(int i = 0; i<decimals.length; i++) {
+										if(!Character.isDigit(decimals[i])) {
+											System.out.println(line);
+											System.out.println("Parametro no valido, la opcion maximo tiene que ser digitos");
+										}
+									}
+								}
+								break;
+							case 13:
+								if(lineas.length<2 || lineas.length>4) {
+									System.out.println(line);
+									System.out.println("Entrada incorrecta, debe contener id#nombre como minimo \nLos parametros opcionales son \nid#nombre#dominio \nid#nombre#extensionDominio \nid#nombre#dominio#extensionDominio");
+								}
+								break;
+							case 14:
+								if(lineas.length!=2) {
+									System.out.println(line);
+									System.out.println("Entrada incorrecta, debe contener id#nombre");
+								}
+								break;
+							case 15:
+								if(lineas.length!=8) {
+									System.out.println(line);
+									System.out.println("Entrada incorrecta, debe contener id#nombre#letras#numeros#mayusculas#minusculas#simbolos#longitud");					
+									continue;
+								}else {
+									for(int i = 2; i<lineas.length-1;i++) {
+										char[] opcions = lineas[i].toCharArray();
+										
+										if(lineas[i].length()!=1) {
+											System.out.println(line);
+											System.out.println("Entrada incorrecta, las opciones deben ser un digito ( zero o uno )");
+										}
+										if(!Character.isDigit(opcions[0])) {
+											System.out.println(line);
+											System.out.println("Entrada incorrecta, las opciones deben ser un digito ( zero o uno )");
+										}else if(Integer.parseInt(String.valueOf(opcions[0]))!=0 && Integer.parseInt(String.valueOf(opcions[0]))!=1) {
+											System.out.println(line);
+											System.out.println("Entrada incorrecta, las opciones deben ser un digito ( zero o uno )");
+										}
+										
+									}
+									
+								} 
+								
+								if(Integer.parseInt(lineas[7])<8 || Integer.parseInt(lineas[7])>32) {
+									System.out.println(line);
+									System.out.println("Entrada incorrecta, la longitud de la contraseña debe ser entre 8 y 32");
+									
+								}
+								break;
+							case 16:
+								boolean error = false;
+								if(lineas.length<2 || lineas.length>4) {
+									System.out.println(line);
+									System.out.println("Entrada incorrecta, debe contener id#nombre como minimo \nLos parametros opcionales son \nid#nombre#añoMinimo \nid#nombre#añoMinimo#añoMaximo");
+								}else if(lineas.length==3) {
+									char[] anyMinim = lineas[2].toCharArray();
+									for(int i = 0; i < anyMinim.length; i++) {
+										if(!Character.isDigit(anyMinim[i])) {
+											System.out.println(line);
+											System.out.println("Parametro no valido, el año minimo deben ser digitos");
+											i=1000;
+											error = true;
+										}
+										
+									}
+	
+								} else if(lineas.length==4) {
+									char[] anyMinim = lineas[2].toCharArray();
+									for(int i = 0; i < anyMinim.length; i++) {
+										if(!Character.isDigit(anyMinim[i])) {
+											System.out.println(line);
+											System.out.println("Parametro no valido, el año minimo deben ser digitos");
+											i=1000;
+											error = true;
+										}
+										
+									}
+									char[] anyMinim2 = lineas[3].toCharArray();
+									for(int i = 0; i < anyMinim2.length; i++) {
+										if(!Character.isDigit(anyMinim2[i])) {
+											System.out.println(line);
+											System.out.println("Parametro no valido, el año maximo deben ser digitos");
+											i=1000;
+											error = true;
+										}		
+									}
+								}
+								break;
+							case 17:
+								if(lineas.length!=2) {
+									System.out.println(line);
+									System.out.println("Entrada incorrecta, debe contener id#nombre");
+								}
+								break;
+							case 18:
+								if(lineas.length!=2) {
+									System.out.println(line);
+									System.out.println("Entrada incorrecta, debe contener id#nombre");
+								}
+								break;
+							case 19:
+								if(lineas.length<2 || lineas.length>3) {
+									System.out.println(line);
+									System.out.println("Entrada incorrecta, debe contener id#nombre \n los parametros opcionales son \n id#nombre#valorInicio");
+								}else if(lineas.length==3) {
+									char[] valorInicio = lineas[2].toCharArray();
+									for(int i = 0; i < valorInicio.length; i++) {
+										if(!Character.isDigit(valorInicio[i])) {
+											System.out.println(line);
+											System.out.println("Parametro no valido, el valor de inicio debe ser digitos");
+											i=1000;
+											
+										}		
+									}
+								}
+								break;
+						}
+					}
+					
+				}
+				if(indice.length==1) {
+					if(!Character.isDigit(indice[0])) {
+						System.out.println("Indice no valido, tienen que ser digitos");
+					}
+					if(lineas.length !=2){
+						System.out.println(line);
+						System.out.println("Entrada incorrecta, debe contener id#nombre");
+					}
+				}
+				
+			}
+		} catch (Exception e) {
+            System.out.println("Error: Índice no válido en la entrada: ");
+        }
+	}
 	//for (int i = 0; i < emails.length; i++) {
 	//System.out.println(emails[i]);
 	//}

@@ -1,13 +1,9 @@
 xml#200#Documentos
-<<<<<<< HEAD
 1#a
-=======
 10#nombre#apellido
 7#numteleofon
 3
->>>>>>> refs/heads/proves
 2
-<<<<<<< HEAD
 3
 4
 5
@@ -25,8 +21,6 @@ xml#200#Documentos
 17
 18
 19
-=======
 1
 9
 17
->>>>>>> refs/heads/proves
