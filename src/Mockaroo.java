@@ -28,10 +28,7 @@ public class Mockaroo {
 			int columnes=0;
 			BufferedReader br1=new BufferedReader(new FileReader(fileEntrada));
 			while((lineContador = br1.readLine()) != null) {
-				
-					
 					String[] lineas = lineContador.split("#");
-					
 					char[] indice = lineas[0].toCharArray();
 					if(indice.length>2) {
 						System.out.println("Tamaño de indice no valido");
@@ -40,9 +37,7 @@ public class Mockaroo {
 						if(!Character.isDigit(indice[0]) || !Character.isDigit(indice[1])) {
 							System.out.println("Indice no valido, tienen que ser digitos");
 						}else {
-							
 							int indiceCompleto = Integer.parseInt(lineas[0]);
-						
 							if(indiceCompleto>19 || indiceCompleto<1) {
 								System.out.println(lineContador);
 								System.out.println("indice no valido, debe estar entre 1 y 19");
