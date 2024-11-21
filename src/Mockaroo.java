@@ -7,9 +7,7 @@ import java.util.Random;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-/**
- * 
- */
+
 public class Mockaroo {
 	// Variables i metodes globals del programa
 	public static String rutaUbicacio;
@@ -141,11 +139,8 @@ public class Mockaroo {
 												System.out.println(lineContador);
 												System.out.println("Entrada incorrecta, las opciones deben ser un digito ( zero o uno )");
 											}
-											
 										}
-										
 									} 
-									
 									if(Integer.parseInt(lineas[7])<8 || Integer.parseInt(lineas[7])>32) {
 										System.out.println(lineContador);
 										System.out.println("Entrada incorrecta, la longitud de la contraseña debe ser entre 8 y 32");
@@ -166,9 +161,7 @@ public class Mockaroo {
 												i=1000;
 												error = true;
 											}
-											
 										}
-		
 									} else if(lineas.length==4) {
 										char[] anyMinim = lineas[2].toCharArray();
 										for(int i = 0; i < anyMinim.length; i++) {
@@ -178,7 +171,6 @@ public class Mockaroo {
 												i=1000;
 												error = true;
 											}
-											
 										}
 										char[] anyMinim2 = lineas[3].toCharArray();
 										for(int i = 0; i < anyMinim2.length; i++) {
@@ -218,7 +210,7 @@ public class Mockaroo {
 											}		
 										}
 									}
-									break;
+							break;
 							}
 						}
 						
@@ -232,8 +224,6 @@ public class Mockaroo {
 							System.out.println("Entrada incorrecta, debe contener id#nombre");
 						}
 					}
-					
-				
 				columnes++;
 			}
 			tipusDada=new String[columnes][columnes];
@@ -394,36 +384,7 @@ public class Mockaroo {
 	    }
 	    return resultados; // Retornar los resultados
 
-	}/*
-	private static String executarFuncions(int index) {
-	    switch (index) {
-	        case 11:
-	            booleans();
-	        case 12:
-	            RandomNumber(decimals,minim,maxim);
-	        case 13:
-	            email(largada,emails[],files_dades[],aleatori,domini);
-	        case 14:
-	            ip4();
-	        case 15:
-	            GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,inclouMinuscules,inclouSimbols, longitud);
-	        case 16:
-	            dates(largada,anyMinim,anyMaxim,aleatori,data[]);
-	        case 17:
-	            iban();
-	        case 18:
-	            ObtenerDNI();
-	        case 19:
-	            autonumeric(llargada,num[],valorPerDefecte);
-	        default:
-	            return "Función no definida para índice " + index;
-	    }
-	}*/
-
-	
-	
-
-
+	}
 	// Funcio creada per validar el format del fitxer d'entrada
 	public static boolean ValidarFormatEntrada(String arxiuGenerat, String formatArxiu[]) {
 		// Comprovar la longitud de l'array i el format correctament
@@ -1170,5 +1131,4 @@ public class Mockaroo {
 			return ""; // Si no coincide con ningún id
 		}
 	}
-
 }
