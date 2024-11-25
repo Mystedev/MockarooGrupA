@@ -38,14 +38,3 @@ xml#200#C:\Intel
 18#dni
 19#id
 19#id
-sql#200#C:\Intel
-4#cabron
-1#si
-10#hola
-5#asiubd
-6#aksbd
-7#akfha
-2#aksbkas
-3#iausugf
-8#asubf
-10#lashfa
