@@ -1,4 +1,4 @@
-xml#200#C:\Intel
+sql#200#C:\Intel
 12#a#7#10#15
 12#sa#1
 12#si

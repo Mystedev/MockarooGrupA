@@ -917,7 +917,7 @@ public class Mockaroo {
 				impressora.println("    <linea>");
 				for (int j = 0; j < dadesCrear.length; j++) {
 					if(tipusDada[j]!= null) {
-						impressora.println("        <"+tipusDada[j]+">"+dadesCrear[j][i]+"</"+tipusDada[j]+">");
+						impressora.println(" <"+tipusDada[j]+">"+dadesCrear[j][i]+"</"+tipusDada[j]+">");
 				for (int k = 0; k < dadesCrear2.length; k++) {
 					if (dadesCrear[k] != null) {
 						impressora.println(
@@ -938,14 +938,10 @@ public class Mockaroo {
 			
   	}
   //Funcio per crear el XSD
-  	
   //Funció per crear l'arxiu xsd
   	//crearXsd(dadesCrear);
-  	
-  	
 	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
 	public static void creacioDeSql(String ruta,int linies,String [][] dadesCrear2 ) throws IOException {
-		
 		//Le doy nombre al SQL 
 		String test="\\Arxiu.sql";
 		//Creo el file per a escriure en ell
@@ -1179,50 +1175,6 @@ public class Mockaroo {
 					j++;
 				}
 			}
-		}
-	}
-	// Funcio per a trovar i tornar el nom de la dada a generar
-	public static String buscarNom(int id) {
-		if (id == 0) {
-			return "Nom";
-		} else if (id == 1) {
-			return "Cognoms";
-		} else if (id == 2) {
-			return "Ciutats";
-		} else if (id == 3) {
-			return "Adreces";
-		} else if (id == 4) {
-			return "Professions";
-		} else if (id == 5) {
-			return "País";
-		} else if (id == 6) {
-			return "Estudis";
-		} else if (id == 7) {
-			return "Colors";
-		} else if (id == 8) {
-			return "URL";
-		} else if (id == 9) {
-			return "Nom_de_la_companyia";
-		} else if (id == 10) {
-			return "Boolean";
-		} else if (id == 11) {
-			return "Number";
-		} else if (id == 12) {
-			return "Emails";
-		} else if (id == 13) {
-			return "IP4";
-		} else if (id == 14) {
-			return "Password";
-		} else if (id == 15) {
-			return "Dates";
-		} else if (id == 16) {
-			return "IBAN";
-		} else if (id == 17) {
-			return "DNI";
-		} else if (id == 18) {
-			return "Autonumèric";
-		} else {
-			return ""; // Si no coincide con ningún id
 		}
 	}
 }
