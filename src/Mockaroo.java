@@ -1030,11 +1030,11 @@ public class Mockaroo {
 				//If tipus[i][0].equals("19")||("11")||("12")
 				if (j == 0 && (tipusDada[i][0].equals("19"))) {
 					writer.write(tipusDada[i][1] + " INT");
-					test = "(" + tipusDada[i][1]	;
+					test = "(" + tipusDada[i][1];
 					j++;
 				}else if (j==0&&(tipusDada[i][0].equals("12"))){
 					writer.write(tipusDada[i][1] + " DOUBLE");
-					test = "(" + tipusDada[i][1]	;
+					test = "(" + tipusDada[i][1];
 					j++;
 				}else if (j == 0 && tipusDada[i][0].equals("11")) {// Condicio per a escriure booleans en la primera bolta
 					writer.write(tipusDada[i][1] + " BOOLEAN");
