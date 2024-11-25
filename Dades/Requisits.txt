@@ -1,4 +1,11 @@
-xml#200#C:\Intel
-12#a#7#10#15
-12#sa#1
-12#si
+sql#200#C:\Intel
+4#cabron
+1#si
+10#hola
+5#asiubd
+6#aksbd
+7#akfha
+2#aksbkas
+3#iausugf
+8#asubf
+10#lashfa

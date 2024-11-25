@@ -103,7 +103,7 @@
 103#Camerun#CM
 104#Nigèria#NG
 105#Ghana#GH
-106#Costa d'Ivori#CI
+106#Costa d Ivori#CI
 107#Burkina Faso#BF
 108#Togo#TG
 109#Benín#BJ
