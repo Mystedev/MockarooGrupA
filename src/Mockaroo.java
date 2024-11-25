@@ -296,7 +296,7 @@ public class Mockaroo {
 				
 				String arxiuSortida = formatArxiu[0]; // XML/SQL
 				registres = Integer.parseInt(formatArxiu[1]); // Cantidad de registros
-				String ruta = formatArxiu[2]; // Ruta donde se guarda el archivo
+				rutaUbicacio = formatArxiu[2]; // Ruta donde se guarda el archivo
 
 				dadesCrear=new String[columnes][registres];
 				quantitatDades=registres;
@@ -315,8 +315,7 @@ public class Mockaroo {
 						int valorPerDefecte = 1;
 						String domini="";
 						String[] indicesStr = line.split("#");
-						int[] indices = new int[indicesStr.length];
-						tipusDada[contadorMatriu][0]=""+indices[0];
+						tipusDada[contadorMatriu][0]=""+indicesStr[0];
 						tipusDada[contadorMatriu][1]=indicesStr[1];
 						// Convertir y validar índices
 							int index = Integer.parseInt(indicesStr[0]);
@@ -422,9 +421,9 @@ public class Mockaroo {
 				if (formatArxiu[0].equalsIgnoreCase("SQL"))
 					creacioDeSql(formatArxiu[2], quantitatDades);
 				else {
-					//crearXml(dadesCrear,);
-					//crearXsd(dadesCrear);
-					//crearXsl(dadesCrear);
+					crearXml(dadesCrear,tipusDada,quantitatDades);
+					crearXsd(tipusDada);
+					crearXsl(dadesCrear);
 				}
 				br.close();
 				} 
@@ -854,7 +853,7 @@ public class Mockaroo {
 
 	// Funcio per crear l'arxiu xsl
 	// crearXsl(dadesCrear);
-	public static void crearXsl(String[] dadesCrear) {
+	public static void crearXsl(String[][] dadesCrear) {
 		File desti = new File(rutaUbicacio + "\\Dades.xsl");
 		try {
 			PrintWriter impressora = new PrintWriter(desti);
@@ -900,9 +899,8 @@ public class Mockaroo {
 	// crearXml(dadesCrear2, dadesCrear, quantitatDades);
 	public static void crearXml(String[][] dadesCrear2, String[][] dadesCrear, int quantitatDades) {
 
-		File desti = new File(rutaUbicacio + "\\Dades.xml");
 		try {
-			PrintWriter impressora = new PrintWriter(desti);
+			PrintWriter impressora = new PrintWriter(new File(rutaUbicacio + "\\Dades.xml"));
 			impressora.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
 					+ "<?xml-stylesheet type=\"text/xsl\" href=\"Dades.xsl\"?>\r\n"
 					+ "<Dades xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"Dades.xsd\">");
@@ -952,7 +950,7 @@ public class Mockaroo {
 	// Funció per crear l'arxiu xsd
 	// crearXsd(dadesCrear);
 
-	public static void crearXsd(String dadesCrear[]) {
+	public static void crearXsd(String dadesCrear[][]) {
 		File desti = new File(rutaUbicacio + "\\Dades.xsd");
 		try {
 			PrintWriter impressora = new PrintWriter(desti);
@@ -1064,8 +1062,7 @@ public class Mockaroo {
 					writer.write(tipusDada[i][1] + " INT");
 					test = "(" + tipusDada[i][1]	;
 					j++;
-				
-				}else if (j==0&&tipusDada[i][0].equals("12")){
+				}else if (j==0&&(tipusDada[i][0].equals("12"))){
 					writer.write(tipusDada[i][1] + " DOUBLE");
 					test = "(" + tipusDada[i][1]	;
 					j++;
@@ -1081,8 +1078,8 @@ public class Mockaroo {
 					writer.write(" ," + tipusDada[i][1] + " INT");
 					test = test + "," + tipusDada[i][1];
 				}else if (tipusDada[i][0].equals("12")) {
-					writer.write(tipusDada[i][1] + " DOUBLE");
-					test = "(" + tipusDada[i][1];
+					writer.write(" ," +tipusDada[i][1] + " DOUBLE");
+					test = test+"," + tipusDada[i][1];
 				}else if (tipusDada[i][0].equals("11")) {// Condicio per a escriure booleans
 					writer.write("," + tipusDada[i][1] + " BOOLEAN");
 					test = test + "," + tipusDada[i][1];
@@ -1105,7 +1102,7 @@ public class Mockaroo {
 				j=0;
 				for (i = 0; i < dadesCrear.length; i++) {
 					if (dadesCrear[i][k] != null) {
-						if (j == 0 && (tipusDada[i][0].equals("11") || tipusDada[i][0].equals("18"))) {
+						if (j == 0 && (tipusDada[i][0].equals("11") || tipusDada[i][0].equals("18")||tipusDada[i][0].equals("12"))) {
 							writer.write(dadesCrear[i][k]);
 							j++;
 						} else if (j == 0) {
