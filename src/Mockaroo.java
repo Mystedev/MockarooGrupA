@@ -31,7 +31,7 @@ public class Mockaroo {
 			boolean errors=false;
 			if (firstLine != null) {
 				formatArxiu = firstLine.split("#");
-				if (ValidarFormatEntrada(firstLine, formatArxiu)) {
+				if (validarFormatEntrada(firstLine, formatArxiu)) {
 					System.out.println("Archivo válido. {" + firstLine + "}");
 				} else {
 					System.out.println("Formato no válido.");
@@ -44,7 +44,7 @@ public class Mockaroo {
 			}
 			while((lineContador = br1.readLine()) != null) {
 				if(lineContador.equals("")) {
-					System.out.println("No poden haver espais en blanck");
+					System.out.println("No poden haver espais en blanc");
 					errors=true;
 				}else {
 					String[] lineas = lineContador.split("#");
@@ -270,27 +270,6 @@ public class Mockaroo {
 				columnes++;
 				}
 			}
-			/*dadesCrear=new String[columnes][registres];
-			quantitatDades=registres;
-			// Leer líneas restantes y procesar índices
-			String line;
-			while ((line=br.readLine())!=null) {
-				if(line.equals("")) {
-					return;
-				}else {
-					String[] indicesStr = line.split("#");
-					
-					int[] indices = new int[indicesStr.length];
-					// Convertir y validar índices
-					for (int i = 0; i < indicesStr.length; i++) {
-						int index = Integer.parseInt(indicesStr[i]);
-						if (index >= 1 && index <= 19) {
-							indices[i] = index;
-						} else {
-							indices[i] = -1;
-						}
-					}*/
-			
 			if(!errors) {
 				tipusDada=new String[columnes][2];
 				// Variables del programa
@@ -313,7 +292,6 @@ public class Mockaroo {
 				// Leer líneas restantes y procesar índices
 				String line;
 				while ((line=br.readLine())!=null) {
-					
 					if(line.equals("")) {
 						return;
 					}else {
@@ -330,7 +308,6 @@ public class Mockaroo {
 						// Convertir y validar índices
 							int index = Integer.parseInt(indicesStr[0]);
 							if (index >= 1 && index <= 19) {
-								
 								if (index==12) {
 									if (indicesStr.length==3) {
 										decimal=Integer.parseInt(indicesStr[2]);
@@ -440,10 +417,6 @@ public class Mockaroo {
 		}
 		catch(Exception e) {e.printStackTrace();}	
 		}
-	
-	public static void validacioDades() {
-			
-	}
 	// Funcio per a crear emails
 	public static void email(int largada, String emails[], String files_dades[], int aleatori, String domini) {
 		try {
@@ -494,7 +467,7 @@ public class Mockaroo {
 
 	}
 	// Funcio creada per validar el format del fitxer d'entrada
-	public static boolean ValidarFormatEntrada(String arxiuGenerat, String formatArxiu[]) {
+	public static boolean validarFormatEntrada(String arxiuGenerat, String formatArxiu[]) {
 		// Comprovar la longitud de l'array i el format correctament
 		boolean isCorrect = false; // Inicialment, no és correcte
 		// Bucle que demana correccions fins que tot el format sigui correcte
@@ -837,14 +810,6 @@ public class Mockaroo {
   			System.out.println(num[i]);
   		}
   	}
-	//*****************************
-	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
-    
-  //Funcio per crear l'arxiu xsl
-    //crearXsl(dadesCrear);
-  	
-  	
-
 	// Funcio per generar autonumeric
 
 	public static void autonumeric(int llargada, String num[], int valorPerDefecte) {
@@ -1076,7 +1041,7 @@ public class Mockaroo {
 					test = "(" + tipusDada[i][1];
 					j++;
 				} else if (j == 0 && (!tipusDada[i][0].equals("19") || !tipusDada[i][0].equals("12"))) {// Condicio per a escriure Strings en la primera bolta
-					writer.write(tipusDada[i][1] + " VACHAR(100)");
+					writer.write(tipusDada[i][1] + " VARCHAR(100)");
 					test = "(" + tipusDada[i][1];
 					j++;
 				} else if (tipusDada[i][0].equals("19")) {// Condicio per a escriure ints
@@ -1089,7 +1054,7 @@ public class Mockaroo {
 					writer.write("," + tipusDada[i][1] + " BOOLEAN");
 					test = test + "," + tipusDada[i][1];
 				} else {// Condicio per a escriure Strings
-					writer.write("," + tipusDada[i][1] + " VACHAR(100)");
+					writer.write("," + tipusDada[i][1] + " VARCHAR(100)");
 					test = test + "," + tipusDada[i][1];
 				}
 			}
@@ -1132,11 +1097,8 @@ public class Mockaroo {
 	// Funcio per a triar quins arxius s'han de gennerar
 	public static void lectorArxius(int linies, int indice,int columna, int aleatori) throws IOException {
 		//String perLlegit[][] = new String[arxiusALlegir.length][linies];
-		
-		
 		BufferedReader br = new BufferedReader(new FileReader(files_dades[indice-1]));
 		llegir(br, dadesCrear[columna], aleatori, linies, 0);
-
 	}
 
 	public static void llegir(BufferedReader br, String[] llegit, int aleatori, int linies, int especial)
@@ -1157,8 +1119,7 @@ public class Mockaroo {
 					llegit[posicioArray] = text[1];
 					posicioArray++;
 				} else {
-					if (i >= numAleatori2 && j < linies) {// Guardo la resta de linies amb el ordre correcte a la
-															// posicio del num aleatori
+					if (i >= numAleatori2 && j < linies) {// Guardo la resta de linies amb el ordre correcte a la posicio del num aleatori
 						text = text[1].split("#");
 						llegit[j] = text[1];
 						j++;

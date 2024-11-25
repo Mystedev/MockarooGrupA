@@ -10,7 +10,7 @@
 10#Història
 11#Filologia Catalana
 12#Ciències Polítiques
-13#Administració d'Empreses
+13#Administració d Empreses
 14#Enginyeria Industrial
 15#Economia
 16#Ciències Ambientals
@@ -31,7 +31,7 @@
 31#Enginyeria Electrònica
 32#Enginyeria Química
 33#Enginyeria Biomèdica
-34#Història de l'Art
+34#Història de l Art
 35#Enginyeria en Disseny Industrial
 36#Ciències del Mar
 37#Pedagogia
@@ -42,7 +42,7 @@
 42#Estudis de Gènere
 43#Criminologia
 44#Comunicació Audiovisual
-45#Ciències de l'Esport
+45#Ciències de l Esport
 46#Enginyeria Naval
 47#Dret Internacional
 48#Ciberseguretat
@@ -90,7 +90,7 @@
 90#Educació Especial
 91#Nanotecnologia
 92#Gestió Esportiva
-93#Ciències de l'Administració
+93#Ciències de l Administració
 94#Enginyeria Ambiental
 95#Estudis Internacionals
 96#Psicoanàlisi
@@ -126,17 +126,17 @@
 126#Tecnologia Musical
 127#Estudis sobre Salut Pública
 128#Investigació Social
-129#Disseny d'Interiors
+129#Disseny d Interiors
 130#Finances i Comptabilitat
-131#Estudis sobre l'Àfrica
-132#Enginyeria en Sistemes d'Energia
+131#Estudis sobre l Àfrica
+132#Enginyeria en Sistemes d Energia
 133#Enginyeria de la Construcció
 134#Ciències del Treball
 135#Pedagogia Terapèutica
 136#Mediació Familiar
-137#Estudis sobre l'Amèrica Llatina
+137#Estudis sobre l Amèrica Llatina
 138#Psicologia Educativa
-139#Enginyeria Tèxtil
+139#Enginyeria Textil 
 140#Filosofia de la Ciència
 141#Estudis sobre Gènere i Sexualitat
 142#Història Medieval
@@ -147,7 +147,7 @@
 147#Ciències del Comportament
 148#Enginyeria Tècnica en Obres Públiques
 149#Biofísica
-150#Enginyeria d'Obres Hidràuliques
+150#Enginyeria d Obres Hidràuliques
 151#Tecnologia Espacial
 152#Neurociència Cognitiva
 153#Educació Física
@@ -161,19 +161,19 @@
 161#Biologia Molecular
 162#Estudis sobre el Patrimoni Cultural
 163#Filosofia Moral
-164#Disseny d'Experiència d'Usuari
+164#Disseny d Experiència d Usuari
 165#Educació Artística
 166#Ciències Socials
 167#Comunicació Política
 168#Economia Internacional
 169#Enginyeria Fotònica
-170#Enginyeria de l'Energia
+170#Enginyeria de l Energia
 171#Història Moderna
 172#Educació i TIC
 173#Llengua de Signes
 174#Estudis Musicals
 175#Genètica Humana
-176#Disseny d'Escenografia
+176#Disseny d Escenografia
 177#Enginyeria de Processos Industrials
 178#Estudis Socioculturals
 179#Gestió Patrimonial
@@ -185,7 +185,7 @@
 185#Dret Mercantil
 186#Biologia Evolutiva
 187#Filosofia Analítica
-188#Estudis sobre l'Àsia
+188#Estudis sobre l Àsia
 189#Enginyeria en Electrònica de Potència
 190#Antropologia Cultural
 191#Bioètica
@@ -193,7 +193,7 @@
 193#Economia i Negocis
 194#Dret Laboral
 195#Estudis sobre la Memòria Històrica
-196#Disseny d'Aplicacions Digitals
+196#Disseny d Aplicacions Digitals
 197#Química Analítica
 198#Enginyeria del Transport
 199#Ciències de la Computació
@@ -204,7 +204,7 @@
 204#Estudis sobre Discapacitat
 205#Ciències dels Materials
 206#Intel·ligència de Negoci
-207#Història d'Espanya
+207#Història d Espanya
 208#Biofarmàcia
 209#Educació Inclusiva
 210#Estudis Cinematogràfics
@@ -213,7 +213,7 @@
 213#Economia Sostenible
 214#Disseny Web
 215#Educació Bilingüe
-216#Gestió d'Empreses Culturals
+216#Gestió d Empreses Culturals
 217#Estudis sobre el Comerç Internacional
 218#Neurociències i Comportament
 219#Història Antiga
@@ -221,7 +221,7 @@
 221#Enginyeria en Automatització
 222#Terapia Familiar
 223#Història i Geografia
-224#Ciències Polítiques i de l'Administració
+224#Ciències Polítiques i de l Administració
 225#Estudis sobre la Infància
 226#Filosofia del Dret
 227#Tecnologia Educativa
@@ -234,16 +234,16 @@
 234#Història del Cinema
 235#Estudis sobre Migració
 236#Educació per a la Sostenibilitat
-237#Disseny d'Animació
+237#Disseny d Animació
 238#Estudis Literaris i Culturals
 239#Lingüística Teòrica
 240#Estudis sobre Comunicació Intercultural
 241#Ciències Biomèdiques
-242#Gestió d'Organitzacions
+242#Gestió d Organitzacions
 243#Història de la Ciència
 244#Tecnologia Ambiental
 245#Estudis Psicològics
-246#Estudis sobre l'educació alternativa
+246#Estudis sobre l educació alternativa
 247#Dret Internacional Públic
 248#Gestió de la Innovació Tecnològica
 249#Estudis sobre la Història del Disseny
