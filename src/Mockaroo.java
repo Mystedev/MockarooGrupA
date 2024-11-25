@@ -12,11 +12,12 @@ public class Mockaroo {
 	// Variables i metodes globals del programa
 	public static String rutaUbicacio;
 	public static int quantitatTipusDades;
+	public static int[] idDades;
 	public static int quantitatDades;
 	public static String[][] tipusDada;
 	public static String dadesCrear[][];
 	public static String files_dades[] = { "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
-			"Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt", "Dades/7-Estudis.txt",
+			"Dades/4-Adreces.txt", "Dades/5-Profesions.txt", "Dades/6-Pais.txt", "Dades/7-Estudis.txt",
 			"Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt" };
 	// Parametres utilitzats a les funcions
 	public static void main(String[] args) {
@@ -409,8 +410,8 @@ public class Mockaroo {
 					creacioDeSql(formatArxiu[2], quantitatDades);
 				else {
 					crearXml(dadesCrear,tipusDada,quantitatDades);
-					crearXsd(tipusDada);
-					crearXsl(dadesCrear);
+					crearXsd();
+					crearXsl();
 				}
 				br.close();
 			}
@@ -466,6 +467,7 @@ public class Mockaroo {
 	    return resultados; // Retornar los resultados
 
 	}
+
 	// Funcio creada per validar el format del fitxer d'entrada
 	public static boolean validarFormatEntrada(String arxiuGenerat, String formatArxiu[]) {
 		// Comprovar la longitud de l'array i el format correctament
@@ -576,7 +578,7 @@ public class Mockaroo {
 		String lletres = "abcdefghijklmnopqrstuvwxyz";
 		String majuscules = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String numeros = "0123456789";
-		String simbols = "!@#$%^&*()_-+=<>?/{}~|";
+		String simbols = "!@#$%^*_-+=?/~|";
 		// Cadena que contindrà tots els caràcters permesos segons les opcions
 		String conjuntCaracters = "";
 		// Afegeix els caràcters segons els paràmetres afegits
@@ -827,34 +829,71 @@ public class Mockaroo {
 
 	// Funcio per crear l'arxiu xsl
 	// crearXsl(dadesCrear);
-	public static void crearXsl(String[][] dadesCrear) {
+	public static void crearXsl() {
 		File desti = new File(rutaUbicacio + "\\Dades.xsl");
 		try {
 			PrintWriter impressora = new PrintWriter(desti);
 			impressora.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
 					+ "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">\r\n"
 					+ "  <xsl:template match=\"/\">\r\n" + "    <html>\r\n" + "      <head>\r\n"
-					+ "        <title>Dades demanades</title>\r\n" + "        <style>\r\n" + "          table {\r\n"
-					+ "            border-collapse: collapse;\r\n" + "            width: 100%;\r\n" + "          }\r\n"
-					+ "          th, td {\r\n" + "            border: 1px solid black;\r\n"
-					+ "            padding: 8px;\r\n" + "            text-align: left;\r\n" + "          }\r\n"
-					+ "          th {\r\n" + "            background-color: #f2f2f2;\r\n" + "          }\r\n"
-					+ "          tr:nth-child(even) {\r\n" + "            background-color: #f9f9f9;\r\n"
-					+ "          }\r\n" + "        </style>\r\n" + "      </head>\r\n" + "      <body>\r\n"
-					+ "        <h2>Taula de Dades</h2>\r\n" + "        <table>\r\n" + "          <thead>\r\n"
+					+ "        <title>Dades demanades</title>\r\n" + "<style>\r\n"
+							+ "          body {\r\n"
+							+ "            font-family: Arial, sans-serif;\r\n"
+							+ "            margin: 20px;\r\n"
+							+ "            background-color: #f4f4f9;\r\n"
+							+ "          }\r\n"
+							+ "          h2 {\r\n"
+							+ "            text-align: center;\r\n"
+							+ "            color: #333;\r\n"
+							+ "          }\r\n"
+							+ "          table {\r\n"
+							+ "            margin: 0 auto;\r\n"
+							+ "            border-collapse: collapse;\r\n"
+							+ "            width: 80%;\r\n"
+							+ "            background-color: #ffffff;\r\n"
+							+ "            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\r\n"
+							+ "            border-radius: 8px;\r\n"
+							+ "            overflow: hidden;\r\n"
+							+ "          }\r\n"
+							+ "          th, td {\r\n"
+							+ "            padding: 12px 20px;\r\n"
+							+ "            text-align: left;\r\n"
+							+ "          }\r\n"
+							+ "          th {\r\n"
+							+ "            background-color: #8e678e;\r\n"
+							+ "            color: #ffffff;\r\n"
+							+ "            font-weight: bold;\r\n"
+							+ "          }\r\n"
+							+ "          tr:nth-child(even) {\r\n"
+							+ "            background-color: #f2f2f2;\r\n"
+							+ "          }\r\n"
+							+ "          tr:hover {\r\n"
+							+ "            background-color: #e6f7ff;\r\n"
+							+ "            transition: background-color 0.3s ease;\r\n"
+							+ "          }\r\n"
+							+ "          td {\r\n"
+							+ "            color: #333;\r\n"
+							+ "          }\r\n"
+							+ "          caption {\r\n"
+							+ "            margin: 10px 0;\r\n"
+							+ "            font-size: 18px;\r\n"
+							+ "            color: #555;\r\n"
+							+ "          }\r\n"
+							+ "        </style>" + "      </head>\r\n" + "      <body>\r\n"
+					+ "        <h2>Mackaroo</h2>\r\n" + "        <table>\r\n" + "          <thead>\r\n"
 					+ "            <tr>");
-			for (int i = 0; i < dadesCrear.length; i++) {
-				if (dadesCrear[i] != null) {
-					impressora.println("              <th>" + dadesCrear[i] + "</th>");
+			for (int i = 0; i < tipusDada.length; i++) {
+				if (tipusDada[i][0] != null) {
+					impressora.println("              <th>" + tipusDada[i][1] + "</th>");
 				}
 			}
 			impressora.println("            </tr>\r\n" + "          </thead>\r\n" + "          <tbody>\r\n"
 					+ "            <xsl:for-each select=\"//linea\">\r\n" + "              <tr>");
 
-			for (int i = 0; i < dadesCrear.length; i++) {
-				if (dadesCrear[i] != null) {
+			for (int i = 0; i < tipusDada.length; i++) {
+				if (tipusDada[i][0] != null) {
 					impressora.println(
-							"              <td><xsl:value-of select=\".//" + dadesCrear[i] + "\"></xsl:value-of></td>");
+							"              <td><xsl:value-of select=\".//" + tipusDada[i][1] + "\"></xsl:value-of></td>");
 				}
 			}
 			impressora.println("              </tr>\r\n" + "            </xsl:for-each>\r\n" + "          </tbody>\r\n"
@@ -871,32 +910,29 @@ public class Mockaroo {
 
 	// Funcio per crear el xml
 	// crearXml(dadesCrear2, dadesCrear, quantitatDades);
-	public static void crearXml(String[][] dadesCrear2, String[][] dadesCrear, int quantitatDades) {
+	public static void crearXml(String[][] dadesCrear, String[][] tipusDada, int quantitatDades) {
+	    try (PrintWriter impressora = new PrintWriter(new File(rutaUbicacio + "\\Dades.xml"))) {
+	        impressora.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+	        impressora.println("<?xml-stylesheet type=\"text/xsl\" href=\"Dades.xsl\"?>");
+	        impressora.println("<Dades xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"Dades.xsd\">");
+	        for (int i = 0; i < quantitatDades; i++) { 
+	            impressora.println("    <linea>");
+	            int columnaEdad = 1; 
+	            for (int j = 0; j < tipusDada.length; j++) { 
+	                if (tipusDada[j][0] != null && dadesCrear[j][i] != null) { 
+	                    impressora.println("        <" + tipusDada[j][1] + ">" + dadesCrear[j][i] + "</" + tipusDada[j][1] + ">");
 
-		try {
-			PrintWriter impressora = new PrintWriter(new File(rutaUbicacio + "\\Dades.xml"));
-			impressora.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-					+ "<?xml-stylesheet type=\"text/xsl\" href=\"Dades.xsl\"?>\r\n"
-					+ "<Dades xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"Dades.xsd\">");
-			for (int i = 0; i < quantitatDades; i++) {
-				impressora.println("    <linea>");
-				for (int j = 0; j < dadesCrear.length; j++) {
-					if(tipusDada[j]!= null) {
-						impressora.println(" <"+tipusDada[j]+">"+dadesCrear[j][i]+"</"+tipusDada[j]+">");
-				for (int k = 0; k < dadesCrear2.length; k++) {
-					if (dadesCrear[k] != null) {
-						impressora.println(
-								"        <" + dadesCrear[k] + ">" + dadesCrear2[k][i] + "</" + dadesCrear[k] + ">");
-					}
-				}
-				impressora.println("    </linea>");
-			}
-			impressora.println("</Dades>");
+	                    if (j == columnaEdad) {
+	                        columnaEdad++;
+	                    }
+	                }
+	            }
+	            impressora.println("    </linea>");
+	        }
+		
 
-			impressora.flush();
-			impressora.close();
-				}
-			}
+	        impressora.println("</Dades>");
+	    
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -905,6 +941,7 @@ public class Mockaroo {
   //Funcio per crear el XSD
   //Funció per crear l'arxiu xsd
   	//crearXsd(dadesCrear);
+
 	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
 	public static void creacioDeSql(String ruta,int linies,String [][] dadesCrear2 ) throws IOException {
 		//Le doy nombre al SQL 
@@ -920,7 +957,7 @@ public class Mockaroo {
 	// Funció per crear l'arxiu xsd
 	// crearXsd(dadesCrear);
 
-	public static void crearXsd(String dadesCrear[][]) {
+	public static void crearXsd() {
 		File desti = new File(rutaUbicacio + "\\Dades.xsd");
 		try {
 			PrintWriter impressora = new PrintWriter(desti);
@@ -928,14 +965,14 @@ public class Mockaroo {
 			// mateixes
 			impressora.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
 					+ "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">");
-			for (int i = 0; i < dadesCrear.length; i++) {
+			for (int i = 0; i < tipusDada.length; i++) {
 				/*
 				 * A dadesGenerar tenim guardat els noms de les dades que volem generar, per
 				 * tant si el valor es null, es que aquelles dades no ens interessen. S'han de
 				 * guardar amb el mateix ordre de valors, per exemple nom sempre a la posició 0,
 				 * cognoms a la 1 etc.. es el mateix ordre que en el enunciat.
 				 */
-				if (dadesCrear[i] != null) {
+				if (tipusDada[i][0] != null) {
 					/*
 					 * Els elements boolean, numero i dates son diferets de la resta pel fet de que
 					 * el tipus no es string, doncs primer amb aquest if controlem aquestes tres
@@ -949,7 +986,7 @@ public class Mockaroo {
 						impressora.println("    <xs:element name=\"dates\" type=\"xs:date\"></xs:element>");
 					} else {
 						impressora.println(
-								"    <xs:element name=\"" + dadesCrear[i] + "\" type=\"xs:string\"></xs:element>");
+								"    <xs:element name=\"" + tipusDada[i][1] + "\" type=\"xs:string\"></xs:element>");
 					}
 				}
 			}
@@ -963,9 +1000,9 @@ public class Mockaroo {
 			 * Amb aquest for imprimim totes les linies dels elements fent referencia als
 			 * elements declarats anteriorment
 			 */
-			for (int i = 0; i < dadesCrear.length; i++) {
-				if (dadesCrear[i] != null) {
-					impressora.println("                <xs:element ref=\"" + dadesCrear[i]
+			for (int i = 0; i < tipusDada.length; i++) {
+				if (tipusDada[i][0] != null) {
+					impressora.println("                <xs:element ref=\"" + tipusDada[i][1]
 							+ "\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>");
 				}
 			}
