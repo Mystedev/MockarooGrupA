@@ -4,7 +4,7 @@
 4#Carrer del Pi
 5#Carrer de la Pau
 6#Carrer del Sol
-7#Carrer de l'Església
+7#Carrer de l Església
 8#Carrer del Port
 9#Carrer de la Riera
 10#Carrer de la Floresta
@@ -13,7 +13,7 @@
 13#Carrer de la Mercè
 14#Carrer de la Font
 15#Carrer de les Moreres
-16#Carrer de l'Olivera
+16#Carrer de l Olivera
 17#Carrer de Sant Pau
 18#Carrer de les Vinyes
 19#Carrer del Castell
@@ -32,9 +32,9 @@
 32#Carrer del Raval
 33#Carrer de la Sort
 34#Carrer del Cingle
-35#Carrer de l'Alzina
+35#Carrer de l Alzina
 36#Carrer de les Planes
-37#Carrer de l'Estació
+37#Carrer de l Estació
 38#Carrer de la Gavina
 39#Carrer del Roure
 40#Carrer de la Palma
@@ -46,7 +46,7 @@
 46#Carrer de la Plana
 47#Carrer de la Garriga
 48#Carrer del Bosquet
-49#Carrer de l'Arc de Sant Martí
+49#Carrer de l Arc de Sant Martí
 50#Carrer del Pi Gros
 51#Carrer de la Palmera
 52#Carrer del Carrilet
@@ -57,16 +57,16 @@
 57#Carrer del Camp
 58#Carrer de la Nit
 59#Carrer del Barri Vell
-60#Carrer de l'Estrella
+60#Carrer de l Estrella
 61#Carrer de la Lluna
 62#Carrer del Mercadal
 63#Carrer de la Barceloneta
 64#Carrer del Terraplè
 65#Carrer de la Vall
-66#Carrer de l'Aigua
+66#Carrer de l Aigua
 67#Carrer del Ter
 68#Carrer de la Noguera
-69#Carrer de l'Urgell
+69#Carrer de l Urgell
 70#Carrer de la Selva
 71#Carrer de la Garrotxa
 72#Carrer del Ripollès
@@ -75,12 +75,12 @@
 75#Carrer de la Conca
 76#Carrer del Gironès
 77#Carrer del Bages
-78#Carrer de l'Anoia
+78#Carrer de l Anoia
 79#Carrer del Maresme
 80#Carrer del Vallès
-81#Carrer de l'Empordà
+81#Carrer de l Empordà
 82#Carrer de la Ribera
-83#Carrer de l'Ordal
+83#Carrer de l Ordal
 84#Carrer del Montjuïc
 85#Carrer de la Pedrera
 86#Carrer de les Corts
@@ -90,7 +90,7 @@
 90#Carrer del Poblenou
 91#Carrer de Sants
 92#Carrer del Congost
-93#Carrer de l'Ebre
+93#Carrer de l Ebre
 94#Carrer del Llobregat
 95#Carrer de la Diagonal
 96#Carrer del Guinardó
@@ -114,7 +114,7 @@
 114#Carrer de Pau Claris
 115#Carrer del Pi Verd
 116#Carrer de les Eres
-117#Carrer de l'Argenteria
+117#Carrer de l Argenteria
 118#Carrer del Fòrum
 119#Carrer de la Barceloneta Alta
 120#Carrer del Passeig Marítim
@@ -136,7 +136,7 @@
 136#Carrer de les Quatre Columnes
 137#Carrer del Calvari
 138#Carrer de la Pedrissa
-139#Carrer de l'Hostal
+139#Carrer de l Hostal
 140#Carrer de la Fosca
 141#Carrer de les Lloses
 142#Carrer del Rosselló
@@ -149,7 +149,7 @@
 149#Carrer del Portell
 150#Carrer de la Llacuna
 151#Carrer del Rec
-152#Carrer de l'Escorxador
+152#Carrer de l Escorxador
 153#Carrer de les Cases Noves
 154#Carrer del Vapor
 155#Carrer del Bellsolà
@@ -158,11 +158,11 @@
 158#Carrer de la Balma
 159#Carrer del Molí
 160#Carrer del Lledoner
-161#Carrer de l'Oreneta
+161#Carrer de l Oreneta
 162#Carrer de les Creus
 163#Carrer del Sitjar
 164#Carrer del Gorg
-165#Carrer de l'Empelt
+165#Carrer de l Empelt
 166#Carrer de les Monges
 167#Carrer del Til·ler
 168#Carrer de la Cisa
@@ -176,11 +176,11 @@
 176#Carrer del Freixe
 177#Carrer del Romaní
 178#Carrer del Fanal
-179#Carrer de l'Arbreda
+179#Carrer de l Arbreda
 180#Carrer de la Rovira
 181#Carrer del Graner
 182#Carrer del Pla de Sant Martí
-183#Carrer de l'Aleixar
+183#Carrer de l Aleixar
 184#Carrer de la Fulla
 185#Carrer del Parc Central
 186#Carrer del Fondo
@@ -189,7 +189,7 @@
 189#Carrer de la Llitera
 190#Carrer del Pantà
 191#Carrer de la Vinya Nova
-192#Carrer de l'Horta
+192#Carrer de l Horta
 193#Carrer del Romesco
 194#Carrer del Xaloc
 195#Carrer del Masnou
@@ -199,8 +199,8 @@
 199#Carrer de la Vall Fosca
 200#Carrer del Montcau
 201#Carrer de la Roca Grossa
-202#Carrer de la Vall d'Hebron
-203#Carrer de l'Atlàntida
+202#Carrer de la Vall d Hebron
+203#Carrer de l Atlàntida
 204#Carrer del Marquet
 205#Carrer de la Savina
 206#Carrer del Salze
@@ -209,9 +209,9 @@
 209#Carrer del Passeig Verd
 210#Carrer del Mirador
 211#Carrer de les Olives
-212#Carrer de l'Ermita
+212#Carrer de l Ermita
 213#Carrer de la Foixarda
-214#Carrer de l'Esquirol
+214#Carrer de l Esquirol
 215#Carrer de la Roca Bruna
 216#Carrer del Roc Blanc
 217#Carrer del Tram
