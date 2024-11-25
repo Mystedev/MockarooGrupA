@@ -1,6 +1,4 @@
 xml#200#C:\Intel
-1#nombre
-10#nombre
-7#numteleofon
-3#kasbgd
-
+12#a#7#10#15
+12#sa#1
+12#si
