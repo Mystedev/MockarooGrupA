@@ -9,7 +9,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 
 public class Mockaroo {
-
 	// Variables i metodes globals del programa
 	public static String rutaUbicacio;
 	public static int quantitatTipusDades;
@@ -20,50 +19,71 @@ public class Mockaroo {
 			"Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt", "Dades/7-Estudis.txt",
 			"Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt" };
 	// Parametres utilitzats a les funcions
-
 	public static void main(String[] args) {
 		try {
 			String lineContador;
 			String fileEntrada = "Dades/Requisits.txt";
 			int columnes=0;
 			BufferedReader br1=new BufferedReader(new FileReader(fileEntrada));
+			// Leer y procesar la primera línea
+			String firstLine = br1.readLine();
+			String[] formatArxiu={};
+			boolean errors=false;
+			if (firstLine != null) {
+				formatArxiu = firstLine.split("#");
+				if (ValidarFormatEntrada(firstLine, formatArxiu)) {
+					System.out.println("Archivo válido. {" + firstLine + "}");
+				} else {
+					System.out.println("Formato no válido.");
+					errors=true;
+				}
+			} else {
+				System.out.println("El archivo está vacío.");
+
+				errors=true;
+			}
 			while((lineContador = br1.readLine()) != null) {
-				
-					
+				if(lineContador.equals("")) {
+					System.out.println("No poden haver espais en blanck");
+					errors=true;
+				}else {
 					String[] lineas = lineContador.split("#");
-					
 					char[] indice = lineas[0].toCharArray();
 					if(indice.length>2) {
 						System.out.println("Tamaño de indice no valido");
+						errors=true;
 					}
 					if(indice.length==2) {
 						if(!Character.isDigit(indice[0]) || !Character.isDigit(indice[1])) {
 							System.out.println("Indice no valido, tienen que ser digitos");
+							errors=true;
 						}else {
-							
 							int indiceCompleto = Integer.parseInt(lineas[0]);
-						
 							if(indiceCompleto>19 || indiceCompleto<1) {
 								System.out.println(lineContador);
 								System.out.println("indice no valido, debe estar entre 1 y 19");
+								errors=true;
 							}
 							switch(indiceCompleto){
 								case 10:
 									if(lineas.length!=2) {
 										System.out.println(lineContador);
 										System.out.println("Entrada incorrecta, debe contener id#nombre");
+										errors=true;
 									}
 									break;
 								case 11:
 									if(lineas.length!=2) {
 										System.out.println(lineContador);
 										System.out.println("Entrada incorrecta, debe contener id#nombre");
+										errors=true;
 									}
 									break;
 								case 12:
 									if(lineas.length<2 || lineas.length>5) {
 										System.out.println(lineContador);
 										System.out.println("Entrada incorrecta, debe contener id#nombre como minimo \nComo pocional puede ser \nid#nombre#decimales \nid#nombre#decimales#minimo \nid#nombre#decimales#minimo#maximo");
+										errors=true;
 									}
 									if(lineas.length==3) {
 										char[] decimals = lineas[2].toCharArray();
@@ -71,6 +91,7 @@ public class Mockaroo {
 											if(!Character.isDigit(decimals[i])) {
 												System.out.println(lineContador);
 												System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+												errors=true;
 											}
 										}
 									}
@@ -80,6 +101,7 @@ public class Mockaroo {
 											if(!Character.isDigit(decimals[i])) {
 												System.out.println(lineContador);
 												System.out.println("Parametro no valido, la opcion minimo tiene que ser digitos");
+												errors=true;
 											}
 										}
 										char[] decimals2 = lineas[2].toCharArray();
@@ -87,6 +109,7 @@ public class Mockaroo {
 											if(!Character.isDigit(decimals2[i])) {
 												System.out.println(lineContador);
 												System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+												errors=true;
 											}
 										}
 									}
@@ -96,6 +119,7 @@ public class Mockaroo {
 											if(!Character.isDigit(decimals2[i])) {
 												System.out.println(lineContador);
 												System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+												errors=true;
 											}
 										}
 										char[] decimals3 = lineas[3].toCharArray();
@@ -103,6 +127,7 @@ public class Mockaroo {
 											if(!Character.isDigit(decimals3[i])) {
 												System.out.println(lineContador);
 												System.out.println("Parametro no valido, la opcion minimo tiene que ser digitos");
+												errors=true;
 											}
 										}
 										char[] decimals = lineas[4].toCharArray();
@@ -110,6 +135,7 @@ public class Mockaroo {
 											if(!Character.isDigit(decimals[i])) {
 												System.out.println(lineContador);
 												System.out.println("Parametro no valido, la opcion maximo tiene que ser digitos");
+												errors=true;
 											}
 										}
 									}
@@ -118,19 +144,21 @@ public class Mockaroo {
 									if(lineas.length<2 || lineas.length>4) {
 										System.out.println(lineContador);
 										System.out.println("Entrada incorrecta, debe contener id#nombre como minimo \nLos parametros opcionales son \nid#nombre#dominio \nid#nombre#extensionDominio \nid#nombre#dominio#extensionDominio");
+										errors=true;
 									}
 									break;
 								case 14:
 									if(lineas.length!=2) {
 										System.out.println(lineContador);
 										System.out.println("Entrada incorrecta, debe contener id#nombre");
+										errors=true;
 									}
 									break;
 								case 15:
 									if(lineas.length!=8) {
 										System.out.println(lineContador);
 										System.out.println("Entrada incorrecta, debe contener id#nombre#letras#numeros#mayusculas#minusculas#simbolos#longitud");					
-										continue;
+										errors=true;
 									}else {
 										for(int i = 2; i<lineas.length-1;i++) {
 											char[] opcions = lineas[i].toCharArray();
@@ -138,30 +166,30 @@ public class Mockaroo {
 											if(lineas[i].length()!=1) {
 												System.out.println(lineContador);
 												System.out.println("Entrada incorrecta, las opciones deben ser un digito ( zero o uno )");
+												errors=true;
 											}
 											if(!Character.isDigit(opcions[0])) {
 												System.out.println(lineContador);
 												System.out.println("Entrada incorrecta, las opciones deben ser un digito ( zero o uno )");
+												errors=true;
 											}else if(Integer.parseInt(String.valueOf(opcions[0]))!=0 && Integer.parseInt(String.valueOf(opcions[0]))!=1) {
 												System.out.println(lineContador);
 												System.out.println("Entrada incorrecta, las opciones deben ser un digito ( zero o uno )");
+												errors=true;
 											}
-											
 										}
-										
 									} 
-									
 									if(Integer.parseInt(lineas[7])<8 || Integer.parseInt(lineas[7])>32) {
 										System.out.println(lineContador);
 										System.out.println("Entrada incorrecta, la longitud de la contraseña debe ser entre 8 y 32");
-										
+										errors=true;
 									}
 									break;
 								case 16:
-									boolean error = false;
 									if(lineas.length<2 || lineas.length>4) {
 										System.out.println(lineContador);
 										System.out.println("Entrada incorrecta, debe contener id#nombre como minimo \nLos parametros opcionales son \nid#nombre#añoMinimo \nid#nombre#añoMinimo#añoMaximo");
+										errors=true;
 									}else if(lineas.length==3) {
 										char[] anyMinim = lineas[2].toCharArray();
 										for(int i = 0; i < anyMinim.length; i++) {
@@ -169,11 +197,9 @@ public class Mockaroo {
 												System.out.println(lineContador);
 												System.out.println("Parametro no valido, el año minimo deben ser digitos");
 												i=1000;
-												error = true;
+												errors=true;
 											}
-											
 										}
-		
 									} else if(lineas.length==4) {
 										char[] anyMinim = lineas[2].toCharArray();
 										for(int i = 0; i < anyMinim.length; i++) {
@@ -181,9 +207,8 @@ public class Mockaroo {
 												System.out.println(lineContador);
 												System.out.println("Parametro no valido, el año minimo deben ser digitos");
 												i=1000;
-												error = true;
+												errors=true;
 											}
-											
 										}
 										char[] anyMinim2 = lineas[3].toCharArray();
 										for(int i = 0; i < anyMinim2.length; i++) {
@@ -191,7 +216,7 @@ public class Mockaroo {
 												System.out.println(lineContador);
 												System.out.println("Parametro no valido, el año maximo deben ser digitos");
 												i=1000;
-												error = true;
+												errors = true;
 											}		
 										}
 									}
@@ -200,18 +225,21 @@ public class Mockaroo {
 									if(lineas.length!=2) {
 										System.out.println(lineContador);
 										System.out.println("Entrada incorrecta, debe contener id#nombre");
+										errors=true;
 									}
 									break;
 								case 18:
 									if(lineas.length!=2) {
 										System.out.println(lineContador);
 										System.out.println("Entrada incorrecta, debe contener id#nombre");
+										errors=true;
 									}
 									break;
 								case 19:
 									if(lineas.length<2 || lineas.length>3) {
 										System.out.println(lineContador);
 										System.out.println("Entrada incorrecta, debe contener id#nombre \n los parametros opcionales son \n id#nombre#valorInicio");
+										errors=true;
 									}else if(lineas.length==3) {
 										char[] valorInicio = lineas[2].toCharArray();
 										for(int i = 0; i < valorInicio.length; i++) {
@@ -219,11 +247,11 @@ public class Mockaroo {
 												System.out.println(lineContador);
 												System.out.println("Parametro no valido, el valor de inicio debe ser digitos");
 												i=1000;
-												
+												errors=true;
 											}		
 										}
 									}
-									break;
+							break;
 							}
 						}
 						
@@ -231,52 +259,18 @@ public class Mockaroo {
 					if(indice.length==1) {
 						if(!Character.isDigit(indice[0])) {
 							System.out.println("Indice no valido, tienen que ser digitos");
+							errors=true;
 						}
 						if(lineas.length !=2){
 							System.out.println(lineContador);
 							System.out.println("Entrada incorrecta, debe contener id#nombre");
+							errors=true;
 						}
 					}
-					
-				
 				columnes++;
-			}
-			tipusDada=new String[columnes][columnes];
-			// Variables del programa
-			Random random = new Random();
-			int numeroAleatori = random.nextInt(200) + 1;
-			BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
-			// Variables generales del main
-			double decimal=2;
-			int minim=0,maxim=1000;
-			int contadorMatriu=0;
-			boolean inclouLletres=false,inclouNumeros=false,inclouMajuscules=false,inclouMinuscules=false,inclouSimbols=false; 
-			int longitud = 0;
-			int anyMinim=1900,anyMaxim = 2023;
-			int valorPerDefecte = 1;
-			// Leer y procesar la primera línea
-			String firstLine = br.readLine();
-			String[] formatArxiu;
-			int registres=columnes;
-			if (firstLine != null) {
-				formatArxiu = firstLine.split("#");
-				if (ValidarFormatEntrada(firstLine, formatArxiu)) {
-					System.out.println("Archivo válido. {" + firstLine + "}");
-					String arxiuSortida = formatArxiu[0]; // XML/SQL
-					quantitatDades = registres;
-					registres = Integer.parseInt(formatArxiu[1]); // Cantidad de registros
-					String ruta = formatArxiu[2]; // Ruta donde se guarda el archivo
-				} else {
-					System.out.println("Formato no válido.");
-					br.close();
-					return;
 				}
-			} else {
-				System.out.println("El archivo está vacío.");
-				br.close();
-				return;
 			}
-			dadesCrear=new String[columnes][registres];
+			/*dadesCrear=new String[columnes][registres];
 			quantitatDades=registres;
 			// Leer líneas restantes y procesar índices
 			String line;
@@ -285,6 +279,7 @@ public class Mockaroo {
 					return;
 				}else {
 					String[] indicesStr = line.split("#");
+					
 					int[] indices = new int[indicesStr.length];
 					// Convertir y validar índices
 					for (int i = 0; i < indicesStr.length; i++) {
@@ -294,62 +289,161 @@ public class Mockaroo {
 						} else {
 							indices[i] = -1;
 						}
-					}
+					}*/
+			
+			if(!errors) {
+				tipusDada=new String[columnes][2];
+				// Variables del programa
+				Random random = new Random();
+				int numeroAleatori = random.nextInt(200) + 1;
+				BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
+				// Variables generales del main
+				int contadorMatriu=0;
+				
+				int registres;
+				// Leer y procesar la primera línea
+				firstLine = br.readLine();
+				
+				String arxiuSortida = formatArxiu[0]; // XML/SQL
+				registres = Integer.parseInt(formatArxiu[1]); // Cantidad de registros
+				rutaUbicacio = formatArxiu[2]; // Ruta donde se guarda el archivo
 
-				// Procesar índices válidos
-				for (int i = 0; i < indices.length; i++) {
-					if (indices[i] >= 1 && indices[i] <= 10) {
-						// Procesar archivos de datos
-						String archivo = files_dades[indices[i] - 1];
-						if ("9".equals(archivo)) {
-							url(quantitatDades, dadesCrear[indices[i] - 1], numeroAleatori);
+				dadesCrear=new String[columnes][registres];
+				quantitatDades=registres;
+				// Leer líneas restantes y procesar índices
+				String line;
+				while ((line=br.readLine())!=null) {
+					
+					if(line.equals("")) {
+						return;
+					}else {
+						int decimal=0;
+						int minim=0,maxim=1000;
+						boolean inclouLletres=false,inclouNumeros=false,inclouMajuscules=false,inclouMinuscules=false,inclouSimbols=false; 
+						int longitud = 0;
+						int anyMinim=1900,anyMaxim = 2023;
+						int valorPerDefecte = 1;
+						String domini="";
+						String[] indicesStr = line.split("#");
+						tipusDada[contadorMatriu][0]=""+indicesStr[0];
+						tipusDada[contadorMatriu][1]=indicesStr[1];
+						// Convertir y validar índices
+							int index = Integer.parseInt(indicesStr[0]);
+							if (index >= 1 && index <= 19) {
+								
+								if (index==12) {
+									if (indicesStr.length==3) {
+										decimal=Integer.parseInt(indicesStr[2]);
+									}else if(indicesStr.length==4){
+										decimal=Integer.parseInt(indicesStr[2]);
+										minim=Integer.parseInt(indicesStr[3]);
+									}else if(indicesStr.length==5){
+										decimal=Integer.parseInt(indicesStr[2]);
+										minim=Integer.parseInt(indicesStr[3]);
+										maxim=Integer.parseInt(indicesStr[4]);
+									}
+								}else if(index==13) {
+									if (indicesStr.length==3) {
+										domini=indicesStr[2];
+									}
+								}else if (index==15) {
+									if (indicesStr[2].equals("0")) {
+										inclouLletres=false;
+									}else{
+										inclouLletres=true;
+									}if(indicesStr[3].equals("0")) {
+										inclouNumeros=false;
+									}else {
+										inclouNumeros=true;
+									}if(indicesStr[4].equals("0")) {
+										inclouMajuscules=false;
+									}else {
+										inclouMajuscules=true;
+									}if(indicesStr[5].equals("0")) {
+										inclouMinuscules=false;
+									}else {
+										inclouMinuscules=true;
+									}if(indicesStr[6].equals("0")) {
+										inclouSimbols=false;
+									}else {
+										inclouSimbols=true;
+									}
+									longitud=Integer.parseInt(indicesStr[7]);
+								}else if (index==16) {
+									if (indicesStr.length==3) {
+										anyMinim=Integer.parseInt(indicesStr[2]);
+									}else if(indicesStr.length==4){
+										anyMinim=Integer.parseInt(indicesStr[2]);
+										anyMaxim=Integer.parseInt(indicesStr[3]);
+									}
+								}else if (index==19) {
+									if (indicesStr.length==3) {
+										valorPerDefecte=Integer.parseInt(indicesStr[2]);
+									}
+								}
 						}
-						if (archivo != null && !"null".equals(archivo)) {
-							System.out.println("Archivo de datos: " + archivo);
+	
+					// Procesar índices válidos
+						if (index >= 1 && index <= 10) {
+							// Procesar archivos de datos
+							String archivo = files_dades[index - 1];
+							if ("9".equals(archivo)) {
+								url(quantitatDades, dadesCrear[index - 1], numeroAleatori);
+							}
+							if (archivo != null && !"null".equals(archivo)) {
+								lectorArxius(quantitatDades, index,contadorMatriu, numeroAleatori);
+								System.out.println("Archivo de datos: " + archivo);
+							}
+						} else if (index >= 11 && index <= 19) {
+							if(index==11)booleans(contadorMatriu);
+							else if(index==12) {
+								for (int i =0;i<quantitatDades;i++){
+									dadesCrear[contadorMatriu][i]=RandomNumber(decimal,minim,maxim);
+								}
+							}
+							else if(index==13)email(quantitatDades,dadesCrear[contadorMatriu],files_dades,numeroAleatori,domini);
+							else if(index==14)ip4(contadorMatriu);
+							else if(index==15) {GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
+									inclouMinuscules,inclouSimbols,longitud);
+								for (int i =0;i<quantitatDades;i++){
+									dadesCrear[contadorMatriu][i]=GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
+											inclouMinuscules,inclouSimbols,longitud);
+								}
+							}
+							else if(index==16)dates(quantitatDades,anyMinim,anyMaxim,numeroAleatori,dadesCrear[contadorMatriu]);
+							else if(index==17)iban(numeroAleatori,contadorMatriu);
+							else if(index==18) {
+								
+								for (int i =0;i<quantitatDades;i++){
+									dadesCrear[contadorMatriu][i]=ObtenerDNI();
+								}
+							}
+							else if(index==19)autonumeric(numeroAleatori, dadesCrear[contadorMatriu], valorPerDefecte);
+						} else if (index == 0) {
+							System.out.println("Índice 0 omitido.");
+						} else {
+							System.out.println("Índice " + index + " fuera de rango.");
 						}
-					} else if (indices[i] >= 11 && indices[i] <= 19) {
-						if(indices[i]==11)booleans(contadorMatriu);
-						if(indices[i]==12)RandomNumber(decimal,minim,maxim);
-						if(indices[i]==13)email(quantitatDades,dadesCrear[contadorMatriu],files_dades,numeroAleatori,"");
-						if(indices[i]==14)ip4(contadorMatriu);
-						if(indices[i]==15)GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
-								inclouMinuscules,inclouSimbols,longitud);
-						if(indices[i]==16)dates(quantitatDades,anyMinim,anyMaxim,numeroAleatori,dadesCrear[contadorMatriu]);
-						if(indices[i]==17)iban(numeroAleatori,contadorMatriu);
-						if(indices[i]==18)ObtenerDNI();
-						if(indices[i]==19)autonumeric(numeroAleatori, dadesCrear[contadorMatriu], valorPerDefecte);
-					} else if (indices[i] == 0) {
-						System.out.println("Índice 0 omitido.");
-					} else {
-						System.out.println("Índice " + indices[i] + " fuera de rango.");
-					}
-					contadorMatriu++;
+						contadorMatriu++;
+						
 					}
 				}
+				if (formatArxiu[0].equalsIgnoreCase("SQL"))
+					creacioDeSql(formatArxiu[2], quantitatDades);
+				else {
+					crearXml(dadesCrear,tipusDada,quantitatDades);
+					crearXsd(tipusDada);
+					crearXsl(dadesCrear);
+				}
+				br.close();
 			}
-			if (formatArxiu[0].equalsIgnoreCase("SQL"))
-				creacioDeSql(formatArxiu[2], quantitatDades);
-			else {
-				//crearXml(dadesCrear,, quantitatDades);
-			}
-			br.close();
-			} catch(Exception e) {e.printStackTrace();}	
-	
-
-	}
+		}
+		catch(Exception e) {e.printStackTrace();}	
+		}
 	
 	public static void validacioDades() {
 			
 	}
-
-	// for (int i = 0; i < emails.length; i++) {
-	// System.out.println(emails[i]);
-	// }
-	// int
-	// numAleatori=random.nextInt(250)+1,anyMaxim=2023,anyMinim=1900,valorPerDefecteAutonumeric=1;
-	// String emails []=new String [1];
-	// line=email(2,emails,files_dades,numAleatori);
-
 	// Funcio per a crear emails
 	public static void email(int largada, String emails[], String files_dades[], int aleatori, String domini) {
 		try {
@@ -398,36 +492,7 @@ public class Mockaroo {
 	    }
 	    return resultados; // Retornar los resultados
 
-	}/*
-	private static String executarFuncions(int index) {
-	    switch (index) {
-	        case 11:
-	            booleans();
-	        case 12:
-	            RandomNumber(decimals,minim,maxim);
-	        case 13:
-	            email(largada,emails[],files_dades[],aleatori,domini);
-	        case 14:
-	            ip4();
-	        case 15:
-	            GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,inclouMinuscules,inclouSimbols, longitud);
-	        case 16:
-	            dates(largada,anyMinim,anyMaxim,aleatori,data[]);
-	        case 17:
-	            iban();
-	        case 18:
-	            ObtenerDNI();
-	        case 19:
-	            autonumeric(llargada,num[],valorPerDefecte);
-	        default:
-	            return "Función no definida para índice " + index;
-	    }
-	}*/
-
-	
-	
-
-
+	}
 	// Funcio creada per validar el format del fitxer d'entrada
 	public static boolean ValidarFormatEntrada(String arxiuGenerat, String formatArxiu[]) {
 		// Comprovar la longitud de l'array i el format correctament
@@ -453,7 +518,7 @@ public class Mockaroo {
 		// Comprovo que el arxiu existeixi i sigui un directori
 		File f = new File(formatArxiu[2]);
 		if ((!f.exists()) || (!f.isDirectory())) {
-			System.out.println("Error -> La ubicació no existe o es un arxibo.");
+			System.out.println("Error -> La ubicació no existe o es un arxiu.");
 			return false;
 		}
 		// Si tot és correcte, sortir del bucle
@@ -491,7 +556,7 @@ public class Mockaroo {
 	}
 
 	// ·Funcion int para indicar los 'decimales=0','minims=0 i maxims=1000'
-	public static void RandomNumber(double decimals, double minim, double maxim) {
+	public static String RandomNumber(double decimals, double minim, double maxim) {
 		// Importem el metode random per generar numeros aleatoris
 		Random random = new Random();
 		// Generem el numero aleatori entre un (minim i un maxim)
@@ -504,7 +569,7 @@ public class Mockaroo {
 		// quantitat de decimals que volem, el rang minim i el rang maxim
 		// Decimals -> 0 per defecte * Minim -> 0 per defecte * Maxim -> 1000 per
 		// defecte
-		double num = numeroAleatorio;
+		return ""+numeroAleatorio;
 	}
 
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
@@ -751,14 +816,14 @@ public class Mockaroo {
 	}
 
 	// Funcion per obtenir el umero de DNI aleatori
-	public static void ObtenerDNI() {
+	public static String ObtenerDNI() {
 		Random random = new Random();
 		// Necesitem que la quantitat de numeros del DNI sigui de 8
 		int numeroDNI = random.nextInt(90000000) + 10000000;
 		// Obtenim la serie de numeros aleatoris que contindran el DNI
 		char lletra = GenerarLetraDNI(numeroDNI);
 		// Obtenim exitosament un numero de DNI aleatori
-		String dni = numeroDNI + String.valueOf(lletra);
+		return numeroDNI + String.valueOf(lletra);
 	}
 
 	// ·Funcion int ha de indicar el 'valor d'inici=1'
@@ -797,7 +862,7 @@ public class Mockaroo {
 
 	// Funcio per crear l'arxiu xsl
 	// crearXsl(dadesCrear);
-	public static void crearXsl(String[] dadesCrear) {
+	public static void crearXsl(String[][] dadesCrear) {
 		File desti = new File(rutaUbicacio + "\\Dades.xsl");
 		try {
 			PrintWriter impressora = new PrintWriter(desti);
@@ -843,9 +908,8 @@ public class Mockaroo {
 	// crearXml(dadesCrear2, dadesCrear, quantitatDades);
 	public static void crearXml(String[][] dadesCrear2, String[][] dadesCrear, int quantitatDades) {
 
-		File desti = new File(rutaUbicacio + "\\Dades.xml");
 		try {
-			PrintWriter impressora = new PrintWriter(desti);
+			PrintWriter impressora = new PrintWriter(new File(rutaUbicacio + "\\Dades.xml"));
 			impressora.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
 					+ "<?xml-stylesheet type=\"text/xsl\" href=\"Dades.xsl\"?>\r\n"
 					+ "<Dades xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"Dades.xsd\">");
@@ -895,7 +959,7 @@ public class Mockaroo {
 	// Funció per crear l'arxiu xsd
 	// crearXsd(dadesCrear);
 
-	public static void crearXsd(String dadesCrear[]) {
+	public static void crearXsd(String dadesCrear[][]) {
 		File desti = new File(rutaUbicacio + "\\Dades.xsd");
 		try {
 			PrintWriter impressora = new PrintWriter(desti);
@@ -998,31 +1062,39 @@ public class Mockaroo {
 		String test = "";
 		// El bucle serveix per a escriure el tipo de valors que hi hauran a la taula
 		// amb el seu nom
-		for (int i = 0; i < dadesCrear.length; i++) {
+		for (int i = 0; i < tipusDada.length; i++) {
 			// Comprobo si hi ha algo a escriure
-			if (dadesCrear[i][0] != null) {
+			if (tipusDada[i][0] != null) {
 				// Condicio per a escriure ints en la primera bolta
-				if (j == 0 && (i == 18 || i == 11)) {
-					writer.write(tipusDada[i] + " INT");
-					test = "(" + tipusDada[i];
+				//If tipus[i][0].equals("19")||("11")||("12")
+				if (j == 0 && (tipusDada[i][0].equals("19"))) {
+					writer.write(tipusDada[i][1] + " INT");
+					test = "(" + tipusDada[i][1]	;
 					j++;
-				} else if (j == 0 && i == 10) {// Condicio per a escriure booleans en la primera bolta
-					writer.write(tipusDada[i] + " BOOLEAN");
-					test = "(" + tipusDada[i];
+				}else if (j==0&&(tipusDada[i][0].equals("12"))){
+					writer.write(tipusDada[i][1] + " DOUBLE");
+					test = "(" + tipusDada[i][1]	;
 					j++;
-				} else if (j == 0 && (i != 18 || i != 11)) {// Condicio per a escriure Strings en la primera bolta
-					writer.write(tipusDada[i] + " VACHAR(100)");
-					test = "(" + tipusDada[i];
+				}else if (j == 0 && tipusDada[i][0].equals("11")) {// Condicio per a escriure booleans en la primera bolta
+					writer.write(tipusDada[i][1] + " BOOLEAN");
+					test = "(" + tipusDada[i][1];
 					j++;
-				} else if (i == 18 || i == 11) {// Condicio per a escriure ints
-					writer.write(" ," + tipusDada[i] + " INT");
-					test = test + "," + tipusDada[i];
-				} else if (i == 10) {// Condicio per a escriure booleans
-					writer.write("," + tipusDada[i] + " BOOLEAN");
-					test = test + "," + tipusDada[i];
+				} else if (j == 0 && (!tipusDada[i][0].equals("19") || !tipusDada[i][0].equals("12"))) {// Condicio per a escriure Strings en la primera bolta
+					writer.write(tipusDada[i][1] + " VACHAR(100)");
+					test = "(" + tipusDada[i][1];
+					j++;
+				} else if (tipusDada[i][0].equals("19")) {// Condicio per a escriure ints
+					writer.write(" ," + tipusDada[i][1] + " INT");
+					test = test + "," + tipusDada[i][1];
+				}else if (tipusDada[i][0].equals("12")) {
+					writer.write(" ," +tipusDada[i][1] + " DOUBLE");
+					test = test+"," + tipusDada[i][1];
+				}else if (tipusDada[i][0].equals("11")) {// Condicio per a escriure booleans
+					writer.write("," + tipusDada[i][1] + " BOOLEAN");
+					test = test + "," + tipusDada[i][1];
 				} else {// Condicio per a escriure Strings
-					writer.write("," + tipusDada[i] + " VACHAR(100)");
-					test = test + "," + tipusDada[i];
+					writer.write("," + tipusDada[i][1] + " VACHAR(100)");
+					test = test + "," + tipusDada[i][1];
 				}
 			}
 		}
@@ -1036,16 +1108,16 @@ public class Mockaroo {
 			if (dadesCrear[i][k] != null) {
 				// Escric cada insert
 				writer.write("INSERT INTO DadesGenarades " + test + ") VALUES (");
-				//
+				j=0;
 				for (i = 0; i < dadesCrear.length; i++) {
 					if (dadesCrear[i][k] != null) {
-						if (j == 0 && (k == 11 || k == 18)) {
+						if (j == 0 && (tipusDada[i][0].equals("11") || tipusDada[i][0].equals("18")||tipusDada[i][0].equals("12"))) {
 							writer.write(dadesCrear[i][k]);
 							j++;
 						} else if (j == 0) {
 							writer.write(" '" + dadesCrear[i][k] + "'");
 							j++;
-						} else if (i == 10 || i == 11) {
+						} else if (tipusDada[i][0].equals("11") || tipusDada[i][0].equals("12")) {
 							writer.write(", " + dadesCrear[i][k]);
 						} else {
 							writer.write(", '" + dadesCrear[i][k] + "'");
@@ -1062,33 +1134,13 @@ public class Mockaroo {
 	}
 
 	// Funcio per a triar quins arxius s'han de gennerar
-	public static String[][] lectorArxius(int linies, String[] arxiusALlegir, int aleatori) throws IOException {
-		String perLlegit[][] = new String[arxiusALlegir.length][linies];
-		String files_dades[] = { "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt", "Dades/4-Adreces.txt",
-				"Dades/5.Proffesions.txt", "Dades/6.Pais.txt", "Dades/7.Estudis.txt", "Dades/8.Colors.txt",
-				"Dades/10.NomDeLaCompanyia" };
-		for (int i = 0; i < arxiusALlegir.length; i++) {
-			BufferedReader br = new BufferedReader(new FileReader(arxiusALlegir[i]));
-			llegir(br, perLlegit[i], aleatori, linies, 0);
-		}
-		int fets = 0;
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < perLlegit.length; j++) {
-				if (arxiusALlegir[j].equals(files_dades[i])) {
-					dadesCrear[i] = perLlegit[j];
-					j = perLlegit.length;
-					fets++;
-				} else if (fets == perLlegit.length) {
-					i = 10;
-					j = perLlegit.length;
-				}
-			}
-		}
-
-		return dadesCrear;
-		/*
+	public static void lectorArxius(int linies, int indice,int columna, int aleatori) throws IOException {
+		//String perLlegit[][] = new String[arxiusALlegir.length][linies];
 		
-		*/
+		
+		BufferedReader br = new BufferedReader(new FileReader(files_dades[indice-1]));
+		llegir(br, dadesCrear[columna], aleatori, linies, 0);
+
 	}
 
 	public static void llegir(BufferedReader br, String[] llegit, int aleatori, int linies, int especial)
@@ -1129,7 +1181,6 @@ public class Mockaroo {
 			}
 		}
 	}
-
 	// Funcio per a trovar i tornar el nom de la dada a generar
 	public static String buscarNom(int id) {
 		if (id == 0) {

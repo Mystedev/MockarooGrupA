@@ -1,5 +1,4 @@
 xml#200#C:\Intel
-1#a
-10#nombre#apellido
-7#numteleofon
-3
+12#a#7#10#15
+12#sa#1
+12#si
