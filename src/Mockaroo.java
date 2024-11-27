@@ -368,7 +368,6 @@ public class Mockaroo {
 							}
 							if (archivo != null && !"null".equals(archivo)) {
 								lectorArxius(quantitatDades, index,contadorMatriu, numeroAleatori);
-								System.out.println("Archivo de datos: " + archivo);
 							}
 						} else if (index >= 11 && index <= 19) {
 							if(index==11)booleans(contadorMatriu);
@@ -634,7 +633,6 @@ public class Mockaroo {
 				// Genero el dia i el guardo a la array
 				dia = random.nextInt(dia) + 1;
 				data[i] = dia + "/" + mes + "/" + any;
-				System.out.println(data[i]);
 			}
 		}
 		// Lineis del main per a fer proves amb la crida de la funcio
