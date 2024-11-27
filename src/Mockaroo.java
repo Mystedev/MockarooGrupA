@@ -631,6 +631,7 @@ public class Mockaroo {
 		llegir(br, urls, aleatori, 0);
 
 		for (int i = 0; i < quantitatDades; i++) {
+			urls[i]=urls[i].toLowerCase();
 			urls[i] = "www." + urls[i] + ".com";
 		}
 	}
