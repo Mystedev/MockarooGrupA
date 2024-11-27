@@ -247,4 +247,8 @@
 247#Estilista#ImatgeNova
 248#Bomber#SafeCity
 249#Cuiner#GastroNova
+<<<<<<< HEAD
 250#Fuster#MobleArt
+=======
+250#Fuster#MobleArt
+>>>>>>> branch 'main' of git@github.com:Mystedev/Mockaroo.git
