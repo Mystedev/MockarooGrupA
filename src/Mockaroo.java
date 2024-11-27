@@ -283,11 +283,9 @@ public class Mockaroo {
 				int registres;
 				// Leer y procesar la primera línea
 				firstLine = br.readLine();
-				
 				String arxiuSortida = formatArxiu[0]; // XML/SQL
 				registres = Integer.parseInt(formatArxiu[1]); // Cantidad de registros
 				rutaUbicacio = formatArxiu[2]; // Ruta donde se guarda el archivo
-
 				dadesCrear=new String[columnes][registres];
 				quantitatDades=registres;
 				// Leer líneas restantes y procesar índices
