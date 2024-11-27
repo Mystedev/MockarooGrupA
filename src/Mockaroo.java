@@ -3,7 +3,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
-import java.util.Iterator;
 import java.util.Random;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,14 +16,14 @@ public class Mockaroo {
 	public static int quantitatDades;
 	public static String[][] tipusDada;
 	public static String dadesCrear[][];
-	public static String files_dades[] = { "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
-			"Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt", "Dades/7-Estudis.txt",
-			"Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt" };
+	public static String files_dades[] = { "C:/Dades/1-Noms.txt", "C:/Dades/2-Cognoms.txt", "C:/Dades/3-Ciutat.txt",
+			"C:/Dades/4-Adreces.txt", "C:/Dades/5-Proffesions.txt", "C:/Dades/6-Pais.txt", "C:/Dades/7-Estudis.txt",
+			"C:/Dades/8-Colors.txt", "null", "C:/Dades/10-NomDeLaCompanyia.txt" };
 	// Parametres utilitzats a les funcions
 	public static void main(String[] args) {
 		try {
 			String lineContador;
-			String fileEntrada = "Dades/Requisits.txt";
+			String fileEntrada = "C:/Dades/Requisits.txt";
 			int columnes=0,contadorRepetits=0;
 			BufferedReader br1=new BufferedReader(new FileReader(fileEntrada));
 			// Leer y procesar la primera línea
@@ -746,13 +745,13 @@ public class Mockaroo {
 		try {
 			// Primer contem les linies del arxiu per generar el array on guardar les dades
 			// No es fa amb un tamany definit per si es modifica el tamany de l'arxiu
-			BufferedReader br = new BufferedReader(new FileReader("Dades/6-Pais.txt"));
+			BufferedReader br = new BufferedReader(new FileReader("C:/Dades/6-Pais.txt"));
 			int tamanyArxiu = 0;
 			while (br.readLine() != null)
 				tamanyArxiu++;
 			br.close();
 			String liniesFitxer[] = new String[tamanyArxiu];
-			BufferedReader br2 = new BufferedReader(new FileReader("Dades/6-Pais.txt"));
+			BufferedReader br2 = new BufferedReader(new FileReader("C:/Dades/6-Pais.txt"));
 			String linia;
 			int i = 0;
 			// Llegir cada línia i guardar-la a l'array
