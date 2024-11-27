@@ -3,13 +3,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
+import java.util.Iterator;
 import java.util.Random;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 
 public class Mockaroo {
-
 	// Variables i metodes globals del programa
 	public static String rutaUbicacio;
 	public static int quantitatTipusDades;
@@ -20,12 +20,11 @@ public class Mockaroo {
 			"Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt", "Dades/7-Estudis.txt",
 			"Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt" };
 	// Parametres utilitzats a les funcions
-
 	public static void main(String[] args) {
 		try {
 			String lineContador;
 			String fileEntrada = "Dades/Requisits.txt";
-			int columnes=0;
+			int columnes=0,contadorRepetits=0;
 			BufferedReader br1=new BufferedReader(new FileReader(fileEntrada));
 			// Leer y procesar la primera línea
 			String firstLine = br1.readLine();
@@ -50,12 +49,19 @@ public class Mockaroo {
 					errors=true;
 				}else {
 					String[] lineas = lineContador.split("#");
+					for (int i = 0; i < lineas.length; i++) {
+						if (lineas[i].equals("")) {
+							System.out.println("El format no es correcte a de haver id#nom ");
+							errors=true;
+						}
+					}
 					char[] indice = lineas[0].toCharArray();
 					if(indice.length>2) {
 						System.out.println("Tamaño de indice no valido");
 						errors=true;
 					}
 					if(indice.length==2) {
+						
 						if(!Character.isDigit(indice[0]) || !Character.isDigit(indice[1])) {
 							System.out.println("Indice no valido, tienen que ser digitos");
 							errors=true;
@@ -75,6 +81,7 @@ public class Mockaroo {
 										System.out.println("Entrada incorrecta, debe contener id#nombre");
 										errors=true;
 									}
+									contadorRepetits++;
 									break;
 								case 11:
 									if(lineas.length!=2) {
@@ -276,21 +283,29 @@ public class Mockaroo {
 							System.out.println("Entrada incorrecta, debe contener id#nombre");
 							errors=true;
 						}
+						contadorRepetits++;
 					}
 				columnes++;
 				}
 			}
-			
+			if (columnes==0) {
+				System.out.println("No hi han id#nom el document esta buit");
+				errors=true;
+			}
 			if(!errors) {
 				tipusDada=new String[columnes][2];
 				// Variables del programa
 				Random random = new Random();
-				int numeroAleatori = random.nextInt(200) + 1;
+				int numeroAleatori[] =new int[contadorRepetits];
+				for (int i = 0; i < numeroAleatori.length; i++) {
+					numeroAleatori[i]= random.nextInt(200) + 1;
+				}
+				
 				BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
 				// Variables generales del main
 				int contadorMatriu=0;
 				
-				int registres;
+				int registres,count9=0,count1=0,count2=0,count3=0,count4=0,count5=0,count6=0,count7=0,count8=0,count10=0,count13=0;
 				// Leer y procesar la primera línea
 				firstLine = br.readLine();
 				
@@ -313,7 +328,7 @@ public class Mockaroo {
 						int longitud = 0;
 						int anyMinim=1900,anyMaxim = 2023;
 						int valorPerDefecte = 1;
-						String domini="";
+						String domini="",extencioDomini="";
 						String[] indicesStr = line.split("#");
 						tipusDada[contadorMatriu][0]=""+indicesStr[0];
 						tipusDada[contadorMatriu][1]=indicesStr[1];
@@ -335,6 +350,9 @@ public class Mockaroo {
 								}else if(index==13) {
 									if (indicesStr.length==3) {
 										domini=indicesStr[2];
+									}if (indicesStr.length==4) {
+										domini=indicesStr[2];
+										extencioDomini=indicesStr[3];
 									}
 								}else if (index==15) {
 									if (indicesStr[2].equals("0")) {
@@ -377,11 +395,41 @@ public class Mockaroo {
 						if (index >= 1 && index <= 10) {
 							// Procesar archivos de datos
 							String archivo = files_dades[index - 1];
-							if ("9".equals(archivo)) {
-								url(quantitatDades, dadesCrear[index - 1], numeroAleatori);
+							if ("null".equals(archivo)) {
+								url( dadesCrear[contadorMatriu], numeroAleatori[count9]);
+								count9++;
 							}
 							if (archivo != null && !"null".equals(archivo)) {
-								lectorArxius(quantitatDades, index,contadorMatriu, numeroAleatori);
+								if(index==1) {
+									lectorArxius(index,contadorMatriu, numeroAleatori[count1]);
+									count1++;
+								}else if (index==2) {
+									lectorArxius(index,contadorMatriu, numeroAleatori[count2]);
+									count2++;
+								}else if (index==3) {
+									lectorArxius(index,contadorMatriu, numeroAleatori[count3]);
+									count3++;
+								}
+								else if (index==4) {
+									lectorArxius(index,contadorMatriu, numeroAleatori[count4]);
+									count4++;
+								}else if (index==5) {
+									lectorArxius(index,contadorMatriu, numeroAleatori[count5]);
+									count5++;
+								}else if (index==6) {
+									lectorArxius(index,contadorMatriu, numeroAleatori[count6]);
+									count6++;
+								}else if (index==7) {
+									lectorArxius(index,contadorMatriu, numeroAleatori[count7]);
+									count7++;
+								}else if (index==8) {
+									lectorArxius(index,contadorMatriu, numeroAleatori[count8]);
+									count8++;
+								}
+								else if (index==10) {
+									lectorArxius(index,contadorMatriu, numeroAleatori[count10]);
+									count10++;
+								}
 								System.out.println("Archivo de datos: " + archivo);
 							}
 						} else if (index >= 11 && index <= 19) {
@@ -391,7 +439,10 @@ public class Mockaroo {
 									dadesCrear[contadorMatriu][i]=RandomNumber(decimal,minim,maxim);
 								}
 							}
-							else if(index==13)email(quantitatDades,dadesCrear[contadorMatriu],files_dades,numeroAleatori,domini);
+							else if(index==13) {
+								email(quantitatDades,dadesCrear[contadorMatriu],files_dades,numeroAleatori[count13],domini,extencioDomini,count13);
+								count13++;
+							}
 							else if(index==14)ip4(contadorMatriu);
 							else if(index==15) {GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
 									inclouMinuscules,inclouSimbols,longitud);
@@ -400,15 +451,15 @@ public class Mockaroo {
 											inclouMinuscules,inclouSimbols,longitud);
 								}
 							}
-							else if(index==16)dates(quantitatDades,anyMinim,anyMaxim,numeroAleatori,dadesCrear[contadorMatriu]);
-							else if(index==17)iban(numeroAleatori,contadorMatriu);
+							else if(index==16)dates(quantitatDades,anyMinim,anyMaxim,numeroAleatori[0],dadesCrear[contadorMatriu]);
+							else if(index==17)iban(numeroAleatori[0],contadorMatriu);
 							else if(index==18) {
 								
 								for (int i =0;i<quantitatDades;i++){
 									dadesCrear[contadorMatriu][i]=ObtenerDNI();
 								}
 							}
-							else if(index==19)autonumeric(numeroAleatori, dadesCrear[contadorMatriu], valorPerDefecte);
+							else if(index==19)autonumeric(dadesCrear[contadorMatriu], valorPerDefecte);
 						} else if (index == 0) {
 							System.out.println("Índice 0 omitido.");
 						} else {
@@ -431,31 +482,51 @@ public class Mockaroo {
 		catch(Exception e) {e.printStackTrace();}	
 		
 	}
-	
-	public static void validacioDades() {
-			
-	}
+
 	// Funcio per a crear emails
-	public static void email(int largada, String emails[], String files_dades[], int aleatori, String domini) {
+	public static void email(int largada, String emails[], String files_dades[], int aleatori, String domini,String extencioDomini,int num) {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(files_dades[0]));
 
 			BufferedReader br1 = new BufferedReader(new FileReader(files_dades[9]));
-
+			
 			// L'asicno la llargada a les arrays que s'utilitzaran
-			String auxiliarNom[] = new String[largada];
-			llegir(br, auxiliarNom, aleatori, largada, 0);
-			if (domini != null && domini.length() > 0) {
-				for (int i = 0; i < emails.length; i++) {
-					emails[i] = auxiliarNom[i] + "@" + domini;
-				}
-			} else {
-				String auxiliarDomini[] = new String[largada];
-				llegir(br1, auxiliarDomini, aleatori, largada, 0);
-				for (int i = 0; i < emails.length; i++) {
-					emails[i] = auxiliarNom[i] + "@" + auxiliarDomini[i] + ".com";
+			String auxiliarNom[] = new String[quantitatDades];
+			llegir(br, auxiliarNom, aleatori, 0);
+			if (num==0) {
+				if ((domini != null && domini.length() > 0)&&(extencioDomini != null && extencioDomini.length() > 0)) {
+					for (int i = 0; i < emails.length; i++) {
+						emails[i] = auxiliarNom[i] + "@" + domini+extencioDomini;
+					}
+				}else if (domini != null && domini.length() > 0) {
+					for (int i = 0; i < emails.length; i++) {
+						emails[i] = auxiliarNom[i] + "@" + domini+".com";
+					}
+				} else {
+					String auxiliarDomini[] = new String[largada];
+					llegir(br1, auxiliarDomini, aleatori, 0);
+					for (int i = 0; i < emails.length; i++) {
+						emails[i] = auxiliarNom[i] + "@" + auxiliarDomini[i] + ".com";
+					}
+				}	
+			}else {
+				if ((domini != null && domini.length() > 0)&&(extencioDomini != null && extencioDomini.length() > 0)) {
+					for (int i = 0; i < emails.length; i++) {
+						emails[i] = auxiliarNom[i]+num + "@" + domini+extencioDomini;
+					}
+				}else if (domini != null && domini.length() > 0) {
+					for (int i = 0; i < emails.length; i++) {
+						emails[i] = auxiliarNom[i]+num + "@" + domini+".com";
+					}
+				} else {
+					String auxiliarDomini[] = new String[largada];
+					llegir(br1, auxiliarDomini, aleatori, 0);
+					for (int i = 0; i < emails.length; i++) {
+						emails[i] = auxiliarNom[i]+num + "@" + auxiliarDomini[i] + ".com";
+					}
 				}
 			}
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -564,12 +635,12 @@ public class Mockaroo {
 	}
 
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
-	public static void url(int llargada, String urls[], int aleatori) throws IOException {
+	public static void url(String urls[], int aleatori) throws IOException {
 		// GENERO LA URL DESDE EL NOM DE COMPANYIA utilitzan llegir
 		BufferedReader br = new BufferedReader(new FileReader(files_dades[9]));
-		llegir(br, urls, aleatori, llargada, 0);
+		llegir(br, urls, aleatori, 0);
 
-		for (int i = 0; i < llargada; i++) {
+		for (int i = 0; i < quantitatDades; i++) {
 			urls[i] = "www." + urls[i] + ".com";
 		}
 	}
@@ -652,7 +723,6 @@ public class Mockaroo {
 				// Genero el dia i el guardo a la array
 				dia = random.nextInt(dia) + 1;
 				data[i] = dia + "/" + mes + "/" + any;
-				System.out.println(data[i]);
 			}
 		}
 		// Lineis del main per a fer proves amb la crida de la funcio
@@ -838,12 +908,12 @@ public class Mockaroo {
 
 	// Funcio per generar autonumeric
 
-	public static void autonumeric(int llargada, String num[], int valorPerDefecte) {
+	public static void autonumeric(String num[], int valorPerDefecte) {
 
 		// Faig un bucle per a genera el auto numeric comensan amb el numero que el
 		// usuari indiqui
-		for (int i = 0; i < llargada; i++) {
-			num[i] = String.valueOf(valorPerDefecte);
+		for (int i = 0; i < quantitatDades; i++) {
+			num[i] = ""+valorPerDefecte;
 			valorPerDefecte++;
 		}
 	}
@@ -1045,6 +1115,7 @@ public class Mockaroo {
 		// Declaro el escritor i escric lo nesesari per a crear i utilitza la base de
 		// dades
 		BufferedWriter writer = new BufferedWriter(new FileWriter(ruta));
+		writer.write("DROP DATABASE TaulaPerMostrarDades;\n");
 		writer.write("CREATE DATABASE IF NOT EXISTS TaulaPerMostrarDades;\n");
 		writer.write("USE TaulaPerMostrarDades;\n\n");
 		// Creo la taula i variables que utilitza-re
@@ -1071,7 +1142,7 @@ public class Mockaroo {
 					test = "(" + tipusDada[i][1];
 					j++;
 				} else if (j == 0 && (!tipusDada[i][0].equals("19") || !tipusDada[i][0].equals("12"))) {// Condicio per a escriure Strings en la primera bolta
-					writer.write(tipusDada[i][1] + " VACHAR(100)");
+					writer.write(tipusDada[i][1] + " VARCHAR(100)");
 					test = "(" + tipusDada[i][1];
 					j++;
 				} else if (tipusDada[i][0].equals("19")) {// Condicio per a escriure ints
@@ -1084,7 +1155,7 @@ public class Mockaroo {
 					writer.write("," + tipusDada[i][1] + " BOOLEAN");
 					test = test + "," + tipusDada[i][1];
 				} else {// Condicio per a escriure Strings
-					writer.write("," + tipusDada[i][1] + " VACHAR(100)");
+					writer.write("," + tipusDada[i][1] + " VARCHAR(100)");
 					test = test + "," + tipusDada[i][1];
 				}
 			}
@@ -1108,7 +1179,7 @@ public class Mockaroo {
 						} else if (j == 0) {
 							writer.write(" '" + dadesCrear[i][k] + "'");
 							j++;
-						} else if (tipusDada[i][0].equals("11") || tipusDada[i][0].equals("12")) {
+						} else if (tipusDada[i][0].equals("11") || tipusDada[i][0].equals("12")||tipusDada[i][0].equals("19")) {
 							writer.write(", " + dadesCrear[i][k]);
 						} else {
 							writer.write(", '" + dadesCrear[i][k] + "'");
@@ -1119,40 +1190,40 @@ public class Mockaroo {
 				i = 0;
 			}
 		}
-
+		
+		writer.write("SELECT * FROM DadesGenarades;\r\n");	
+		
 		writer.flush();
 		writer.close();
 	}
 
 	// Funcio per a triar quins arxius s'han de gennerar
-	public static void lectorArxius(int linies, int indice,int columna, int aleatori) throws IOException {
+	public static void lectorArxius(int indice,int columna, int aleatori) throws IOException {
 		//String perLlegit[][] = new String[arxiusALlegir.length][linies];
-		
-		
 		BufferedReader br = new BufferedReader(new FileReader(files_dades[indice-1]));
-		llegir(br, dadesCrear[columna], aleatori, linies, 0);
+		llegir(br, dadesCrear[columna], aleatori, 0);
 
 	}
 
-	public static void llegir(BufferedReader br, String[] llegit, int aleatori, int linies, int especial)
+	public static void llegir(BufferedReader br, String[] llegit, int aleatori, int especial)
 			throws IOException {
 		String text[] = new String[2];
 		// L'asicno la llargada a les arrays que s'utilitzaran
-		int j = 0, posicioArray, numAleatori2 = aleatori, largadaArxiu = 250, largadaGenera = linies;
+		int j = 0, posicioArray, numAleatori2 = aleatori, largadaArxiu = 250, largadaGenera = quantitatDades;
 		largadaGenera = numAleatori2 + largadaGenera;
 		posicioArray = largadaGenera - largadaArxiu;
 		if (posicioArray > 0) {// Condicio per si mirar que tot cap a la array respecte el num aleatori
 			// calculo quina posicio li correspont a la primera linia
-			posicioArray = linies - posicioArray;
+			posicioArray = quantitatDades - posicioArray;
 			// Bucle per a lleguir i guardar a la posicio corresponent
 			for (int i = 0; i < largadaArxiu; i++) {
 				text[1] = br.readLine();
-				if (posicioArray < linies) {// Guardo a les ultimes posicions del array les primeres linies
+				if (posicioArray < quantitatDades) {// Guardo a les ultimes posicions del array les primeres linies
 					text = text[1].split("#");
 					llegit[posicioArray] = text[1];
 					posicioArray++;
 				} else {
-					if (i >= numAleatori2 && j < linies) {// Guardo la resta de linies amb el ordre correcte a la
+					if (i >= numAleatori2 && j < quantitatDades) {// Guardo la resta de linies amb el ordre correcte a la
 															// posicio del num aleatori
 						text = text[1].split("#");
 						llegit[j] = text[1];
@@ -1162,9 +1233,9 @@ public class Mockaroo {
 			}
 		} else {// Si que hi cap respecte el aleatori
 				// bucle per a llegir de una sense fer els calculs
-			for (int i = 0; j < linies; i++) {
+			for (int i = 0; j < quantitatDades; i++) {
 				text[1] = br.readLine();
-				if (i >= aleatori && j < linies) {
+				if (i >= aleatori && j < quantitatDades) {
 					text = text[1].split("#");
 					llegit[j] = text[1];
 					j++;
