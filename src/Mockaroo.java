@@ -537,12 +537,12 @@ public class Mockaroo {
 		// Redondearem el numeor especificat a partir de la quantitat de decimals
 		// demanats
 		double escala = Math.pow(10, decimals);
-		numeroAleatorio = Math.round(numeroAleatorio * escala) / escala;
+		return ""+numeroAleatorio;
 		// Al declarar el resultat de la funcio , haurem de especificar en ordre , la
 		// quantitat de decimals que volem, el rang minim i el rang maxim
 		// Decimals -> 0 per defecte * Minim -> 0 per defecte * Maxim -> 1000 per
 		// defecte
-		return ""+numeroAleatorio;
+		
 	}
 
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
