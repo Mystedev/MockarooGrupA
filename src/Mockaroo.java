@@ -13,6 +13,7 @@ public class Mockaroo {
 	// Variables i metodes globals del programa
 	public static String rutaUbicacio;
 	public static int quantitatTipusDades;
+	public static int[] idDades;
 	public static int quantitatDades;
 	public static String[][] tipusDada;
 	public static String dadesCrear[][];
@@ -32,7 +33,7 @@ public class Mockaroo {
 			boolean errors=false;
 			if (firstLine != null) {
 				formatArxiu = firstLine.split("#");
-				if (ValidarFormatEntrada(firstLine, formatArxiu)) {
+				if (validarFormatEntrada(firstLine, formatArxiu)) {
 					System.out.println("Archivo válido. {" + firstLine + "}");
 				} else {
 					System.out.println("Formato no válido.");
@@ -45,7 +46,7 @@ public class Mockaroo {
 			}
 			while((lineContador = br1.readLine()) != null) {
 				if(lineContador.equals("")) {
-					System.out.println("No poden haver espais en blanck");
+					System.out.println("No poden haver espais en blanc");
 					errors=true;
 				}else {
 					String[] lineas = lineContador.split("#");
@@ -66,9 +67,7 @@ public class Mockaroo {
 							System.out.println("Indice no valido, tienen que ser digitos");
 							errors=true;
 						}else {
-							
 							int indiceCompleto = Integer.parseInt(lineas[0]);
-						
 							if(indiceCompleto>19 || indiceCompleto<1) {
 								System.out.println(lineContador);
 								System.out.println("indice no valido, debe estar entre 1 y 19");
@@ -188,11 +187,8 @@ public class Mockaroo {
 												System.out.println("Entrada incorrecta, las opciones deben ser un digito ( zero o uno )");
 												errors=true;
 											}
-											
 										}
-										
 									} 
-									
 									if(Integer.parseInt(lineas[7])<8 || Integer.parseInt(lineas[7])>32) {
 										System.out.println(lineContador);
 										System.out.println("Entrada incorrecta, la longitud de la contraseña debe ser entre 8 y 32");
@@ -213,9 +209,7 @@ public class Mockaroo {
 												i=1000;
 												errors=true;
 											}
-											
 										}
-		
 									} else if(lineas.length==4) {
 										char[] anyMinim = lineas[2].toCharArray();
 										for(int i = 0; i < anyMinim.length; i++) {
@@ -225,7 +219,6 @@ public class Mockaroo {
 												i=1000;
 												errors=true;
 											}
-											
 										}
 										char[] anyMinim2 = lineas[3].toCharArray();
 										for(int i = 0; i < anyMinim2.length; i++) {
@@ -268,7 +261,7 @@ public class Mockaroo {
 											}		
 										}
 									}
-									break;
+							break;
 							}
 						}
 						
@@ -292,6 +285,7 @@ public class Mockaroo {
 				System.out.println("No hi han id#nom el document esta buit");
 				errors=true;
 			}
+
 			if(!errors) {
 				tipusDada=new String[columnes][2];
 				// Variables del programa
@@ -308,17 +302,14 @@ public class Mockaroo {
 				int registres,count9=0,count1=0,count2=0,count3=0,count4=0,count5=0,count6=0,count7=0,count8=0,count10=0,count13=0;
 				// Leer y procesar la primera línea
 				firstLine = br.readLine();
-				
 				String arxiuSortida = formatArxiu[0]; // XML/SQL
 				registres = Integer.parseInt(formatArxiu[1]); // Cantidad de registros
 				rutaUbicacio = formatArxiu[2]; // Ruta donde se guarda el archivo
-
 				dadesCrear=new String[columnes][registres];
 				quantitatDades=registres;
 				// Leer líneas restantes y procesar índices
 				String line;
 				while ((line=br.readLine())!=null) {
-					
 					if(line.equals("")) {
 						return;
 					}else {
@@ -335,7 +326,6 @@ public class Mockaroo {
 						// Convertir y validar índices
 							int index = Integer.parseInt(indicesStr[0]);
 							if (index >= 1 && index <= 19) {
-								
 								if (index==12) {
 									if (indicesStr.length==3) {
 										decimal=Integer.parseInt(indicesStr[2]);
@@ -436,7 +426,7 @@ public class Mockaroo {
 							if(index==11)booleans(contadorMatriu);
 							else if(index==12) {
 								for (int i =0;i<quantitatDades;i++){
-									dadesCrear[contadorMatriu][i]=RandomNumber(decimal,minim,maxim);
+									dadesCrear[contadorMatriu][i]=randomNumber(decimal,minim,maxim);
 								}
 							}
 							else if(index==13) {
@@ -444,10 +434,10 @@ public class Mockaroo {
 								count13++;
 							}
 							else if(index==14)ip4(contadorMatriu);
-							else if(index==15) {GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
+							else if(index==15) {generarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
 									inclouMinuscules,inclouSimbols,longitud);
 								for (int i =0;i<quantitatDades;i++){
-									dadesCrear[contadorMatriu][i]=GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
+									dadesCrear[contadorMatriu][i]=generarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
 											inclouMinuscules,inclouSimbols,longitud);
 								}
 							}
@@ -456,7 +446,7 @@ public class Mockaroo {
 							else if(index==18) {
 								
 								for (int i =0;i<quantitatDades;i++){
-									dadesCrear[contadorMatriu][i]=ObtenerDNI();
+									dadesCrear[contadorMatriu][i]=obtenerDNI();
 								}
 							}
 							else if(index==19)autonumeric(dadesCrear[contadorMatriu], valorPerDefecte);
@@ -473,16 +463,15 @@ public class Mockaroo {
 					creacioDeSql(formatArxiu[2], quantitatDades);
 				else {
 					crearXml(dadesCrear,tipusDada,quantitatDades);
-					crearXsd(tipusDada);
-					crearXsl(dadesCrear);
+					crearXsd();
+					crearXsl();
 				}
 				br.close();
-				} 
 			}
-		catch(Exception e) {e.printStackTrace();}	
+		}
+		catch(Exception e) {e.printStackTrace();}
 		
 	}
-
 	// Funcio per a crear emails
 	public static void email(int largada, String emails[], String files_dades[], int aleatori, String domini,String extencioDomini,int num) {
 		try {
@@ -555,8 +544,9 @@ public class Mockaroo {
 	    return resultados; // Retornar los resultados
 
 	}
+
 	// Funcio creada per validar el format del fitxer d'entrada
-	public static boolean ValidarFormatEntrada(String arxiuGenerat, String formatArxiu[]) {
+	public static boolean validarFormatEntrada(String arxiuGenerat, String formatArxiu[]) {
 		// Comprovar la longitud de l'array i el format correctament
 		boolean isCorrect = false; // Inicialment, no és correcte
 		// Bucle que demana correccions fins que tot el format sigui correcte
@@ -580,7 +570,7 @@ public class Mockaroo {
 		// Comprovo que el arxiu existeixi i sigui un directori
 		File f = new File(formatArxiu[2]);
 		if ((!f.exists()) || (!f.isDirectory())) {
-			System.out.println("Error -> La ubicació no existe o es un arxibo.");
+			System.out.println("Error -> La ubicació no existe o es un arxiu.");
 			return false;
 		}
 		// Si tot és correcte, sortir del bucle
@@ -618,7 +608,7 @@ public class Mockaroo {
 	}
 
 	// ·Funcion int para indicar los 'decimales=0','minims=0 i maxims=1000'
-	public static String RandomNumber(double decimals, double minim, double maxim) {
+	public static String randomNumber(double decimals, double minim, double maxim) {
 		// Importem el metode random per generar numeros aleatoris
 		Random random = new Random();
 		// Generem el numero aleatori entre un (minim i un maxim)
@@ -626,12 +616,12 @@ public class Mockaroo {
 		// Redondearem el numeor especificat a partir de la quantitat de decimals
 		// demanats
 		double escala = Math.pow(10, decimals);
-		numeroAleatorio = Math.round(numeroAleatorio * escala) / escala;
+		return ""+numeroAleatorio;
 		// Al declarar el resultat de la funcio , haurem de especificar en ordre , la
 		// quantitat de decimals que volem, el rang minim i el rang maxim
 		// Decimals -> 0 per defecte * Minim -> 0 per defecte * Maxim -> 1000 per
 		// defecte
-		return ""+numeroAleatorio;
+		
 	}
 
 	// ·Funcion String para indicar el nombre del dominio='nom de comapnyia'
@@ -659,13 +649,13 @@ public class Mockaroo {
 	}
 
 	// Mètode per generar la contrasenya segons els paràmetres
-	public static String GenerarPassword(boolean inclouLletres, boolean inclouNumeros, boolean inclouMajuscules,
+	public static String generarPassword(boolean inclouLletres, boolean inclouNumeros, boolean inclouMajuscules,
 			boolean inclouMinuscules, boolean inclouSimbols, int longitud) {
 		// Definim els conjunts de caràcters possibles
 		String lletres = "abcdefghijklmnopqrstuvwxyz";
 		String majuscules = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String numeros = "0123456789";
-		String simbols = "!@#$%^&*()_-+=<>?/{}~|";
+		String simbols = "!@#$%^*_-+=?/~|";
 		// Cadena que contindrà tots els caràcters permesos segons les opcions
 		String conjuntCaracters = "";
 		// Afegeix els caràcters segons els paràmetres afegits
@@ -687,7 +677,7 @@ public class Mockaroo {
 		return password;
 	}
 
-	public static void MostrarPassword() {
+	public static void mostrarPassword() {
 		// Paràmetres de exemple
 		boolean inclouLletres = true;
 		boolean inclouNumeros = true;
@@ -695,7 +685,7 @@ public class Mockaroo {
 		boolean inclouMinuscules = true;
 		boolean inclouSymbols = true;
 		int longitud = 12; // Longitud de la contrasenya
-		String password = GenerarPassword(inclouLletres, inclouNumeros, inclouMajuscules, inclouMinuscules,
+		String password = generarPassword(inclouLletres, inclouNumeros, inclouMajuscules, inclouMinuscules,
 				inclouSymbols, longitud);
 		// Mostrar la contrasenya generada
 		System.out.println("Contrasenya generada exitosament: " + password);
@@ -748,7 +738,6 @@ public class Mockaroo {
 			return -1;
 		}
 	}
-
 	// ·Funcion para IBAN
 	// Per cridarla: iban( numeroAleatori, quantitatDades, Array on guardar els
 	// ibans)
@@ -864,7 +853,7 @@ public class Mockaroo {
 	}
 
 	// Funcio per generar la ultima lletra del DNI
-	public static char GenerarLetraDNI(int dni) {
+	public static char generarLetraDNI(int dni) {
 		// Lletres valides per seleccionar l'ultim caracter del DNI
 		String characters = "TRWAGMYFPDXBNJZSQVHLCKE";
 		// La resta de la divisio de la longitud total del 'string' dels caracters ens
@@ -874,12 +863,12 @@ public class Mockaroo {
 	}
 
 	// Funcion per obtenir el umero de DNI aleatori
-	public static String ObtenerDNI() {
+	public static String obtenerDNI() {
 		Random random = new Random();
 		// Necesitem que la quantitat de numeros del DNI sigui de 8
 		int numeroDNI = random.nextInt(90000000) + 10000000;
 		// Obtenim la serie de numeros aleatoris que contindran el DNI
-		char lletra = GenerarLetraDNI(numeroDNI);
+		char lletra = generarLetraDNI(numeroDNI);
 		// Obtenim exitosament un numero de DNI aleatori
 		return numeroDNI + String.valueOf(lletra);
 	}
@@ -895,14 +884,6 @@ public class Mockaroo {
   			System.out.println(num[i]);
   		}
   	}
-	//*****************************
-	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
-    
-  //Funcio per crear l'arxiu xsl
-    //crearXsl(dadesCrear);
-  	
-  	
-
 	// Funcio per generar autonumeric
 
 	public static void autonumeric(String num[], int valorPerDefecte) {
@@ -920,34 +901,71 @@ public class Mockaroo {
 
 	// Funcio per crear l'arxiu xsl
 	// crearXsl(dadesCrear);
-	public static void crearXsl(String[][] dadesCrear) {
+	public static void crearXsl() {
 		File desti = new File(rutaUbicacio + "\\Dades.xsl");
 		try {
 			PrintWriter impressora = new PrintWriter(desti);
 			impressora.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
 					+ "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" version=\"1.0\">\r\n"
 					+ "  <xsl:template match=\"/\">\r\n" + "    <html>\r\n" + "      <head>\r\n"
-					+ "        <title>Dades demanades</title>\r\n" + "        <style>\r\n" + "          table {\r\n"
-					+ "            border-collapse: collapse;\r\n" + "            width: 100%;\r\n" + "          }\r\n"
-					+ "          th, td {\r\n" + "            border: 1px solid black;\r\n"
-					+ "            padding: 8px;\r\n" + "            text-align: left;\r\n" + "          }\r\n"
-					+ "          th {\r\n" + "            background-color: #f2f2f2;\r\n" + "          }\r\n"
-					+ "          tr:nth-child(even) {\r\n" + "            background-color: #f9f9f9;\r\n"
-					+ "          }\r\n" + "        </style>\r\n" + "      </head>\r\n" + "      <body>\r\n"
-					+ "        <h2>Taula de Dades</h2>\r\n" + "        <table>\r\n" + "          <thead>\r\n"
+					+ "        <title>Dades demanades</title>\r\n" + "<style>\r\n"
+							+ "          body {\r\n"
+							+ "            font-family: Arial, sans-serif;\r\n"
+							+ "            margin: 20px;\r\n"
+							+ "            background-color: #f4f4f9;\r\n"
+							+ "          }\r\n"
+							+ "          h2 {\r\n"
+							+ "            text-align: center;\r\n"
+							+ "            color: #333;\r\n"
+							+ "          }\r\n"
+							+ "          table {\r\n"
+							+ "            margin: 0 auto;\r\n"
+							+ "            border-collapse: collapse;\r\n"
+							+ "            width: 80%;\r\n"
+							+ "            background-color: #ffffff;\r\n"
+							+ "            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\r\n"
+							+ "            border-radius: 8px;\r\n"
+							+ "            overflow: hidden;\r\n"
+							+ "          }\r\n"
+							+ "          th, td {\r\n"
+							+ "            padding: 12px 20px;\r\n"
+							+ "            text-align: left;\r\n"
+							+ "          }\r\n"
+							+ "          th {\r\n"
+							+ "            background-color: #8e678e;\r\n"
+							+ "            color: #ffffff;\r\n"
+							+ "            font-weight: bold;\r\n"
+							+ "          }\r\n"
+							+ "          tr:nth-child(even) {\r\n"
+							+ "            background-color: #f2f2f2;\r\n"
+							+ "          }\r\n"
+							+ "          tr:hover {\r\n"
+							+ "            background-color: #e6f7ff;\r\n"
+							+ "            transition: background-color 0.3s ease;\r\n"
+							+ "          }\r\n"
+							+ "          td {\r\n"
+							+ "            color: #333;\r\n"
+							+ "          }\r\n"
+							+ "          caption {\r\n"
+							+ "            margin: 10px 0;\r\n"
+							+ "            font-size: 18px;\r\n"
+							+ "            color: #555;\r\n"
+							+ "          }\r\n"
+							+ "        </style>" + "      </head>\r\n" + "      <body>\r\n"
+					+ "        <h2>Mackaroo</h2>\r\n" + "        <table>\r\n" + "          <thead>\r\n"
 					+ "            <tr>");
-			for (int i = 0; i < dadesCrear.length; i++) {
-				if (dadesCrear[i] != null) {
-					impressora.println("              <th>" + dadesCrear[i] + "</th>");
+			for (int i = 0; i < tipusDada.length; i++) {
+				if (tipusDada[i][0] != null) {
+					impressora.println("              <th>" + tipusDada[i][1] + "</th>");
 				}
 			}
 			impressora.println("            </tr>\r\n" + "          </thead>\r\n" + "          <tbody>\r\n"
 					+ "            <xsl:for-each select=\"//linea\">\r\n" + "              <tr>");
 
-			for (int i = 0; i < dadesCrear.length; i++) {
-				if (dadesCrear[i] != null) {
+			for (int i = 0; i < tipusDada.length; i++) {
+				if (tipusDada[i][0] != null) {
 					impressora.println(
-							"              <td><xsl:value-of select=\".//" + dadesCrear[i] + "\"></xsl:value-of></td>");
+							"              <td><xsl:value-of select=\".//" + tipusDada[i][1] + "\"></xsl:value-of></td>");
 				}
 			}
 			impressora.println("              </tr>\r\n" + "            </xsl:for-each>\r\n" + "          </tbody>\r\n"
@@ -964,46 +982,39 @@ public class Mockaroo {
 
 	// Funcio per crear el xml
 	// crearXml(dadesCrear2, dadesCrear, quantitatDades);
-	public static void crearXml(String[][] dadesCrear2, String[][] dadesCrear, int quantitatDades) {
+	public static void crearXml(String[][] dadesCrear, String[][] tipusDada, int quantitatDades) {
+	    try (PrintWriter impressora = new PrintWriter(new File(rutaUbicacio + "\\Dades.xml"))) {
+	        impressora.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+	        impressora.println("<?xml-stylesheet type=\"text/xsl\" href=\"Dades.xsl\"?>");
+	        impressora.println("<Dades xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"Dades.xsd\">");
+	        for (int i = 0; i < quantitatDades; i++) { 
+	            impressora.println("    <linea>");
+	            int columnaEdad = 1; 
+	            for (int j = 0; j < tipusDada.length; j++) { 
+	                if (tipusDada[j][0] != null && dadesCrear[j][i] != null) { 
+	                    impressora.println("        <" + tipusDada[j][1] + ">" + dadesCrear[j][i] + "</" + tipusDada[j][1] + ">");
 
-		try {
-			PrintWriter impressora = new PrintWriter(new File(rutaUbicacio + "\\Dades.xml"));
-			impressora.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
-					+ "<?xml-stylesheet type=\"text/xsl\" href=\"Dades.xsl\"?>\r\n"
-					+ "<Dades xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"Dades.xsd\">");
-			for (int i = 0; i < quantitatDades; i++) {
-				impressora.println("    <linea>");
-				for (int j = 0; j < dadesCrear.length; j++) {
-					if(tipusDada[j]!= null) {
-						impressora.println("        <"+tipusDada[j]+">"+dadesCrear[j][i]+"</"+tipusDada[j]+">");
-				for (int k = 0; k < dadesCrear2.length; k++) {
-					if (dadesCrear[k] != null) {
-						impressora.println(
-								"        <" + dadesCrear[k] + ">" + dadesCrear2[k][i] + "</" + dadesCrear[k] + ">");
-					}
-				}
-				impressora.println("    </linea>");
-			}
-			impressora.println("</Dades>");
+	                    if (j == columnaEdad) {
+	                        columnaEdad++;
+	                    }
+	                }
+	            }
+	            impressora.println("    </linea>");
+	        }
+		
 
-			impressora.flush();
-			impressora.close();
-				}
-			}
+	        impressora.println("</Dades>");
+	    
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 			
   	}
-  //Funcio per crear el XSD
-  	
-  //Funció per crear l'arxiu xsd
+	//Funcio per crear el XSD
+	//Funció per crear l'arxiu xsd
   	//crearXsd(dadesCrear);
-  	
-  	
 	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
 	public static void creacioDeSql(String ruta,int linies,String [][] dadesCrear2 ) throws IOException {
-		
 		//Le doy nombre al SQL 
 		String test="\\Arxiu.sql";
 		//Creo el file per a escriure en ell
@@ -1017,7 +1028,7 @@ public class Mockaroo {
 	// Funció per crear l'arxiu xsd
 	// crearXsd(dadesCrear);
 
-	public static void crearXsd(String dadesCrear[][]) {
+	public static void crearXsd() {
 		File desti = new File(rutaUbicacio + "\\Dades.xsd");
 		try {
 			PrintWriter impressora = new PrintWriter(desti);
@@ -1025,14 +1036,14 @@ public class Mockaroo {
 			// mateixes
 			impressora.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n"
 					+ "<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\">");
-			for (int i = 0; i < dadesCrear.length; i++) {
+			for (int i = 0; i < tipusDada.length; i++) {
 				/*
 				 * A dadesGenerar tenim guardat els noms de les dades que volem generar, per
 				 * tant si el valor es null, es que aquelles dades no ens interessen. S'han de
 				 * guardar amb el mateix ordre de valors, per exemple nom sempre a la posició 0,
 				 * cognoms a la 1 etc.. es el mateix ordre que en el enunciat.
 				 */
-				if (dadesCrear[i] != null) {
+				if (tipusDada[i][0] != null) {
 					/*
 					 * Els elements boolean, numero i dates son diferets de la resta pel fet de que
 					 * el tipus no es string, doncs primer amb aquest if controlem aquestes tres
@@ -1046,7 +1057,7 @@ public class Mockaroo {
 						impressora.println("    <xs:element name=\"dates\" type=\"xs:date\"></xs:element>");
 					} else {
 						impressora.println(
-								"    <xs:element name=\"" + dadesCrear[i] + "\" type=\"xs:string\"></xs:element>");
+								"    <xs:element name=\"" + tipusDada[i][1] + "\" type=\"xs:string\"></xs:element>");
 					}
 				}
 			}
@@ -1060,9 +1071,9 @@ public class Mockaroo {
 			 * Amb aquest for imprimim totes les linies dels elements fent referencia als
 			 * elements declarats anteriorment
 			 */
-			for (int i = 0; i < dadesCrear.length; i++) {
-				if (dadesCrear[i] != null) {
-					impressora.println("                <xs:element ref=\"" + dadesCrear[i]
+			for (int i = 0; i < tipusDada.length; i++) {
+				if (tipusDada[i][0] != null) {
+					impressora.println("                <xs:element ref=\"" + tipusDada[i][1]
 							+ "\" maxOccurs=\"unbounded\" minOccurs=\"0\"/>");
 				}
 			}
@@ -1128,11 +1139,11 @@ public class Mockaroo {
 				//If tipus[i][0].equals("19")||("11")||("12")
 				if (j == 0 && (tipusDada[i][0].equals("19"))) {
 					writer.write(tipusDada[i][1] + " INT");
-					test = "(" + tipusDada[i][1]	;
+					test = "(" + tipusDada[i][1];
 					j++;
 				}else if (j==0&&(tipusDada[i][0].equals("12"))){
 					writer.write(tipusDada[i][1] + " DOUBLE");
-					test = "(" + tipusDada[i][1]	;
+					test = "(" + tipusDada[i][1];
 					j++;
 				}else if (j == 0 && tipusDada[i][0].equals("11")) {// Condicio per a escriure booleans en la primera bolta
 					writer.write(tipusDada[i][1] + " BOOLEAN");
@@ -1199,7 +1210,6 @@ public class Mockaroo {
 		//String perLlegit[][] = new String[arxiusALlegir.length][linies];
 		BufferedReader br = new BufferedReader(new FileReader(files_dades[indice-1]));
 		llegir(br, dadesCrear[columna], aleatori, 0);
-
 	}
 
 	public static void llegir(BufferedReader br, String[] llegit, int aleatori, int especial)
