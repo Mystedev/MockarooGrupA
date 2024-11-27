@@ -282,9 +282,9 @@ public class Mockaroo {
 							System.out.println(lineContador);
 							System.out.println("Entrada incorrecta, debe contener id#nombre");
 							errors=true;
-						}
-						contadorRepetits++;
+						}		
 					}
+				contadorRepetits++;
 				columnes++;
 				}
 			}
@@ -725,10 +725,7 @@ public class Mockaroo {
 				data[i] = dia + "/" + mes + "/" + any;
 			}
 		}
-		// Lineis del main per a fer proves amb la crida de la funcio
-		// int
-		// numAleatori=random.nextInt(250)+1,anyMaxim=2023,anyMinim=1900,valorPerDefecteAutonumeric=1;
-		// line=dates(2,anyMinim,anyMaxim,numAleatori);
+		
 	}
 
 	// funcio per a saber cuants dies te el mes que es genere aleatoriament
