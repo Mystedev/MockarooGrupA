@@ -17,7 +17,7 @@ public class Mockaroo {
 	public static String[][] tipusDada;
 	public static String dadesCrear[][];
 	public static String files_dades[] = { "Dades/1-Noms.txt", "Dades/2-Cognoms.txt", "Dades/3-Ciutat.txt",
-			"Dades/4-Adreces.txt", "Dades/5-Profesions.txt", "Dades/6-Pais.txt", "Dades/7-Estudis.txt",
+			"Dades/4-Adreces.txt", "Dades/5-Proffesions.txt", "Dades/6-Pais.txt", "Dades/7-Estudis.txt",
 			"Dades/8-Colors.txt", "null", "Dades/10-NomDeLaCompanyia.txt" };
 	// Parametres utilitzats a les funcions
 	public static void main(String[] args) {
@@ -376,15 +376,15 @@ public class Mockaroo {
 							if(index==11)booleans(contadorMatriu);
 							else if(index==12) {
 								for (int i =0;i<quantitatDades;i++){
-									dadesCrear[contadorMatriu][i]=RandomNumber(decimal,minim,maxim);
+									dadesCrear[contadorMatriu][i]=randomNumber(decimal,minim,maxim);
 								}
 							}
 							else if(index==13)email(quantitatDades,dadesCrear[contadorMatriu],files_dades,numeroAleatori,domini);
 							else if(index==14)ip4(contadorMatriu);
-							else if(index==15) {GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
+							else if(index==15) {generarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
 									inclouMinuscules,inclouSimbols,longitud);
 								for (int i =0;i<quantitatDades;i++){
-									dadesCrear[contadorMatriu][i]=GenerarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
+									dadesCrear[contadorMatriu][i]=generarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
 											inclouMinuscules,inclouSimbols,longitud);
 								}
 							}
@@ -393,7 +393,7 @@ public class Mockaroo {
 							else if(index==18) {
 								
 								for (int i =0;i<quantitatDades;i++){
-									dadesCrear[contadorMatriu][i]=ObtenerDNI();
+									dadesCrear[contadorMatriu][i]=obtenerDNI();
 								}
 							}
 							else if(index==19)autonumeric(numeroAleatori, dadesCrear[contadorMatriu], valorPerDefecte);
@@ -531,7 +531,7 @@ public class Mockaroo {
 	}
 
 	// ·Funcion int para indicar los 'decimales=0','minims=0 i maxims=1000'
-	public static String RandomNumber(double decimals, double minim, double maxim) {
+	public static String randomNumber(double decimals, double minim, double maxim) {
 		// Importem el metode random per generar numeros aleatoris
 		Random random = new Random();
 		// Generem el numero aleatori entre un (minim i un maxim)
@@ -572,7 +572,7 @@ public class Mockaroo {
 	}
 
 	// Mètode per generar la contrasenya segons els paràmetres
-	public static String GenerarPassword(boolean inclouLletres, boolean inclouNumeros, boolean inclouMajuscules,
+	public static String generarPassword(boolean inclouLletres, boolean inclouNumeros, boolean inclouMajuscules,
 			boolean inclouMinuscules, boolean inclouSimbols, int longitud) {
 		// Definim els conjunts de caràcters possibles
 		String lletres = "abcdefghijklmnopqrstuvwxyz";
@@ -600,7 +600,7 @@ public class Mockaroo {
 		return password;
 	}
 
-	public static void MostrarPassword() {
+	public static void mostrarPassword() {
 		// Paràmetres de exemple
 		boolean inclouLletres = true;
 		boolean inclouNumeros = true;
@@ -608,7 +608,7 @@ public class Mockaroo {
 		boolean inclouMinuscules = true;
 		boolean inclouSymbols = true;
 		int longitud = 12; // Longitud de la contrasenya
-		String password = GenerarPassword(inclouLletres, inclouNumeros, inclouMajuscules, inclouMinuscules,
+		String password = generarPassword(inclouLletres, inclouNumeros, inclouMajuscules, inclouMinuscules,
 				inclouSymbols, longitud);
 		// Mostrar la contrasenya generada
 		System.out.println("Contrasenya generada exitosament: " + password);
@@ -665,7 +665,6 @@ public class Mockaroo {
 			return -1;
 		}
 	}
-
 	// ·Funcion para IBAN
 	// Per cridarla: iban( numeroAleatori, quantitatDades, Array on guardar els
 	// ibans)
@@ -781,7 +780,7 @@ public class Mockaroo {
 	}
 
 	// Funcio per generar la ultima lletra del DNI
-	public static char GenerarLetraDNI(int dni) {
+	public static char generarLetraDNI(int dni) {
 		// Lletres valides per seleccionar l'ultim caracter del DNI
 		String characters = "TRWAGMYFPDXBNJZSQVHLCKE";
 		// La resta de la divisio de la longitud total del 'string' dels caracters ens
@@ -791,12 +790,12 @@ public class Mockaroo {
 	}
 
 	// Funcion per obtenir el umero de DNI aleatori
-	public static String ObtenerDNI() {
+	public static String obtenerDNI() {
 		Random random = new Random();
 		// Necesitem que la quantitat de numeros del DNI sigui de 8
 		int numeroDNI = random.nextInt(90000000) + 10000000;
 		// Obtenim la serie de numeros aleatoris que contindran el DNI
-		char lletra = GenerarLetraDNI(numeroDNI);
+		char lletra = generarLetraDNI(numeroDNI);
 		// Obtenim exitosament un numero de DNI aleatori
 		return numeroDNI + String.valueOf(lletra);
 	}
@@ -938,10 +937,9 @@ public class Mockaroo {
 		}
 			
   	}
-  //Funcio per crear el XSD
-  //Funció per crear l'arxiu xsd
+	//Funcio per crear el XSD
+	//Funció per crear l'arxiu xsd
   	//crearXsd(dadesCrear);
-
 	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
 	public static void creacioDeSql(String ruta,int linies,String [][] dadesCrear2 ) throws IOException {
 		//Le doy nombre al SQL 
@@ -1067,11 +1065,11 @@ public class Mockaroo {
 				//If tipus[i][0].equals("19")||("11")||("12")
 				if (j == 0 && (tipusDada[i][0].equals("19"))) {
 					writer.write(tipusDada[i][1] + " INT");
-					test = "(" + tipusDada[i][1]	;
+					test = "(" + tipusDada[i][1];
 					j++;
 				}else if (j==0&&(tipusDada[i][0].equals("12"))){
 					writer.write(tipusDada[i][1] + " DOUBLE");
-					test = "(" + tipusDada[i][1]	;
+					test = "(" + tipusDada[i][1];
 					j++;
 				}else if (j == 0 && tipusDada[i][0].equals("11")) {// Condicio per a escriure booleans en la primera bolta
 					writer.write(tipusDada[i][1] + " BOOLEAN");
