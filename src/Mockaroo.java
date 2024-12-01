@@ -26,57 +26,57 @@ public class Mockaroo {
 			String fileEntrada = "C:/Dades/Requisits.txt";
 			int columnes=0,contadorRepetits=0;
 			BufferedReader br1=new BufferedReader(new FileReader(fileEntrada));
-			// Leer y procesar la primera línea
+			// Llegir i processar la primera línea
 			String firstLine = br1.readLine();
 			String[] formatArxiu={};
 			boolean errors=false;
 			if (firstLine != null) {
 				formatArxiu = firstLine.split("#");
 				if (validarFormatEntrada(firstLine, formatArxiu)) {
-					System.out.println("Archivo válido. {" + firstLine + "}");
+					System.out.println("Arxiu vàlid. {" + firstLine + "}");
 				} else {
-					System.out.println("Formato no válido.");
+					System.out.println("Format no vàlid.");
 					errors=true;
 				}
 			} else {
-				System.out.println("El archivo está vacío.");
+				System.out.println("L'arxiu està vuit.");
 
 				errors=true;
 			}
 			while((lineContador = br1.readLine()) != null) {
 				if(lineContador.equals("")) {
-					System.out.println("No poden haver espais en blanc");
+					System.out.println("No pot contenir espais en blanc");
 					errors=true;
 				}else {
 					String[] lineas = lineContador.split("#");
 					for (int i = 0; i < lineas.length; i++) {
 						if (lineas[i].equals("")) {
-							System.out.println("El format no es correcte a de haver id#nom ");
+							System.out.println("El format no es correcte, a de contenir id#nom ");
 							errors=true;
 						}
 					}
 					char[] indice = lineas[0].toCharArray();
 					if(indice.length>2) {
-						System.out.println("Tamaño de indice no valido");
+						System.out.println("Tamany d'índex no vàlido");
 						errors=true;
 					}
 					if(indice.length==2) {
 						
 						if(!Character.isDigit(indice[0]) || !Character.isDigit(indice[1])) {
-							System.out.println("Indice no valido, tienen que ser digitos");
+							System.out.println("Índex no vàlid, han de ser dígits");
 							errors=true;
 						}else {
 							int indiceCompleto = Integer.parseInt(lineas[0]);
 							if(indiceCompleto>19 || indiceCompleto<1) {
 								System.out.println(lineContador);
-								System.out.println("indice no valido, debe estar entre 1 y 19");
+								System.out.println("Índex no vàlid, ha de ser un número entre 1 y 19");
 								errors=true;
 							}
 							switch(indiceCompleto){
 								case 10:
 									if(lineas.length!=2) {
 										System.out.println(lineContador);
-										System.out.println("Entrada incorrecta, debe contener id#nombre");
+										System.out.println("El format no es correcte, a de contenir id#nom");
 										errors=true;
 									}
 									contadorRepetits++;
@@ -84,14 +84,14 @@ public class Mockaroo {
 								case 11:
 									if(lineas.length!=2) {
 										System.out.println(lineContador);
-										System.out.println("Entrada incorrecta, debe contener id#nombre");
+										System.out.println("El format no es correcte, a de contenir id#nom");
 										errors=true;
 									}
 									break;
 								case 12:
 									if(lineas.length<2 || lineas.length>5) {
 										System.out.println(lineContador);
-										System.out.println("Entrada incorrecta, debe contener id#nombre como minimo \nComo pocional puede ser \nid#nombre#decimales \nid#nombre#decimales#minimo \nid#nombre#decimales#minimo#maximo");
+										System.out.println("El format no es correcte, a de contenir id#nom com a mínim \nCom a opcional pot ser \nid#nom#decimals \nid#nom#decimals#minim \nid#nom#decimals#minim#maxim");
 										errors=true;
 									}
 									if(lineas.length==3) {
@@ -99,7 +99,7 @@ public class Mockaroo {
 										for(int i = 0; i<decimals.length; i++) {
 											if(!Character.isDigit(decimals[i])) {
 												System.out.println(lineContador);
-												System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+												System.out.println("Entrada no vàlida, el paràmetre decimals ha de ser numeric");
 												errors=true;
 											}
 										}
@@ -109,7 +109,7 @@ public class Mockaroo {
 										for(int i = 0; i<decimals.length; i++) {
 											if(!Character.isDigit(decimals[i])) {
 												System.out.println(lineContador);
-												System.out.println("Parametro no valido, la opcion minimo tiene que ser digitos");
+												System.out.println("Entrada no vàlida, el paràmetre minim ha de ser numeric");
 												errors=true;
 											}
 										}
@@ -117,7 +117,7 @@ public class Mockaroo {
 										for(int i = 0; i<decimals2.length; i++) {
 											if(!Character.isDigit(decimals2[i])) {
 												System.out.println(lineContador);
-												System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+												System.out.println("PEntrada no vàlida, el paràmetre decimals ha de ser numeric");
 												errors=true;
 											}
 										}
@@ -127,7 +127,7 @@ public class Mockaroo {
 										for(int i = 0; i<decimals2.length; i++) {
 											if(!Character.isDigit(decimals2[i])) {
 												System.out.println(lineContador);
-												System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+												System.out.println("Entrada no vàlida, el paràmetre decimals ha de ser numeric");
 												errors=true;
 											}
 										}
@@ -135,7 +135,7 @@ public class Mockaroo {
 										for(int i = 0; i<decimals3.length; i++) {
 											if(!Character.isDigit(decimals3[i])) {
 												System.out.println(lineContador);
-												System.out.println("Parametro no valido, la opcion minimo tiene que ser digitos");
+												System.out.println("Entrada no vàlida, el paràmetre minim ha de ser numeric");
 												errors=true;
 											}
 										}
@@ -143,7 +143,7 @@ public class Mockaroo {
 										for(int i = 0; i<decimals.length; i++) {
 											if(!Character.isDigit(decimals[i])) {
 												System.out.println(lineContador);
-												System.out.println("Parametro no valido, la opcion maximo tiene que ser digitos");
+												System.out.println("Entrada no vàlida, el paràmetre maxim ha de ser numeric");
 												errors=true;
 											}
 										}
