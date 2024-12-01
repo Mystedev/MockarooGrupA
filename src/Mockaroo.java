@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
+import java.util.Iterator;
 import java.util.Random;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,7 +24,9 @@ public class Mockaroo {
 	public static void main(String[] args) {
 		try {
 			String lineContador;
+			String arrayValidaNoms[]=new String[201];
 			String fileEntrada = "C:/Dades/Requisits.txt";
+<<<<<<< HEAD
 			int columnes=0,contadorRepetits=0;
 			BufferedReader br1=new BufferedReader(new FileReader(fileEntrada));
 			// Llegir i processar la primera línea
@@ -58,20 +61,279 @@ public class Mockaroo {
 					char[] indice = lineas[0].toCharArray();
 					if(indice.length>2) {
 						System.out.println("Tamany d'índex no vàlido");
+=======
+			int columnes=0,contadorRepetits=0,dadesAGenerar=0;
+			if(!new File(fileEntrada).exists()) {
+				System.out.println("No existeix el fitxero de requisitos");
+			}else {
+				BufferedReader br1=new BufferedReader(new FileReader(fileEntrada));
+				// Leer y procesar la primera línea
+				String firstLine = br1.readLine();
+				String[] formatArxiu={};
+				boolean errors=false;
+				if (firstLine != null) {
+					formatArxiu = firstLine.split("#");
+					if (validarFormatEntrada(firstLine, formatArxiu)) {
+						System.out.println("Archivo válido. {" + firstLine + "}");
+						if (Integer.parseInt(formatArxiu[1])>200)dadesAGenerar=200;
+					} else {
+						System.out.println("Formato no válido.");
+>>>>>>> refs/remotes/origin/main_jaume
 						errors=true;
 					}
+<<<<<<< HEAD
 					if(indice.length==2) {
 						
 						if(!Character.isDigit(indice[0]) || !Character.isDigit(indice[1])) {
 							System.out.println("Índex no vàlid, han de ser dígits");
+=======
+				} else {
+					System.out.println("El archivo está vacío.");
+					errors=true;
+				}
+				while((lineContador = br1.readLine()) != null) {
+					if(lineContador.equals("")) {
+						System.out.println("No poden haver espais en blanc");
+						errors=true;
+					}else {
+						String[] lineas = lineContador.split("#");
+						for (int i = 0; i < lineas.length; i++) {
+							if (lineas[i].equals("")) {
+								System.out.println("El format no es correcte a de haver id#nom ");
+								errors=true;
+							}	
+						}
+						char[] indice = lineas[0].toCharArray();
+						if(indice.length>2) {
+							System.out.println("Tamaño de indice no valido");
+>>>>>>> refs/remotes/origin/main_jaume
 							errors=true;
+<<<<<<< HEAD
 						}else {
 							int indiceCompleto = Integer.parseInt(lineas[0]);
 							if(indiceCompleto>19 || indiceCompleto<1) {
 								System.out.println(lineContador);
 								System.out.println("Índex no vàlid, ha de ser un número entre 1 y 19");
+=======
+						}
+						if(indice.length==2) {
+							
+							if(!Character.isDigit(indice[0]) || !Character.isDigit(indice[1])) {
+								System.out.println("Indice no valido, tienen que ser digitos");
+								errors=true;
+							}else {
+								int indiceCompleto = Integer.parseInt(lineas[0]);
+								if(indiceCompleto>19 || indiceCompleto<1) {
+									System.out.println(lineContador);
+									System.out.println("indice no valido, debe estar entre 1 y 19");
+									errors=true;
+								}
+								switch(indiceCompleto){
+									case 10:
+										if(lineas.length!=2) {
+											System.out.println(lineContador);
+											System.out.println("Entrada incorrecta, debe contener id#nombre");
+											errors=true;
+										}
+										contadorRepetits++;
+										break;
+									case 11:
+										if(lineas.length!=2) {
+											System.out.println(lineContador);
+											System.out.println("Entrada incorrecta, debe contener id#nombre");
+											errors=true;
+										}
+										break;
+									case 12:
+										if(lineas.length<2 || lineas.length>5) {
+											System.out.println(lineContador);
+											System.out.println("Entrada incorrecta, debe contener id#nombre como minimo \nComo pocional puede ser \nid#nombre#decimales \nid#nombre#decimales#minimo \nid#nombre#decimales#minimo#maximo");
+											errors=true;
+										}
+										if(lineas.length==3) {
+											char[] decimals = lineas[2].toCharArray();
+											for(int i = 0; i<decimals.length; i++) {
+												if(!Character.isDigit(decimals[i])) {
+													System.out.println(lineContador);
+													System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+													errors=true;
+												}
+											}
+										}
+										if(lineas.length==4) {
+											char[] decimals = lineas[3].toCharArray();
+											for(int i = 0; i<decimals.length; i++) {
+												if(!Character.isDigit(decimals[i])) {
+													System.out.println(lineContador);
+													System.out.println("Parametro no valido, la opcion minimo tiene que ser digitos");
+													errors=true;
+												}
+											}
+											char[] decimals2 = lineas[2].toCharArray();
+											for(int i = 0; i<decimals2.length; i++) {
+												if(!Character.isDigit(decimals2[i])) {
+													System.out.println(lineContador);
+													System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+													errors=true;
+												}
+											}
+										}
+										if(lineas.length==5) {
+											char[] decimals2 = lineas[2].toCharArray();
+											for(int i = 0; i<decimals2.length; i++) {
+												if(!Character.isDigit(decimals2[i])) {
+													System.out.println(lineContador);
+													System.out.println("Parametro no valido, la opcion decimales tiene que ser digitos");
+													errors=true;
+												}
+											}
+											char[] decimals3 = lineas[3].toCharArray();
+											for(int i = 0; i<decimals3.length; i++) {
+												if(!Character.isDigit(decimals3[i])) {
+													System.out.println(lineContador);
+													System.out.println("Parametro no valido, la opcion minimo tiene que ser digitos");
+													errors=true;
+												}
+											}
+											char[] decimals = lineas[4].toCharArray();
+											for(int i = 0; i<decimals.length; i++) {
+												if(!Character.isDigit(decimals[i])) {
+													System.out.println(lineContador);
+													System.out.println("Parametro no valido, la opcion maximo tiene que ser digitos");
+													errors=true;
+												}
+											}
+										}
+										break;
+									case 13:
+										if(lineas.length<2 || lineas.length>4 ) {
+											System.out.println(lineContador);
+											System.out.println("Entrada incorrecta, debe contener id#nombre como minimo \nLos parametros opcionales son \nid#nombre#dominio \nid#nombre#extensionDominio \nid#nombre#dominio#extensionDominio");
+											errors=true;
+										}
+										if (lineas.length==4) {
+											if(!validarExtencio(lineas[3])) {
+												System.out.println("Extencio de email no valida");
+												errors=true;
+											}
+										}
+										break;
+									case 14:
+										if(lineas.length!=2) {
+											System.out.println(lineContador);
+											System.out.println("Entrada incorrecta, debe contener id#nombre");
+											errors=true;
+										}
+										break;
+									case 15:
+										if(lineas.length!=8) {
+											System.out.println(lineContador);
+											System.out.println("Entrada incorrecta, debe contener id#nombre#letras#numeros#mayusculas#minusculas#simbolos#longitud");					
+											errors=true;
+										}else {
+											for(int i = 2; i<lineas.length-1;i++) {
+												char[] opcions = lineas[i].toCharArray();
+												
+												if(lineas[i].length()!=1) {
+													System.out.println(lineContador);
+													System.out.println("Entrada incorrecta, las opciones deben ser un digito ( zero o uno )");
+													errors=true;
+												}
+												if(!Character.isDigit(opcions[0])) {
+													System.out.println(lineContador);
+													System.out.println("Entrada incorrecta, las opciones deben ser un digito ( zero o uno )");
+													errors=true;
+												}else if(Integer.parseInt(String.valueOf(opcions[0]))!=0 && Integer.parseInt(String.valueOf(opcions[0]))!=1) {
+													System.out.println(lineContador);
+													System.out.println("Entrada incorrecta, las opciones deben ser un digito ( zero o uno )");
+													errors=true;
+												}
+											}
+										} 
+										if(Integer.parseInt(lineas[7])<8 || Integer.parseInt(lineas[7])>32) {
+											System.out.println(lineContador);
+											System.out.println("Entrada incorrecta, la longitud de la contraseña debe ser entre 8 y 32");
+											errors=true;
+										}
+										break;
+									case 16:
+										if(lineas.length<2 || lineas.length>4) {
+											System.out.println(lineContador);
+											System.out.println("Entrada incorrecta, debe contener id#nombre como minimo \nLos parametros opcionales son \nid#nombre#añoMinimo \nid#nombre#añoMinimo#añoMaximo");
+											errors=true;
+										}else if(lineas.length==3) {
+											char[] anyMinim = lineas[2].toCharArray();
+											for(int i = 0; i < anyMinim.length; i++) {
+												if(!Character.isDigit(anyMinim[i])) {
+													System.out.println(lineContador);
+													System.out.println("Parametro no valido, el año minimo deben ser digitos");
+													i=1000;
+													errors=true;
+												}
+											}
+										} else if(lineas.length==4) {
+											char[] anyMinim = lineas[2].toCharArray();
+											for(int i = 0; i < anyMinim.length; i++) {
+												if(!Character.isDigit(anyMinim[i])) {
+													System.out.println(lineContador);
+													System.out.println("Parametro no valido, el año minimo deben ser digitos");
+													i=1000;
+													errors=true;
+												}
+											}
+											char[] anyMinim2 = lineas[3].toCharArray();
+											for(int i = 0; i < anyMinim2.length; i++) {
+												if(!Character.isDigit(anyMinim2[i])) {
+													System.out.println(lineContador);
+													System.out.println("Parametro no valido, el año maximo deben ser digitos");
+													i=1000;
+													errors = true;
+												}		
+											}
+										}
+										break;
+									case 17:
+										if(lineas.length!=2) {
+											System.out.println(lineContador);
+											System.out.println("Entrada incorrecta, debe contener id#nombre");
+											errors=true;
+										}
+										break;
+									case 18:
+										if(lineas.length!=2) {
+											System.out.println(lineContador);
+											System.out.println("Entrada incorrecta, debe contener id#nombre");
+											errors=true;
+										}
+										break;
+									case 19:
+										if(lineas.length<2 || lineas.length>3) {
+											System.out.println(lineContador);
+											System.out.println("Entrada incorrecta, debe contener id#nombre \n los parametros opcionales son \n id#nombre#valorInicio");
+											errors=true;
+										}else if(lineas.length==3) {
+											char[] valorInicio = lineas[2].toCharArray();
+											for(int i = 0; i < valorInicio.length; i++) {
+												if(!Character.isDigit(valorInicio[i])) {
+													System.out.println(lineContador);
+													System.out.println("Parametro no valido, el valor de inicio debe ser digitos");
+													i=1000;
+													errors=true;
+												}		
+											}
+										}
+								break;
+								}
+							}
+							
+						}
+						if(indice.length==1) {
+							if(!Character.isDigit(indice[0])) {
+								System.out.println("Indice no valido, tienen que ser digitos");
+>>>>>>> refs/remotes/origin/main_jaume
 								errors=true;
 							}
+<<<<<<< HEAD
 							switch(indiceCompleto){
 								case 10:
 									if(lineas.length!=2) {
@@ -262,214 +524,231 @@ public class Mockaroo {
 									}
 							break;
 							}
+=======
+							if(lineas.length !=2){
+								System.out.println(lineContador);
+								System.out.println("Entrada incorrecta, debe contener id#nombre");
+								errors=true;
+							}		
+>>>>>>> refs/remotes/origin/main_jaume
 						}
-						
-					}
-					if(indice.length==1) {
-						if(!Character.isDigit(indice[0])) {
-							System.out.println("Indice no valido, tienen que ser digitos");
-							errors=true;
-						}
-						if(lineas.length !=2){
-							System.out.println(lineContador);
-							System.out.println("Entrada incorrecta, debe contener id#nombre");
-							errors=true;
-						}		
-					}
-				contadorRepetits++;
-				columnes++;
-				}
-			}
-			if (columnes==0) {
-				System.out.println("No hi han id#nom el document esta buit");
-				errors=true;
-			}
-
-			if(!errors) {
-				tipusDada=new String[columnes][2];
-				// Variables del programa
-				Random random = new Random();
-				int numeroAleatori[] =new int[contadorRepetits];
-				for (int i = 0; i < numeroAleatori.length; i++) {
-					numeroAleatori[i]= random.nextInt(200) + 1;
-				}
-				
-				BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
-				// Variables generales del main
-				int contadorMatriu=0;
-				
-				int registres,count9=0,count1=0,count2=0,count3=0,count4=0,count5=0,count6=0,count7=0,count8=0,count10=0,count13=0;
-				// Leer y procesar la primera línea
-				firstLine = br.readLine();
-				String arxiuSortida = formatArxiu[0]; // XML/SQL
-				registres = Integer.parseInt(formatArxiu[1]); // Cantidad de registros
-				rutaUbicacio = formatArxiu[2]; // Ruta donde se guarda el archivo
-				dadesCrear=new String[columnes][registres];
-				quantitatDades=registres;
-				// Leer líneas restantes y procesar índices
-				String line;
-				while ((line=br.readLine())!=null) {
-					if(line.equals("")) {
-						return;
-					}else {
-						int decimal=0;
-						int minim=0,maxim=1000;
-						boolean inclouLletres=false,inclouNumeros=false,inclouMajuscules=false,inclouMinuscules=false,inclouSimbols=false; 
-						int longitud = 0;
-						int anyMinim=1900,anyMaxim = 2023;
-						int valorPerDefecte = 1;
-						String domini="",extencioDomini="";
-						String[] indicesStr = line.split("#");
-						tipusDada[contadorMatriu][0]=""+indicesStr[0];
-						tipusDada[contadorMatriu][1]=indicesStr[1];
-						// Convertir y validar índices
-							int index = Integer.parseInt(indicesStr[0]);
-							if (index >= 1 && index <= 19) {
-								if (index==12) {
-									if (indicesStr.length==3) {
-										decimal=Integer.parseInt(indicesStr[2]);
-									}else if(indicesStr.length==4){
-										decimal=Integer.parseInt(indicesStr[2]);
-										minim=Integer.parseInt(indicesStr[3]);
-									}else if(indicesStr.length==5){
-										decimal=Integer.parseInt(indicesStr[2]);
-										minim=Integer.parseInt(indicesStr[3]);
-										maxim=Integer.parseInt(indicesStr[4]);
-									}
-								}else if(index==13) {
-									if (indicesStr.length==3) {
-										domini=indicesStr[2];
-									}if (indicesStr.length==4) {
-										domini=indicesStr[2];
-										extencioDomini=indicesStr[3];
-									}
-								}else if (index==15) {
-									if (indicesStr[2].equals("0")) {
-										inclouLletres=false;
-									}else{
-										inclouLletres=true;
-									}if(indicesStr[3].equals("0")) {
-										inclouNumeros=false;
-									}else {
-										inclouNumeros=true;
-									}if(indicesStr[4].equals("0")) {
-										inclouMajuscules=false;
-									}else {
-										inclouMajuscules=true;
-									}if(indicesStr[5].equals("0")) {
-										inclouMinuscules=false;
-									}else {
-										inclouMinuscules=true;
-									}if(indicesStr[6].equals("0")) {
-										inclouSimbols=false;
-									}else {
-										inclouSimbols=true;
-									}
-									longitud=Integer.parseInt(indicesStr[7]);
-								}else if (index==16) {
-									if (indicesStr.length==3) {
-										anyMinim=Integer.parseInt(indicesStr[2]);
-									}else if(indicesStr.length==4){
-										anyMinim=Integer.parseInt(indicesStr[2]);
-										anyMaxim=Integer.parseInt(indicesStr[3]);
-									}
-								}else if (index==19) {
-									if (indicesStr.length==3) {
-										valorPerDefecte=Integer.parseInt(indicesStr[2]);
-									}
-								}
-						}
-	
-					// Procesar índices válidos
-						if (index >= 1 && index <= 10) {
-							// Procesar archivos de datos
-							String archivo = files_dades[index - 1];
-							if ("null".equals(archivo)) {
-								url( dadesCrear[contadorMatriu], numeroAleatori[count9]);
-								count9++;
-							}
-							if (archivo != null && !"null".equals(archivo)) {
-								if(index==1) {
-									lectorArxius(index,contadorMatriu, numeroAleatori[count1]);
-									count1++;
-								}else if (index==2) {
-									lectorArxius(index,contadorMatriu, numeroAleatori[count2]);
-									count2++;
-								}else if (index==3) {
-									lectorArxius(index,contadorMatriu, numeroAleatori[count3]);
-									count3++;
-								}
-								else if (index==4) {
-									lectorArxius(index,contadorMatriu, numeroAleatori[count4]);
-									count4++;
-								}else if (index==5) {
-									lectorArxius(index,contadorMatriu, numeroAleatori[count5]);
-									count5++;
-								}else if (index==6) {
-									lectorArxius(index,contadorMatriu, numeroAleatori[count6]);
-									count6++;
-								}else if (index==7) {
-									lectorArxius(index,contadorMatriu, numeroAleatori[count7]);
-									count7++;
-								}else if (index==8) {
-									lectorArxius(index,contadorMatriu, numeroAleatori[count8]);
-									count8++;
-								}
-								else if (index==10) {
-									lectorArxius(index,contadorMatriu, numeroAleatori[count10]);
-									count10++;
-								}
-								System.out.println("Archivo de datos: " + archivo);
-							}
-						} else if (index >= 11 && index <= 19) {
-							if(index==11)booleans(contadorMatriu);
-							else if(index==12) {
-								for (int i =0;i<quantitatDades;i++){
-									dadesCrear[contadorMatriu][i]=randomNumber(decimal,minim,maxim);
-								}
-							}
-							else if(index==13) {
-								email(quantitatDades,dadesCrear[contadorMatriu],files_dades,numeroAleatori[count13],domini,extencioDomini,count13);
-								count13++;
-							}
-							else if(index==14)ip4(contadorMatriu);
-							else if(index==15) {generarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
-									inclouMinuscules,inclouSimbols,longitud);
-								for (int i =0;i<quantitatDades;i++){
-									dadesCrear[contadorMatriu][i]=generarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
-											inclouMinuscules,inclouSimbols,longitud);
-								}
-							}
-							else if(index==16)dates(quantitatDades,anyMinim,anyMaxim,numeroAleatori[0],dadesCrear[contadorMatriu]);
-							else if(index==17)iban(numeroAleatori[0],contadorMatriu);
-							else if(index==18) {
-								
-								for (int i =0;i<quantitatDades;i++){
-									dadesCrear[contadorMatriu][i]=obtenerDNI();
-								}
-							}
-							else if(index==19)autonumeric(dadesCrear[contadorMatriu], valorPerDefecte);
-						} else if (index == 0) {
-							System.out.println("Índice 0 omitido.");
-						} else {
-							System.out.println("Índice " + index + " fuera de rango.");
-						}
-						contadorMatriu++;
-						
+						if(columnes<9000&&lineas.length>=2) arrayValidaNoms[columnes]=lineas[1];
+						contadorRepetits++;
+						columnes++;
+					
 					}
 				}
-				if (formatArxiu[0].equalsIgnoreCase("SQL"))
-					creacioDeSql(formatArxiu[2], quantitatDades);
-				else {
-					crearXml(dadesCrear,tipusDada,quantitatDades);
-					crearXsd();
-					crearXsl();
+				if (columnes==0 || columnes>=201) {
+					System.out.println("No hi han id#nom el document esta buit ho hi han masses camps poden haver 1 al 200");
+					errors=true;
 				}
-				br.close();
+				for (int i = 0; i < columnes; i++) {
+					if (arrayValidaNoms[i] != null && !arrayValidaNoms[i].isEmpty()) {
+						for (int j = i+1; j < columnes; j++) {
+							if(arrayValidaNoms[i].equals(arrayValidaNoms[j])) {
+								System.out.println("Es repetei el nom :"+ arrayValidaNoms[i]+".");
+								errors=true;
+							}
+						}	
+					} else {
+					    System.out.println("El nom es null ho esta buit");
+					    errors=true;
+					}
+					
+				}
+				if(!errors) {
+					tipusDada=new String[columnes][2];
+					// Variables del programa
+					Random random = new Random();
+					int numeroAleatori[] =new int[contadorRepetits];
+					for (int i = 0; i < numeroAleatori.length; i++) {
+						numeroAleatori[i]= random.nextInt(200) + 1;
+					}
+					
+					BufferedReader br = new BufferedReader(new FileReader(fileEntrada));
+					// Variables generales del main
+					int contadorMatriu=0;
+					
+					int registres,count9=0,count1=0,count2=0,count3=0,count4=0,count5=0,count6=0,count7=0,count8=0,count10=0,count13=0,coutnAux=0;
+					// Leer y procesar la primera línea
+					firstLine = br.readLine();
+					String arxiuSortida = formatArxiu[0]; // XML/SQL
+					registres = Integer.parseInt(formatArxiu[1]); // Cantidad de registros
+					rutaUbicacio = formatArxiu[2]; // Ruta donde se guarda el archivo
+					dadesCrear=new String[columnes][registres];
+					quantitatDades=registres;
+					// Leer líneas restantes y procesar índices
+					String line;
+					while ((line=br.readLine())!=null) {
+						if(line.equals("")) {
+							return;
+						}else {
+							int decimal=0;
+							int minim=0,maxim=1000;
+							boolean inclouLletres=false,inclouNumeros=false,inclouMajuscules=false,inclouMinuscules=false,inclouSimbols=false; 
+							int longitud = 0;
+							int anyMinim=1900,anyMaxim = 2023;
+							int valorPerDefecte = 1;
+							String domini="",extencioDomini="";
+							String[] indicesStr = line.split("#");
+							tipusDada[contadorMatriu][0]=""+indicesStr[0];
+							tipusDada[contadorMatriu][1]=indicesStr[1];
+							// Convertir y validar índices
+								int index = Integer.parseInt(indicesStr[0]);
+								if (index >= 1 && index <= 19) {
+									if (index==12) {
+										if (indicesStr.length==3) {
+											decimal=Integer.parseInt(indicesStr[2]);
+										}else if(indicesStr.length==4){
+											decimal=Integer.parseInt(indicesStr[2]);
+											minim=Integer.parseInt(indicesStr[3]);
+										}else if(indicesStr.length==5){
+											decimal=Integer.parseInt(indicesStr[2]);
+											minim=Integer.parseInt(indicesStr[3]);
+											maxim=Integer.parseInt(indicesStr[4]);
+										}
+									}else if(index==13) {
+										if (indicesStr.length==3) {
+											domini=indicesStr[2];
+										}if (indicesStr.length==4) {
+											domini=indicesStr[2];
+											extencioDomini=indicesStr[3];
+										}
+									}else if (index==15) {
+										if (indicesStr[2].equals("0")) {
+											inclouLletres=false;
+										}else{
+											inclouLletres=true;
+										}if(indicesStr[3].equals("0")) {
+											inclouNumeros=false;
+										}else {
+											inclouNumeros=true;
+										}if(indicesStr[4].equals("0")) {
+											inclouMajuscules=false;
+										}else {
+											inclouMajuscules=true;
+										}if(indicesStr[5].equals("0")) {
+											inclouMinuscules=false;
+										}else {
+											inclouMinuscules=true;
+										}if(indicesStr[6].equals("0")) {
+											inclouSimbols=false;
+										}else {
+											inclouSimbols=true;
+										}
+										longitud=Integer.parseInt(indicesStr[7]);
+									}else if (index==16) {
+										if (indicesStr.length==3) {
+											anyMinim=Integer.parseInt(indicesStr[2]);
+										}else if(indicesStr.length==4){
+											anyMinim=Integer.parseInt(indicesStr[2]);
+											anyMaxim=Integer.parseInt(indicesStr[3]);
+										}
+									}else if (index==19) {
+										if (indicesStr.length==3) {
+											valorPerDefecte=Integer.parseInt(indicesStr[2]);
+										}
+									}
+							}
+		
+						// Procesar índices válidos
+							if (index >= 1 && index <= 10) {
+								// Procesar archivos de datos
+								String archivo = files_dades[index - 1];
+								if ("null".equals(archivo)) {
+									url( dadesCrear[contadorMatriu], numeroAleatori[count9]);
+									count9++;
+								}
+								if (archivo != null && !"null".equals(archivo)) {
+									if(index==1) {
+										lectorArxius(dadesAGenerar,index,contadorMatriu, numeroAleatori[count1]);
+										count1++;
+									}else if (index==2) {
+										lectorArxius(dadesAGenerar,index,contadorMatriu, numeroAleatori[count2]);
+										count2++;
+									}else if (index==3) {
+										lectorArxius(dadesAGenerar,index,contadorMatriu, numeroAleatori[count3]);
+										count3++;
+									}else if (index==4) {
+										lectorArxius(dadesAGenerar,index,contadorMatriu, numeroAleatori[count4]);
+										count4++;
+									}else if (index==5) {
+										lectorArxius(dadesAGenerar,index,contadorMatriu, numeroAleatori[count5]);
+										count5++;
+									}else if (index==6) {
+										lectorArxius(dadesAGenerar,index,contadorMatriu, numeroAleatori[count6]);
+										count6++;
+									}else if (index==7) {
+										lectorArxius(dadesAGenerar,index,contadorMatriu, numeroAleatori[count7]);
+										count7++;
+									}else if (index==8) {
+										lectorArxius(dadesAGenerar,index,contadorMatriu, numeroAleatori[count8]);
+										count8++;
+									}
+									else if (index==10) {
+										lectorArxius(dadesAGenerar,index,contadorMatriu, numeroAleatori[count10]);
+										count10++;
+									}
+									System.out.println("Archivo de datos: " + archivo);
+								}
+							} else if (index >= 11 && index <= 19) {
+								if(index==11)booleans(contadorMatriu);
+								else if(index==12) {
+									for (int i =0;i<quantitatDades;i++){
+										dadesCrear[contadorMatriu][i]=randomNumber(decimal,minim,maxim);
+									}
+								}
+								else if(index==13) {
+									email(quantitatDades,dadesCrear[contadorMatriu],files_dades,numeroAleatori[count13],domini,extencioDomini,count13);
+									count13++;
+									
+								}
+								else if(index==14)ip4(contadorMatriu);
+								else if(index==15) {generarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
+										inclouMinuscules,inclouSimbols,longitud);
+									for (int i =0;i<quantitatDades;i++){
+										dadesCrear[contadorMatriu][i]=generarPassword(inclouLletres,inclouNumeros,inclouMajuscules,
+												inclouMinuscules,inclouSimbols,longitud);
+									}
+								}
+								else if(index==16)dates(quantitatDades,anyMinim,anyMaxim,numeroAleatori[0],dadesCrear[contadorMatriu]);
+								else if(index==17)iban(numeroAleatori[0],contadorMatriu);
+								else if(index==18) {
+									
+									for (int i =0;i<quantitatDades;i++){
+										dadesCrear[contadorMatriu][i]=obtenerDNI();
+									}
+								}
+								else if(index==19)autonumeric(dadesCrear[contadorMatriu], valorPerDefecte);
+							} else if (index == 0) {
+								System.out.println("Índice 0 omitido.");
+							} else {
+								System.out.println("Índice " + index + " fuera de rango.");
+							}
+							contadorMatriu++;
+							
+						}
+					}
+					if (formatArxiu[0].equalsIgnoreCase("SQL"))
+						creacioDeSql(formatArxiu[2], quantitatDades);
+					else {
+						crearXml(dadesCrear,tipusDada,quantitatDades);
+						crearXsd();
+						crearXsl();
+					}
+					br.close();
+				}
 			}
 		}
 		catch(Exception e) {e.printStackTrace();}
 		
+	}
+	public static boolean validarExtencio(String extencio) {
+		 if (extencio == null || extencio.isEmpty()) {
+		        return false; 
+		    }
+		    // VerificO si el primer carácter es un punt
+		    return extencio.charAt(0) == '.';
 	}
 	// Funcio per a crear emails
 	public static void email(int largada, String emails[], String files_dades[], int aleatori, String domini,String extencioDomini,int num) {
@@ -479,38 +758,54 @@ public class Mockaroo {
 			BufferedReader br1 = new BufferedReader(new FileReader(files_dades[9]));
 			
 			// L'asicno la llargada a les arrays que s'utilitzaran
-			String auxiliarNom[] = new String[quantitatDades];
-			llegir(br, auxiliarNom, aleatori, 0);
+			String auxiliarNom[] = new String[largada];
+			int numAux=0;
+			if(largada<=200)llegir(largada,br, auxiliarNom, aleatori, 0);
+			else llegir(200,br, auxiliarNom, aleatori, largada);
 			if (num==0) {
 				if ((domini != null && domini.length() > 0)&&(extencioDomini != null && extencioDomini.length() > 0)) {
 					for (int i = 0; i < emails.length; i++) {
-						emails[i] = auxiliarNom[i] + "@" + domini+extencioDomini;
+						if(i%200==0&&i>0)numAux++;
+						if(numAux==0)emails[i] = auxiliarNom[i] + "@" + domini+extencioDomini;
+						else emails[i] = auxiliarNom[i] +numAux+ "@" + domini+extencioDomini;
 					}
 				}else if (domini != null && domini.length() > 0) {
 					for (int i = 0; i < emails.length; i++) {
-						emails[i] = auxiliarNom[i] + "@" + domini+".com";
+						if(i%200==0 &&i>0)numAux++;
+						if(numAux==0) emails[i] = auxiliarNom[i] + "@" + domini+".com";
+						else emails[i] = auxiliarNom[i] +numAux+ "@" + domini+".com";
 					}
 				} else {
 					String auxiliarDomini[] = new String[largada];
-					llegir(br1, auxiliarDomini, aleatori, 0);
+					if(largada<=200) llegir(largada,br1, auxiliarDomini, aleatori, 0);
+					else llegir(200,br1, auxiliarDomini, aleatori, largada);
 					for (int i = 0; i < emails.length; i++) {
-						emails[i] = auxiliarNom[i] + "@" + auxiliarDomini[i] + ".com";
+						if(i%200==0&&i>0)numAux++;
+						if(numAux==0)emails[i] = auxiliarNom[i] + "@" + auxiliarDomini[i] + ".com";
+						else emails[i] = auxiliarNom[i] +numAux+ "@" + auxiliarDomini[i] + ".com";
 					}
 				}	
 			}else {
 				if ((domini != null && domini.length() > 0)&&(extencioDomini != null && extencioDomini.length() > 0)) {
 					for (int i = 0; i < emails.length; i++) {
-						emails[i] = auxiliarNom[i]+num + "@" + domini+extencioDomini;
+						if(i%200==0)numAux++;
+						if(numAux==0&&i>0) emails[i] = auxiliarNom[i]+num+ "@" + domini+extencioDomini;
+						else emails[i] = auxiliarNom[i]+num +numAux+ "@" + domini+extencioDomini;
 					}
 				}else if (domini != null && domini.length() > 0) {
 					for (int i = 0; i < emails.length; i++) {
-						emails[i] = auxiliarNom[i]+num + "@" + domini+".com";
+						if(i%200==0&&i>0)numAux++;
+						if(numAux==0) emails[i] = auxiliarNom[i]+num+ "@" + domini+".com";
+						else emails[i] = auxiliarNom[i]+num +numAux+ "@" + domini+".com";;
 					}
 				} else {
 					String auxiliarDomini[] = new String[largada];
-					llegir(br1, auxiliarDomini, aleatori, 0);
+					if(largada<=200) llegir(largada,br1, auxiliarDomini, aleatori, 0);
+					else llegir(200,br1, auxiliarDomini, aleatori, largada);
 					for (int i = 0; i < emails.length; i++) {
-						emails[i] = auxiliarNom[i]+num + "@" + auxiliarDomini[i] + ".com";
+						if(i%200==0&& i>0)numAux++;
+						if(numAux==0)emails[i] = auxiliarNom[i]+num+ "@" + auxiliarDomini[i] + ".com";
+						else emails[i] = auxiliarNom[i]+num +numAux+ "@" + auxiliarDomini[i] + ".com";
 					}
 				}
 			}
@@ -563,7 +858,7 @@ public class Mockaroo {
 		}
 		// Comprovar que el segon element és un nombre vàlid
 		if (!esNumeroValid(formatArxiu[1])) {
-			System.out.println("Error -> La quantitat de registres ha de ser un número positiu entre 1 i 200.");
+			System.out.println("Error -> La quantitat de registres ha de ser un número positiu entre 1 i 999999.");
 			return false;
 		}
 		// Comprovo que el arxiu existeixi i sigui un directori
@@ -588,7 +883,7 @@ public class Mockaroo {
 		}
 		// Convertir el número i comprovar que estigui dins del rang
 		int numero = Integer.parseInt(valor);
-		return numero >= 1 && numero <= 250;
+		return numero >= 1 && numero <= 9999999;
 	}
 
 	// ·Leemos archivos con funciones y generamos estos a partir de otras funciones
@@ -627,8 +922,9 @@ public class Mockaroo {
 	public static void url(String urls[], int aleatori) throws IOException {
 		// GENERO LA URL DESDE EL NOM DE COMPANYIA utilitzan llegir
 		BufferedReader br = new BufferedReader(new FileReader(files_dades[9]));
-		llegir(br, urls, aleatori, 0);
-
+		if(quantitatDades<=200) llegir(quantitatDades,br, urls, aleatori, 0);
+		else llegir(200,br, urls, aleatori, quantitatDades);
+		
 		for (int i = 0; i < quantitatDades; i++) {
 			urls[i]=urls[i].toLowerCase();
 			urls[i] = "www." + urls[i] + ".com";
@@ -800,6 +1096,7 @@ public class Mockaroo {
 				for (int l = 0; l < dadesRestants; l++) {
 					// amb aquest for generem ibans des de la linea 0 del
 					// array fins haver generat totes les dades restants
+					if(i%250==0)llegirLinea = 0;
 					dadesCrear[contadorMatriu][contador] = generarIban(liniesFitxer[llegirLinea]);
 					llegirLinea++;
 					contador++;
@@ -1206,48 +1503,57 @@ public class Mockaroo {
 	}
 
 	// Funcio per a triar quins arxius s'han de gennerar
-	public static void lectorArxius(int indice,int columna, int aleatori) throws IOException {
+	public static void lectorArxius(int dadesAGenerar,int indice,int columna, int aleatori) throws IOException {
 		//String perLlegit[][] = new String[arxiusALlegir.length][linies];
 		BufferedReader br = new BufferedReader(new FileReader(files_dades[indice-1]));
-		llegir(br, dadesCrear[columna], aleatori, 0);
+		if(dadesAGenerar==0)llegir(quantitatDades,br, dadesCrear[columna], aleatori, 0);
+		else llegir(200,br, dadesCrear[columna], aleatori,quantitatDades);
+		
 	}
 
-	public static void llegir(BufferedReader br, String[] llegit, int aleatori, int especial)
+	public static void llegir(int largada,BufferedReader br, String[] llegit, int aleatori, int dadesAGenera)
 			throws IOException {
 		String text[] = new String[2];
+		String arrayAuciliar[]=new String[largada];
 		// L'asicno la llargada a les arrays que s'utilitzaran
-		int j = 0, posicioArray, numAleatori2 = aleatori, largadaArxiu = 250, largadaGenera = quantitatDades;
+		int j = 0, posicioArray, numAleatori2 = aleatori, largadaArxiu = 250, largadaGenera = largada;
 		largadaGenera = numAleatori2 + largadaGenera;
 		posicioArray = largadaGenera - largadaArxiu;
 		if (posicioArray > 0) {// Condicio per si mirar que tot cap a la array respecte el num aleatori
 			// calculo quina posicio li correspont a la primera linia
-			posicioArray = quantitatDades - posicioArray;
+			posicioArray = largada - posicioArray;
 			// Bucle per a lleguir i guardar a la posicio corresponent
 			for (int i = 0; i < largadaArxiu; i++) {
 				text[1] = br.readLine();
-				if (posicioArray < quantitatDades) {// Guardo a les ultimes posicions del array les primeres linies
+				if (posicioArray < largada) {// Guardo a les ultimes posicions del array les primeres linies
 					text = text[1].split("#");
-					llegit[posicioArray] = text[1];
+					arrayAuciliar[posicioArray] = text[1];
 					posicioArray++;
 				} else {
-					if (i >= numAleatori2 && j < quantitatDades) {// Guardo la resta de linies amb el ordre correcte a la
+					if (i >= numAleatori2 && j < largada) {// Guardo la resta de linies amb el ordre correcte a la
 															// posicio del num aleatori
 						text = text[1].split("#");
-						llegit[j] = text[1];
+						arrayAuciliar[j] = text[1];
 						j++;
 					}
 				}
 			}
 		} else {// Si que hi cap respecte el aleatori
 				// bucle per a llegir de una sense fer els calculs
-			for (int i = 0; j < quantitatDades; i++) {
+			for (int i = 0; j < largada; i++) {
 				text[1] = br.readLine();
-				if (i >= aleatori && j < quantitatDades) {
+				if (i >= aleatori && j < largada) {
 					text = text[1].split("#");
-					llegit[j] = text[1];
+					arrayAuciliar[j] = text[1];
 					j++;
 				}
 			}
+		}
+		int k=0;
+		for (int i = 0; i < llegit.length; i++) {
+			if (k>=200) k=0;
+			llegit[i]=arrayAuciliar[k];
+			k++;
 		}
 	}
 }
