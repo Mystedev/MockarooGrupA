@@ -3,7 +3,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
-import java.util.Iterator;
 import java.util.Random;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -631,6 +630,7 @@ public class Mockaroo {
 		llegir(br, urls, aleatori, 0);
 
 		for (int i = 0; i < quantitatDades; i++) {
+			urls[i]=urls[i].toLowerCase();
 			urls[i] = "www." + urls[i] + ".com";
 		}
 	}
@@ -751,7 +751,7 @@ public class Mockaroo {
 				tamanyArxiu++;
 			br.close();
 			String liniesFitxer[] = new String[tamanyArxiu];
-			BufferedReader br2 = new BufferedReader(new FileReader("Dades/6-Pais.txt"));
+			BufferedReader br2 = new BufferedReader(new FileReader("C:/Dades/6-Pais.txt"));
 			String linia;
 			int i = 0;
 			// Llegir cada línia i guardar-la a l'array
