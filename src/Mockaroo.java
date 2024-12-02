@@ -1066,15 +1066,6 @@ public class Mockaroo {
 	//Funció per crear l'arxiu xsd
   	//crearXsd(dadesCrear);
 	// Debemos leer el archivo de datos y crear a partir de este los archivos SQL y XML/XSD/XSLT
-	public static void creacioDeSql(String ruta,int linies,String [][] dadesCrear2 ) throws IOException {
-		//Le doy nombre al SQL 
-		String test="\\Arxiu.sql";
-		//Creo el file per a escriure en ell
-		File arxiuSql = new File(ruta+test);
-		//Miro si el file existeix i el canvio si es nesesari
-		int i=0;
-
-	}
 	// Funcio per crear el XSD
 
 	// Funció per crear l'arxiu xsd
